@@ -5190,10 +5190,10 @@ input[type="submit"].btn.btn-mini {
 .modal {
   position: fixed;
   top: 10%;
-  left: 28%;
+  left: 34%;
   z-index: 1050;
-  width: none; 
-  margin-left: -280px;
+  width: 90%; 
+  margin-left: -250px;
   background-color: #2a2a2a;
   border: 1px solid #999;
   border: 1px solid rgba(0, 0, 0, 0.3);

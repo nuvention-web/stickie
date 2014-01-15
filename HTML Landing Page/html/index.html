@@ -8,8 +8,7 @@
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="App, Subscription Service and General Product Landing Page. Suitable to promote your product and service such as app, subscription service and others.">
-	<meta name="author" content="The Develovers">
+
 
 	<!-- Styles -->
 	<link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -44,32 +43,17 @@
 
 </script>
 
+<!-- Javascript
+    ================================================== -->
+	<script src="assets/js/jquery-1.7.2.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery.flexslider.js"></script>
+	<script src="assets/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+	<script src="assets/js/jquery.localscroll-1.2.7-min.js"></script>		
+	<script src="assets/js/big-thing.js"></script>
+
 <body>
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-body">	      
-		    <div class="full-width newsletter">
-		      	<div class="container">
-						<div class="span4">
-							<h3 class="heading"><b>Sign Up to Join Our Beta</b></h3>
-							<p class="description">Love what you see? Sign up for our free beta!</p>
-						</div>
-						<div class="span4">
-							<div class="alert">
-								<button type="button" class="close">×</button>
-								<p></p>
-							</div>
-							<form class="form-inline">
-								<input type="email" id="email" name="email" placeholder="youremail@domain.com">
-								<input type="button" id="submit" class="btn btn-primary" value="Sign Up for Beta">
-							</form>	
-						</div>
-				</div>
-			</div>
-	    </div><!-- /.modal-content -->
-	  </div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
+	
 
 	<div class="wrapper">
 		<!-- begins header -->
@@ -84,13 +68,22 @@
 							<span class="icon-bar"></span>
 						</a>					
 						<a class="brand" data-section="body" href="index.html">
-							<img src="assets/img/stickie-logo2.png" alt="Stickie Logo" width = "140"/>
+							<img src="assets/img/stickie-logo3.png" alt="Stickie Logo">
 							<h1 class="hide">Stickie | Product Landing Page</h1>
 						</a>	
-						<nav id="main-menu" class="nav-collapse collapse" align="right">
-							<h2 class="hide">Main Navigation</h2>							
-							<a class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-							  Sign Up for Beta </a>
+						<nav id="main-menu" class="nav-collapse collapse" style="height: 0px;">
+							<h2 class="hide">Main Navigation</h2>
+							<ul class="nav pull-right">
+								<li>
+									<a href="#features-section">FEATURES</a>
+								</li>
+								<li>
+									<a href="about.html">ABOUT US</a>
+								</li>
+								<li>
+									<a data-toggle="modal" data-target="#myModal" class="btn btn-primary">JOIN BETA</a>
+								</li>
+							</ul>
 						</nav>
 					</div>
 				</div>
@@ -175,13 +168,32 @@
 		<!-- ends footer -->
 	</div>
 
-	<!-- Javascript
-    ================================================== -->
-	<script src="assets/js/jquery-1.7.2.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/jquery.flexslider.js"></script>
-	<script src="assets/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-	<script src="assets/js/jquery.localscroll-1.2.7-min.js"></script>		
-	<script src="assets/js/big-thing.js"></script>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-body">	      
+		    <div class="full-width newsletter">
+		      	<!--<div class="container">-->
+						<div class="span4">
+							<h3 class="heading"><b>Sign Up to Join Our Beta</b></h3>
+							<p class="description">Love what you see? Sign up for our free beta!</p>
+						</div>
+						<div class="span4">
+							<div class="alert">
+								<button type="button" class="close">×</button>
+								<p></p>
+							</div>
+							<form class="form-inline">
+								<input type="email" id="email" name="email" placeholder="youremail@domain.com">
+								<input type="button" id="submit" class="btn btn-primary" value="Sign Up for Beta">
+							</form>	
+						</div>
+				<!--</div>-->
+			</div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	
 </body>
 </html>
