@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface STKViewController : UIViewController
+
+@property (nonatomic, strong) ALAssetsGroup *assetsGroup;
 
 @end
