@@ -9,6 +9,7 @@
 #import "SKViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SKPhotoCell.h"
+#import "SKDetailViewController.h"
 
 @interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
@@ -116,5 +117,19 @@
     
     [self presentViewController:mediaUI animated:YES completion:nil];
 }
+
+////Enlarge Image
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([[segue identifier] isEqualToString:@"showDetail"])
+//    {
+//        NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
+//        ALAsset *asset = self.assets[indexPath.row];
+//        ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+//        UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+//        SKDetailViewController *detailViewController = [segue destinationViewController];
+//        detailViewController.image = image;
+//    }
+//}
 
 @end
