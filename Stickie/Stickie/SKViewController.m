@@ -18,7 +18,7 @@
 @end
 
 @implementation SKViewController
-
+//Prepare static saved image library
 + (ALAssetsLibrary *)defaultAssetsLibrary
 {
     static dispatch_once_t pred = 0;
@@ -29,6 +29,7 @@
     return library;
 }
 
+//Load images at app startup
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -72,6 +73,7 @@
     return self.assets.count;
 }
 
+//Load images into cells
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SKPhotoCell *cell = (SKPhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
@@ -82,7 +84,7 @@
     
     return cell;
 }
-
+//Adjust image spacing
 - (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 4;
@@ -91,6 +93,28 @@
 - (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     return 1;
+}
+//Select image
+//- (void) collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    ALAsset *asset = self.assets[indexPath.row];
+//    ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+//    UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+//}
+
+//Take photo
+- (IBAction)takePhotoButtonTapped:(id)sender
+{
+    if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO)) {
+        return;
+    }
+    
+    UIImagePickerController *mediaUI = [UIImagePickerController new];
+    mediaUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+    mediaUI.allowsEditing = NO;
+    mediaUI.delegate = self;
+    
+    [self presentViewController:mediaUI animated:YES completion:nil];
 }
 
 @end
