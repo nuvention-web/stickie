@@ -9,7 +9,9 @@
 #import "SKDetailViewController.h"
 
 @interface SKDetailViewController ()
+
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
+
 @end
 
 @implementation SKDetailViewController

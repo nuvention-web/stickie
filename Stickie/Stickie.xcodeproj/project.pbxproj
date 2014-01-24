@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14985C631890EBC4004B3ECB /* CameraIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 14985C621890EBC4004B3ECB /* CameraIcon.png */; };
+		1490A0FD189207E500453D61 /* camera_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = 1490A0FC189207E500453D61 /* camera_512x512.png */; };
 		14985C661890F037004B3ECB /* SKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14985C651890F037004B3ECB /* SKDetailViewController.m */; };
 		149FB2971890845B00D44DB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2961890845B00D44DB2 /* Foundation.framework */; };
 		149FB2991890845B00D44DB2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2981890845B00D44DB2 /* CoreGraphics.framework */; };
@@ -38,7 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		14985C621890EBC4004B3ECB /* CameraIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CameraIcon.png; sourceTree = "<group>"; };
+		1490A0FC189207E500453D61 /* camera_512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_512x512.png; sourceTree = "<group>"; };
 		14985C641890F037004B3ECB /* SKDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDetailViewController.h; sourceTree = "<group>"; };
 		14985C651890F037004B3ECB /* SKDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDetailViewController.m; sourceTree = "<group>"; };
 		149FB2931890845B00D44DB2 /* Stickie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stickie.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,10 +90,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		14985C611890EBC4004B3ECB /* Images */ = {
+		1490A0F91892066300453D61 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				14985C621890EBC4004B3ECB /* CameraIcon.png */,
+				1490A0FC189207E500453D61 /* camera_512x512.png */,
 			);
 			path = Images;
 			sourceTree = SOURCE_ROOT;
@@ -132,7 +132,7 @@
 		149FB29C1890845B00D44DB2 /* Stickie */ = {
 			isa = PBXGroup;
 			children = (
-				14985C611890EBC4004B3ECB /* Images */,
+				1490A0F91892066300453D61 /* Images */,
 				149FB2A51890845B00D44DB2 /* SKAppDelegate.h */,
 				149FB2A61890845B00D44DB2 /* SKAppDelegate.m */,
 				149FB2A81890845B00D44DB2 /* Main.storyboard */,
@@ -254,10 +254,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1490A0FD189207E500453D61 /* camera_512x512.png in Resources */,
 				149FB2AF1890845B00D44DB2 /* Images.xcassets in Resources */,
 				149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */,
 				149FB2AA1890845B00D44DB2 /* Main.storyboard in Resources */,
-				14985C631890EBC4004B3ECB /* CameraIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
