@@ -28,7 +28,6 @@
 		93E82087189828F100877D38 /* SKImageTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82080189828F100877D38 /* SKImageTag.m */; };
 		93E82088189828F100877D38 /* SKTagCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82082189828F100877D38 /* SKTagCollection.m */; };
 		93E82089189828F100877D38 /* SKTagData.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82084189828F100877D38 /* SKTagData.m */; };
-		93E8208A1898296C00877D38 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2B51890845B00D44DB2 /* XCTest.framework */; };
 		93E8208C189829A400877D38 /* SKAssetURLTagMapTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */; };
 /* End PBXBuildFile section */
 
@@ -83,7 +82,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93E8208A1898296C00877D38 /* XCTest.framework in Frameworks */,
 				149FB2EB1890997000D44DB2 /* AssetsLibrary.framework in Frameworks */,
 				149FB2991890845B00D44DB2 /* CoreGraphics.framework in Frameworks */,
 				149FB29B1890845B00D44DB2 /* UIKit.framework in Frameworks */,
