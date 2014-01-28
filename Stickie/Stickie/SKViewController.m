@@ -11,7 +11,8 @@
 #import "SKPhotoCell.h"
 #import "SKDetailViewController.h"
 
-@interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
+@interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property(nonatomic, strong) NSArray *assets;
