@@ -9,8 +9,13 @@
 #import "SKViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SKPhotoCell.h"
+#import "SKDetailViewController.h"
 
+<<<<<<< HEAD
 @interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+=======
+@interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+>>>>>>> a76f6ef898825c7e7fcb34ba185eb7a3eb48350e
 
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property(nonatomic, strong) NSArray *assets;
@@ -116,5 +121,19 @@
     
     [self presentViewController:mediaUI animated:YES completion:nil];
 }
+
+////Enlarge Image
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([[segue identifier] isEqualToString:@"showDetail"])
+//    {
+//        NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
+//        ALAsset *asset = self.assets[indexPath.row];
+//        ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+//        UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+//        SKDetailViewController *detailViewController = [segue destinationViewController];
+//        detailViewController.image = image;
+//    }
+//}
 
 @end

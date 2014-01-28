@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>99880A2F-521A-4A62-B9B3-9560D016DB00</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Stickie</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AB6EA7E1-E970-4AE4-8062-0493AFDB2685</key>
+		<string>ssh://github.com/nuvention-web/stickie.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Tutorial Game Menu/Stickie.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AB6EA7E1-E970-4AE4-8062-0493AFDB2685</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/nuvention-web/stickie.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AB6EA7E1-E970-4AE4-8062-0493AFDB2685</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AB6EA7E1-E970-4AE4-8062-0493AFDB2685</string>
+			<key>IDESourceControlWCCName</key>
+			<string>stickie</string>
+		</dict>
+	</array>
+</dict>
+</plist>
