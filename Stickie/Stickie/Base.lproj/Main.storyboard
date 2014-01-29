@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="InS-wl-dcP">
-                                <rect key="frame" x="8" y="114" width="304" height="398"/>
+                                <rect key="frame" x="8" y="119" width="304" height="393"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Yub-vE-j5q">
@@ -43,7 +43,7 @@
                                         </view>
                                         <connections>
                                             <outlet property="photoImageView" destination="mIl-fn-xEd" id="nYq-S2-BYS"/>
-                                            <segue destination="BWr-p7-POP" kind="modal" identifier="showDetail" id="kNa-3S-pJo"/>
+                                            <segue destination="BWr-p7-POP" kind="modal" identifier="showDetail" modalTransitionStyle="crossDissolve" animates="NO" id="kNa-3S-pJo"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -85,6 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="221" y="198"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="4nN-Kz-V2n">
@@ -117,12 +118,13 @@
                                         </state>
                                         <connections>
                                             <action selector="backMain:" destination="BWr-p7-POP" eventType="touchUpInside" id="MfV-8s-UGV"/>
+                                            <segue destination="vXZ-lx-hvc" kind="modal" modalTransitionStyle="crossDissolve" animates="NO" id="rHq-Mc-Vot"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.41213501079999998" blue="0.90887454909999998" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0pj-zq-Gd7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0pj-zq-Gd7">
                                 <rect key="frame" x="0.0" y="71" width="320" height="497"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
