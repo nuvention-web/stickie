@@ -11,10 +11,22 @@
 
 @implementation SKImageTag
 
-- (BOOL) isTagEqualTo: (SKImageTag *) tag
+-(id)initWithName: (NSString *) name andColor: (UIColor *)color
 {
-    /* Determing tag equality by tag name (i.e. a tag's name uniquely identifies that tag */
-    return [self.tagName isEqualToString: tag.tagName];
+    _tagName = name;
+    _tagColor = color;
+    return self;
+}
+
+-(id)copyWithZone:(NSZone *)zone
+{
+    SKImageTag *tag = [[[self class] allocWithZone:zone] init];
+    
+    if (tag) {
+        tag->_tagColor = _tagColor;
+        tag->_tagName = _tagName;
+    }
+    return tag;
 }
 
 @end

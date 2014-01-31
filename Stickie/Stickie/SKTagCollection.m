@@ -24,16 +24,30 @@
     return instance;
 }
 
+-(id)init
+{
+    _allUserTags = [[NSMutableArray alloc] init];
+    _tagDataMap = [[NSMutableDictionary alloc] init];
+    return self;
+}
+
 - (SKTagData *) getTagInfo: (SKImageTag *) tag
 {
     return (SKTagData *) [_tagDataMap objectForKey: tag];
 }
 
-- (void) addTagToCollection: (SKImageTag<NSCopying> *) tag
+- (void) updateCollectionWithTag: (SKImageTag *) tag
 {
     if (![_allUserTags containsObject: tag]) {
         [_allUserTags addObject: tag];
-        [_tagDataMap setObject: [SKTagData init] forKey: tag];
+        SKTagData *data = [[SKTagData alloc] init];
+        data.tagColor = tag.tagColor;
+        [_tagDataMap setObject:data forKey: tag];
+    }
+    else {
+        SKTagData *currentData = [_tagDataMap objectForKey:tag];
+        currentData.tagFrequencyInPhotos++;
+        [_tagDataMap setObject:currentData forKey:tag];
     }
 }
 

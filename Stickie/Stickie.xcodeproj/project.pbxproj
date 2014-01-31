@@ -24,6 +24,7 @@
 		149FB2C01890845C00D44DB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 149FB2BE1890845C00D44DB2 /* InfoPlist.strings */; };
 		149FB2EB1890997000D44DB2 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2EA1890997000D44DB2 /* AssetsLibrary.framework */; };
 		149FB2EE18909D3500D44DB2 /* SKPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */; };
+		932F86E81899C2FD00C32E71 /* SKTagCollectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 932F86E71899C2FD00C32E71 /* SKTagCollectionTest.m */; };
 		93E82086189828F100877D38 /* SKAssetURLTagMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8207E189828F100877D38 /* SKAssetURLTagMap.m */; };
 		93E82087189828F100877D38 /* SKImageTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82080189828F100877D38 /* SKImageTag.m */; };
 		93E82088189828F100877D38 /* SKTagCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82082189828F100877D38 /* SKTagCollection.m */; };
@@ -66,6 +67,7 @@
 		149FB2EA1890997000D44DB2 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		149FB2EC18909D3500D44DB2 /* SKPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPhotoCell.h; sourceTree = "<group>"; };
 		149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPhotoCell.m; sourceTree = "<group>"; };
+		932F86E71899C2FD00C32E71 /* SKTagCollectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagCollectionTest.m; sourceTree = "<group>"; };
 		93E8207D189828F100877D38 /* SKAssetURLTagMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAssetURLTagMap.h; sourceTree = "<group>"; };
 		93E8207E189828F100877D38 /* SKAssetURLTagMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagMap.m; sourceTree = "<group>"; };
 		93E8207F189828F100877D38 /* SKImageTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKImageTag.h; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		149FB2BB1890845C00D44DB2 /* StickieTests */ = {
 			isa = PBXGroup;
 			children = (
+				932F86E71899C2FD00C32E71 /* SKTagCollectionTest.m */,
 				93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */,
 				149FB2BC1890845C00D44DB2 /* Supporting Files */,
 			);
@@ -243,7 +246,7 @@
 			attributes = {
 				CLASSPREFIX = SK;
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = "Stephen Z";
+				ORGANIZATIONNAME = "Stickie Inc.";
 				TargetAttributes = {
 					149FB2B31890845B00D44DB2 = {
 						TestTargetID = 149FB2921890845B00D44DB2;
@@ -312,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				932F86E81899C2FD00C32E71 /* SKTagCollectionTest.m in Sources */,
 				93E8208C189829A400877D38 /* SKAssetURLTagMapTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
