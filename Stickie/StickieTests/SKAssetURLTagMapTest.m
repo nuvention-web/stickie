@@ -62,8 +62,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     NSString *filePath = @"http://www.myschool.edu/~myuserid/test.rtf";
 	NSURL *url = [[NSURL alloc]  initFileURLWithPath:filePath];
     
-    [map.assetURLToTagMap setObject: tag forKey: url];
-    
+    [map setTag:tag forAssetURL:url];
+
     NSString *tagOutput = [map getTagForAssetURL: url].tagName ;
     
     XCTAssertEqualObjects(tag.tagName, tagOutput, "Tags should be equal.");

@@ -29,6 +29,7 @@
     return NO;
 }
 
+/* Careful with this (especially for hashing). It checks for IDENTITY first */
 -(BOOL)isEqual:(id)object
 {
     if (object == self) {
@@ -51,8 +52,8 @@
     SKImageTag *tag = [[[self class] allocWithZone:zone] init];
     
     if (tag) {
-        tag->_tagColor = _tagColor;
-        tag->_tagName = _tagName;
+        tag.tagColor = _tagColor;
+        tag.tagName = _tagName;
     }
     return tag;
 }

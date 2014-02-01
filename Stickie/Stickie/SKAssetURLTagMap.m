@@ -8,6 +8,13 @@
 
 #import "SKAssetURLTagMap.h"
 
+@interface SKAssetURLTagMap () {
+    
+    NSMutableDictionary *assetURLToTagMap;
+    
+}
+
+@end
 
 
 @implementation SKAssetURLTagMap
@@ -27,27 +34,27 @@
 
 -(SKAssetURLTagMap *) init
 {
-    _assetURLToTagMap = [[NSMutableDictionary alloc] init] ;
+    assetURLToTagMap = [[NSMutableDictionary alloc] init] ;
     return self;
 }
 
 - (SKImageTag *) getTagForAssetURL: (NSURL *) imageURL
 {
-    return [_assetURLToTagMap objectForKey: imageURL];
+    return [assetURLToTagMap objectForKey: imageURL];
 }
 
 - (void) setTag: (SKImageTag *) tag forAssetURL: (NSURL<NSCopying> *) imageURL
 {
-    [_assetURLToTagMap setObject: tag forKey: imageURL];
+    [assetURLToTagMap setObject: tag forKey: imageURL];
 }
 
 - (void) removeTagForAssetURL: (NSURL *) imageURL;
 {
-    [_assetURLToTagMap removeObjectForKey: imageURL];
+    [assetURLToTagMap removeObjectForKey: imageURL];
 }
 
 -(void) removeAllTags
 {
-    [_assetURLToTagMap removeAllObjects];
+    [assetURLToTagMap removeAllObjects];
 }
 @end

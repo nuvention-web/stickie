@@ -36,7 +36,7 @@
         SKImageTag *tag = [[SKImageTag alloc] init];
         NSString *str = [NSString stringWithFormat:@"%d",i];
         [tag setTagName:str];
-        [tagCollection.allUserTags addObject:tag];
+        [tagCollection updateCollectionWithTag:tag];
     }
 
     SKTagCollection *tagCollection2 = [SKTagCollection sharedInstance];
@@ -44,11 +44,14 @@
     
     SKTagCollection *tagCollection3 = [[SKTagCollection alloc] init];
     XCTAssertNotEqual(tagCollection, tagCollection3, "SKTagCollection tags should not be equal at this point");
+    [tagCollection removeAllTags];
+    
 }
 
--(void)testUpdateCollectionWithTag
+-(void)testRemoveAllTagsAndIsInCollection
 {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    [tagCollection removeAllTags];
     for (int i=0; i<25; i++) {
         SKImageTag *tag = [[SKImageTag alloc] init];
         NSString *str = @"cody";
@@ -60,12 +63,64 @@
     tag.tagName = @"john";
     [tagCollection updateCollectionWithTag: tag];
     
-    SKTagData *data = [tagCollection.tagDataMap objectForKey:tag];
+    XCTAssertTrue([tagCollection isTagInCollection:tag], "John should be in the tag collection.");
+    
+    SKImageTag *tag2 = [[SKImageTag alloc] init];
+    tag2.tagName = @"bill";
+    XCTAssertFalse([tagCollection isTagInCollection:tag2], "Bill should not be in the tag collection.");
+    
+    SKImageTag *tag3 = [[SKImageTag alloc] init];
+    tag3.tagName = @"cody";
+    XCTAssertTrue([tagCollection isTagInCollection:tag3], "Cody should be in the tag collection.");
+    
+    [tagCollection removeAllTags];
+    XCTAssertFalse([tagCollection isTagInCollection:tag3], "Cody should not be in the tag collection.");
+}
+
+-(void)testUpdateAndGetTag
+{
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    [tagCollection removeAllTags];
+    for (int i=0; i<25; i++) {
+        SKImageTag *tag = [[SKImageTag alloc] init];
+        NSString *str = @"cody";
+        [tag setTagName:str];
+        [tagCollection updateCollectionWithTag: tag];
+    }
+    
+    SKImageTag *tag = [[SKImageTag alloc] init];
+    tag.tagName = @"john";
+    [tagCollection updateCollectionWithTag: tag];
+    
+    SKTagData *data = [tagCollection getTagInfo:tag];
     XCTAssertTrue(data.tagFrequencyInPhotos == 1, "john appears in collection only once.");
     
     tag.tagName = @"cody";
-    data = [tagCollection.tagDataMap objectForKey:tag];
-    XCTAssertTrue(data.tagFrequencyInPhotos == 25, "cody appears in collection 25 times.");
+    data = [tagCollection getTagInfo:tag];
+    XCTAssertTrue(data.tagFrequencyInPhotos == 25, "cody has a frequency of 25.");
+    [tagCollection removeAllTags];
 }
+
+-(void)testChangeTagToFreqOneHigherOrLower
+{
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    [tagCollection removeAllTags];
+    
+    SKImageTag *tag = [[SKImageTag alloc] init];
+    tag.tagName = @"john";
+    [tagCollection updateCollectionWithTag: tag];
+    SKTagData *data = [tagCollection getTagInfo:tag];
+    XCTAssertTrue(data.tagFrequencyInPhotos == 1, "john appears in collection only once.");
+    
+    [tagCollection changeTag:tag toFreqOneHigherOrLower:HIGHER];
+    data = [tagCollection getTagInfo:tag];
+    XCTAssertTrue(data.tagFrequencyInPhotos == 2, "john has a frequency of 2.");
+    
+    [tagCollection changeTag:tag toFreqOneHigherOrLower:LOWER];
+    data = [tagCollection getTagInfo:tag];
+    XCTAssertTrue(data.tagFrequencyInPhotos == 1, "john has a frequency of 1.");
+    [tagCollection removeAllTags];
+}
+
 
 @end
