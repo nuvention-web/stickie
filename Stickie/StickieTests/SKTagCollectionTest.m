@@ -3,7 +3,7 @@
 //  Stickie
 //
 //  Created by Grant Sheldon on 1/29/14.
-//  Copyright (c) 2014 Stephen Z. All rights reserved.
+//  Copyright (c) 2014 Stickie Inc. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
