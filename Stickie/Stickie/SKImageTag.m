@@ -18,6 +18,34 @@
     return self;
 }
 
+-(BOOL)isEqualToTag:(SKImageTag *) tag
+{
+    /* Objective-C is weird with equality (i.e. [nil isEqual:nil] evaluates to NO) */
+    if ([tag.tagName isEqualToString:_tagName] || (!tag.tagName && !_tagName)) {
+        if ([tag.tagColor isEqual:_tagColor] || (!tag.tagColor && !_tagColor)) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+-(BOOL)isEqual:(id)object
+{
+    if (object == self) {
+        return YES;
+    }
+    if (!object || ![object isKindOfClass:[self class]]) {
+        return NO;
+    }
+    
+    return [self isEqualToTag:(SKImageTag *) object];
+}
+
+-(NSUInteger)hash
+{
+    return [self.tagName hash] ^ [self.tagColor hash];
+}
+
 -(id)copyWithZone:(NSZone *)zone
 {
     SKImageTag *tag = [[[self class] allocWithZone:zone] init];

@@ -60,11 +60,11 @@
     tag.tagName = @"john";
     [tagCollection updateCollectionWithTag: tag];
     
-    SKTagData *data = [tagCollection getTagInfo:tag];
+    SKTagData *data = [tagCollection.tagDataMap objectForKey:tag];
     XCTAssertTrue(data.tagFrequencyInPhotos == 1, "john appears in collection only once.");
     
     tag.tagName = @"cody";
-    data = [tagCollection getTagInfo:tag];
+    data = [tagCollection.tagDataMap objectForKey:tag];
     XCTAssertTrue(data.tagFrequencyInPhotos == 25, "cody appears in collection 25 times.");
 }
 

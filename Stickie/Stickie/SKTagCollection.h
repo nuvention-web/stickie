@@ -21,9 +21,9 @@ typedef enum {
 
 + (SKTagCollection *) sharedInstance;
 - (SKTagData *) getTagInfo: (SKImageTag *) tag;
-- (void) updateCollectionWithTag: (SKImageTag<NSCopying> *) tag;
+- (void) updateCollectionWithTag: (SKImageTag *) tag;
 - (BOOL) isTagInCollection: (SKImageTag *) tag;
-- (void) changeTag: (SKImageTag<NSCopying> *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice;
-- (void) changeTag: (SKImageTag<NSCopying> *) tag toColor: (UIColor *) color;
+- (void) changeTag: (SKImageTag *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice;
+- (void) changeTag: (SKImageTag *) tag toColor: (UIColor *) color;
 
 @end

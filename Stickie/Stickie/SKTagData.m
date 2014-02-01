@@ -16,7 +16,7 @@
 {
     self = [super init];
     if (self) {
-        _tagFrequencyInPhotos = 0;
+        _tagFrequencyInPhotos = 1;
     }
     return self;
 }

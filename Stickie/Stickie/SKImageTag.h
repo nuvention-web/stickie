@@ -14,6 +14,6 @@
 @property (nonatomic) UIColor *tagColor;
 
 -(id)initWithName: (NSString *) str andColor: (UIColor *) color;
--(id)copyWithZone: (NSZone *) zone;
+-(BOOL)isEqualToTag:(SKImageTag *) tag;
 
 @end
