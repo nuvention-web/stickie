@@ -32,10 +32,28 @@
     return instance;
 }
 
--(SKAssetURLTagMap *) init
+- (id) init
 {
     assetURLToTagMap = [[NSMutableDictionary alloc] init] ;
     return self;
+}
+
+- (id) initWithCoder:(NSCoder *) decoder
+{
+    // Unarchive the singleton instance.
+    SKAssetURLTagMap *instance = [SKAssetURLTagMap sharedInstance];
+    
+    instance->assetURLToTagMap = [decoder decodeObjectForKey:@"assetURLToTagMap"];
+    
+    return instance;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+    // Archive the singleton instance.
+    SKAssetURLTagMap *instance = [SKAssetURLTagMap sharedInstance];
+    
+    [encoder encodeObject:instance->assetURLToTagMap forKey:@"assetURLToTagMap"];
 }
 
 - (SKImageTag *) getTagForAssetURL: (NSURL *) imageURL

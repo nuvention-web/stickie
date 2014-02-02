@@ -10,7 +10,7 @@
 #import "SKTagData.h"
 #import "SKImageTag.h"
 
-@interface SKTagCollection : NSObject 
+@interface SKTagCollection : NSObject <NSCoding>
 
 typedef enum {
     HIGHER, LOWER

@@ -33,11 +33,31 @@
     return instance;
 }
 
--(id)init
+- (id) init
 {
     allUserTags = [[NSMutableArray alloc] init];
     tagDataMap = [[NSMutableDictionary alloc] init];
     return self;
+}
+
+- (id) initWithCoder:(NSCoder *) decoder
+{
+    // Unarchive the singleton instance.
+    SKTagCollection *instance = [SKTagCollection sharedInstance];
+    
+    instance->allUserTags = [decoder decodeObjectForKey:@"allUserTags"];
+    instance->tagDataMap = [decoder decodeObjectForKey:@"tagDataMap"];
+    
+    return instance;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+    // Archive the singleton instance.
+    SKTagCollection *instance = [SKTagCollection sharedInstance];
+    
+    [encoder encodeObject:instance->allUserTags forKey:@"allUserTags"];
+    [encoder encodeObject:instance->tagDataMap forKey:@"tagDataMap"];
 }
 
 - (SKTagData *) getTagInfo: (SKImageTag *) tag
