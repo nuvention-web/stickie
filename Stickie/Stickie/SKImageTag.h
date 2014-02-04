@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SKImageTag : NSObject
+@interface SKImageTag : NSObject<NSCopying>
 
 @property (nonatomic) NSString *tagName;
 @property (nonatomic) UIColor *tagColor;
 
-- (BOOL) isTagEqualTo: (SKImageTag *) tag;
+-(id)initWithName: (NSString *) str andColor: (UIColor *) color;
+-(BOOL)isEqualToTag:(SKImageTag *) tag;
 
 @end

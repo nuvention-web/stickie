@@ -8,6 +8,13 @@
 
 #import "SKAssetURLTagMap.h"
 
+@interface SKAssetURLTagMap () {
+    
+    NSMutableDictionary *assetURLToTagMap;
+    
+}
+
+@end
 
 
 @implementation SKAssetURLTagMap
@@ -25,29 +32,47 @@
     return instance;
 }
 
--(SKAssetURLTagMap *) init
+- (id) init
 {
-    _assetURLToTagMap = [[NSMutableDictionary alloc] init] ;
+    assetURLToTagMap = [[NSMutableDictionary alloc] init] ;
     return self;
+}
+
+- (id) initWithCoder:(NSCoder *) decoder
+{
+    // Unarchive the singleton instance.
+    SKAssetURLTagMap *instance = [SKAssetURLTagMap sharedInstance];
+    
+    instance->assetURLToTagMap = [decoder decodeObjectForKey:@"assetURLToTagMap"];
+    
+    return instance;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+    // Archive the singleton instance.
+    SKAssetURLTagMap *instance = [SKAssetURLTagMap sharedInstance];
+    
+    [encoder encodeObject:instance->assetURLToTagMap forKey:@"assetURLToTagMap"];
 }
 
 - (SKImageTag *) getTagForAssetURL: (NSURL *) imageURL
 {
-    return [_assetURLToTagMap objectForKey: imageURL];
+    return [assetURLToTagMap objectForKey: imageURL];
 }
 
 - (void) setTag: (SKImageTag *) tag forAssetURL: (NSURL<NSCopying> *) imageURL
 {
-    [_assetURLToTagMap setObject: tag forKey: imageURL];
+    [assetURLToTagMap setObject: tag forKey: imageURL];
 }
 
 - (void) removeTagForAssetURL: (NSURL *) imageURL;
 {
-    [_assetURLToTagMap removeObjectForKey: imageURL];
+    [assetURLToTagMap removeObjectForKey: imageURL];
 }
 
 -(void) removeAllTags
 {
-    [_assetURLToTagMap removeAllObjects];
+    [assetURLToTagMap removeAllObjects];
 }
 @end

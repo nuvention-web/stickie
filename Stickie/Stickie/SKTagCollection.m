@@ -8,6 +8,15 @@
 
 #import "SKTagCollection.h"
 
+@interface SKTagCollection () {
+    
+    NSMutableArray *allUserTags;
+    NSMutableDictionary *tagDataMap;
+    
+}
+
+@end
+
 @implementation SKTagCollection
 
 /* Implementing class as a singleton */
@@ -24,55 +33,101 @@
     return instance;
 }
 
-- (SKTagData *) getTagInfo: (SKImageTag *) tag
+- (id) init
 {
-    return (SKTagData *) [_tagDataMap objectForKey: tag];
+    allUserTags = [[NSMutableArray alloc] init];
+    tagDataMap = [[NSMutableDictionary alloc] init];
+    return self;
 }
 
-- (void) addTagToCollection: (SKImageTag<NSCopying> *) tag
+- (id) initWithCoder:(NSCoder *) decoder
 {
-    if (![_allUserTags containsObject: tag]) {
-        [_allUserTags addObject: tag];
-        [_tagDataMap setObject: [SKTagData init] forKey: tag];
+    // Unarchive the singleton instance.
+    SKTagCollection *instance = [SKTagCollection sharedInstance];
+    
+    instance->allUserTags = [decoder decodeObjectForKey:@"allUserTags"];
+    instance->tagDataMap = [decoder decodeObjectForKey:@"tagDataMap"];
+    
+    return instance;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+    // Archive the singleton instance.
+    SKTagCollection *instance = [SKTagCollection sharedInstance];
+    
+    [encoder encodeObject:instance->allUserTags forKey:@"allUserTags"];
+    [encoder encodeObject:instance->tagDataMap forKey:@"tagDataMap"];
+}
+
+- (SKTagData *) getTagInfo: (SKImageTag *) tag
+{
+    return (SKTagData *) [tagDataMap objectForKey: tag];
+}
+
+- (void) updateCollectionWithTag: (SKImageTag *) tag
+{
+    if (![allUserTags containsObject: tag]) {
+        [allUserTags addObject: tag];
+        SKTagData *data = [[SKTagData alloc] init];
+        data.tagColor = tag.tagColor;
+        [tagDataMap setObject:data forKey: tag];
+    }
+    else {
+        SKTagData *currentData = [tagDataMap objectForKey:tag];
+        currentData.tagFrequencyInPhotos++;
+        [tagDataMap setObject:currentData forKey:tag];
     }
 }
 
 - (BOOL) isTagInCollection: (SKImageTag *) tag
 {
-    return [_allUserTags containsObject: tag];
+    return [allUserTags containsObject: tag];
 }
 
-- (void) changeTag: (SKImageTag<NSCopying> *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice
+- (void) changeTag: (SKImageTag *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice
 {
-    if (![_allUserTags containsObject: tag]) {
+    if (![allUserTags containsObject: tag]) {
         @throw [NSException exceptionWithName: @"TagNotFoundException" reason: @"The specified tag was not found." userInfo:nil];
     }
     
-    SKTagData *data = [_tagDataMap objectForKey: tag];
+    SKTagData *data = [tagDataMap objectForKey: tag];
     
     switch (choice) {
         case HIGHER:
             data.tagFrequencyInPhotos++;
-            [_tagDataMap setObject: data forKey: tag];
+            [tagDataMap setObject: data forKey: tag];
             break;
         case LOWER:
             if (data.tagFrequencyInPhotos > 0) {
                 data.tagFrequencyInPhotos--;
-                [_tagDataMap setObject: data forKey: tag];
+                [tagDataMap setObject: data forKey: tag];
             }
             break;
     }
 }
 
-- (void) changeTag: (SKImageTag<NSCopying> *) tag toColor: (UIColor *) color
+- (void) changeTag: (SKImageTag *) tag toColor: (UIColor *) color
 {
-    if (![_allUserTags containsObject: tag]) {
+    if (![allUserTags containsObject: tag]) {
         @throw [NSException exceptionWithName: @"TagNotFoundException" reason: @"The specified tag was not found." userInfo:nil];
     }
     
-    SKTagData *data = [_tagDataMap objectForKey: tag];
+    SKTagData *data = [tagDataMap objectForKey: tag];
     data.tagColor = color;
-    [_tagDataMap setObject: data forKey: tag];
+    [tagDataMap setObject: data forKey: tag];
+}
+
+- (void) removeTag: (SKImageTag *) tag;
+{
+    [allUserTags removeObject:tag];
+    [tagDataMap removeObjectForKey:tag];
+}
+
+- (void) removeAllTags
+{
+    [allUserTags removeAllObjects];
+    [tagDataMap removeAllObjects];
 }
 
 @end

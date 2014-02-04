@@ -10,9 +10,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SKImageTag.h"
 
-@interface SKAssetURLTagMap : NSObject
-
-@property (nonatomic) NSMutableDictionary *assetURLToTagMap;
+@interface SKAssetURLTagMap : NSObject <NSCoding>
 
 + (SKAssetURLTagMap *) sharedInstance;
 - (SKImageTag *) getTagForAssetURL: (NSURL *) imageURL;

@@ -10,10 +10,7 @@
 #import "SKTagData.h"
 #import "SKImageTag.h"
 
-@interface SKTagCollection : NSObject
-
-@property (nonatomic) NSMutableArray *allUserTags;
-@property (nonatomic) NSMutableDictionary *tagDataMap;
+@interface SKTagCollection : NSObject <NSCoding>
 
 typedef enum {
     HIGHER, LOWER
@@ -21,9 +18,13 @@ typedef enum {
 
 + (SKTagCollection *) sharedInstance;
 - (SKTagData *) getTagInfo: (SKImageTag *) tag;
-- (void) addTagToCollection: (SKImageTag<NSCopying> *) tag;
+- (void) updateCollectionWithTag: (SKImageTag *) tag;
 - (BOOL) isTagInCollection: (SKImageTag *) tag;
-- (void) changeTag: (SKImageTag<NSCopying> *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice;
-- (void) changeTag: (SKImageTag<NSCopying> *) tag toColor: (UIColor *) color;
+- (void) changeTag: (SKImageTag *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice;
+- (void) changeTag: (SKImageTag *) tag toColor: (UIColor *) color;
+- (void) removeTag: (SKImageTag *) tag;
+
+/* DANGER, DRAGONS LIE AHEAD: This method will nuke all tags in the collection: */
+- (void) removeAllTags;
 
 @end
