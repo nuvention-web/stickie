@@ -10,7 +10,7 @@
 
 @interface SKTagData : NSObject
 
-@property (nonatomic) NSInteger *tagFrequencyInPhotos;
+@property (nonatomic) NSInteger tagFrequencyInPhotos;
 @property (nonatomic) UIColor *tagColor;
 
 - (id) init;

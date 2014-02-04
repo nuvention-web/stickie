@@ -62,11 +62,79 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     NSString *filePath = @"http://www.myschool.edu/~myuserid/test.rtf";
 	NSURL *url = [[NSURL alloc]  initFileURLWithPath:filePath];
     
-    [map.assetURLToTagMap setObject: tag forKey: url];
-    
+    [map setTag:tag forAssetURL:url];
+
     NSString *tagOutput = [map getTagForAssetURL: url].tagName ;
     
     XCTAssertEqualObjects(tag.tagName, tagOutput, "Tags should be equal.");
+}
+
+-(void)testSetTagForAssetURL
+{
+    SKAssetURLTagMap *map = [SKAssetURLTagMap sharedInstance];
+    
+    SKImageTag *tag = [[SKImageTag alloc] init];
+    
+    tag.tagName = @"cody";
+
+    NSString *filePath = @"http://www.myschool.edu/~myuserid/test.rtf";
+	NSURL *url = [[NSURL alloc]  initFileURLWithPath:filePath];
+    
+    [map setTag:tag forAssetURL:url];
+    
+    SKImageTag *tag2 = [map getTagForAssetURL:url];
+    SKImageTag *tag3 = [[SKImageTag alloc] init];
+    
+    XCTAssertEqualObjects(tag, tag2, "Tag and Tag2 should be equal");
+    XCTAssertNotEqualObjects(tag, tag3, "Tag and Tag3 should not be equal");
+}
+
+-(void)testRemoveTagForAssetURL
+{
+    SKAssetURLTagMap *map = [SKAssetURLTagMap sharedInstance];
+    
+    SKImageTag *tag = [[SKImageTag alloc] init];
+    
+    tag.tagName = @"cody";
+    
+    NSString *filePath = @"http://www.myschool.edu/~myuserid/test.rtf";
+	NSURL *url = [[NSURL alloc]  initFileURLWithPath:filePath];
+    
+    [map setTag:tag forAssetURL:url];
+    
+    [map removeTagForAssetURL:url];
+    
+    SKImageTag *tagOut = [map getTagForAssetURL:url];
+    XCTAssertNotEqualObjects(tag, tagOut, "Tag and tagOut should not be equal.");
+}
+
+-(void)testRemoveAllTags
+{
+    SKAssetURLTagMap *map = [SKAssetURLTagMap sharedInstance];
+    
+    SKImageTag *tag = [[SKImageTag alloc] init];
+    tag.tagName = @"cody";
+    
+    SKImageTag *tag2 = [[SKImageTag alloc] init];
+    tag.tagName = @"john";
+    
+    NSString *filePath = @"http://www.myschool.edu/~myuserid/test.rtf";
+	NSURL *url = [[NSURL alloc]  initFileURLWithPath:filePath];
+    
+    filePath = @"www.google.com";
+	NSURL *url2 = [[NSURL alloc]  initFileURLWithPath:filePath];
+    
+    [map setTag:tag forAssetURL:url];
+    
+    [map setTag:tag2 forAssetURL:url2];
+    
+    [map removeAllTags];
+    
+    SKImageTag *tagOut = [map getTagForAssetURL:url];
+    XCTAssertNotEqualObjects(tag, tagOut, "Tag and tagOut should not be equal.");
+    
+    tagOut = [map getTagForAssetURL:url2];
+    XCTAssertNotEqualObjects(tag2, tagOut, "Tag2 and tagOut should not be equal.");
 }
 
 @end

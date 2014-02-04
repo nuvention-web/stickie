@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1490A0FD189207E500453D61 /* camera_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = 1490A0FC189207E500453D61 /* camera_512x512.png */; };
 		14985C661890F037004B3ECB /* SKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14985C651890F037004B3ECB /* SKDetailViewController.m */; };
+		149A97F8189F750D007FF0D4 /* ReturnButton283_283.png in Resources */ = {isa = PBXBuildFile; fileRef = 149A97F7189F750D007FF0D4 /* ReturnButton283_283.png */; };
 		149FB2971890845B00D44DB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2961890845B00D44DB2 /* Foundation.framework */; };
 		149FB2991890845B00D44DB2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2981890845B00D44DB2 /* CoreGraphics.framework */; };
 		149FB29B1890845B00D44DB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB29A1890845B00D44DB2 /* UIKit.framework */; };
@@ -24,6 +25,16 @@
 		149FB2C01890845C00D44DB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 149FB2BE1890845C00D44DB2 /* InfoPlist.strings */; };
 		149FB2EB1890997000D44DB2 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2EA1890997000D44DB2 /* AssetsLibrary.framework */; };
 		149FB2EE18909D3500D44DB2 /* SKPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */; };
+		14A0567018A0BEC3006E86FF /* LSCollectionViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A0566518A0BEC3006E86FF /* LSCollectionViewHelper.m */; };
+		14A0567118A0BEC3006E86FF /* LSCollectionViewLayoutHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A0566718A0BEC3006E86FF /* LSCollectionViewLayoutHelper.m */; };
+		14A0567218A0BEC3006E86FF /* DraggableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A0566A18A0BEC3006E86FF /* DraggableCollectionViewFlowLayout.m */; };
+		14A0567318A0BEC3006E86FF /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 14A0566B18A0BEC3006E86FF /* LICENSE */; };
+		14A0567418A0BEC3006E86FF /* UICollectionView+Draggable.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A0566D18A0BEC3006E86FF /* UICollectionView+Draggable.m */; };
+		14A0567818A0C326006E86FF /* I3DragBetweenHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A0567718A0C326006E86FF /* I3DragBetweenHelper.m */; };
+		14A6F9A71899BB0200DA1AA1 /* OBDragDropManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6F99F1899BB0200DA1AA1 /* OBDragDropManager.m */; };
+		14A6F9A81899BB0200DA1AA1 /* OBLongPressDragDropGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6F9A21899BB0200DA1AA1 /* OBLongPressDragDropGestureRecognizer.m */; };
+		14A6F9A91899BB0200DA1AA1 /* UIGestureRecognizer+OBDragDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6F9A41899BB0200DA1AA1 /* UIGestureRecognizer+OBDragDrop.m */; };
+		14A6F9AA1899BB0200DA1AA1 /* UIView+OBDropZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6F9A61899BB0200DA1AA1 /* UIView+OBDropZone.m */; };
 		93E82086189828F100877D38 /* SKAssetURLTagMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8207E189828F100877D38 /* SKAssetURLTagMap.m */; };
 		93E82087189828F100877D38 /* SKImageTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82080189828F100877D38 /* SKImageTag.m */; };
 		93E82088189828F100877D38 /* SKTagCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82082189828F100877D38 /* SKTagCollection.m */; };
@@ -45,6 +56,7 @@
 		1490A0FC189207E500453D61 /* camera_512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_512x512.png; sourceTree = "<group>"; };
 		14985C641890F037004B3ECB /* SKDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDetailViewController.h; sourceTree = "<group>"; };
 		14985C651890F037004B3ECB /* SKDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDetailViewController.m; sourceTree = "<group>"; };
+		149A97F7189F750D007FF0D4 /* ReturnButton283_283.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReturnButton283_283.png; sourceTree = "<group>"; };
 		149FB2931890845B00D44DB2 /* Stickie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stickie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FB2961890845B00D44DB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		149FB2981890845B00D44DB2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -66,6 +78,29 @@
 		149FB2EA1890997000D44DB2 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		149FB2EC18909D3500D44DB2 /* SKPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPhotoCell.h; sourceTree = "<group>"; };
 		149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPhotoCell.m; sourceTree = "<group>"; };
+		14A0566418A0BEC3006E86FF /* LSCollectionViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewHelper.h; sourceTree = "<group>"; };
+		14A0566518A0BEC3006E86FF /* LSCollectionViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewHelper.m; sourceTree = "<group>"; };
+		14A0566618A0BEC3006E86FF /* LSCollectionViewLayoutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewLayoutHelper.h; sourceTree = "<group>"; };
+		14A0566718A0BEC3006E86FF /* LSCollectionViewLayoutHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewLayoutHelper.m; sourceTree = "<group>"; };
+		14A0566918A0BEC3006E86FF /* DraggableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		14A0566A18A0BEC3006E86FF /* DraggableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		14A0566B18A0BEC3006E86FF /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		14A0566C18A0BEC3006E86FF /* UICollectionView+Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Draggable.h"; sourceTree = "<group>"; };
+		14A0566D18A0BEC3006E86FF /* UICollectionView+Draggable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Draggable.m"; sourceTree = "<group>"; };
+		14A0566E18A0BEC3006E86FF /* UICollectionViewDataSource_Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewDataSource_Draggable.h; sourceTree = "<group>"; };
+		14A0566F18A0BEC3006E86FF /* UICollectionViewLayout_Warpable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLayout_Warpable.h; sourceTree = "<group>"; };
+		14A0567618A0C326006E86FF /* I3DragBetweenHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = I3DragBetweenHelper.h; sourceTree = "<group>"; };
+		14A0567718A0C326006E86FF /* I3DragBetweenHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = I3DragBetweenHelper.m; sourceTree = "<group>"; };
+		14A6F99D1899BB0200DA1AA1 /* OBDragDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBDragDrop.h; sourceTree = "<group>"; };
+		14A6F99E1899BB0200DA1AA1 /* OBDragDropManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBDragDropManager.h; sourceTree = "<group>"; };
+		14A6F99F1899BB0200DA1AA1 /* OBDragDropManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBDragDropManager.m; sourceTree = "<group>"; };
+		14A6F9A01899BB0200DA1AA1 /* OBDragDropProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBDragDropProtocol.h; sourceTree = "<group>"; };
+		14A6F9A11899BB0200DA1AA1 /* OBLongPressDragDropGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBLongPressDragDropGestureRecognizer.h; sourceTree = "<group>"; };
+		14A6F9A21899BB0200DA1AA1 /* OBLongPressDragDropGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBLongPressDragDropGestureRecognizer.m; sourceTree = "<group>"; };
+		14A6F9A31899BB0200DA1AA1 /* UIGestureRecognizer+OBDragDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+OBDragDrop.h"; sourceTree = "<group>"; };
+		14A6F9A41899BB0200DA1AA1 /* UIGestureRecognizer+OBDragDrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+OBDragDrop.m"; sourceTree = "<group>"; };
+		14A6F9A51899BB0200DA1AA1 /* UIView+OBDropZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+OBDropZone.h"; sourceTree = "<group>"; };
+		14A6F9A61899BB0200DA1AA1 /* UIView+OBDropZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+OBDropZone.m"; sourceTree = "<group>"; };
 		93E8207D189828F100877D38 /* SKAssetURLTagMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAssetURLTagMap.h; sourceTree = "<group>"; };
 		93E8207E189828F100877D38 /* SKAssetURLTagMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagMap.m; sourceTree = "<group>"; };
 		93E8207F189828F100877D38 /* SKImageTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKImageTag.h; sourceTree = "<group>"; };
@@ -106,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				1490A0FC189207E500453D61 /* camera_512x512.png */,
+				149A97F7189F750D007FF0D4 /* ReturnButton283_283.png */,
 			);
 			path = Images;
 			sourceTree = SOURCE_ROOT;
@@ -144,10 +180,17 @@
 		149FB29C1890845B00D44DB2 /* Stickie */ = {
 			isa = PBXGroup;
 			children = (
+				14A6F99B1899BB0200DA1AA1 /* Classes */,
 				1490A0F91892066300453D61 /* Images */,
 				149FB2A51890845B00D44DB2 /* SKAppDelegate.h */,
 				149FB2A61890845B00D44DB2 /* SKAppDelegate.m */,
 				149FB2A81890845B00D44DB2 /* Main.storyboard */,
+				149FB2AB1890845B00D44DB2 /* SKViewController.h */,
+				149FB2AC1890845B00D44DB2 /* SKViewController.m */,
+				14985C641890F037004B3ECB /* SKDetailViewController.h */,
+				14985C651890F037004B3ECB /* SKDetailViewController.m */,
+				149FB2EC18909D3500D44DB2 /* SKPhotoCell.h */,
+				149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */,
 				93E8207D189828F100877D38 /* SKAssetURLTagMap.h */,
 				93E8207E189828F100877D38 /* SKAssetURLTagMap.m */,
 				93E8207F189828F100877D38 /* SKImageTag.h */,
@@ -156,12 +199,6 @@
 				93E82082189828F100877D38 /* SKTagCollection.m */,
 				93E82083189828F100877D38 /* SKTagData.h */,
 				93E82084189828F100877D38 /* SKTagData.m */,
-				149FB2AB1890845B00D44DB2 /* SKViewController.h */,
-				149FB2AC1890845B00D44DB2 /* SKViewController.m */,
-				14985C641890F037004B3ECB /* SKDetailViewController.h */,
-				14985C651890F037004B3ECB /* SKDetailViewController.m */,
-				149FB2EC18909D3500D44DB2 /* SKPhotoCell.h */,
-				149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */,
 				149FB2AE1890845B00D44DB2 /* Images.xcassets */,
 				149FB29D1890845B00D44DB2 /* Supporting Files */,
 			);
@@ -182,6 +219,7 @@
 		149FB2BB1890845C00D44DB2 /* StickieTests */ = {
 			isa = PBXGroup;
 			children = (
+				932F86E71899C2FD00C32E71 /* SKTagCollectionTest.m */,
 				93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */,
 				149FB2BC1890845C00D44DB2 /* Supporting Files */,
 			);
@@ -195,6 +233,76 @@
 				149FB2BE1890845C00D44DB2 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		14A0566218A0BEC3006E86FF /* DraggableCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				14A0566318A0BEC3006E86FF /* Helpers */,
+				14A0566818A0BEC3006E86FF /* Layout */,
+				14A0566B18A0BEC3006E86FF /* LICENSE */,
+				14A0566C18A0BEC3006E86FF /* UICollectionView+Draggable.h */,
+				14A0566D18A0BEC3006E86FF /* UICollectionView+Draggable.m */,
+				14A0566E18A0BEC3006E86FF /* UICollectionViewDataSource_Draggable.h */,
+				14A0566F18A0BEC3006E86FF /* UICollectionViewLayout_Warpable.h */,
+			);
+			path = DraggableCollectionView;
+			sourceTree = "<group>";
+		};
+		14A0566318A0BEC3006E86FF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				14A0566418A0BEC3006E86FF /* LSCollectionViewHelper.h */,
+				14A0566518A0BEC3006E86FF /* LSCollectionViewHelper.m */,
+				14A0566618A0BEC3006E86FF /* LSCollectionViewLayoutHelper.h */,
+				14A0566718A0BEC3006E86FF /* LSCollectionViewLayoutHelper.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		14A0566818A0BEC3006E86FF /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				14A0566918A0BEC3006E86FF /* DraggableCollectionViewFlowLayout.h */,
+				14A0566A18A0BEC3006E86FF /* DraggableCollectionViewFlowLayout.m */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		14A0567518A0C326006E86FF /* i3 Drag And Drop */ = {
+			isa = PBXGroup;
+			children = (
+				14A0567618A0C326006E86FF /* I3DragBetweenHelper.h */,
+				14A0567718A0C326006E86FF /* I3DragBetweenHelper.m */,
+			);
+			path = "i3 Drag And Drop";
+			sourceTree = "<group>";
+		};
+		14A6F99B1899BB0200DA1AA1 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				14A0567518A0C326006E86FF /* i3 Drag And Drop */,
+				14A0566218A0BEC3006E86FF /* DraggableCollectionView */,
+				14A6F99C1899BB0200DA1AA1 /* OBDragDrop */,
+			);
+			path = Classes;
+			sourceTree = SOURCE_ROOT;
+		};
+		14A6F99C1899BB0200DA1AA1 /* OBDragDrop */ = {
+			isa = PBXGroup;
+			children = (
+				14A6F99D1899BB0200DA1AA1 /* OBDragDrop.h */,
+				14A6F99E1899BB0200DA1AA1 /* OBDragDropManager.h */,
+				14A6F99F1899BB0200DA1AA1 /* OBDragDropManager.m */,
+				14A6F9A01899BB0200DA1AA1 /* OBDragDropProtocol.h */,
+				14A6F9A11899BB0200DA1AA1 /* OBLongPressDragDropGestureRecognizer.h */,
+				14A6F9A21899BB0200DA1AA1 /* OBLongPressDragDropGestureRecognizer.m */,
+				14A6F9A31899BB0200DA1AA1 /* UIGestureRecognizer+OBDragDrop.h */,
+				14A6F9A41899BB0200DA1AA1 /* UIGestureRecognizer+OBDragDrop.m */,
+				14A6F9A51899BB0200DA1AA1 /* UIView+OBDropZone.h */,
+				14A6F9A61899BB0200DA1AA1 /* UIView+OBDropZone.m */,
+			);
+			path = OBDragDrop;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,7 +351,7 @@
 			attributes = {
 				CLASSPREFIX = SK;
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = "Stephen Z";
+				ORGANIZATIONNAME = "Stickie Inc.";
 				TargetAttributes = {
 					149FB2B31890845B00D44DB2 = {
 						TestTargetID = 149FB2921890845B00D44DB2;
@@ -274,7 +382,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14A0567318A0BEC3006E86FF /* LICENSE in Resources */,
 				1490A0FD189207E500453D61 /* camera_512x512.png in Resources */,
+				149A97F8189F750D007FF0D4 /* ReturnButton283_283.png in Resources */,
 				149FB2AF1890845B00D44DB2 /* Images.xcassets in Resources */,
 				149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */,
 				149FB2AA1890845B00D44DB2 /* Main.storyboard in Resources */,
@@ -298,10 +408,19 @@
 			files = (
 				93E82089189828F100877D38 /* SKTagData.m in Sources */,
 				14985C661890F037004B3ECB /* SKDetailViewController.m in Sources */,
+				14A6F9A91899BB0200DA1AA1 /* UIGestureRecognizer+OBDragDrop.m in Sources */,
 				149FB2EE18909D3500D44DB2 /* SKPhotoCell.m in Sources */,
+				14A0567218A0BEC3006E86FF /* DraggableCollectionViewFlowLayout.m in Sources */,
 				149FB2A71890845B00D44DB2 /* SKAppDelegate.m in Sources */,
+				14A0567018A0BEC3006E86FF /* LSCollectionViewHelper.m in Sources */,
 				93E82087189828F100877D38 /* SKImageTag.m in Sources */,
+				14A6F9A71899BB0200DA1AA1 /* OBDragDropManager.m in Sources */,
+				14A6F9AA1899BB0200DA1AA1 /* UIView+OBDropZone.m in Sources */,
+				14A0567418A0BEC3006E86FF /* UICollectionView+Draggable.m in Sources */,
+				14A0567118A0BEC3006E86FF /* LSCollectionViewLayoutHelper.m in Sources */,
 				93E82088189828F100877D38 /* SKTagCollection.m in Sources */,
+				14A6F9A81899BB0200DA1AA1 /* OBLongPressDragDropGestureRecognizer.m in Sources */,
+				14A0567818A0C326006E86FF /* I3DragBetweenHelper.m in Sources */,
 				149FB2AD1890845B00D44DB2 /* SKViewController.m in Sources */,
 				149FB2A31890845B00D44DB2 /* main.m in Sources */,
 				93E82086189828F100877D38 /* SKAssetURLTagMap.m in Sources */,
@@ -312,6 +431,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				932F86E81899C2FD00C32E71 /* SKTagCollectionTest.m in Sources */,
 				93E8208C189829A400877D38 /* SKAssetURLTagMapTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
