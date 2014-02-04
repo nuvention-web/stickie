@@ -17,6 +17,7 @@
     self = [super init];
     if (self) {
         _tagFrequencyInPhotos = 1;
+        _tagColor = [[UIColor alloc] init];
     }
     return self;
 }
