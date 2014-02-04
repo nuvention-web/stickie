@@ -97,12 +97,24 @@
     return 1;
 }
 //Select image
-//- (void) collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    ALAsset *asset = self.assets[indexPath.row];
-//    ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
-//    UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
-//}
+- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ALAsset *asset = self.assets[indexPath.row];
+    ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+    UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+    UIImageView *newImageView = [[UIImageView alloc] initWithImage:image];
+    [newImageView setUserInteractionEnabled:YES];
+    UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
+    [newImageView addGestureRecognizer:longGestureRecognizer];
+    longGestureRecognizer.minimumPressDuration = 0.3;
+
+}
+
+-(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
+    CGPoint newPoint = [gestureRecognizer locationInView:[self view]];
+    [[self view] bringSubviewToFront:[gestureRecognizer view]];
+    [[gestureRecognizer view] setCenter:newPoint];
+}
 
 //Take photo
 - (IBAction)takePhotoButtonTapped:(id)sender
