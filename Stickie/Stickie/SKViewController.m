@@ -10,6 +10,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SKPhotoCell.h"
 #import "SKDetailViewController.h"
+#import "SKAssetURLTagMap.h"
 
 
 @interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
@@ -97,24 +98,32 @@
     return 1;
 }
 //Select image
-- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    ALAsset *asset = self.assets[indexPath.row];
-    ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
-    UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
-    UIImageView *newImageView = [[UIImageView alloc] initWithImage:image];
-    [newImageView setUserInteractionEnabled:YES];
-    UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
-    [newImageView addGestureRecognizer:longGestureRecognizer];
-    longGestureRecognizer.minimumPressDuration = 0.3;
+//- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    ALAsset *asset = self.assets[indexPath.row];
+//    NSLog(@"%@",[asset valueForProperty:ALAssetPropertyAssetURL]);
+//    NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
+//    SKAssetURLTagMap *map = [SKAssetURLTagMap sharedInstance];
+//    [map removeAllTags];
+//    SKImageTag *tag = [[SKImageTag alloc] initWithName:@"stick" andColor: nil];
+//    [map setTag:tag forAssetURL:url];
+//    NSLog(@"%@", [[map getTagForAssetURL:url] tagName]);
 
-}
+//    ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+//    UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+//    UIImageView *newImageView = [[UIImageView alloc] initWithImage:image];
+//    [newImageView setUserInteractionEnabled:YES];
+//    UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
+//    [newImageView addGestureRecognizer:longGestureRecognizer];
+//    longGestureRecognizer.minimumPressDuration = 0.3;
 
--(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
-    CGPoint newPoint = [gestureRecognizer locationInView:[self view]];
-    [[self view] bringSubviewToFront:[gestureRecognizer view]];
-    [[gestureRecognizer view] setCenter:newPoint];
-}
+//}
+
+//-(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
+//    CGPoint newPoint = [gestureRecognizer locationInView:[self view]];
+//    [[self view] bringSubviewToFront:[gestureRecognizer view]];
+//    [[gestureRecognizer view] setCenter:newPoint];
+//}
 
 //Take photo
 - (IBAction)takePhotoButtonTapped:(id)sender
@@ -138,10 +147,12 @@
     {
         NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
         ALAsset *asset = self.assets[indexPath.row];
+        NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
         ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
         UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
         SKDetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.image = image;
+        detailViewController.imageURL = url;
     }
 }
 

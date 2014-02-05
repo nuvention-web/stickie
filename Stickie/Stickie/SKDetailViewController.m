@@ -7,6 +7,8 @@
 //
 
 #import "SKDetailViewController.h"
+#import "SKTagTableController.h"
+
 
 @interface SKDetailViewController ()
 
@@ -24,6 +26,14 @@
 - (IBAction)backMain:(id)sender {
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"tagTable"]) {
+        SKTagTableController *tagTableController = [segue destinationViewController];
+        tagTableController.imageURL = _imageURL;
+    }
 }
 
 @end

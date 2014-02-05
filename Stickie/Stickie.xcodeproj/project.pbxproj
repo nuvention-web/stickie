@@ -35,6 +35,9 @@
 		14A6F9A81899BB0200DA1AA1 /* OBLongPressDragDropGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6F9A21899BB0200DA1AA1 /* OBLongPressDragDropGestureRecognizer.m */; };
 		14A6F9A91899BB0200DA1AA1 /* UIGestureRecognizer+OBDragDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6F9A41899BB0200DA1AA1 /* UIGestureRecognizer+OBDragDrop.m */; };
 		14A6F9AA1899BB0200DA1AA1 /* UIView+OBDropZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6F9A61899BB0200DA1AA1 /* UIView+OBDropZone.m */; };
+		14B0C7A018A2EFA4008B65C3 /* SKTagCollectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */; };
+		14B0C7A218A2F348008B65C3 /* SearchStickie_222x222.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7A118A2F348008B65C3 /* SearchStickie_222x222.png */; };
+		14B0C7A518A2F6BA008B65C3 /* SKTagTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C7A418A2F6BA008B65C3 /* SKTagTableController.m */; };
 		93E82086189828F100877D38 /* SKAssetURLTagMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8207E189828F100877D38 /* SKAssetURLTagMap.m */; };
 		93E82087189828F100877D38 /* SKImageTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82080189828F100877D38 /* SKImageTag.m */; };
 		93E82088189828F100877D38 /* SKTagCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82082189828F100877D38 /* SKTagCollection.m */; };
@@ -101,6 +104,10 @@
 		14A6F9A41899BB0200DA1AA1 /* UIGestureRecognizer+OBDragDrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+OBDragDrop.m"; sourceTree = "<group>"; };
 		14A6F9A51899BB0200DA1AA1 /* UIView+OBDropZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+OBDropZone.h"; sourceTree = "<group>"; };
 		14A6F9A61899BB0200DA1AA1 /* UIView+OBDropZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+OBDropZone.m"; sourceTree = "<group>"; };
+		14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagCollectionTest.m; sourceTree = "<group>"; };
+		14B0C7A118A2F348008B65C3 /* SearchStickie_222x222.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchStickie_222x222.png; sourceTree = "<group>"; };
+		14B0C7A318A2F6BA008B65C3 /* SKTagTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagTableController.h; sourceTree = "<group>"; };
+		14B0C7A418A2F6BA008B65C3 /* SKTagTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagTableController.m; sourceTree = "<group>"; };
 		93E8207D189828F100877D38 /* SKAssetURLTagMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAssetURLTagMap.h; sourceTree = "<group>"; };
 		93E8207E189828F100877D38 /* SKAssetURLTagMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagMap.m; sourceTree = "<group>"; };
 		93E8207F189828F100877D38 /* SKImageTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKImageTag.h; sourceTree = "<group>"; };
@@ -140,6 +147,7 @@
 		1490A0F91892066300453D61 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				14B0C7A118A2F348008B65C3 /* SearchStickie_222x222.png */,
 				1490A0FC189207E500453D61 /* camera_512x512.png */,
 				149A97F7189F750D007FF0D4 /* ReturnButton283_283.png */,
 			);
@@ -189,6 +197,8 @@
 				149FB2AC1890845B00D44DB2 /* SKViewController.m */,
 				14985C641890F037004B3ECB /* SKDetailViewController.h */,
 				14985C651890F037004B3ECB /* SKDetailViewController.m */,
+				14B0C7A318A2F6BA008B65C3 /* SKTagTableController.h */,
+				14B0C7A418A2F6BA008B65C3 /* SKTagTableController.m */,
 				149FB2EC18909D3500D44DB2 /* SKPhotoCell.h */,
 				149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */,
 				93E8207D189828F100877D38 /* SKAssetURLTagMap.h */,
@@ -219,8 +229,8 @@
 		149FB2BB1890845C00D44DB2 /* StickieTests */ = {
 			isa = PBXGroup;
 			children = (
-				932F86E71899C2FD00C32E71 /* SKTagCollectionTest.m */,
 				93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */,
+				14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */,
 				149FB2BC1890845C00D44DB2 /* Supporting Files */,
 			);
 			path = StickieTests;
@@ -388,6 +398,7 @@
 				149FB2AF1890845B00D44DB2 /* Images.xcassets in Resources */,
 				149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */,
 				149FB2AA1890845B00D44DB2 /* Main.storyboard in Resources */,
+				14B0C7A218A2F348008B65C3 /* SearchStickie_222x222.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +423,7 @@
 				149FB2EE18909D3500D44DB2 /* SKPhotoCell.m in Sources */,
 				14A0567218A0BEC3006E86FF /* DraggableCollectionViewFlowLayout.m in Sources */,
 				149FB2A71890845B00D44DB2 /* SKAppDelegate.m in Sources */,
+				14B0C7A518A2F6BA008B65C3 /* SKTagTableController.m in Sources */,
 				14A0567018A0BEC3006E86FF /* LSCollectionViewHelper.m in Sources */,
 				93E82087189828F100877D38 /* SKImageTag.m in Sources */,
 				14A6F9A71899BB0200DA1AA1 /* OBDragDropManager.m in Sources */,
@@ -431,7 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				932F86E81899C2FD00C32E71 /* SKTagCollectionTest.m in Sources */,
+				14B0C7A018A2EFA4008B65C3 /* SKTagCollectionTest.m in Sources */,
 				93E8208C189829A400877D38 /* SKAssetURLTagMapTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
