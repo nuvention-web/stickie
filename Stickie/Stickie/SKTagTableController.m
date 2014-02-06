@@ -8,6 +8,7 @@
 
 #import "SKTagTableController.h"
 #import "SKAssetURLTagMap.h"
+#import "SKTagCollection.h"
 
 @interface SKTagTableController ()
 
@@ -60,6 +61,11 @@
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     SKImageTag *tag = [[SKImageTag alloc] initWithName:cell.textLabel.text andColor:nil];
+    SKTagCollection *collection = [SKTagCollection sharedInstance];
+    if (![collection isTagInCollection:tag]) {
+        [collection addTagToCollection:tag];
+    }
+    [collection updateCollectionWithTag:tag forImageURL:_imageURL];
     SKAssetURLTagMap *map = [SKAssetURLTagMap sharedInstance];
     [map setTag:tag forAssetURL:_imageURL];
 }
