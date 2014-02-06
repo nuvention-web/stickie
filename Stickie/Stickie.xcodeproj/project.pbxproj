@@ -38,6 +38,15 @@
 		14B0C7A018A2EFA4008B65C3 /* SKTagCollectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */; };
 		14B0C7A218A2F348008B65C3 /* SearchStickie_222x222.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7A118A2F348008B65C3 /* SearchStickie_222x222.png */; };
 		14B0C7A518A2F6BA008B65C3 /* SKTagTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C7A418A2F6BA008B65C3 /* SKTagTableController.m */; };
+		14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */; };
+		14B0C7B118A31016008B65C3 /* BlueCircle_192x192.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7A918A31016008B65C3 /* BlueCircle_192x192.png */; };
+		14B0C7B218A31016008B65C3 /* BlueCorner_106x106.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7AA18A31016008B65C3 /* BlueCorner_106x106.png */; };
+		14B0C7B318A31016008B65C3 /* GreenCircle_192x192.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7AB18A31016008B65C3 /* GreenCircle_192x192.png */; };
+		14B0C7B418A31016008B65C3 /* GreenCorner_106x106.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7AC18A31016008B65C3 /* GreenCorner_106x106.png */; };
+		14B0C7B518A31016008B65C3 /* PinkCircle_192x192.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7AD18A31016008B65C3 /* PinkCircle_192x192.png */; };
+		14B0C7B618A31016008B65C3 /* PinkCorner_106x106.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7AE18A31016008B65C3 /* PinkCorner_106x106.png */; };
+		14B0C7B718A31016008B65C3 /* RedCircle_192x192.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7AF18A31016008B65C3 /* RedCircle_192x192.png */; };
+		14B0C7B818A31016008B65C3 /* RedCorner_106x106.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7B018A31016008B65C3 /* RedCorner_106x106.png */; };
 		93E82086189828F100877D38 /* SKAssetURLTagMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8207E189828F100877D38 /* SKAssetURLTagMap.m */; };
 		93E82087189828F100877D38 /* SKImageTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82080189828F100877D38 /* SKImageTag.m */; };
 		93E82088189828F100877D38 /* SKTagCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82082189828F100877D38 /* SKTagCollection.m */; };
@@ -108,6 +117,16 @@
 		14B0C7A118A2F348008B65C3 /* SearchStickie_222x222.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchStickie_222x222.png; sourceTree = "<group>"; };
 		14B0C7A318A2F6BA008B65C3 /* SKTagTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagTableController.h; sourceTree = "<group>"; };
 		14B0C7A418A2F6BA008B65C3 /* SKTagTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagTableController.m; sourceTree = "<group>"; };
+		14B0C7A618A30B43008B65C3 /* SKTagSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagSearchViewController.h; sourceTree = "<group>"; };
+		14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagSearchViewController.m; sourceTree = "<group>"; };
+		14B0C7A918A31016008B65C3 /* BlueCircle_192x192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueCircle_192x192.png; sourceTree = "<group>"; };
+		14B0C7AA18A31016008B65C3 /* BlueCorner_106x106.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueCorner_106x106.png; sourceTree = "<group>"; };
+		14B0C7AB18A31016008B65C3 /* GreenCircle_192x192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenCircle_192x192.png; sourceTree = "<group>"; };
+		14B0C7AC18A31016008B65C3 /* GreenCorner_106x106.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenCorner_106x106.png; sourceTree = "<group>"; };
+		14B0C7AD18A31016008B65C3 /* PinkCircle_192x192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinkCircle_192x192.png; sourceTree = "<group>"; };
+		14B0C7AE18A31016008B65C3 /* PinkCorner_106x106.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinkCorner_106x106.png; sourceTree = "<group>"; };
+		14B0C7AF18A31016008B65C3 /* RedCircle_192x192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCircle_192x192.png; sourceTree = "<group>"; };
+		14B0C7B018A31016008B65C3 /* RedCorner_106x106.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCorner_106x106.png; sourceTree = "<group>"; };
 		93E8207D189828F100877D38 /* SKAssetURLTagMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAssetURLTagMap.h; sourceTree = "<group>"; };
 		93E8207E189828F100877D38 /* SKAssetURLTagMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagMap.m; sourceTree = "<group>"; };
 		93E8207F189828F100877D38 /* SKImageTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKImageTag.h; sourceTree = "<group>"; };
@@ -147,6 +166,14 @@
 		1490A0F91892066300453D61 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				14B0C7A918A31016008B65C3 /* BlueCircle_192x192.png */,
+				14B0C7AA18A31016008B65C3 /* BlueCorner_106x106.png */,
+				14B0C7AB18A31016008B65C3 /* GreenCircle_192x192.png */,
+				14B0C7AC18A31016008B65C3 /* GreenCorner_106x106.png */,
+				14B0C7AD18A31016008B65C3 /* PinkCircle_192x192.png */,
+				14B0C7AE18A31016008B65C3 /* PinkCorner_106x106.png */,
+				14B0C7AF18A31016008B65C3 /* RedCircle_192x192.png */,
+				14B0C7B018A31016008B65C3 /* RedCorner_106x106.png */,
 				14B0C7A118A2F348008B65C3 /* SearchStickie_222x222.png */,
 				1490A0FC189207E500453D61 /* camera_512x512.png */,
 				149A97F7189F750D007FF0D4 /* ReturnButton283_283.png */,
@@ -193,6 +220,8 @@
 				149FB2A51890845B00D44DB2 /* SKAppDelegate.h */,
 				149FB2A61890845B00D44DB2 /* SKAppDelegate.m */,
 				149FB2A81890845B00D44DB2 /* Main.storyboard */,
+				14B0C7A618A30B43008B65C3 /* SKTagSearchViewController.h */,
+				14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */,
 				149FB2AB1890845B00D44DB2 /* SKViewController.h */,
 				149FB2AC1890845B00D44DB2 /* SKViewController.m */,
 				14985C641890F037004B3ECB /* SKDetailViewController.h */,
@@ -393,11 +422,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				14A0567318A0BEC3006E86FF /* LICENSE in Resources */,
+				14B0C7B418A31016008B65C3 /* GreenCorner_106x106.png in Resources */,
 				1490A0FD189207E500453D61 /* camera_512x512.png in Resources */,
+				14B0C7B818A31016008B65C3 /* RedCorner_106x106.png in Resources */,
+				14B0C7B318A31016008B65C3 /* GreenCircle_192x192.png in Resources */,
+				14B0C7B118A31016008B65C3 /* BlueCircle_192x192.png in Resources */,
 				149A97F8189F750D007FF0D4 /* ReturnButton283_283.png in Resources */,
 				149FB2AF1890845B00D44DB2 /* Images.xcassets in Resources */,
 				149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */,
+				14B0C7B618A31016008B65C3 /* PinkCorner_106x106.png in Resources */,
+				14B0C7B518A31016008B65C3 /* PinkCircle_192x192.png in Resources */,
+				14B0C7B218A31016008B65C3 /* BlueCorner_106x106.png in Resources */,
 				149FB2AA1890845B00D44DB2 /* Main.storyboard in Resources */,
+				14B0C7B718A31016008B65C3 /* RedCircle_192x192.png in Resources */,
 				14B0C7A218A2F348008B65C3 /* SearchStickie_222x222.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,6 +467,7 @@
 				14A6F9AA1899BB0200DA1AA1 /* UIView+OBDropZone.m in Sources */,
 				14A0567418A0BEC3006E86FF /* UICollectionView+Draggable.m in Sources */,
 				14A0567118A0BEC3006E86FF /* LSCollectionViewLayoutHelper.m in Sources */,
+				14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */,
 				93E82088189828F100877D38 /* SKTagCollection.m in Sources */,
 				14A6F9A81899BB0200DA1AA1 /* OBLongPressDragDropGestureRecognizer.m in Sources */,
 				14A0567818A0C326006E86FF /* I3DragBetweenHelper.m in Sources */,
