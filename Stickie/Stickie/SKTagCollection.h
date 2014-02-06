@@ -18,10 +18,13 @@ typedef enum {
 
 + (SKTagCollection *) sharedInstance;
 - (SKTagData *) getTagInfo: (SKImageTag *) tag;
-- (void) updateCollectionWithTag: (SKImageTag *) tag;
+//- (void) updateCollectionWithTag: (SKImageTag *) tag;
+- (void) addTagToCollection: (SKImageTag *) tag;
+- (void) updateCollectionWithTag:(SKImageTag *)tag forImageURL: (NSURL *) url;
 - (BOOL) isTagInCollection: (SKImageTag *) tag;
 - (void) changeTag: (SKImageTag *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice;
 - (void) changeTag: (SKImageTag *) tag toColor: (UIColor *) color;
+- (void) removeImageURL: (NSURL *) url forTag: (SKImageTag *) tag;
 - (void) removeTag: (SKImageTag *) tag;
 
 /* DANGER, DRAGONS LIE AHEAD: This method will nuke all tags in the collection: */
