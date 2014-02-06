@@ -24,7 +24,6 @@
     self.imageView.image = self.image;
 }
 - (IBAction)backMain:(id)sender {
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
