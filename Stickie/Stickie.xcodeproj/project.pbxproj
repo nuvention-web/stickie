@@ -47,7 +47,7 @@
 		14B0C7B618A31016008B65C3 /* PinkCorner_106x106.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7AE18A31016008B65C3 /* PinkCorner_106x106.png */; };
 		14B0C7B718A31016008B65C3 /* RedCircle_192x192.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7AF18A31016008B65C3 /* RedCircle_192x192.png */; };
 		14B0C7B818A31016008B65C3 /* RedCorner_106x106.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7B018A31016008B65C3 /* RedCorner_106x106.png */; };
-		93E82086189828F100877D38 /* SKAssetURLTagMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8207E189828F100877D38 /* SKAssetURLTagMap.m */; };
+		93E82086189828F100877D38 /* SKAssetURLTagsMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8207E189828F100877D38 /* SKAssetURLTagsMap.m */; };
 		93E82087189828F100877D38 /* SKImageTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82080189828F100877D38 /* SKImageTag.m */; };
 		93E82088189828F100877D38 /* SKTagCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82082189828F100877D38 /* SKTagCollection.m */; };
 		93E82089189828F100877D38 /* SKTagData.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82084189828F100877D38 /* SKTagData.m */; };
@@ -127,8 +127,8 @@
 		14B0C7AE18A31016008B65C3 /* PinkCorner_106x106.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinkCorner_106x106.png; sourceTree = "<group>"; };
 		14B0C7AF18A31016008B65C3 /* RedCircle_192x192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCircle_192x192.png; sourceTree = "<group>"; };
 		14B0C7B018A31016008B65C3 /* RedCorner_106x106.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCorner_106x106.png; sourceTree = "<group>"; };
-		93E8207D189828F100877D38 /* SKAssetURLTagMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAssetURLTagMap.h; sourceTree = "<group>"; };
-		93E8207E189828F100877D38 /* SKAssetURLTagMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagMap.m; sourceTree = "<group>"; };
+		93E8207D189828F100877D38 /* SKAssetURLTagsMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAssetURLTagsMap.h; sourceTree = "<group>"; };
+		93E8207E189828F100877D38 /* SKAssetURLTagsMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagsMap.m; sourceTree = "<group>"; };
 		93E8207F189828F100877D38 /* SKImageTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKImageTag.h; sourceTree = "<group>"; };
 		93E82080189828F100877D38 /* SKImageTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKImageTag.m; sourceTree = "<group>"; };
 		93E82081189828F100877D38 /* SKTagCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagCollection.h; sourceTree = "<group>"; };
@@ -234,8 +234,8 @@
 				93E82080189828F100877D38 /* SKImageTag.m */,
 				93E82083189828F100877D38 /* SKTagData.h */,
 				93E82084189828F100877D38 /* SKTagData.m */,
-				93E8207D189828F100877D38 /* SKAssetURLTagMap.h */,
-				93E8207E189828F100877D38 /* SKAssetURLTagMap.m */,
+				93E8207D189828F100877D38 /* SKAssetURLTagsMap.h */,
+				93E8207E189828F100877D38 /* SKAssetURLTagsMap.m */,
 				93E82081189828F100877D38 /* SKTagCollection.h */,
 				93E82082189828F100877D38 /* SKTagCollection.m */,
 				149FB2AE1890845B00D44DB2 /* Images.xcassets */,
@@ -473,7 +473,7 @@
 				14A0567818A0C326006E86FF /* I3DragBetweenHelper.m in Sources */,
 				149FB2AD1890845B00D44DB2 /* SKViewController.m in Sources */,
 				149FB2A31890845B00D44DB2 /* main.m in Sources */,
-				93E82086189828F100877D38 /* SKAssetURLTagMap.m in Sources */,
+				93E82086189828F100877D38 /* SKAssetURLTagsMap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

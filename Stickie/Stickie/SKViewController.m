@@ -10,7 +10,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SKPhotoCell.h"
 #import "SKDetailViewController.h"
-#import "SKAssetURLTagMap.h"
+#import "SKAssetURLTagsMap.h"
 
 
 @interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
@@ -103,7 +103,7 @@
 //    ALAsset *asset = self.assets[indexPath.row];
 //    NSLog(@"%@",[asset valueForProperty:ALAssetPropertyAssetURL]);
 //    NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
-//    SKAssetURLTagMap *map = [SKAssetURLTagMap sharedInstance];
+//    SKAssetURLTagsMap *map = [SKAssetURLTagsMap sharedInstance];
 //    [map removeAllTags];
 //    SKImageTag *tag = [[SKImageTag alloc] initWithName:@"stick" andColor: nil];
 //    [map setTag:tag forAssetURL:url];

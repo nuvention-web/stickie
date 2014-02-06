@@ -7,7 +7,7 @@
 //
 
 #import "SKTagTableController.h"
-#import "SKAssetURLTagMap.h"
+#import "SKAssetURLTagsMap.h"
 #import "SKTagCollection.h"
 
 @interface SKTagTableController ()
@@ -29,8 +29,8 @@
 {
     [super viewDidLoad];
     NSLog(@"%@", _imageURL);
-    SKAssetURLTagMap *map = [SKAssetURLTagMap sharedInstance];
-    NSLog(@"%@", [[map getTagForAssetURL:_imageURL] tagName]);
+    SKAssetURLTagsMap *map = [SKAssetURLTagsMap sharedInstance];
+    NSLog(@"%@", [[[map getTagsForAssetURL:_imageURL] objectAtIndex:0] tagName]);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -66,8 +66,8 @@
         [collection addTagToCollection:tag];
     }
     [collection updateCollectionWithTag:tag forImageURL:_imageURL];
-    SKAssetURLTagMap *map = [SKAssetURLTagMap sharedInstance];
-    [map setTag:tag forAssetURL:_imageURL];
+    SKAssetURLTagsMap *map = [SKAssetURLTagsMap sharedInstance];
+    [map addTag:tag forAssetURL:_imageURL];
 }
 
 //- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
