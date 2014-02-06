@@ -18,6 +18,7 @@
     if (self) {
         _tagFrequencyInPhotos = 1;
         _tagColor = [[UIColor alloc] init];
+        _imageURLs = [[NSMutableArray alloc] init];
     }
     return self;
 }

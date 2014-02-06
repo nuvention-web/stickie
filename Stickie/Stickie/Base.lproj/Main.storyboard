@@ -110,6 +110,31 @@
             </objects>
             <point key="canvasLocation" x="251" y="198"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="DxD-Wm-cy3">
+            <objects>
+                <viewController id="lsA-Em-eke" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wXB-lK-ouB"/>
+                        <viewControllerLayoutGuide type="bottom" id="lma-VR-7hb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fec-Hm-ZsD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WU6-gG-MpZ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rbs-Hz-1hR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="242" y="926"/>
+        </scene>
         <!--Detail View Controller-->
         <scene sceneID="4nN-Kz-V2n">
             <objects>
@@ -290,6 +315,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Yka-j6-OS4"/>
+        <segue reference="rHq-Mc-Vot"/>
     </inferredMetricsTieBreakers>
 </document>
