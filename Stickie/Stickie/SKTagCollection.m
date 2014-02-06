@@ -97,8 +97,14 @@
 {
     if ([allUserTags containsObject:tag]) {
         SKTagData *currentData = [tagDataMap objectForKey:tag];
-        currentData.tagFrequencyInPhotos++;
-        [currentData.imageURLs addObject:url];
+        if (![currentData.imageURLs containsObject:url]) {
+            currentData.tagFrequencyInPhotos++;
+            [currentData.imageURLs addObject:url];
+        }
+        else {
+            [NSException raise:@"Repeated asset URL" format:@"URL %@ is already associated with tag %@.",
+                [url absoluteString], tag.tagName];
+        }
     }
     else {
         [NSException raise:@"Missing tag." format:@"Tag %@ is not yet in collection.", tag.tagName];
@@ -110,28 +116,34 @@
     return [allUserTags containsObject: tag];
 }
 
-/* This method likely is not necessary anymore. */
-- (void) changeTag: (SKImageTag *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice
+-(BOOL) isURL: (NSURL *) url associatedWithTag: (SKImageTag *) tag
 {
-    if (![allUserTags containsObject: tag]) {
-        @throw [NSException exceptionWithName: @"TagNotFoundException" reason: @"The specified tag was not found." userInfo:nil];
-    }
-    
-    SKTagData *data = [tagDataMap objectForKey: tag];
-    
-    switch (choice) {
-        case HIGHER:
-            data.tagFrequencyInPhotos++;
-            [tagDataMap setObject: data forKey: tag];
-            break;
-        case LOWER:
-            if (data.tagFrequencyInPhotos > 0) {
-                data.tagFrequencyInPhotos--;
-                [tagDataMap setObject: data forKey: tag];
-            }
-            break;
-    }
+    SKTagData *tagData = [tagDataMap objectForKey:tag];
+    return [tagData.imageURLs containsObject:url];
 }
+
+/* This method likely is not necessary anymore. */
+//- (void) changeTag: (SKImageTag *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice
+//{
+//    if (![allUserTags containsObject: tag]) {
+//        @throw [NSException exceptionWithName: @"TagNotFoundException" reason: @"The specified tag was not found." userInfo:nil];
+//    }
+//    
+//    SKTagData *data = [tagDataMap objectForKey: tag];
+//    
+//    switch (choice) {
+//        case HIGHER:
+//            data.tagFrequencyInPhotos++;
+//            [tagDataMap setObject: data forKey: tag];
+//            break;
+//        case LOWER:
+//            if (data.tagFrequencyInPhotos > 0) {
+//                data.tagFrequencyInPhotos--;
+//                [tagDataMap setObject: data forKey: tag];
+//            }
+//            break;
+//    }
+//}
 
 - (void) changeTag: (SKImageTag *) tag toColor: (UIColor *) color
 {
