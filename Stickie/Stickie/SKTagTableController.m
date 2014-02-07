@@ -65,9 +65,11 @@
     if (![collection isTagInCollection:tag]) {
         [collection addTagToCollection:tag];
     }
-    [collection updateCollectionWithTag:tag forImageURL:_imageURL];
-    SKAssetURLTagsMap *map = [SKAssetURLTagsMap sharedInstance];
-    [map addTag:tag forAssetURL:_imageURL];
+    if (![collection isURL:_imageURL associatedWithTag:tag]){
+        [collection updateCollectionWithTag:tag forImageURL:_imageURL];
+        SKAssetURLTagsMap *map = [SKAssetURLTagsMap sharedInstance];
+        [map addTag:tag forAssetURL:_imageURL];
+    }
 }
 
 //- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

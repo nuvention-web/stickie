@@ -66,8 +66,13 @@
     NSMutableArray *tags = [assetURLToTagsMap objectForKey:imageURL];
     if (!tags)
         tags = [[NSMutableArray alloc] init];
-    [tags addObject:tag];
-    [assetURLToTagsMap setObject: tags forKey: imageURL];
+    if ([tags containsObject:tag]) {
+        [NSException raise:@"Repeated tag" format:@"Tag %@ has already been associated with URL %@", tag.tagName, [imageURL absoluteString]];
+    }
+    else {
+        [tags addObject:tag];
+        [assetURLToTagsMap setObject: tags forKey: imageURL];
+    }
 }
 
 - (void) removeAllTagsForURL: (NSURL *) imageURL
