@@ -28,9 +28,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"%@", _imageURL);
-    SKAssetURLTagsMap *map = [SKAssetURLTagsMap sharedInstance];
-    NSLog(@"%@", [[[map getTagsForAssetURL:_imageURL] objectAtIndex:0] tagName]);
+//    NSLog(@"%@", _imageURL);
+//    SKAssetURLTagsMap *map = [SKAssetURLTagsMap sharedInstance];
+//    NSLog(@"%@", [[[map getTagsForAssetURL:_imageURL] objectAtIndex:0] tagName]);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

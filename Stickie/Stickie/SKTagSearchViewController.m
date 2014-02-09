@@ -44,7 +44,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [super viewDidLoad];
     blue = NO, red = NO, green = NO, pink = NO;
 	// Do any additional setup after loading the view.
-    _assets = [@[] mutableCopy];
+    _assets = [[NSMutableArray alloc] init];
     library = [[ALAssetsLibrary alloc] init];
 }
 - (IBAction)backMain:(id)sender {
@@ -85,11 +85,12 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (IBAction)blueButton:(id)sender
 {
+    [self viewDidLoad];
+    [_collectionView reloadData];
+
     if (!blue){
-        [self viewDidLoad];
         ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
         {
-            NSLog(@"%@",myasset);
             [_assets addObject:myasset];
             [_collectionView reloadData];
         };
@@ -113,11 +114,12 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     }
 }
 - (IBAction)redButton:(id)sender {
+    [self viewDidLoad];
+    [_collectionView reloadData];
+
     if (!red){
-        [self viewDidLoad];
         ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
         {
-            NSLog(@"%@",myasset);
             [_assets addObject:myasset];
             [_collectionView reloadData];
         };
@@ -141,11 +143,12 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     }
 }
 - (IBAction)greenButton:(id)sender {
+    [self viewDidLoad];
+    [_collectionView reloadData];
+
     if (!green){
-        [self viewDidLoad];
         ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
         {
-            NSLog(@"%@",myasset);
             [_assets addObject:myasset];
             [_collectionView reloadData];
         };
@@ -169,11 +172,12 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     }
 }
 - (IBAction)pinkButton:(id)sender {
+    [self viewDidLoad];
+    [_collectionView reloadData];
+
     if (!pink){
-        [self viewDidLoad];
         ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
         {
-            NSLog(@"%@",myasset);
             [_assets addObject:myasset];
             [_collectionView reloadData];
         };
