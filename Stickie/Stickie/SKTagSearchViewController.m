@@ -17,7 +17,7 @@
 typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
 typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
-@property(nonatomic, strong) NSMutableArray *assets;
+@property(nonatomic, strong) __block NSMutableArray *assets;
 
 
 @end
@@ -62,11 +62,15 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (IBAction)blueButton:(id)sender {
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    _assets = [@[] mutableCopy];
+    __block NSMutableArray *tmpAssets = [@[] mutableCopy];
     
     ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
     {
         NSLog(@"%@",myasset);
-        [_assets addObject:myasset];
+        [tmpAssets addObject:myasset];
+        [_assets addObjectsFromArray: tmpAssets];
+        [_collectionView reloadData];
     };
     
     //
