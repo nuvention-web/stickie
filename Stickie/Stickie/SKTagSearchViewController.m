@@ -12,12 +12,12 @@
 #import "SKPhotoCell.h"
 
 
-@interface SKTagSearchViewController ()
+@interface SKTagSearchViewController()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
 typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
-@property(nonatomic, strong) __block NSMutableArray *assets;
+@property(nonatomic, strong) NSMutableArray *assets;
 
 
 @end
@@ -37,7 +37,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    _assets = [[NSMutableArray alloc] init];
+    _assets = [@[] mutableCopy];
 }
 - (IBAction)backMain:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -49,9 +49,14 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     // Dispose of any resources that can be recreated.
 }
 
+- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.assets.count;
+}
+
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SKPhotoCell *cell = (SKPhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
+    SKPhotoCell *cell = (SKPhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"searchCell" forIndexPath:indexPath];
     
     ALAsset *asset = self.assets[indexPath.row];
     cell.asset = asset;
@@ -62,7 +67,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (IBAction)blueButton:(id)sender {
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
     
     ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
