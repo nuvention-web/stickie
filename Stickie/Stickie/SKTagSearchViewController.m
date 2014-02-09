@@ -12,13 +12,19 @@
 #import "SKPhotoCell.h"
 
 
-@interface SKTagSearchViewController()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface SKTagSearchViewController()
+{
+    ALAssetsLibrary *library;
+    BOOL blue;
+    BOOL red;
+    BOOL green;
+    BOOL pink;
+}
 
 typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
 typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property(nonatomic, strong) NSMutableArray *assets;
-
 
 @end
 
@@ -36,8 +42,10 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    blue = NO, red = NO, green = NO, pink = NO;
 	// Do any additional setup after loading the view.
     _assets = [@[] mutableCopy];
+    library = [[ALAssetsLibrary alloc] init];
 }
 - (IBAction)backMain:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -65,42 +73,128 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     return cell;
 }
 
-- (IBAction)blueButton:(id)sender {
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    __block NSMutableArray *tmpAssets = [@[] mutableCopy];
-    
-    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
-    {
-        NSLog(@"%@",myasset);
-        [tmpAssets addObject:myasset];
-        [_assets addObjectsFromArray: tmpAssets];
-        [_collectionView reloadData];
-    };
-    
-    //
-    ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
-    {
-        NSLog(@"booya, cant get image - %@",[myerror localizedDescription]);
-    };
-    
-    SKTagCollection *collection = [SKTagCollection sharedInstance];
-    SKImageTag *tag = [[SKImageTag alloc] init];
-    tag.tagName = @"Food";
-    
-    SKTagData *tagData = [collection getTagInfo:tag];
-    NSMutableArray *imageURLs = [tagData imageURLs];
-    
-    for (NSURL *url in imageURLs) {
-        [library assetForURL:url resultBlock:resultblock failureBlock:failureblock];
-    }     
+- (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 4;
+}
+
+- (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 1;
+}
+
+- (IBAction)blueButton:(id)sender
+{
+    if (!blue){
+        [self viewDidLoad];
+        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
+        {
+            NSLog(@"%@",myasset);
+            [_assets addObject:myasset];
+            [_collectionView reloadData];
+        };
+
+        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
+        {
+            NSLog(@"Cannot access Library Assets");
+        };
+        
+        SKTagCollection *collection = [SKTagCollection sharedInstance];
+        SKImageTag *tag = [[SKImageTag alloc] init];
+        tag.tagName = @"Food";
+        
+        SKTagData *tagData = [collection getTagInfo:tag];
+        NSMutableArray *imageURLs = [tagData imageURLs];
+        
+        for (NSURL *url in imageURLs) {
+            [library assetForURL:url resultBlock:resultblock failureBlock:failureblock];
+        }
+        blue = YES;
+    }
 }
 - (IBAction)redButton:(id)sender {
-    
+    if (!red){
+        [self viewDidLoad];
+        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
+        {
+            NSLog(@"%@",myasset);
+            [_assets addObject:myasset];
+            [_collectionView reloadData];
+        };
+        
+        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
+        {
+            NSLog(@"Cannot access Library Assets");
+        };
+        
+        SKTagCollection *collection = [SKTagCollection sharedInstance];
+        SKImageTag *tag = [[SKImageTag alloc] init];
+        tag.tagName = @"Favs";
+        
+        SKTagData *tagData = [collection getTagInfo:tag];
+        NSMutableArray *imageURLs = [tagData imageURLs];
+        
+        for (NSURL *url in imageURLs) {
+            [library assetForURL:url resultBlock:resultblock failureBlock:failureblock];
+        }
+        red = YES;
+    }
 }
 - (IBAction)greenButton:(id)sender {
-    
+    if (!green){
+        [self viewDidLoad];
+        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
+        {
+            NSLog(@"%@",myasset);
+            [_assets addObject:myasset];
+            [_collectionView reloadData];
+        };
+        
+        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
+        {
+            NSLog(@"Cannot access Library Assets");
+        };
+        
+        SKTagCollection *collection = [SKTagCollection sharedInstance];
+        SKImageTag *tag = [[SKImageTag alloc] init];
+        tag.tagName = @"Trips";
+        
+        SKTagData *tagData = [collection getTagInfo:tag];
+        NSMutableArray *imageURLs = [tagData imageURLs];
+        
+        for (NSURL *url in imageURLs) {
+            [library assetForURL:url resultBlock:resultblock failureBlock:failureblock];
+        }
+        green = YES;
+    }
 }
 - (IBAction)pinkButton:(id)sender {
+    if (!pink){
+        [self viewDidLoad];
+        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
+        {
+            NSLog(@"%@",myasset);
+            [_assets addObject:myasset];
+            [_collectionView reloadData];
+        };
+        
+        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
+        {
+            NSLog(@"Cannot access Library Assets");
+        };
+        
+        SKTagCollection *collection = [SKTagCollection sharedInstance];
+        SKImageTag *tag = [[SKImageTag alloc] init];
+        tag.tagName = @"Pets";
+        
+        SKTagData *tagData = [collection getTagInfo:tag];
+        NSMutableArray *imageURLs = [tagData imageURLs];
+        
+        for (NSURL *url in imageURLs) {
+            [library assetForURL:url resultBlock:resultblock failureBlock:failureblock];
+        }
+        pink = YES;
+    }
     
 }
 
