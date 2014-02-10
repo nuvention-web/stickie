@@ -16,8 +16,9 @@
 {
     self = [super init];
     if (self) {
-        _tagFrequencyInPhotos = 1;
+        _tagFrequencyInPhotos = 0;
         _tagColor = [[UIColor alloc] init];
+        _imageURLs = [[NSMutableArray alloc] init];
     }
     return self;
 }

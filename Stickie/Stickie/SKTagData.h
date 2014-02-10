@@ -12,6 +12,7 @@
 
 @property (nonatomic) NSInteger tagFrequencyInPhotos;
 @property (nonatomic) UIColor *tagColor;
+@property (nonatomic) NSMutableArray *imageURLs;
 
 - (id) init;
 

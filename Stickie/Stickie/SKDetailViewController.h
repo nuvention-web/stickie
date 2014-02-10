@@ -11,5 +11,6 @@
 @interface SKDetailViewController : UIViewController
 
 @property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) NSURL *imageURL;
 
 @end

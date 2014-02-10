@@ -65,18 +65,49 @@
     return (SKTagData *) [tagDataMap objectForKey: tag];
 }
 
-- (void) updateCollectionWithTag: (SKImageTag *) tag
+//- (void) updateCollectionWithTag: (SKImageTag *) tag
+//{
+//    if (![allUserTags containsObject: tag]) {
+//        [allUserTags addObject: tag];
+//        SKTagData *data = [[SKTagData alloc] init];
+//        data.tagColor = tag.tagColor;
+//        [tagDataMap setObject:data forKey: tag];
+//    }
+//    else {
+//        SKTagData *currentData = [tagDataMap objectForKey:tag];
+//        currentData.tagFrequencyInPhotos++;
+//        [tagDataMap setObject:currentData forKey:tag];
+//    }
+//}
+
+- (void) addTagToCollection: (SKImageTag *) tag
 {
     if (![allUserTags containsObject: tag]) {
         [allUserTags addObject: tag];
         SKTagData *data = [[SKTagData alloc] init];
         data.tagColor = tag.tagColor;
-        [tagDataMap setObject:data forKey: tag];
+        [tagDataMap setObject:data forKey:tag];
     }
     else {
+        [NSException raise:@"Repeated tag." format:@"Tag %@ is already in collection", tag.tagName];
+    }
+}
+
+-(void) updateCollectionWithTag:(SKImageTag *)tag forImageURL: (NSURL *) url
+{
+    if ([allUserTags containsObject:tag]) {
         SKTagData *currentData = [tagDataMap objectForKey:tag];
-        currentData.tagFrequencyInPhotos++;
-        [tagDataMap setObject:currentData forKey:tag];
+        if (![currentData.imageURLs containsObject:url]) {
+            currentData.tagFrequencyInPhotos++;
+            [currentData.imageURLs addObject:url];
+        }
+        else {
+            [NSException raise:@"Repeated asset URL" format:@"URL %@ is already associated with tag %@.",
+                [url absoluteString], tag.tagName];
+        }
+    }
+    else {
+        [NSException raise:@"Missing tag." format:@"Tag %@ is not yet in collection.", tag.tagName];
     }
 }
 
@@ -85,27 +116,34 @@
     return [allUserTags containsObject: tag];
 }
 
-- (void) changeTag: (SKImageTag *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice
+-(BOOL) isURL: (NSURL *) url associatedWithTag: (SKImageTag *) tag
 {
-    if (![allUserTags containsObject: tag]) {
-        @throw [NSException exceptionWithName: @"TagNotFoundException" reason: @"The specified tag was not found." userInfo:nil];
-    }
-    
-    SKTagData *data = [tagDataMap objectForKey: tag];
-    
-    switch (choice) {
-        case HIGHER:
-            data.tagFrequencyInPhotos++;
-            [tagDataMap setObject: data forKey: tag];
-            break;
-        case LOWER:
-            if (data.tagFrequencyInPhotos > 0) {
-                data.tagFrequencyInPhotos--;
-                [tagDataMap setObject: data forKey: tag];
-            }
-            break;
-    }
+    SKTagData *tagData = [tagDataMap objectForKey:tag];
+    return [tagData.imageURLs containsObject:url];
 }
+
+/* This method likely is not necessary anymore. */
+//- (void) changeTag: (SKImageTag *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice
+//{
+//    if (![allUserTags containsObject: tag]) {
+//        @throw [NSException exceptionWithName: @"TagNotFoundException" reason: @"The specified tag was not found." userInfo:nil];
+//    }
+//    
+//    SKTagData *data = [tagDataMap objectForKey: tag];
+//    
+//    switch (choice) {
+//        case HIGHER:
+//            data.tagFrequencyInPhotos++;
+//            [tagDataMap setObject: data forKey: tag];
+//            break;
+//        case LOWER:
+//            if (data.tagFrequencyInPhotos > 0) {
+//                data.tagFrequencyInPhotos--;
+//                [tagDataMap setObject: data forKey: tag];
+//            }
+//            break;
+//    }
+//}
 
 - (void) changeTag: (SKImageTag *) tag toColor: (UIColor *) color
 {
@@ -116,6 +154,19 @@
     SKTagData *data = [tagDataMap objectForKey: tag];
     data.tagColor = color;
     [tagDataMap setObject: data forKey: tag];
+}
+
+- (void) removeImageURL: (NSURL *) url forTag: (SKImageTag *) tag
+{
+    SKTagData *tagData = [tagDataMap objectForKey:tag];
+    if ([tagData.imageURLs containsObject:url]) {
+        [tagData.imageURLs removeObject:url];
+        tagData.tagFrequencyInPhotos--;
+        [tagDataMap setObject:tagData forKey:tag];
+    }
+    else {
+        [NSException raise:@"URL Not Found." format:@"URL %@ is not associated with tag %@.", [url absoluteString], tag.tagName];
+    }
 }
 
 - (void) removeTag: (SKImageTag *) tag;
