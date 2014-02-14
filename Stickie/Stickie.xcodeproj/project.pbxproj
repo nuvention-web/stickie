@@ -27,7 +27,6 @@
 		149FB2EE18909D3500D44DB2 /* SKPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */; };
 		14B0C7A018A2EFA4008B65C3 /* SKTagCollectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */; };
 		14B0C7A218A2F348008B65C3 /* SearchStickie_222x222.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7A118A2F348008B65C3 /* SearchStickie_222x222.png */; };
-		14B0C7A518A2F6BA008B65C3 /* SKTagTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C7A418A2F6BA008B65C3 /* SKTagTableController.m */; };
 		14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */; };
 		14B0C7B118A31016008B65C3 /* BlueCircle_192x192.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7A918A31016008B65C3 /* BlueCircle_192x192.png */; };
 		14B0C7B218A31016008B65C3 /* BlueCorner_106x106.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7AA18A31016008B65C3 /* BlueCorner_106x106.png */; };
@@ -82,8 +81,6 @@
 		149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPhotoCell.m; sourceTree = "<group>"; };
 		14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagCollectionTest.m; sourceTree = "<group>"; };
 		14B0C7A118A2F348008B65C3 /* SearchStickie_222x222.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchStickie_222x222.png; sourceTree = "<group>"; };
-		14B0C7A318A2F6BA008B65C3 /* SKTagTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagTableController.h; sourceTree = "<group>"; };
-		14B0C7A418A2F6BA008B65C3 /* SKTagTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagTableController.m; sourceTree = "<group>"; };
 		14B0C7A618A30B43008B65C3 /* SKTagSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagSearchViewController.h; sourceTree = "<group>"; };
 		14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagSearchViewController.m; sourceTree = "<group>"; };
 		14B0C7A918A31016008B65C3 /* BlueCircle_192x192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueCircle_192x192.png; sourceTree = "<group>"; };
@@ -192,8 +189,6 @@
 				149FB2AC1890845B00D44DB2 /* SKViewController.m */,
 				14985C641890F037004B3ECB /* SKDetailViewController.h */,
 				14985C651890F037004B3ECB /* SKDetailViewController.m */,
-				14B0C7A318A2F6BA008B65C3 /* SKTagTableController.h */,
-				14B0C7A418A2F6BA008B65C3 /* SKTagTableController.m */,
 				149FB2EC18909D3500D44DB2 /* SKPhotoCell.h */,
 				149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */,
 				93E8207F189828F100877D38 /* SKImageTag.h */,
@@ -356,7 +351,6 @@
 				14985C661890F037004B3ECB /* SKDetailViewController.m in Sources */,
 				149FB2EE18909D3500D44DB2 /* SKPhotoCell.m in Sources */,
 				149FB2A71890845B00D44DB2 /* SKAppDelegate.m in Sources */,
-				14B0C7A518A2F6BA008B65C3 /* SKTagTableController.m in Sources */,
 				93E82087189828F100877D38 /* SKImageTag.m in Sources */,
 				14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */,
 				93E82088189828F100877D38 /* SKTagCollection.m in Sources */,
