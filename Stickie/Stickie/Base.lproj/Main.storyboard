@@ -16,8 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QzL-J0-3XE">
+                                <rect key="frame" x="40" y="367" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="InS-wl-dcP">
-                                <rect key="frame" x="8" y="129" width="304" height="372"/>
+                                <rect key="frame" x="8" y="130" width="304" height="167"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -29,7 +33,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="Prg-ZQ-8I9" customClass="SKPhotoCell">
-                                        <rect key="frame" x="0.0" y="64" width="73" height="73"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="73" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="73" height="73"/>
@@ -113,7 +117,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PinkCorner_106x106.png" translatesAutoresizingMaskIntoConstraints="NO" id="rjK-j0-VGI">
-                                        <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="74" height="76"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGM-6F-hVZ">
@@ -131,9 +135,9 @@
                         <gestureRecognizers/>
                     </view>
                     <navigationItem key="navigationItem" title="Photos" id="uyL-ej-GPD">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="0Ma-hi-8nK">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="0Ma-hi-8nK">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ga5-JI-haJ">
-                                <rect key="frame" x="274" y="7" width="30" height="30"/>
+                                <rect key="frame" x="16" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="17"/>
                                 <state key="normal" title="Search" image="ReturnButton283_283.png"/>
@@ -145,6 +149,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="InS-wl-dcP" id="CrP-He-TVc"/>
+                        <outlet property="dNewImageView" destination="QzL-J0-3XE" id="Lzo-7f-LkG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
