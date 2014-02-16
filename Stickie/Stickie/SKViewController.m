@@ -37,6 +37,9 @@
 {
     [super viewDidLoad];
     
+    /* Removed top margin in collection view at startup */
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
     // 1

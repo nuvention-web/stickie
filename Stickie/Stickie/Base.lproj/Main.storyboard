@@ -9,8 +9,8 @@
             <objects>
                 <viewController title="MainGallery" id="vXZ-lx-hvc" customClass="SKViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="lFb-cZ-LpT"/>
-                        <viewControllerLayoutGuide type="bottom" id="zlo-zE-lTq"/>
+                        <viewControllerLayoutGuide type="top" id="bLf-dL-jhB"/>
+                        <viewControllerLayoutGuide type="bottom" id="RI6-Z5-Olu"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -156,8 +156,8 @@
             <objects>
                 <viewController title="Tag Search" id="lsA-Em-eke" customClass="SKTagSearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="wXB-lK-ouB"/>
-                        <viewControllerLayoutGuide type="bottom" id="lma-VR-7hb"/>
+                        <viewControllerLayoutGuide type="top" id="I3f-j8-9qi"/>
+                        <viewControllerLayoutGuide type="bottom" id="qwO-J1-RkE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fec-Hm-ZsD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -255,8 +255,8 @@
             <objects>
                 <viewController id="BWr-p7-POP" customClass="SKDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="62b-6T-aee"/>
-                        <viewControllerLayoutGuide type="bottom" id="T4w-D2-oJC"/>
+                        <viewControllerLayoutGuide type="top" id="JEU-Gh-M5Y"/>
+                        <viewControllerLayoutGuide type="bottom" id="B9L-c9-4rC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vSG-gW-jGV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
