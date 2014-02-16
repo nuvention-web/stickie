@@ -21,7 +21,8 @@
 @end
 
 @implementation SKViewController
-//Prepare static saved image library
+
+/* Prepare static saved image library */
 + (ALAssetsLibrary *)defaultAssetsLibrary
 {
     static dispatch_once_t pred = 0;
@@ -32,7 +33,7 @@
     return library;
 }
 
-//Load images at app startup
+/* Load images at app startup */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -42,24 +43,20 @@
     
     _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
-    // 1
+
     ALAssetsLibrary *assetsLibrary = [SKViewController defaultAssetsLibrary];
-    // 2
+
     [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if(result)
             {
-                // 3
+
                 [tmpAssets addObject:result];
             }
         }];
         
-        // 4
-        //NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
-        //self.assets = [tmpAssets sortedArrayUsingDescriptors:@[sort]];
         self.assets = tmpAssets;
         
-        // 5
         [self.collectionView reloadData];
     } failureBlock:^(NSError *error) {
         NSLog(@"Error loading images %@", error);
@@ -129,19 +126,19 @@
 //}
 
 //Take photo
-- (IBAction)takePhotoButtonTapped:(id)sender
-{
-    if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO)) {
-        return;
-    }
-    
-    UIImagePickerController *mediaUI = [UIImagePickerController new];
-    mediaUI.sourceType = UIImagePickerControllerSourceTypeCamera;
-    mediaUI.allowsEditing = NO;
-    mediaUI.delegate = self;
-    
-    [self presentViewController:mediaUI animated:YES completion:nil];
-}
+//- (IBAction)takePhotoButtonTapped:(id)sender
+//{
+//    if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO)) {
+//        return;
+//    }
+//    
+//    UIImagePickerController *mediaUI = [UIImagePickerController new];
+//    mediaUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    mediaUI.allowsEditing = NO;
+//    mediaUI.delegate = self;
+//    
+//    [self presentViewController:mediaUI animated:YES completion:nil];
+//}
 
 //Enlarge Image
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

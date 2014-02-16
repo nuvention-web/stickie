@@ -130,13 +130,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                     </view>
-                    <navigationItem key="navigationItem" title="Stickie" id="uyL-ej-GPD">
+                    <navigationItem key="navigationItem" title="Photos" id="uyL-ej-GPD">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="0Ma-hi-8nK">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ga5-JI-haJ">
-                                <rect key="frame" x="233" y="5" width="71" height="33"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ga5-JI-haJ">
+                                <rect key="frame" x="274" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <state key="normal" title="Search"/>
+                                <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="17"/>
+                                <state key="normal" title="Search" image="ReturnButton283_283.png"/>
                                 <connections>
                                     <segue destination="lsA-Em-eke" kind="push" id="ZiL-3a-YzY"/>
                                 </connections>
@@ -241,7 +241,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="vE7-cv-KVE"/>
+                    <navigationItem key="navigationItem" title="Find Photos" id="vE7-cv-KVE"/>
                     <connections>
                         <outlet property="collectionView" destination="tMz-6e-eQE" id="Qd5-QW-JP7"/>
                     </connections>
@@ -306,6 +306,7 @@
         <image name="PinkCorner_106x106.png" width="106" height="106"/>
         <image name="RedCircle_192x192.png" width="192" height="192"/>
         <image name="RedCorner_106x106.png" width="106" height="106"/>
+        <image name="ReturnButton283_283.png" width="283" height="283"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
