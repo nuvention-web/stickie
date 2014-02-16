@@ -10,20 +10,25 @@
 #import "SKTagData.h"
 #import "SKImageTag.h"
 
-@interface SKTagCollection : NSObject
+@interface SKTagCollection : NSObject <NSCoding>
 
-@property (nonatomic) NSMutableArray *allUserTags;
-@property (nonatomic) NSMutableDictionary *tagDataMap;
-
-typedef enum {
-    HIGHER, LOWER
-} SKHigherOrLower;
+//typedef enum {
+//    HIGHER, LOWER
+//} SKHigherOrLower;
 
 + (SKTagCollection *) sharedInstance;
 - (SKTagData *) getTagInfo: (SKImageTag *) tag;
-- (void) addTagToCollection: (SKImageTag<NSCopying> *) tag;
+//- (void) updateCollectionWithTag: (SKImageTag *) tag;
+- (void) addTagToCollection: (SKImageTag *) tag;
+- (void) updateCollectionWithTag:(SKImageTag *)tag forImageURL: (NSURL *) url;
 - (BOOL) isTagInCollection: (SKImageTag *) tag;
-- (void) changeTag: (SKImageTag<NSCopying> *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice;
-- (void) changeTag: (SKImageTag<NSCopying> *) tag toColor: (UIColor *) color;
+- (BOOL) isURL: (NSURL *) url associatedWithTag: (SKImageTag *) tag;
+//- (void) changeTag: (SKImageTag *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice;
+- (void) changeTag: (SKImageTag *) tag toColor: (UIColor *) color;
+- (void) removeImageURL: (NSURL *) url forTag: (SKImageTag *) tag;
+- (void) removeTag: (SKImageTag *) tag;
+
+/* DANGER, DRAGONS LIE AHEAD: This method will nuke all tags in the collection: */
+- (void) removeAllTags;
 
 @end

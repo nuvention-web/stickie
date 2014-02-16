@@ -3,10 +3,12 @@
 //  Stickie
 //
 //  Created by Stephen Z on 1/23/14.
-//  Copyright (c) 2014 Stephen Z. All rights reserved.
+//  Copyright (c) 2014 Stickie Inc. All rights reserved.
 //
 
 #import "SKDetailViewController.h"
+#import "SKTagTableController.h"
+
 
 @interface SKDetailViewController ()
 
@@ -22,8 +24,15 @@
     self.imageView.image = self.image;
 }
 - (IBAction)backMain:(id)sender {
-    
-    [[self navigationController] popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"tagTable"]) {
+        SKTagTableController *tagTableController = [segue destinationViewController];
+        tagTableController.imageURL = _imageURL;
+    }
 }
 
 @end
