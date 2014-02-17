@@ -72,6 +72,9 @@
     longGestureRecognizer.minimumPressDuration = 0.5;
     longGestureRecognizer.delegate = self;
     [self.collectionView addGestureRecognizer:longGestureRecognizer];
+    _dNewImageView = [[UIImageView alloc] init];
+    _dNewImageView.userInteractionEnabled = YES;
+    [self.view insertSubview:_dNewImageView aboveSubview:self.collectionView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -169,8 +172,9 @@
             }
             dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
             dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
-            _dNewImageView = [[UIImageView alloc] initWithImage:dImage];
+            [_dNewImageView setImage:dImage];
             [_dNewImageView setUserInteractionEnabled:YES];
+            [self.view insertSubview:_dNewImageView aboveSubview:self.collectionView];
 //            [[self view] bringSubviewToFront:[_dNewImageView superview]];
 //            [[_dNewImageView superview] bringSubviewToFront:_dNewImageView];
             NSLog(@"Yo I'm in start");
