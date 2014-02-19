@@ -26,8 +26,6 @@
 @property(nonatomic, strong) NSArray *assets;
 @property BOOL newMedia;
 
-
-
 @end
 
 @implementation SKViewController
@@ -136,10 +134,13 @@
         default:
             break;
     }
-
 }
-//Take photo
 
+-(void)recordTags(CGPoint) {
+    
+}
+
+//Take photo
 - (IBAction)takePhotoButtonTapped:(id)sender {
 //    if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO)) {
 //        return;
