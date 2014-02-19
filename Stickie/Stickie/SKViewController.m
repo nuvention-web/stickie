@@ -13,16 +13,17 @@
 #import "SKAssetURLTagsMap.h"
 
 
-@interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIGestureRecognizerDelegate>{
+@interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
+{
     SKPhotoCell *dCell;
     NSIndexPath *dIndexPath;
     UIImage *dImage;
-//    UIImageView *dNewImageView;
+    UIImageView *dNewImageView;
 }
 
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property(nonatomic, strong) NSArray *assets;
-@property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
+
 
 
 @end
@@ -57,7 +58,6 @@
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if(result)
             {
-
                 [tmpAssets addObject:result];
             }
         }];
@@ -72,9 +72,9 @@
     longGestureRecognizer.minimumPressDuration = 0.5;
     longGestureRecognizer.delegate = self;
     [self.collectionView addGestureRecognizer:longGestureRecognizer];
-    _dNewImageView = [[UIImageView alloc] init];
-    _dNewImageView.userInteractionEnabled = YES;
-    [self.view insertSubview:_dNewImageView aboveSubview:self.collectionView];
+    dNewImageView = [[UIImageView alloc] init];
+    dNewImageView.userInteractionEnabled = YES;
+    [self.view insertSubview:dNewImageView aboveSubview:self.collectionView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -172,15 +172,21 @@
             }
             dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
             dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
-            [_dNewImageView setImage:dImage];
-            [_dNewImageView setUserInteractionEnabled:YES];
-            [self.view insertSubview:_dNewImageView aboveSubview:self.collectionView];
-//            [[self view] bringSubviewToFront:[_dNewImageView superview]];
-//            [[_dNewImageView superview] bringSubviewToFront:_dNewImageView];
+            [dNewImageView setImage:dImage];
+            [dNewImageView setUserInteractionEnabled:YES];
+            
+//            [[self view] bringSubviewToFront:[dNewImageView superview]];
+//            [[dNewImageView superview] bringSubviewToFront:dNewImageView];
             NSLog(@"Yo I'm in start");
             break;
         case UIGestureRecognizerStateChanged:
-            [_dNewImageView setCenter:newPoint];
+            [self.view insertSubview:dNewImageView aboveSubview:self.collectionView];
+            [dNewImageView setCenter:newPoint];
+//            NSLog(@"%@", dNewImageView);
+//            NSLog(@"X Coordinate: %f", newPoint.x);
+//            NSLog(@"Y Coordinate: %f", newPoint.y);
+            NSLog(@"X Coord: %f", dNewImageView.frame.origin.x);
+            NSLog(@"Y Coord: %f", dNewImageView.frame.origin.y);
             NSLog(@"Yo I'm in middle");
             break;
         case UIGestureRecognizerStateEnded:
