@@ -18,14 +18,11 @@
     SKPhotoCell *dCell;
     NSIndexPath *dIndexPath;
     UIImage *dImage;
-//    UIImageView *_dNewImageView;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property(nonatomic, strong) NSArray *assets;
-
-
 
 @end
 
@@ -135,10 +132,13 @@
         default:
             break;
     }
-
 }
-//Take photo
 
+-(void)recordTags(CGPoint) {
+    
+}
+
+//Take photo
 - (IBAction)takePhotoButtonTapped:(id)sender {
     if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO)) {
         return;
