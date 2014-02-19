@@ -18,9 +18,10 @@
     SKPhotoCell *dCell;
     NSIndexPath *dIndexPath;
     UIImage *dImage;
-    UIImageView *dNewImageView;
+//    UIImageView *_dNewImageView;
 }
 
+@property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property(nonatomic, strong) NSArray *assets;
 
@@ -71,10 +72,8 @@
     UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
     longGestureRecognizer.minimumPressDuration = 0.5;
     longGestureRecognizer.delegate = self;
+    _dNewImageView.userInteractionEnabled = YES;
     [self.collectionView addGestureRecognizer:longGestureRecognizer];
-    dNewImageView = [[UIImageView alloc] init];
-    dNewImageView.userInteractionEnabled = YES;
-    [self.view insertSubview:dNewImageView aboveSubview:self.collectionView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,60 +109,10 @@
 {
     return 1;
 }
-//-(void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
-//    longGestureRecognizer.delaysTouchesBegan = YES;
-//    longGestureRecognizer.minimumPressDuration = 0.5;
-//    longGestureRecognizer.delegate = self;
-//    ALAsset *asset = self.assets[indexPath.row];
-//    UIImage *image = [UIImage imageWithCGImage:[asset thumbnail]];
-//    UIImageView *newImageView = [[UIImageView alloc] initWithImage:image];
-//    [newImageView setUserInteractionEnabled:YES];
-//    [newImageView addGestureRecognizer:longGestureRecognizer];
-//}
-//Select image
-//- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
-//    longGestureRecognizer.delaysTouchesBegan = YES;
-//    longGestureRecognizer.minimumPressDuration = 0.5;
-//    longGestureRecognizer.delegate = self;
-//    ALAsset *asset = self.assets[indexPath.row];
-//////    NSLog(@"%@",[asset valueForProperty:ALAssetPropertyAssetURL]);
-//////    NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
-//////    SKAssetURLTagsMap *map = [SKAssetURLTagsMap sharedInstance];
-//////    [map removeAllTags];
-//////    SKImageTag *tag = [[SKImageTag alloc] initWithName:@"stick" andColor: nil];
-//////    [map setTag:tag forAssetURL:url];
-//////    NSLog(@"%@", [[map getTagForAssetURL:url] tagName]);
-////
-//////    ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
-//////    UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
-//    UIImage *image = [UIImage imageWithCGImage:[asset thumbnail]];
-//    UIImageView *newImageView = [[UIImageView alloc] initWithImage:image];
-//    [newImageView setUserInteractionEnabled:YES];
-////    UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
-////    [newImageView addGestureRecognizer:longGestureRecognizer];
-////    longGestureRecognizer.minimumPressDuration = 0.3;
-//
-//    [newImageView addGestureRecognizer:longGestureRecognizer];
-//}
+
 -(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
-    gestureRecognizer.delaysTouchesBegan = YES;
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
-//    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:newPoint];
-//    if (indexPath == nil){
-//        NSLog(@"Couldn't find index path");
-//    }
-//    else {
-//        SKPhotoCell* cell = [self.collectionView cellForItemAtIndexPath:indexPath];
-//        UIImage *image = [UIImage imageWithCGImage:[cell.asset thumbnail]];
-//        UIImageView *newImageView = [[UIImageView alloc] initWithImage:image];
-//        [newImageView setCenter:newPoint];
-//        
-//    }
-    
+    CGPoint anotherPoint = [self.view convertPoint:newPoint fromView:self.collectionView];
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:
             dIndexPath = [self.collectionView indexPathForItemAtPoint:newPoint];
@@ -172,32 +121,24 @@
             }
             dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
             dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
-            [dNewImageView setImage:dImage];
-            [dNewImageView setUserInteractionEnabled:YES];
-            
-//            [[self view] bringSubviewToFront:[dNewImageView superview]];
-//            [[dNewImageView superview] bringSubviewToFront:dNewImageView];
+            [_dNewImageView setCenter:anotherPoint];
+            [_dNewImageView setImage:dImage];
+            [_dNewImageView addGestureRecognizer:gestureRecognizer];
             NSLog(@"Yo I'm in start");
             break;
         case UIGestureRecognizerStateChanged:
-            [self.view insertSubview:dNewImageView aboveSubview:self.collectionView];
-            [dNewImageView setCenter:newPoint];
-//            NSLog(@"%@", dNewImageView);
-//            NSLog(@"X Coordinate: %f", newPoint.x);
-//            NSLog(@"Y Coordinate: %f", newPoint.y);
-            NSLog(@"X Coord: %f", dNewImageView.frame.origin.x);
-            NSLog(@"Y Coord: %f", dNewImageView.frame.origin.y);
+            [_dNewImageView setCenter:anotherPoint];
             NSLog(@"Yo I'm in middle");
             break;
         case UIGestureRecognizerStateEnded:
+            _dNewImageView.image = nil;
+            [self.collectionView addGestureRecognizer:gestureRecognizer];
             NSLog(@"Yo I'm in end");
             break;
         default:
             break;
     }
-//    CGPoint newPoint = [gestureRecognizer locationInView:[self view]];
-//    [[self view] bringSubviewToFront:[gestureRecognizer view]];
-//    [[gestureRecognizer view] setCenter:newPoint];
+
 }
 
 //Take photo
