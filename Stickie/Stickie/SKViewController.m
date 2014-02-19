@@ -11,6 +11,7 @@
 #import "SKPhotoCell.h"
 #import "SKDetailViewController.h"
 #import "SKAssetURLTagsMap.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 
 @interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
@@ -23,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property(nonatomic, strong) NSArray *assets;
+@property BOOL newMedia;
 
 @end
 
@@ -140,18 +142,70 @@
 
 //Take photo
 - (IBAction)takePhotoButtonTapped:(id)sender {
-    if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO)) {
-        return;
+//    if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO)) {
+//        return;
+//    }
+//    
+//    UIImagePickerController *mediaUI = [UIImagePickerController new];
+//    mediaUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    mediaUI.allowsEditing = NO;
+//    mediaUI.delegate = self;
+//    
+//    [self presentViewController:mediaUI animated:YES completion:nil];
+    if ([UIImagePickerController isSourceTypeAvailable:
+         UIImagePickerControllerSourceTypeCamera])
+    {
+        UIImagePickerController *imagePicker =
+        [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.sourceType =
+        UIImagePickerControllerSourceTypeCamera;
+        imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
+        imagePicker.allowsEditing = NO;
+        [self presentViewController:imagePicker
+                           animated:YES completion:nil];
+        _newMedia = YES;
     }
+}
+-(void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSString *mediaType = info[UIImagePickerControllerMediaType];
     
-    UIImagePickerController *mediaUI = [UIImagePickerController new];
-    mediaUI.sourceType = UIImagePickerControllerSourceTypeCamera;
-    mediaUI.allowsEditing = NO;
-    mediaUI.delegate = self;
+    [self dismissViewControllerAnimated:YES completion:nil];
     
-    [self presentViewController:mediaUI animated:YES completion:nil];
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+        UIImage *image = info[UIImagePickerControllerOriginalImage];
+        
+
+        if (_newMedia)
+            UIImageWriteToSavedPhotosAlbum(image,
+                                           self,
+                                           @selector(image:finishedSavingWithError:contextInfo:),
+                                           nil);
+    }
+    else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
+    {
+        // Code here to support video if enabled
+    }
 }
 
+-(void)image:(UIImage *)image
+finishedSavingWithError:(NSError *)error
+ contextInfo:(void *)contextInfo
+{
+    if (error) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Save failed"
+                              message: @"Failed to save image"
+                              delegate: nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        [alert show];
+    }
+    [self viewDidLoad];
+    [_collectionView reloadData];
+}
 
 //Enlarge Image
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
