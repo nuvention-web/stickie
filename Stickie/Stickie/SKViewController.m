@@ -46,7 +46,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     /* Removed top margin in collection view at startup */
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -124,37 +124,34 @@
             [_dNewImageView setCenter:anotherPoint];
             [_dNewImageView setImage:dImage];
             [_dNewImageView addGestureRecognizer:gestureRecognizer];
-            NSLog(@"Yo I'm in start");
             break;
         case UIGestureRecognizerStateChanged:
             [_dNewImageView setCenter:anotherPoint];
-            NSLog(@"Yo I'm in middle");
             break;
         case UIGestureRecognizerStateEnded:
             _dNewImageView.image = nil;
             [self.collectionView addGestureRecognizer:gestureRecognizer];
-            NSLog(@"Yo I'm in end");
             break;
         default:
             break;
     }
 
 }
-
 //Take photo
-//- (IBAction)takePhotoButtonTapped:(id)sender
-//{
-//    if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO)) {
-//        return;
-//    }
-//    
-//    UIImagePickerController *mediaUI = [UIImagePickerController new];
-//    mediaUI.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    mediaUI.allowsEditing = NO;
-//    mediaUI.delegate = self;
-//    
-//    [self presentViewController:mediaUI animated:YES completion:nil];
-//}
+
+- (IBAction)takePhotoButtonTapped:(id)sender {
+    if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO)) {
+        return;
+    }
+    
+    UIImagePickerController *mediaUI = [UIImagePickerController new];
+    mediaUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+    mediaUI.allowsEditing = NO;
+    mediaUI.delegate = self;
+    
+    [self presentViewController:mediaUI animated:YES completion:nil];
+}
+
 
 //Enlarge Image
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -112,9 +112,9 @@
                                 <rect key="frame" x="255" y="503" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PinkCorner_106x106.png" translatesAutoresizingMaskIntoConstraints="NO" id="rjK-j0-VGI">
-                                        <rect key="frame" x="0.0" y="0.0" width="74" height="76"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PinkCorner_106x106.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZOx-zi-XlG">
+                                        <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGM-6F-hVZ">
                                         <rect key="frame" x="23" y="24" width="42" height="21"/>
@@ -127,7 +127,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="owN-vc-Jt0">
-                                <rect key="frame" x="111" y="68" width="73" height="73"/>
+                                <rect key="frame" x="124" y="68" width="73" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -137,12 +137,25 @@
                     <navigationItem key="navigationItem" title="Photos" id="uyL-ej-GPD">
                         <barButtonItem key="leftBarButtonItem" id="0Ma-hi-8nK">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ga5-JI-haJ">
-                                <rect key="frame" x="16" y="7" width="30" height="30"/>
+                                <rect key="frame" x="16" y="4" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="17"/>
-                                <state key="normal" title="Search" image="ReturnButton283_283.png"/>
+                                <state key="normal" title="Search" image="SearchStickie_222x222.png"/>
                                 <connections>
                                     <segue destination="lsA-Em-eke" kind="push" id="ZiL-3a-YzY"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="rED-uW-Iah">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="53N-NE-0rf">
+                                <rect key="frame" x="269" y="4" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Button" image="camera_512x512.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="takePhotoButtonTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="UFq-mg-4AJ"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -315,7 +328,8 @@
         <image name="PinkCorner_106x106.png" width="106" height="106"/>
         <image name="RedCircle_192x192.png" width="192" height="192"/>
         <image name="RedCorner_106x106.png" width="106" height="106"/>
-        <image name="ReturnButton283_283.png" width="283" height="283"/>
+        <image name="SearchStickie_222x222.png" width="222" height="222"/>
+        <image name="camera_512x512.png" width="512" height="512"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
