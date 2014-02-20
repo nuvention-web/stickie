@@ -153,8 +153,8 @@
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     SKImageTag *tag;
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"A tag occured."
-                                                    message:@"In yo face."
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You tagged a picture."
+                                                    message:nil
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];

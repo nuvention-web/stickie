@@ -10,7 +10,7 @@
 #import "SKTagCollection.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SKPhotoCell.h"
-
+#import "SKDetailViewController.h"
 
 @interface SKTagSearchViewController()
 {
@@ -250,5 +250,18 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             pink = YES;
     }
 }
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showTagDetail"])
+    {
+        NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
+        ALAsset *asset = self.assets[indexPath.row];
+        NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
+        ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+        UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+        SKDetailViewController *detailViewController = [segue destinationViewController];
+        detailViewController.image = image;
+        detailViewController.imageURL = url;
+    }
+}
 @end

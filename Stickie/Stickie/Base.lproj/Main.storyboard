@@ -252,6 +252,7 @@
                                         </view>
                                         <connections>
                                             <outlet property="photoImageView" destination="JN6-zq-JQl" id="l3u-7k-Igx"/>
+                                            <segue destination="BWr-p7-POP" kind="push" identifier="showTagDetail" id="XUF-iZ-BJj"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -336,4 +337,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="XUF-iZ-BJj"/>
+    </inferredMetricsTieBreakers>
 </document>
