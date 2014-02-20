@@ -11,6 +11,8 @@
 #import "SKPhotoCell.h"
 #import "SKDetailViewController.h"
 #import "SKAssetURLTagsMap.h"
+#import "SKTagCollection.h"
+#import "SKImageTag.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
 
@@ -19,6 +21,7 @@
     SKPhotoCell *dCell;
     NSIndexPath *dIndexPath;
     UIImage *dImage;
+    CGPoint defaultPoint;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
@@ -53,7 +56,9 @@
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
 
     ALAssetsLibrary *assetsLibrary = [SKViewController defaultAssetsLibrary];
-
+    
+    defaultPoint = CGPointMake(0.0, 0.0);
+    
     [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if(result)
@@ -69,7 +74,7 @@
         NSLog(@"Error loading images %@", error);
     }];
     UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
-    longGestureRecognizer.minimumPressDuration = 0.5;
+    longGestureRecognizer.minimumPressDuration = 0.15;
     longGestureRecognizer.delegate = self;
     _dNewImageView.userInteractionEnabled = YES;
     [self.collectionView addGestureRecognizer:longGestureRecognizer];
@@ -113,31 +118,68 @@
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
     CGPoint anotherPoint = [self.view convertPoint:newPoint fromView:self.collectionView];
     switch (gestureRecognizer.state) {
-        case UIGestureRecognizerStateBegan:
+        case UIGestureRecognizerStateBegan: {
             dIndexPath = [self.collectionView indexPathForItemAtPoint:newPoint];
             if (dIndexPath == nil){
                 NSLog(@"Couldn't find index path");
             }
             dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
             dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
+            [dCell.asset valueForProperty:ALAssetPropertyURLs];
             [_dNewImageView setCenter:anotherPoint];
             [_dNewImageView setImage:dImage];
             [_dNewImageView addGestureRecognizer:gestureRecognizer];
             break;
-        case UIGestureRecognizerStateChanged:
+        }
+        case UIGestureRecognizerStateChanged: {
             [_dNewImageView setCenter:anotherPoint];
             break;
-        case UIGestureRecognizerStateEnded:
+        }
+        case UIGestureRecognizerStateEnded: {
             _dNewImageView.image = nil;
+            [_dNewImageView setCenter:defaultPoint];
+            NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
+            [self recordTags: anotherPoint forURL: url];
             [self.collectionView addGestureRecognizer:gestureRecognizer];
             break;
+        }
         default:
             break;
     }
 }
 
--(void)recordTags(CGPoint) {
+-(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
+    SKImageTag *tag;
     
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"A tag occured."
+                                                    message:@"In yo face."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    
+    /* Tag event occurs in top-left corner */
+    if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128) {
+        tag = [[SKImageTag alloc] initWithName:@"Food" andColor:nil];
+        [alert show];
+    }
+    else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128) {
+        tag = [[SKImageTag alloc] initWithName:@"Favs" andColor:nil];
+        [alert show];
+    }
+    else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568) {
+        tag = [[SKImageTag alloc] initWithName:@"Trips" andColor:nil];
+        [alert show];
+    }
+    else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568) {
+        tag = [[SKImageTag alloc] initWithName:@"Pets" andColor:nil];
+        [alert show];
+    }
+    if (tag) {
+        [urlToTagMap addTag: tag forAssetURL:assetURL];
+        [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
+    }
 }
 
 //Take photo

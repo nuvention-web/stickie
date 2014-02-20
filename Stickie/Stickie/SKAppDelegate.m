@@ -7,6 +7,8 @@
 //
 
 #import "SKAppDelegate.h"
+#import "SKTagCollection.h"
+#import "SKImageTag.h"
 
 @implementation SKAppDelegate
 
@@ -30,6 +32,14 @@
             NSFontAttributeName, nil
         ]
      ];
+    
+    /* For second prototype, these tags need to be added to the tag collection at startup 
+     THIS WILL BREAK IF SERIALIZATION IS IMPLEMENTED*/
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    [tagCollection addTagToCollection: [[SKImageTag alloc] initWithName: @"Food" andColor: nil]];
+    [tagCollection addTagToCollection: [[SKImageTag alloc] initWithName: @"Favs" andColor: nil]];
+    [tagCollection addTagToCollection: [[SKImageTag alloc] initWithName: @"Trips" andColor: nil]];
+    [tagCollection addTagToCollection: [[SKImageTag alloc] initWithName: @"Pets" andColor: nil]];
     
     return YES;
 }
