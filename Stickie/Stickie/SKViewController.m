@@ -151,6 +151,11 @@
 -(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKAssetURLTagsMap *urlToTagMap = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"assetURLTagsMap"]];
+//    SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
+    
+    if (!urlToTagMap)
+        urlToTagMap = [SKAssetURLTagsMap sharedInstance];
+    
     SKImageTag *tag;
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You tagged a picture."
