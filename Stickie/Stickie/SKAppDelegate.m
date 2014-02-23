@@ -9,6 +9,7 @@
 #import "SKAppDelegate.h"
 #import "SKTagCollection.h"
 #import "SKImageTag.h"
+#import "SKAssetURLTagsMap.h"
 
 @implementation SKAppDelegate
 
@@ -33,13 +34,28 @@
         ]
      ];
     
-    /* For second prototype, these tags need to be added to the tag collection at startup 
-     THIS WILL BREAK IF SERIALIZATION IS IMPLEMENTED*/
-    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
-    [tagCollection addTagToCollection: [[SKImageTag alloc] initWithName: @"Food" andColor: nil]];
-    [tagCollection addTagToCollection: [[SKImageTag alloc] initWithName: @"Favs" andColor: nil]];
-    [tagCollection addTagToCollection: [[SKImageTag alloc] initWithName: @"Trips" andColor: nil]];
-    [tagCollection addTagToCollection: [[SKImageTag alloc] initWithName: @"Pets" andColor: nil]];
+    /* For second prototype, these tags need to be added to the tag collection at startup. */
+    SKTagCollection *tagCollection = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagCollection"]];
+    
+    /* If there is nothing to unarchive. */
+    if (!tagCollection)
+        tagCollection = [SKTagCollection sharedInstance];
+    
+    SKImageTag *tag = [[SKImageTag alloc] initWithName: @"Food" andColor: nil];
+    if (![tagCollection isTagInCollection:tag])
+        [tagCollection addTagToCollection: tag];
+    
+    SKImageTag *tag2 = [[SKImageTag alloc] initWithName: @"Favs" andColor: nil];
+    if (![tagCollection isTagInCollection:tag2])
+        [tagCollection addTagToCollection: tag2];
+    
+    SKImageTag *tag3 = [[SKImageTag alloc] initWithName: @"Trips" andColor: nil];
+    if (![tagCollection isTagInCollection:tag3])
+        [tagCollection addTagToCollection: tag3];
+    
+    SKImageTag *tag4 = [[SKImageTag alloc] initWithName: @"Pets" andColor: nil];
+    if (![tagCollection isTagInCollection:tag4])
+        [tagCollection addTagToCollection: tag4];
     
     return YES;
 }
@@ -69,6 +85,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[SKTagCollection sharedInstance]] forKey:@"tagCollection"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[SKAssetURLTagsMap sharedInstance]] forKey:@"assetURLTagsMap"];
 }
 
 @end
