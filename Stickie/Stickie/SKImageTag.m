@@ -18,6 +18,16 @@
     return self;
 }
 
+- (id) initWithCoder:(NSCoder *) decoder
+{
+    return [decoder decodeObject];
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+    [encoder encodeObject:self];
+}
+
 -(BOOL)isEqualToTag:(SKImageTag *) tag
 {
     /* Objective-C is weird with equality (i.e. [nil isEqual:nil] evaluates to NO) */

@@ -45,8 +45,8 @@
     // Unarchive the singleton instance.
     SKTagCollection *instance = [SKTagCollection sharedInstance];
     
-    instance->allUserTags = [decoder decodeObjectForKey:@"allUserTags"];
-    instance->tagDataMap = [decoder decodeObjectForKey:@"tagDataMap"];
+    instance->allUserTags = [decoder decodeObjectForKey:@"tagCollection"];
+    instance->tagDataMap = [decoder decodeObjectForKey:@"tagCollection"];
     
     return instance;
 }
@@ -56,29 +56,16 @@
     // Archive the singleton instance.
     SKTagCollection *instance = [SKTagCollection sharedInstance];
     
-    [encoder encodeObject:instance->allUserTags forKey:@"allUserTags"];
-    [encoder encodeObject:instance->tagDataMap forKey:@"tagDataMap"];
+    [encoder encodeObject:instance->allUserTags forKey:@"tagCollection"];
+    [encoder encodeObject:instance->tagDataMap forKey:@"tagCollection"];
+    
+//    [encoder encodeObject:instance->tagDataMap forKey:@"tagDataMap"];
 }
 
 - (SKTagData *) getTagInfo: (SKImageTag *) tag
 {
     return (SKTagData *) [tagDataMap objectForKey: tag];
 }
-
-//- (void) updateCollectionWithTag: (SKImageTag *) tag
-//{
-//    if (![allUserTags containsObject: tag]) {
-//        [allUserTags addObject: tag];
-//        SKTagData *data = [[SKTagData alloc] init];
-//        data.tagColor = tag.tagColor;
-//        [tagDataMap setObject:data forKey: tag];
-//    }
-//    else {
-//        SKTagData *currentData = [tagDataMap objectForKey:tag];
-//        currentData.tagFrequencyInPhotos++;
-//        [tagDataMap setObject:currentData forKey:tag];
-//    }
-//}
 
 - (void) addTagToCollection: (SKImageTag *) tag
 {

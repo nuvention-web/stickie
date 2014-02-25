@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SKTagData : NSObject
+@interface SKTagData : NSObject <NSCoding>
 
 @property (nonatomic) NSInteger tagFrequencyInPhotos;
 @property (nonatomic) UIColor *tagColor;
