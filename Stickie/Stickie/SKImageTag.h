@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SKImageTag : NSObject<NSCopying>
+@interface SKImageTag : NSObject <NSCopying, NSCoding>
 
 @property (nonatomic) NSString *tagName;
 @property (nonatomic) UIColor *tagColor;
