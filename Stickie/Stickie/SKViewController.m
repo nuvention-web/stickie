@@ -164,23 +164,20 @@
                                           otherButtonTitles:nil];
     
     /* Tag event occurs in top-left corner */
-    if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128) {
+    if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
         tag = [[SKImageTag alloc] initWithName:@"Food" andColor:nil];
-        [alert show];
-    }
-    else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128) {
+    
+    else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128)
         tag = [[SKImageTag alloc] initWithName:@"Favs" andColor:nil];
-        [alert show];
-    }
-    else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568) {
+    
+    else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568)
         tag = [[SKImageTag alloc] initWithName:@"Trips" andColor:nil];
-        [alert show];
-    }
-    else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568) {
+    
+    else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
         tag = [[SKImageTag alloc] initWithName:@"Pets" andColor:nil];
+        
+    if (tag && ![tagCollection isTagInCollection:tag]) {
         [alert show];
-    }
-    if (tag) {
         [urlToTagMap addTag: tag forAssetURL:assetURL];
         [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
     }
