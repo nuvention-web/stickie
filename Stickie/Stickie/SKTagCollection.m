@@ -45,8 +45,8 @@
     // Unarchive the singleton instance.
     SKTagCollection *instance = [SKTagCollection sharedInstance];
     
-    instance->allUserTags = [decoder decodeObjectForKey:@"tagCollection"];
-    instance->tagDataMap = [decoder decodeObjectForKey:@"tagCollection"];
+    instance->allUserTags = [decoder decodeObjectForKey:@"allUserTags"];
+    instance->tagDataMap = [decoder decodeObjectForKey:@"tagDataMap"];
     
     return instance;
 }
@@ -56,10 +56,8 @@
     // Archive the singleton instance.
     SKTagCollection *instance = [SKTagCollection sharedInstance];
     
-    [encoder encodeObject:instance->allUserTags forKey:@"tagCollection"];
-    [encoder encodeObject:instance->tagDataMap forKey:@"tagCollection"];
-    
-//    [encoder encodeObject:instance->tagDataMap forKey:@"tagDataMap"];
+    [encoder encodeObject:instance->allUserTags forKey:@"allUserTags"];
+    [encoder encodeObject:instance->tagDataMap forKey:@"tagDataMap"];
 }
 
 - (SKTagData *) getTagInfo: (SKImageTag *) tag
@@ -108,29 +106,6 @@
     SKTagData *tagData = [tagDataMap objectForKey:tag];
     return [tagData.imageURLs containsObject:url];
 }
-
-/* This method likely is not necessary anymore. */
-//- (void) changeTag: (SKImageTag *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice
-//{
-//    if (![allUserTags containsObject: tag]) {
-//        @throw [NSException exceptionWithName: @"TagNotFoundException" reason: @"The specified tag was not found." userInfo:nil];
-//    }
-//    
-//    SKTagData *data = [tagDataMap objectForKey: tag];
-//    
-//    switch (choice) {
-//        case HIGHER:
-//            data.tagFrequencyInPhotos++;
-//            [tagDataMap setObject: data forKey: tag];
-//            break;
-//        case LOWER:
-//            if (data.tagFrequencyInPhotos > 0) {
-//                data.tagFrequencyInPhotos--;
-//                [tagDataMap setObject: data forKey: tag];
-//            }
-//            break;
-//    }
-//}
 
 - (void) changeTag: (SKImageTag *) tag toColor: (UIColor *) color
 {

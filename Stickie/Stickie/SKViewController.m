@@ -150,8 +150,7 @@
 
 -(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
-    SKAssetURLTagsMap *urlToTagMap = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"assetURLTagsMap"]];
-//    SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
+    SKAssetURLTagsMap *urlToTagMap = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagsMap"]];
     
     if (!urlToTagMap)
         urlToTagMap = [SKAssetURLTagsMap sharedInstance];
@@ -189,16 +188,7 @@
 
 //Take photo
 - (IBAction)takePhotoButtonTapped:(id)sender {
-//    if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO)) {
-//        return;
-//    }
-//    
-//    UIImagePickerController *mediaUI = [UIImagePickerController new];
-//    mediaUI.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    mediaUI.allowsEditing = NO;
-//    mediaUI.delegate = self;
-//    
-//    [self presentViewController:mediaUI animated:YES completion:nil];
+
     if ([UIImagePickerController isSourceTypeAvailable:
          UIImagePickerControllerSourceTypeCamera])
     {

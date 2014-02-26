@@ -20,12 +20,15 @@
 
 - (id) initWithCoder:(NSCoder *) decoder
 {
-    return [decoder decodeObject];
+    _tagName = [decoder decodeObjectForKey:@"tagName"];
+    _tagColor = [decoder decodeObjectForKey:@"tagColor"];
+    return self;
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder
 {
-    [encoder encodeObject:self];
+    [encoder encodeObject:_tagName forKey:@"tagName"];
+    [encoder encodeObject:_tagColor forKey:@"tagColor"];
 }
 
 -(BOOL)isEqualToTag:(SKImageTag *) tag
