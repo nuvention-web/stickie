@@ -150,7 +150,7 @@
                                 <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="17"/>
                                 <state key="normal" title="Search" image="SearchStickie_222x222.png"/>
                                 <connections>
-                                    <segue destination="lsA-Em-eke" kind="push" id="ZiL-3a-YzY"/>
+                                    <segue destination="lsA-Em-eke" kind="push" identifier="tagSearch" id="ZiL-3a-YzY"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -169,8 +169,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="botLeftLabel" destination="Da7-GR-7sd" id="3eO-aj-Ek2"/>
+                        <outlet property="botRightLabel" destination="IGM-6F-hVZ" id="jxz-Wq-o12"/>
                         <outlet property="collectionView" destination="InS-wl-dcP" id="CrP-He-TVc"/>
                         <outlet property="dNewImageView" destination="owN-vc-Jt0" id="1cr-pa-KFG"/>
+                        <outlet property="topLeftLabel" destination="d0k-6x-Qhh" id="Z1P-67-vJ0"/>
+                        <outlet property="topRightLabel" destination="aHt-Lw-nUa" id="hlb-D2-RQT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -270,7 +274,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Find Photos" id="vE7-cv-KVE"/>
                     <connections>
+                        <outlet property="botLeftButton" destination="d3b-qy-B1F" id="ier-If-vAi"/>
+                        <outlet property="botRightButton" destination="pPm-qW-BA7" id="6cl-j7-UhU"/>
                         <outlet property="collectionView" destination="tMz-6e-eQE" id="Qd5-QW-JP7"/>
+                        <outlet property="topLeftButton" destination="MJE-Ka-gKq" id="aMV-xm-0kj"/>
+                        <outlet property="topRightButton" destination="GqL-SY-fLM" id="0lW-ek-akc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rbs-Hz-1hR" userLabel="First Responder" sceneMemberID="firstResponder"/>

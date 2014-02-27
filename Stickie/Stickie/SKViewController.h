@@ -9,4 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface SKViewController : UIViewController
+
+@property (strong, nonatomic) IBOutlet UILabel *topLeftLabel;
+@property (strong, nonatomic) IBOutlet UILabel *topRightLabel;
+@property (strong, nonatomic) IBOutlet UILabel *botLeftLabel;
+@property (strong, nonatomic) IBOutlet UILabel *botRightLabel;
+
 @end

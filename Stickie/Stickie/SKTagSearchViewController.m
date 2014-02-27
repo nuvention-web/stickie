@@ -32,6 +32,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+
+    
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -42,6 +44,10 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [_topLeftButton setTitle:_topLeftText forState:UIControlStateNormal];
+    [_topRightButton setTitle:_topRightText forState:UIControlStateNormal];
+    [_botLeftButton setTitle:_botLeftText forState:UIControlStateNormal];
+    [_botRightButton setTitle:_botRightText forState:UIControlStateNormal];
     blue = NO, red = NO, green = NO, pink = NO;
 	// Do any additional setup after loading the view.
     _assets = [[NSMutableArray alloc] init];
@@ -91,11 +97,11 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     NSString *buttonPressed = [sender currentTitle];
     
-    if ([buttonPressed isEqualToString:@"Food"])
+    if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text])
         beenClickedBefore = blue;
-    else if ([buttonPressed isEqualToString:@"Favs"])
+    else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text])
         beenClickedBefore = red;
-    else if ([buttonPressed isEqualToString:@"Trips"])
+    else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text])
         beenClickedBefore = green;
     else
         beenClickedBefore = pink;
@@ -123,11 +129,11 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [library assetForURL:url resultBlock:resultblock failureBlock:failureblock];
         }
         
-        if ([buttonPressed isEqualToString:@"Food"])
+        if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text])
             blue = YES;
-        else if ([buttonPressed isEqualToString:@"Favs"])
+        else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text])
             red = YES;
-        else if ([buttonPressed isEqualToString:@"Trips"])
+        else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text])
             green = YES;
         else
             pink = YES;
