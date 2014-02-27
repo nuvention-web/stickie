@@ -157,11 +157,17 @@
     
     SKImageTag *tag;
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You tagged a picture."
+    UIAlertView *alertTag = [[UIAlertView alloc] initWithTitle:@"You tagged a picture."
                                                     message:nil
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
+    
+    UIAlertView *alertRemove = [[UIAlertView alloc] initWithTitle:@"You untagged a picture."
+                                                       message:nil
+                                                      delegate:nil
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil];
     
     /* Tag event occurs in top-left corner */
     if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
@@ -176,10 +182,15 @@
     else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
         tag = [[SKImageTag alloc] initWithName:@"Pets" andColor:nil];
         
-    if (tag && ![tagCollection isTagInCollection:tag]) {
-        [alert show];
+    if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
+        [alertTag show];
         [urlToTagMap addTag: tag forAssetURL:assetURL];
         [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
+    }
+    else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
+        [alertRemove show];
+        [urlToTagMap removeTag:tag forAssetURL:assetURL];
+        [tagCollection removeImageURL:assetURL forTag:tag];
     }
 }
 
