@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1490A0FD189207E500453D61 /* camera_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = 1490A0FC189207E500453D61 /* camera_512x512.png */; };
 		14985C661890F037004B3ECB /* SKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14985C651890F037004B3ECB /* SKDetailViewController.m */; };
+		1499CDC618BEE3CB00D0C0EA /* SKTagAssignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499CDC518BEE3CB00D0C0EA /* SKTagAssignViewController.m */; };
 		149A97F8189F750D007FF0D4 /* ReturnButton283_283.png in Resources */ = {isa = PBXBuildFile; fileRef = 149A97F7189F750D007FF0D4 /* ReturnButton283_283.png */; };
 		149FB2971890845B00D44DB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2961890845B00D44DB2 /* Foundation.framework */; };
 		149FB2991890845B00D44DB2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2981890845B00D44DB2 /* CoreGraphics.framework */; };
@@ -57,6 +58,8 @@
 		1490A0FC189207E500453D61 /* camera_512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_512x512.png; sourceTree = "<group>"; };
 		14985C641890F037004B3ECB /* SKDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDetailViewController.h; sourceTree = "<group>"; };
 		14985C651890F037004B3ECB /* SKDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDetailViewController.m; sourceTree = "<group>"; };
+		1499CDC418BEE3CB00D0C0EA /* SKTagAssignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagAssignViewController.h; sourceTree = "<group>"; };
+		1499CDC518BEE3CB00D0C0EA /* SKTagAssignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagAssignViewController.m; sourceTree = "<group>"; };
 		149A97F7189F750D007FF0D4 /* ReturnButton283_283.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReturnButton283_283.png; sourceTree = "<group>"; };
 		149FB2931890845B00D44DB2 /* Stickie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stickie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FB2961890845B00D44DB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -185,6 +188,8 @@
 				149FB2A81890845B00D44DB2 /* Main.storyboard */,
 				149FB2AB1890845B00D44DB2 /* SKViewController.h */,
 				149FB2AC1890845B00D44DB2 /* SKViewController.m */,
+				1499CDC418BEE3CB00D0C0EA /* SKTagAssignViewController.h */,
+				1499CDC518BEE3CB00D0C0EA /* SKTagAssignViewController.m */,
 				14985C641890F037004B3ECB /* SKDetailViewController.h */,
 				14985C651890F037004B3ECB /* SKDetailViewController.m */,
 				14B0C7A618A30B43008B65C3 /* SKTagSearchViewController.h */,
@@ -349,6 +354,7 @@
 			files = (
 				93E82089189828F100877D38 /* SKTagData.m in Sources */,
 				14985C661890F037004B3ECB /* SKDetailViewController.m in Sources */,
+				1499CDC618BEE3CB00D0C0EA /* SKTagAssignViewController.m in Sources */,
 				149FB2EE18909D3500D44DB2 /* SKPhotoCell.m in Sources */,
 				149FB2A71890845B00D44DB2 /* SKAppDelegate.m in Sources */,
 				93E82087189828F100877D38 /* SKImageTag.m in Sources */,

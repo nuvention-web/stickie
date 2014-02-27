@@ -41,7 +41,7 @@
     if (!tagCollection)
         tagCollection = [SKTagCollection sharedInstance];
     
-    SKImageTag *tag = [[SKImageTag alloc] initWithName: @"Food" andColor: nil];
+    SKImageTag *tag = [[SKImageTag alloc] initWithName: @"Blah" andColor: nil];
     if (![tagCollection isTagInCollection:tag])
         [tagCollection addTagToCollection: tag];
     

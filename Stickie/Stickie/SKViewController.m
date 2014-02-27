@@ -14,6 +14,8 @@
 #import "SKTagCollection.h"
 #import "SKImageTag.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "SKTagSearchViewController.h"
+#import "SKTagAssignViewController.h"
 
 
 @interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
@@ -48,7 +50,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    _topLeftLabel.text = @"Blah";
     /* Removed top margin in collection view at startup */
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -171,7 +173,7 @@
     
     /* Tag event occurs in top-left corner */
     if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
-        tag = [[SKImageTag alloc] initWithName:@"Food" andColor:nil];
+        tag = [[SKImageTag alloc] initWithName:_topLeftLabel.text andColor:nil];
     
     else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128)
         tag = [[SKImageTag alloc] initWithName:@"Favs" andColor:nil];
@@ -252,9 +254,9 @@ finishedSavingWithError:(NSError *)error
     [_collectionView reloadData];
 }
 
-//Enlarge Image
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    //Enlarge Image
     if ([[segue identifier] isEqualToString:@"showDetail"])
     {
         NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
@@ -266,6 +268,63 @@ finishedSavingWithError:(NSError *)error
         detailViewController.image = image;
         detailViewController.imageURL = url;
     }
+    else if ([[segue identifier] isEqualToString:@"tagSearch"])
+    {
+        SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
+        tagSearchViewController.topLeftText = _topLeftLabel.text;
+        NSLog(@"%@", _topLeftLabel.text);
+        tagSearchViewController.topRightText = _topRightLabel.text;
+        tagSearchViewController.botLeftText = _botLeftLabel.text;
+        tagSearchViewController.botRightText = _botRightLabel.text;
+    }
+    else if ([[segue identifier] isEqualToString:@"topLeftTag"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        tagAssignViewController.source = @"topLeft";
+        tagAssignViewController.delegate = self;
+    }
+    else if ([[segue identifier] isEqualToString:@"topRightTag"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        tagAssignViewController.source = @"topRight";
+        tagAssignViewController.delegate = self;
+        
+    }
+    else if ([[segue identifier] isEqualToString:@"botLeftTag"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        tagAssignViewController.source = @"botLeft";
+        tagAssignViewController.delegate = self;
+    }
+    else if ([[segue identifier] isEqualToString:@"botRightTag"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        tagAssignViewController.source = @"botRight";
+        tagAssignViewController.delegate = self;
+
+    }
+}
+
+- (void)tagAssignViewControllerDidCancel:(SKTagAssignViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tag for:(NSString *)corner
+{
+    if ([corner isEqualToString:@"topLeft"]) {
+        _topLeftLabel.text = tag;
+    }
+    else if ([corner isEqualToString:@"topRight"]) {
+        _topRightLabel.text = tag;
+    }
+    else if ([corner isEqualToString:@"botLeft"]) {
+        _botLeftLabel.text = tag;
+    }
+    else if ([corner isEqualToString:@"botRight"]) {
+        _botRightLabel.text = tag;
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

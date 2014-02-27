@@ -60,6 +60,9 @@
                                         <state key="normal" title="BlueCorner" image="BlueCorner_106x106.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="iXZ-cN-TVP" kind="modal" identifier="topLeftTag" id="DV0-Mc-7un"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d0k-6x-Qhh">
                                         <rect key="frame" x="11" y="11" width="42" height="21"/>
@@ -81,6 +84,9 @@
                                         <state key="normal" title="RedCorner" image="RedCorner_106x106.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="iXZ-cN-TVP" kind="modal" identifier="topRightTag" id="uZh-4e-u4L"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aHt-Lw-nUa">
                                         <rect key="frame" x="20" y="12" width="42" height="21"/>
@@ -102,6 +108,9 @@
                                         <state key="normal" title="GreenCorner" image="GreenCorner_106x106.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="iXZ-cN-TVP" kind="modal" identifier="botLeftTag" id="GKa-30-X3s"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trips" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Da7-GR-7sd">
                                         <rect key="frame" x="11" y="24" width="42" height="21"/>
@@ -123,6 +132,9 @@
                                         <state key="normal" title="PinkCorner" image="PinkCorner_106x106.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="iXZ-cN-TVP" kind="modal" identifier="botRightTag" id="Buw-Fm-mcW"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IGM-6F-hVZ">
                                         <rect key="frame" x="23" y="24" width="42" height="21"/>
@@ -150,7 +162,7 @@
                                 <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="17"/>
                                 <state key="normal" title="Search" image="SearchStickie_222x222.png"/>
                                 <connections>
-                                    <segue destination="lsA-Em-eke" kind="push" id="ZiL-3a-YzY"/>
+                                    <segue destination="lsA-Em-eke" kind="push" identifier="tagSearch" id="ZiL-3a-YzY"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -169,8 +181,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="botLeftLabel" destination="Da7-GR-7sd" id="3eO-aj-Ek2"/>
+                        <outlet property="botRightLabel" destination="IGM-6F-hVZ" id="jxz-Wq-o12"/>
                         <outlet property="collectionView" destination="InS-wl-dcP" id="CrP-He-TVc"/>
                         <outlet property="dNewImageView" destination="owN-vc-Jt0" id="1cr-pa-KFG"/>
+                        <outlet property="topLeftLabel" destination="d0k-6x-Qhh" id="Z1P-67-vJ0"/>
+                        <outlet property="topRightLabel" destination="aHt-Lw-nUa" id="hlb-D2-RQT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -270,12 +286,82 @@
                     </view>
                     <navigationItem key="navigationItem" title="Find Photos" id="vE7-cv-KVE"/>
                     <connections>
+                        <outlet property="botLeftButton" destination="d3b-qy-B1F" id="ier-If-vAi"/>
+                        <outlet property="botRightButton" destination="pPm-qW-BA7" id="6cl-j7-UhU"/>
                         <outlet property="collectionView" destination="tMz-6e-eQE" id="Qd5-QW-JP7"/>
+                        <outlet property="topLeftButton" destination="MJE-Ka-gKq" id="aMV-xm-0kj"/>
+                        <outlet property="topRightButton" destination="GqL-SY-fLM" id="0lW-ek-akc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rbs-Hz-1hR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1385" y="922"/>
+        </scene>
+        <!--Tag Assign View Controller - Assign Tag-->
+        <scene sceneID="z6b-I1-ufu">
+            <objects>
+                <tableViewController id="YEi-U5-gnl" customClass="SKTagAssignViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Aji-mb-i9j">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Enter Tag Name" id="cR6-un-fNd">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="h9b-6t-0Mq">
+                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h9b-6t-0Mq" id="3mC-jE-w3x">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontSizeToFit="NO" minimumFontSize="17" id="QLL-eQ-nmN">
+                                                    <rect key="frame" x="20" y="7" width="280" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Assign Tag" id="fzv-2b-c1m">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="1rQ-Ha-2Eh">
+                            <connections>
+                                <action selector="cancel:" destination="YEi-U5-gnl" id="edk-eK-ccD"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="hOl-Fk-GnJ">
+                            <connections>
+                                <action selector="done:" destination="YEi-U5-gnl" id="Rq8-Nh-aB1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tagTextField" destination="QLL-eQ-nmN" id="e50-N1-WeU"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fYn-q4-35G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1919" y="-529"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2vN-os-lN4">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="iXZ-cN-TVP" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pT6-pb-Whn">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="YEi-U5-gnl" kind="relationship" relationship="rootViewController" id="c16-cL-gEt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n1a-mY-YC7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1385" y="-529"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="4nN-Kz-V2n">
@@ -339,5 +425,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="kNa-3S-pJo"/>
+        <segue reference="Buw-Fm-mcW"/>
     </inferredMetricsTieBreakers>
 </document>
