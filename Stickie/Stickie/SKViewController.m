@@ -50,6 +50,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.screenName = @"Home Screen";
     _topLeftLabel.text = @"Blah";
     /* Removed top margin in collection view at startup */
     self.automaticallyAdjustsScrollViewInsets = NO;

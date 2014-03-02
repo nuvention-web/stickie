@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "SKTagAssignViewController.h"
+#import "GAITrackedViewController.h"
 
-@interface SKViewController : UIViewController <SKTagAssignViewControllerDelegate>
+@interface SKViewController : GAITrackedViewController <SKTagAssignViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *topLeftLabel;
 @property (strong, nonatomic) IBOutlet UILabel *topRightLabel;

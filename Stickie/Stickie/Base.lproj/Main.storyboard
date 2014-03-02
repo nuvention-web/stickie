@@ -171,7 +171,7 @@
                                 <rect key="frame" x="269" y="4" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="Button" image="camera_512x512.png">
+                                <state key="normal" title="Button" image="Camera Icon - app.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -409,6 +409,7 @@
     <resources>
         <image name="BlueCircle_192x192.png" width="192" height="192"/>
         <image name="BlueCorner_106x106.png" width="106" height="106"/>
+        <image name="Camera Icon - app.png" width="500" height="500"/>
         <image name="GreenCircle_192x192.png" width="192" height="192"/>
         <image name="GreenCorner_106x106.png" width="106" height="106"/>
         <image name="PinkCircle_192x192.png" width="192" height="192"/>
@@ -416,7 +417,6 @@
         <image name="RedCircle_192x192.png" width="192" height="192"/>
         <image name="RedCorner_106x106.png" width="106" height="106"/>
         <image name="SearchStickie_222x222.png" width="222" height="222"/>
-        <image name="camera_512x512.png" width="512" height="512"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

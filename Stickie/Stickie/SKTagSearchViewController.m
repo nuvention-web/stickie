@@ -33,6 +33,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.screenName = @"Tag Search Screen";
     [_topLeftButton setTitle:_topLeftText forState:UIControlStateNormal];
     [_topRightButton setTitle:_topRightText forState:UIControlStateNormal];
     [_botLeftButton setTitle:_botLeftText forState:UIControlStateNormal];
