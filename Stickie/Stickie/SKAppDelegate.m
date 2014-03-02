@@ -10,7 +10,7 @@
 #import "SKTagCollection.h"
 #import "SKImageTag.h"
 #import "SKAssetURLTagsMap.h"
-
+#import "GAI.h"
 @implementation SKAppDelegate
 
 
@@ -19,7 +19,7 @@
     // Override point for customization after application launch.
 
     /* Sets background color of navigation bar */
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:255.0/255.0 green:116.0/255.0 blue:208.0/255.0 alpha:1.0]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:127.0/255.0 green:126.0/255.0 blue:168.0/255.0 alpha:1.0]];
     
     
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
@@ -33,7 +33,7 @@
             NSFontAttributeName, nil
         ]
      ];
-    
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-45915238-2"];
     /* For second prototype, these tags need to be added to the tag collection at startup. */
     SKTagCollection *tagCollection = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagCollection"]];
     

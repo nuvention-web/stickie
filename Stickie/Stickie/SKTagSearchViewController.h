@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SKTagSearchViewController : UIViewController
+#import "GAITrackedViewController.h"
+@interface SKTagSearchViewController : GAITrackedViewController
 
 @property (strong, nonatomic) IBOutlet UIButton *topLeftButton;
 @property (strong, nonatomic) IBOutlet UIButton *topRightButton;
