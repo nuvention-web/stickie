@@ -36,6 +36,10 @@
     
     /* For second prototype, these tags need to be added to the tag collection at startup. */
     SKTagCollection *tagCollection = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagCollection"]];
+    SKAssetURLTagsMap *urlToTagMap = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagsMap"]];
+    
+    if (!urlToTagMap)
+        urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     
     /* If there is nothing to unarchive. */
     if (!tagCollection)

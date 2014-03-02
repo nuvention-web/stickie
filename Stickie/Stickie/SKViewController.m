@@ -152,10 +152,7 @@
 
 -(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
-    SKAssetURLTagsMap *urlToTagMap = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagsMap"]];
-    
-    if (!urlToTagMap)
-        urlToTagMap = [SKAssetURLTagsMap sharedInstance];
+    SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     
     SKImageTag *tag;
     
