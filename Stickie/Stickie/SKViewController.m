@@ -345,8 +345,8 @@ finishedSavingWithError:(NSError *)error
         if ([corner isEqualToString:@"topLeft"]) {
             SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_topLeftLabel.text andColor:nil]];
             NSMutableArray *urls = tagData.imageURLs;
-            if ([urls count] > 0) {
-                [urlTagsMap removeTag:oldTag forAssetURL:urls[0]];
+            for (NSURL *url in urls){
+                [urlTagsMap removeTag:oldTag forAssetURL:url];
             }
             [tagCollection removeTag: oldTag];
             [tagCollection addTagToCollection:tag];
@@ -355,8 +355,8 @@ finishedSavingWithError:(NSError *)error
         else if ([corner isEqualToString:@"topRight"]) {
             SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_topRightLabel.text andColor:nil]];
             NSMutableArray *urls = tagData.imageURLs;
-            if ([urls count] > 0) {
-                [urlTagsMap removeTag:oldTag forAssetURL:urls[0]];
+            for (NSURL *url in urls){
+                [urlTagsMap removeTag:oldTag forAssetURL:url];
             }
             [tagCollection removeTag: oldTag];
             [tagCollection addTagToCollection:tag];
@@ -365,8 +365,8 @@ finishedSavingWithError:(NSError *)error
         else if ([corner isEqualToString:@"botLeft"]) {
             SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_botLeftLabel.text andColor:nil]];
             NSMutableArray *urls = tagData.imageURLs;
-            if ([urls count] > 0) {
-                [urlTagsMap removeTag:oldTag forAssetURL:urls[0]];
+            for (NSURL *url in urls){
+                [urlTagsMap removeTag:oldTag forAssetURL:url];
             }
             [tagCollection removeTag: oldTag];
             [tagCollection addTagToCollection:tag];
@@ -375,8 +375,8 @@ finishedSavingWithError:(NSError *)error
         else if ([corner isEqualToString:@"botRight"]) {
             SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_botRightLabel.text andColor:nil]];
             NSMutableArray *urls = tagData.imageURLs;
-            if ([urls count] > 0) {
-                [urlTagsMap removeTag:oldTag forAssetURL:urls[0]];
+            for (NSURL *url in urls){
+                [urlTagsMap removeTag:oldTag forAssetURL:url];
             }
             [tagCollection removeTag: oldTag];
             [tagCollection addTagToCollection:tag];
