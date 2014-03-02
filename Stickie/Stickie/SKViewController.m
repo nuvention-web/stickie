@@ -340,24 +340,45 @@ finishedSavingWithError:(NSError *)error
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKImageTag *tag = [[SKImageTag alloc] initWithName:tagSTR andColor:nil];
     SKImageTag *oldTag =[SKImageTag alloc];
+    SKAssetURLTagsMap *urlTagsMap = [SKAssetURLTagsMap sharedInstance];
     if (![tagCollection isTagInCollection:tag]) {
         if ([corner isEqualToString:@"topLeft"]) {
-            [tagCollection removeTag: [oldTag initWithName:_topLeftLabel.text andColor:nil]];
+            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_topLeftLabel.text andColor:nil]];
+            NSMutableArray *urls = tagData.imageURLs;
+            if ([urls count] > 0) {
+                [urlTagsMap removeTag:oldTag forAssetURL:urls[0]];
+            }
+            [tagCollection removeTag: oldTag];
             [tagCollection addTagToCollection:tag];
             _topLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"topRight"]) {
-            [tagCollection removeTag: [oldTag initWithName:_topRightLabel.text andColor:nil]];
+            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_topRightLabel.text andColor:nil]];
+            NSMutableArray *urls = tagData.imageURLs;
+            if ([urls count] > 0) {
+                [urlTagsMap removeTag:oldTag forAssetURL:urls[0]];
+            }
+            [tagCollection removeTag: oldTag];
             [tagCollection addTagToCollection:tag];
             _topRightLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botLeft"]) {
-            [tagCollection removeTag: [oldTag initWithName:_botLeftLabel.text andColor:nil]];
+            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_botLeftLabel.text andColor:nil]];
+            NSMutableArray *urls = tagData.imageURLs;
+            if ([urls count] > 0) {
+                [urlTagsMap removeTag:oldTag forAssetURL:urls[0]];
+            }
+            [tagCollection removeTag: oldTag];
             [tagCollection addTagToCollection:tag];
             _botLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botRight"]) {
-            [tagCollection removeTag: [oldTag initWithName:_botRightLabel.text andColor:nil]];
+            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_botRightLabel.text andColor:nil]];
+            NSMutableArray *urls = tagData.imageURLs;
+            if ([urls count] > 0) {
+                [urlTagsMap removeTag:oldTag forAssetURL:urls[0]];
+            }
+            [tagCollection removeTag: oldTag];
             [tagCollection addTagToCollection:tag];
             _botRightLabel.text = tagSTR;
         }

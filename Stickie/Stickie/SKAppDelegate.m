@@ -20,15 +20,15 @@
     // Override point for customization after application launch.
 
     /* Sets background color of navigation bar */
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:127.0/255.0 green:126.0/255.0 blue:168.0/255.0 alpha:1.0]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:243.0/255.0 green:243.0/255.0 blue:243.0/255.0 alpha:1.0]];
     
     
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:51.0/255.0 green:153.0/255.0 blue:255.0/255.0 alpha:1.0]];
     
     /* Sets style of navigation bar title */
     [[UINavigationBar appearance] setTitleTextAttributes:
         [NSDictionary dictionaryWithObjectsAndKeys:
-            [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0],
+            [UIColor colorWithRed:51.0/255.0 green:153.0/255.0 blue:255.0/255.0 alpha:1.0],
             NSForegroundColorAttributeName,
             [UIFont fontWithName:@"Arial Hebrew" size:21],
             NSFontAttributeName, nil

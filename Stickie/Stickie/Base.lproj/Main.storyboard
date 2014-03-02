@@ -297,7 +297,7 @@
             </objects>
             <point key="canvasLocation" x="1385" y="922"/>
         </scene>
-        <!--Tag Assign View Controller - Assign Tag-->
+        <!--Tag Assign View Controller - assign tag-->
         <scene sceneID="z6b-I1-ufu">
             <objects>
                 <tableViewController id="YEi-U5-gnl" customClass="SKTagAssignViewController" sceneMemberID="viewController">
@@ -328,7 +328,7 @@
                             </tableViewSection>
                         </sections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Assign Tag" id="fzv-2b-c1m">
+                    <navigationItem key="navigationItem" title="assign tag" id="fzv-2b-c1m">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="1rQ-Ha-2Eh">
                             <connections>
                                 <action selector="cancel:" destination="YEi-U5-gnl" id="edk-eK-ccD"/>
@@ -425,6 +425,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Buw-Fm-mcW"/>
-        <segue reference="XUF-iZ-BJj"/>
+        <segue reference="kNa-3S-pJo"/>
     </inferredMetricsTieBreakers>
 </document>
