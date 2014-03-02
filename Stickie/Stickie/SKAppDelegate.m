@@ -11,6 +11,7 @@
 #import "SKImageTag.h"
 #import "SKAssetURLTagsMap.h"
 #import "GAI.h"
+
 @implementation SKAppDelegate
 
 
@@ -33,7 +34,9 @@
             NSFontAttributeName, nil
         ]
      ];
+    
     id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-45915238-2"];
+    
     /* For second prototype, these tags need to be added to the tag collection at startup. */
     SKTagCollection *tagCollection = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagCollection"]];
     SKAssetURLTagsMap *urlToTagMap = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagsMap"]];
@@ -45,21 +48,21 @@
     if (!tagCollection)
         tagCollection = [SKTagCollection sharedInstance];
     
-    SKImageTag *tag = [[SKImageTag alloc] initWithName: @"Blah" andColor: nil];
-    if (![tagCollection isTagInCollection:tag])
-        [tagCollection addTagToCollection: tag];
-    
-    SKImageTag *tag2 = [[SKImageTag alloc] initWithName: @"Favs" andColor: nil];
-    if (![tagCollection isTagInCollection:tag2])
-        [tagCollection addTagToCollection: tag2];
-    
-    SKImageTag *tag3 = [[SKImageTag alloc] initWithName: @"Trips" andColor: nil];
-    if (![tagCollection isTagInCollection:tag3])
-        [tagCollection addTagToCollection: tag3];
-    
-    SKImageTag *tag4 = [[SKImageTag alloc] initWithName: @"Pets" andColor: nil];
-    if (![tagCollection isTagInCollection:tag4])
-        [tagCollection addTagToCollection: tag4];
+//    SKImageTag *tag = [[SKImageTag alloc] initWithName: @"Blah" andColor: nil];
+//    if (![tagCollection isTagInCollection:tag])
+//        [tagCollection addTagToCollection: tag];
+//    
+//    SKImageTag *tag2 = [[SKImageTag alloc] initWithName: @"Favs" andColor: nil];
+//    if (![tagCollection isTagInCollection:tag2])
+//        [tagCollection addTagToCollection: tag2];
+//    
+//    SKImageTag *tag3 = [[SKImageTag alloc] initWithName: @"Trips" andColor: nil];
+//    if (![tagCollection isTagInCollection:tag3])
+//        [tagCollection addTagToCollection: tag3];
+//    
+//    SKImageTag *tag4 = [[SKImageTag alloc] initWithName: @"Pets" andColor: nil];
+//    if (![tagCollection isTagInCollection:tag4])
+//        [tagCollection addTagToCollection: tag4];
     
     return YES;
 }
