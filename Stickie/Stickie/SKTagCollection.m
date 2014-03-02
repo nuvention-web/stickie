@@ -65,6 +65,11 @@
     return (SKTagData *) [tagDataMap objectForKey: tag];
 }
 
+- (NSMutableArray *) getAllTags
+{
+    return allUserTags;
+}
+
 - (void) addTagToCollection: (SKImageTag *) tag
 {
     if (![allUserTags containsObject: tag]) {

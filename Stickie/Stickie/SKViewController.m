@@ -51,7 +51,22 @@
 {
     [super viewDidLoad];
     self.screenName = @"Home Screen";
-    _topLeftLabel.text = @"Blah";
+    
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    NSMutableArray *tagArray = [tagCollection getAllTags];
+    if ([tagArray count] > 0) {
+        _topLeftLabel.text = ((SKImageTag *) tagArray[0]).tagName;
+    }
+    if ([tagArray count] > 1) {
+        _topRightLabel.text = ((SKImageTag *) tagArray[1]).tagName;
+    }
+    if ([tagArray count] > 2) {
+        _botLeftLabel.text = ((SKImageTag *) tagArray[2]).tagName;
+    }
+    if ([tagArray count] > 3) {
+        _botRightLabel.text = ((SKImageTag *) tagArray[3]).tagName;
+    }
+    
     /* Removed top margin in collection view at startup */
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -168,29 +183,41 @@
                                                       delegate:nil
                                              cancelButtonTitle:@"OK"
                                              otherButtonTitles:nil];
+    UIAlertView *alertEmptyTag = [[UIAlertView alloc] initWithTitle:@"The tag is unlabeled."
+                                                          message:nil
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
     
     /* Tag event occurs in top-left corner */
+ 
+    
     if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
         tag = [[SKImageTag alloc] initWithName:_topLeftLabel.text andColor:nil];
-    
+
     else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128)
-        tag = [[SKImageTag alloc] initWithName:@"Favs" andColor:nil];
-    
+        tag = [[SKImageTag alloc] initWithName:_topRightLabel.text andColor:nil];
+
     else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568)
-        tag = [[SKImageTag alloc] initWithName:@"Trips" andColor:nil];
-    
+        tag = [[SKImageTag alloc] initWithName:_botLeftLabel.text andColor:nil];
+
     else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
-        tag = [[SKImageTag alloc] initWithName:@"Pets" andColor:nil];
-        
-    if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
-        [alertTag show];
-        [urlToTagMap addTag: tag forAssetURL:assetURL];
-        [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
+        tag = [[SKImageTag alloc] initWithName:_botRightLabel.text andColor:nil];
+    
+    if (![tag.tagName isEqualToString:@""]) {
+        if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
+            [alertTag show];
+            [urlToTagMap addTag: tag forAssetURL:assetURL];
+            [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
+        }
+        else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
+            [alertRemove show];
+            [urlToTagMap removeTag:tag forAssetURL:assetURL];
+            [tagCollection removeImageURL:assetURL forTag:tag];
+        }
     }
-    else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
-        [alertRemove show];
-        [urlToTagMap removeTag:tag forAssetURL:assetURL];
-        [tagCollection removeImageURL:assetURL forTag:tag];
+    else {
+        [alertEmptyTag show];
     }
 }
 
@@ -308,19 +335,41 @@ finishedSavingWithError:(NSError *)error
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tag for:(NSString *)corner
+-(void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR for:(NSString *)corner
 {
-    if ([corner isEqualToString:@"topLeft"]) {
-        _topLeftLabel.text = tag;
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    SKImageTag *tag = [[SKImageTag alloc] initWithName:tagSTR andColor:nil];
+    SKImageTag *oldTag =[SKImageTag alloc];
+    if (![tagCollection isTagInCollection:tag]) {
+        if ([corner isEqualToString:@"topLeft"]) {
+            [tagCollection removeTag: [oldTag initWithName:_topLeftLabel.text andColor:nil]];
+            [tagCollection addTagToCollection:tag];
+            _topLeftLabel.text = tagSTR;
+        }
+        else if ([corner isEqualToString:@"topRight"]) {
+            [tagCollection removeTag: [oldTag initWithName:_topRightLabel.text andColor:nil]];
+            [tagCollection addTagToCollection:tag];
+            _topRightLabel.text = tagSTR;
+        }
+        else if ([corner isEqualToString:@"botLeft"]) {
+            [tagCollection removeTag: [oldTag initWithName:_botLeftLabel.text andColor:nil]];
+            [tagCollection addTagToCollection:tag];
+            _botLeftLabel.text = tagSTR;
+        }
+        else if ([corner isEqualToString:@"botRight"]) {
+            [tagCollection removeTag: [oldTag initWithName:_botRightLabel.text andColor:nil]];
+            [tagCollection addTagToCollection:tag];
+            _botRightLabel.text = tagSTR;
+        }
     }
-    else if ([corner isEqualToString:@"topRight"]) {
-        _topRightLabel.text = tag;
-    }
-    else if ([corner isEqualToString:@"botLeft"]) {
-        _botLeftLabel.text = tag;
-    }
-    else if ([corner isEqualToString:@"botRight"]) {
-        _botRightLabel.text = tag;
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @" Tag already in collection."
+                              message: nil
+                              delegate: nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        [alert show];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }

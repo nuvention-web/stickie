@@ -45,25 +45,12 @@
         urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     
     /* If there is nothing to unarchive. */
-    if (!tagCollection)
+    if (!tagCollection) {
         tagCollection = [SKTagCollection sharedInstance];
-    
-//    SKImageTag *tag = [[SKImageTag alloc] initWithName: @"Blah" andColor: nil];
-//    if (![tagCollection isTagInCollection:tag])
-//        [tagCollection addTagToCollection: tag];
-//    
-//    SKImageTag *tag2 = [[SKImageTag alloc] initWithName: @"Favs" andColor: nil];
-//    if (![tagCollection isTagInCollection:tag2])
-//        [tagCollection addTagToCollection: tag2];
-//    
-//    SKImageTag *tag3 = [[SKImageTag alloc] initWithName: @"Trips" andColor: nil];
-//    if (![tagCollection isTagInCollection:tag3])
-//        [tagCollection addTagToCollection: tag3];
-//    
-//    SKImageTag *tag4 = [[SKImageTag alloc] initWithName: @"Pets" andColor: nil];
-//    if (![tagCollection isTagInCollection:tag4])
-//        [tagCollection addTagToCollection: tag4];
-    
+        SKImageTag *tag = [[SKImageTag alloc] initWithName:@"" andColor:nil];
+        [tagCollection addTagToCollection:tag];
+    }
+        
     return YES;
 }
 							
