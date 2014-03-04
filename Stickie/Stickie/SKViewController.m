@@ -343,41 +343,25 @@ finishedSavingWithError:(NSError *)error
     SKAssetURLTagsMap *urlTagsMap = [SKAssetURLTagsMap sharedInstance];
     if (![tagCollection isTagInCollection:tag]) {
         if ([corner isEqualToString:@"topLeft"]) {
-            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_topLeftLabel.text andColor:nil]];
-            NSMutableArray *urls = tagData.imageURLs;
-            for (NSURL *url in urls){
-                [urlTagsMap removeTag:oldTag forAssetURL:url];
-            }
+            [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topLeftLabel.text andColor:nil]];
             [tagCollection removeTag: oldTag];
             [tagCollection addTagToCollection:tag];
             _topLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"topRight"]) {
-            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_topRightLabel.text andColor:nil]];
-            NSMutableArray *urls = tagData.imageURLs;
-            for (NSURL *url in urls){
-                [urlTagsMap removeTag:oldTag forAssetURL:url];
-            }
+            [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topRightLabel.text andColor:nil]];
             [tagCollection removeTag: oldTag];
             [tagCollection addTagToCollection:tag];
             _topRightLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botLeft"]) {
-            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_botLeftLabel.text andColor:nil]];
-            NSMutableArray *urls = tagData.imageURLs;
-            for (NSURL *url in urls){
-                [urlTagsMap removeTag:oldTag forAssetURL:url];
-            }
+            [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botLeftLabel.text andColor:nil]];
             [tagCollection removeTag: oldTag];
             [tagCollection addTagToCollection:tag];
             _botLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botRight"]) {
-            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_botRightLabel.text andColor:nil]];
-            NSMutableArray *urls = tagData.imageURLs;
-            for (NSURL *url in urls){
-                [urlTagsMap removeTag:oldTag forAssetURL:url];
-            }
+            [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botRightLabel.text andColor:nil]];
             [tagCollection removeTag: oldTag];
             [tagCollection addTagToCollection:tag];
             _botRightLabel.text = tagSTR;
