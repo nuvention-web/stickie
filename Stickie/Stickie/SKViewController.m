@@ -360,25 +360,33 @@ finishedSavingWithError:(NSError *)error
         if ([corner isEqualToString:@"topLeft"]) {
             [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topLeftLabel.text andColor:nil]];
             [tagCollection removeTag: oldTag];
-            [tagCollection addTagToCollection:tag];
+            if (![tag.tagName isEqualToString:@""]){
+                [tagCollection addTagToCollection:tag];
+            }
             _topLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"topRight"]) {
             [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topRightLabel.text andColor:nil]];
             [tagCollection removeTag: oldTag];
-            [tagCollection addTagToCollection:tag];
+            if (![tag.tagName isEqualToString:@""]){
+                [tagCollection addTagToCollection:tag];
+            }
             _topRightLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botLeft"]) {
             [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botLeftLabel.text andColor:nil]];
             [tagCollection removeTag: oldTag];
-            [tagCollection addTagToCollection:tag];
+            if (![tag.tagName isEqualToString:@""]){
+                [tagCollection addTagToCollection:tag];
+            }
             _botLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botRight"]) {
             [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botRightLabel.text andColor:nil]];
             [tagCollection removeTag: oldTag];
-            [tagCollection addTagToCollection:tag];
+            if (![tag.tagName isEqualToString:@""]){
+                [tagCollection addTagToCollection:tag];
+            }
             _botRightLabel.text = tagSTR;
         }
     }
