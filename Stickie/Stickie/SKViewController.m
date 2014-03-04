@@ -24,6 +24,7 @@
     NSIndexPath *dIndexPath;
     UIImage *dImage;
     CGPoint defaultPoint;
+    NSInteger retainScroll;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
@@ -97,13 +98,23 @@
     longGestureRecognizer.delegate = self;
     _dNewImageView.userInteractionEnabled = YES;
     [self.collectionView addGestureRecognizer:longGestureRecognizer];
+    
+    if (!retainScroll) {
+        retainScroll = 0;
+    }
+    else {
+        retainScroll++;
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    NSInteger section = 0;
-    NSInteger item = [self collectionView:_collectionView numberOfItemsInSection:section] - 1;
-    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
-    [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+    if (retainScroll < 1) {
+        NSInteger section = 0;
+        NSInteger item = [self collectionView:_collectionView numberOfItemsInSection:section] - 1;
+        NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+        [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+        retainScroll = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning
