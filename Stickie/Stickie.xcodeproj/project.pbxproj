@@ -565,6 +565,7 @@
 				INFOPLIST_FILE = "Stickie/Stickie-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					/Users/Grant/Desktop/GoogleAnalyticsServicesiOS_3.03c,
 					/Users/StephenZ/Desktop/stickie/Stickie/GoogleAnalyticsServicesiOS_3.03c,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -589,6 +590,7 @@
 				INFOPLIST_FILE = "Stickie/Stickie-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					/Users/Grant/Desktop/GoogleAnalyticsServicesiOS_3.03c,
 					/Users/StephenZ/Desktop/stickie/Stickie/GoogleAnalyticsServicesiOS_3.03c,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";

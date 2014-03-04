@@ -110,6 +110,17 @@
     }
 }
 
+-(void) removeAllMappingsToTag: (SKImageTag *) tag
+{
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    SKTagData *tagData = [tagCollection getTagInfo: tag];
+    NSMutableArray *urls = tagData.imageURLs;
+    
+    for (NSURL *url in urls){
+        [self removeTag:tag forAssetURL:url];
+    }
+}
+
 - (void) removeAllURLs
 {
     [assetURLToTagsMap removeAllObjects];

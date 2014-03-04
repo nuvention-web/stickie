@@ -70,6 +70,7 @@
     /* Removed top margin in collection view at startup */
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    
     _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
 
@@ -96,6 +97,13 @@
     longGestureRecognizer.delegate = self;
     _dNewImageView.userInteractionEnabled = YES;
     [self.collectionView addGestureRecognizer:longGestureRecognizer];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    NSInteger section = 0;
+    NSInteger item = [self collectionView:_collectionView numberOfItemsInSection:section] - 1;
+    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+    [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -125,6 +133,11 @@
 - (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 4;
+}
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
 }
 
 - (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
@@ -255,6 +268,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
                                            self,
                                            @selector(image:finishedSavingWithError:contextInfo:),
                                            nil);
+        
     }
     else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
     {
@@ -266,6 +280,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 finishedSavingWithError:(NSError *)error
  contextInfo:(void *)contextInfo
 {
+    [self viewDidLoad];
+    [_collectionView reloadData];
     if (error) {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Save failed"
@@ -275,8 +291,6 @@ finishedSavingWithError:(NSError *)error
                               otherButtonTitles:nil];
         [alert show];
     }
-    [self viewDidLoad];
-    [_collectionView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -341,45 +355,38 @@ finishedSavingWithError:(NSError *)error
     SKImageTag *tag = [[SKImageTag alloc] initWithName:tagSTR andColor:nil];
     SKImageTag *oldTag =[SKImageTag alloc];
     SKAssetURLTagsMap *urlTagsMap = [SKAssetURLTagsMap sharedInstance];
+    
     if (![tagCollection isTagInCollection:tag]) {
         if ([corner isEqualToString:@"topLeft"]) {
-            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_topLeftLabel.text andColor:nil]];
-            NSMutableArray *urls = tagData.imageURLs;
-            for (NSURL *url in urls){
-                [urlTagsMap removeTag:oldTag forAssetURL:url];
-            }
+            [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topLeftLabel.text andColor:nil]];
             [tagCollection removeTag: oldTag];
-            [tagCollection addTagToCollection:tag];
+            if (![tag.tagName isEqualToString:@""]){
+                [tagCollection addTagToCollection:tag];
+            }
             _topLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"topRight"]) {
-            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_topRightLabel.text andColor:nil]];
-            NSMutableArray *urls = tagData.imageURLs;
-            for (NSURL *url in urls){
-                [urlTagsMap removeTag:oldTag forAssetURL:url];
-            }
+            [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topRightLabel.text andColor:nil]];
             [tagCollection removeTag: oldTag];
-            [tagCollection addTagToCollection:tag];
+            if (![tag.tagName isEqualToString:@""]){
+                [tagCollection addTagToCollection:tag];
+            }
             _topRightLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botLeft"]) {
-            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_botLeftLabel.text andColor:nil]];
-            NSMutableArray *urls = tagData.imageURLs;
-            for (NSURL *url in urls){
-                [urlTagsMap removeTag:oldTag forAssetURL:url];
-            }
+            [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botLeftLabel.text andColor:nil]];
             [tagCollection removeTag: oldTag];
-            [tagCollection addTagToCollection:tag];
+            if (![tag.tagName isEqualToString:@""]){
+                [tagCollection addTagToCollection:tag];
+            }
             _botLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botRight"]) {
-            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_botRightLabel.text andColor:nil]];
-            NSMutableArray *urls = tagData.imageURLs;
-            for (NSURL *url in urls){
-                [urlTagsMap removeTag:oldTag forAssetURL:url];
-            }
+            [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botRightLabel.text andColor:nil]];
             [tagCollection removeTag: oldTag];
-            [tagCollection addTagToCollection:tag];
+            if (![tag.tagName isEqualToString:@""]){
+                [tagCollection addTagToCollection:tag];
+            }
             _botRightLabel.text = tagSTR;
         }
     }

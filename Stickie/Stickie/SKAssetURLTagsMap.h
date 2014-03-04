@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SKImageTag.h"
+#import "SKTagData.h"
+#import "SKTagCollection.h"
 
 @interface SKAssetURLTagsMap : NSObject <NSCoding>
 
@@ -17,6 +19,7 @@
 - (void) addTag: (SKImageTag *) tag forAssetURL: (NSURL *) imageURL;
 - (BOOL) doesURL: (NSURL *) url haveTag: (SKImageTag *) tag;
 - (void) removeTag: (SKImageTag *) tag forAssetURL: (NSURL *) imageURL;
+-(void) removeAllMappingsToTag: (SKImageTag *) tag;
 - (void) removeAllTagsForURL: (NSURL *) imageURL;
 - (void) removeAllURLs;
 
