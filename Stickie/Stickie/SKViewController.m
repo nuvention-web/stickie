@@ -14,6 +14,8 @@
 #import "SKTagCollection.h"
 #import "SKImageTag.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "SKTagSearchViewController.h"
+#import "SKTagAssignViewController.h"
 
 
 @interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
@@ -48,7 +50,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    self.screenName = @"Home Screen";
+    
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    NSMutableArray *tagArray = [tagCollection getAllTags];
+    if ([tagArray count] > 0) {
+        _topLeftLabel.text = ((SKImageTag *) tagArray[0]).tagName;
+    }
+    if ([tagArray count] > 1) {
+        _topRightLabel.text = ((SKImageTag *) tagArray[1]).tagName;
+    }
+    if ([tagArray count] > 2) {
+        _botLeftLabel.text = ((SKImageTag *) tagArray[2]).tagName;
+    }
+    if ([tagArray count] > 3) {
+        _botRightLabel.text = ((SKImageTag *) tagArray[3]).tagName;
+    }
+    
     /* Removed top margin in collection view at startup */
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -150,55 +168,62 @@
 
 -(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
-    SKAssetURLTagsMap *urlToTagMap = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"assetURLTagsMap"]];
-//    SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
-    
-    if (!urlToTagMap)
-        urlToTagMap = [SKAssetURLTagsMap sharedInstance];
+    SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     
     SKImageTag *tag;
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You tagged a picture."
+    UIAlertView *alertTag = [[UIAlertView alloc] initWithTitle:@"You tagged a picture."
                                                     message:nil
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     
+    UIAlertView *alertRemove = [[UIAlertView alloc] initWithTitle:@"You untagged a picture."
+                                                       message:nil
+                                                      delegate:nil
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil];
+    UIAlertView *alertEmptyTag = [[UIAlertView alloc] initWithTitle:@"The tag is unlabeled."
+                                                          message:nil
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+    
     /* Tag event occurs in top-left corner */
-    if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128) {
-        tag = [[SKImageTag alloc] initWithName:@"Food" andColor:nil];
-        [alert show];
+ 
+    
+    if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
+        tag = [[SKImageTag alloc] initWithName:_topLeftLabel.text andColor:nil];
+
+    else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128)
+        tag = [[SKImageTag alloc] initWithName:_topRightLabel.text andColor:nil];
+
+    else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568)
+        tag = [[SKImageTag alloc] initWithName:_botLeftLabel.text andColor:nil];
+
+    else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
+        tag = [[SKImageTag alloc] initWithName:_botRightLabel.text andColor:nil];
+    
+    if (![tag.tagName isEqualToString:@""]) {
+        if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
+            [alertTag show];
+            [urlToTagMap addTag: tag forAssetURL:assetURL];
+            [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
+        }
+        else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
+            [alertRemove show];
+            [urlToTagMap removeTag:tag forAssetURL:assetURL];
+            [tagCollection removeImageURL:assetURL forTag:tag];
+        }
     }
-    else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128) {
-        tag = [[SKImageTag alloc] initWithName:@"Favs" andColor:nil];
-        [alert show];
-    }
-    else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568) {
-        tag = [[SKImageTag alloc] initWithName:@"Trips" andColor:nil];
-        [alert show];
-    }
-    else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568) {
-        tag = [[SKImageTag alloc] initWithName:@"Pets" andColor:nil];
-        [alert show];
-    }
-    if (tag) {
-        [urlToTagMap addTag: tag forAssetURL:assetURL];
-        [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
+    else {
+        [alertEmptyTag show];
     }
 }
 
 //Take photo
 - (IBAction)takePhotoButtonTapped:(id)sender {
-//    if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO)) {
-//        return;
-//    }
-//    
-//    UIImagePickerController *mediaUI = [UIImagePickerController new];
-//    mediaUI.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    mediaUI.allowsEditing = NO;
-//    mediaUI.delegate = self;
-//    
-//    [self presentViewController:mediaUI animated:YES completion:nil];
+
     if ([UIImagePickerController isSourceTypeAvailable:
          UIImagePickerControllerSourceTypeCamera])
     {
@@ -254,9 +279,9 @@ finishedSavingWithError:(NSError *)error
     [_collectionView reloadData];
 }
 
-//Enlarge Image
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    //Enlarge Image
     if ([[segue identifier] isEqualToString:@"showDetail"])
     {
         NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
@@ -268,6 +293,106 @@ finishedSavingWithError:(NSError *)error
         detailViewController.image = image;
         detailViewController.imageURL = url;
     }
+    else if ([[segue identifier] isEqualToString:@"tagSearch"])
+    {
+        SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
+        tagSearchViewController.topLeftText = _topLeftLabel.text;
+        NSLog(@"%@", _topLeftLabel.text);
+        tagSearchViewController.topRightText = _topRightLabel.text;
+        tagSearchViewController.botLeftText = _botLeftLabel.text;
+        tagSearchViewController.botRightText = _botRightLabel.text;
+    }
+    else if ([[segue identifier] isEqualToString:@"topLeftTag"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        tagAssignViewController.source = @"topLeft";
+        tagAssignViewController.delegate = self;
+    }
+    else if ([[segue identifier] isEqualToString:@"topRightTag"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        tagAssignViewController.source = @"topRight";
+        tagAssignViewController.delegate = self;
+        
+    }
+    else if ([[segue identifier] isEqualToString:@"botLeftTag"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        tagAssignViewController.source = @"botLeft";
+        tagAssignViewController.delegate = self;
+    }
+    else if ([[segue identifier] isEqualToString:@"botRightTag"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        tagAssignViewController.source = @"botRight";
+        tagAssignViewController.delegate = self;
+
+    }
+}
+
+- (void)tagAssignViewControllerDidCancel:(SKTagAssignViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR for:(NSString *)corner
+{
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    SKImageTag *tag = [[SKImageTag alloc] initWithName:tagSTR andColor:nil];
+    SKImageTag *oldTag =[SKImageTag alloc];
+    SKAssetURLTagsMap *urlTagsMap = [SKAssetURLTagsMap sharedInstance];
+    if (![tagCollection isTagInCollection:tag]) {
+        if ([corner isEqualToString:@"topLeft"]) {
+            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_topLeftLabel.text andColor:nil]];
+            NSMutableArray *urls = tagData.imageURLs;
+            for (NSURL *url in urls){
+                [urlTagsMap removeTag:oldTag forAssetURL:url];
+            }
+            [tagCollection removeTag: oldTag];
+            [tagCollection addTagToCollection:tag];
+            _topLeftLabel.text = tagSTR;
+        }
+        else if ([corner isEqualToString:@"topRight"]) {
+            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_topRightLabel.text andColor:nil]];
+            NSMutableArray *urls = tagData.imageURLs;
+            for (NSURL *url in urls){
+                [urlTagsMap removeTag:oldTag forAssetURL:url];
+            }
+            [tagCollection removeTag: oldTag];
+            [tagCollection addTagToCollection:tag];
+            _topRightLabel.text = tagSTR;
+        }
+        else if ([corner isEqualToString:@"botLeft"]) {
+            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_botLeftLabel.text andColor:nil]];
+            NSMutableArray *urls = tagData.imageURLs;
+            for (NSURL *url in urls){
+                [urlTagsMap removeTag:oldTag forAssetURL:url];
+            }
+            [tagCollection removeTag: oldTag];
+            [tagCollection addTagToCollection:tag];
+            _botLeftLabel.text = tagSTR;
+        }
+        else if ([corner isEqualToString:@"botRight"]) {
+            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_botRightLabel.text andColor:nil]];
+            NSMutableArray *urls = tagData.imageURLs;
+            for (NSURL *url in urls){
+                [urlTagsMap removeTag:oldTag forAssetURL:url];
+            }
+            [tagCollection removeTag: oldTag];
+            [tagCollection addTagToCollection:tag];
+            _botRightLabel.text = tagSTR;
+        }
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @" Tag already in collection."
+                              message: nil
+                              delegate: nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        [alert show];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

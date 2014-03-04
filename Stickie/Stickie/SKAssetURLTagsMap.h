@@ -15,6 +15,7 @@
 + (SKAssetURLTagsMap *) sharedInstance;
 - (NSMutableArray *) getTagsForAssetURL: (NSURL *) imageURL;
 - (void) addTag: (SKImageTag *) tag forAssetURL: (NSURL *) imageURL;
+- (BOOL) doesURL: (NSURL *) url haveTag: (SKImageTag *) tag;
 - (void) removeTag: (SKImageTag *) tag forAssetURL: (NSURL *) imageURL;
 - (void) removeAllTagsForURL: (NSURL *) imageURL;
 - (void) removeAllURLs;

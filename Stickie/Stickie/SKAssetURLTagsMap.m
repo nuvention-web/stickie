@@ -73,6 +73,20 @@
     }
 }
 
+- (BOOL) doesURL: (NSURL *) url haveTag: (SKImageTag *) tag
+{
+//    return [[self getTagsForAssetURL:url] containsObject:tag];
+    
+    NSMutableArray *tags = [self getTagsForAssetURL:url];
+    
+    if (!tags)
+        return NO;
+    else {
+        return [tags count] > 0;
+    }
+    
+}
+
 - (void) removeAllTagsForURL: (NSURL *) imageURL
 {
     if (![assetURLToTagsMap objectForKey:imageURL]) {

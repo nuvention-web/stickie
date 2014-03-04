@@ -12,18 +12,13 @@
 
 @interface SKTagCollection : NSObject <NSCoding>
 
-//typedef enum {
-//    HIGHER, LOWER
-//} SKHigherOrLower;
-
 + (SKTagCollection *) sharedInstance;
 - (SKTagData *) getTagInfo: (SKImageTag *) tag;
-//- (void) updateCollectionWithTag: (SKImageTag *) tag;
+- (NSMutableArray *) getAllTags;
 - (void) addTagToCollection: (SKImageTag *) tag;
 - (void) updateCollectionWithTag:(SKImageTag *)tag forImageURL: (NSURL *) url;
 - (BOOL) isTagInCollection: (SKImageTag *) tag;
 - (BOOL) isURL: (NSURL *) url associatedWithTag: (SKImageTag *) tag;
-//- (void) changeTag: (SKImageTag *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice;
 - (void) changeTag: (SKImageTag *) tag toColor: (UIColor *) color;
 - (void) removeImageURL: (NSURL *) url forTag: (SKImageTag *) tag;
 - (void) removeTag: (SKImageTag *) tag;
