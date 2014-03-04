@@ -7,6 +7,10 @@
 //
 
 #import "SKAppDelegate.h"
+#import "SKTagCollection.h"
+#import "SKImageTag.h"
+#import "SKAssetURLTagsMap.h"
+#import "GAI.h"
 
 @implementation SKAppDelegate
 
@@ -16,21 +20,37 @@
     // Override point for customization after application launch.
 
     /* Sets background color of navigation bar */
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:255.0/255.0 green:116.0/255.0 blue:208.0/255.0 alpha:1.0]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:243.0/255.0 green:243.0/255.0 blue:243.0/255.0 alpha:1.0]];
     
     
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:51.0/255.0 green:153.0/255.0 blue:255.0/255.0 alpha:1.0]];
     
     /* Sets style of navigation bar title */
     [[UINavigationBar appearance] setTitleTextAttributes:
         [NSDictionary dictionaryWithObjectsAndKeys:
-            [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0],
+            [UIColor colorWithRed:51.0/255.0 green:153.0/255.0 blue:255.0/255.0 alpha:1.0],
             NSForegroundColorAttributeName,
             [UIFont fontWithName:@"Arial Hebrew" size:21],
             NSFontAttributeName, nil
         ]
      ];
     
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-45915238-2"];
+    
+    /* For second prototype, these tags need to be added to the tag collection at startup. */
+    SKTagCollection *tagCollection = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagCollection"]];
+    SKAssetURLTagsMap *urlToTagMap = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagsMap"]];
+    
+    if (!urlToTagMap)
+        urlToTagMap = [SKAssetURLTagsMap sharedInstance];
+    
+    /* If there is nothing to unarchive. */
+    if (!tagCollection) {
+        tagCollection = [SKTagCollection sharedInstance];
+        SKImageTag *tag = [[SKImageTag alloc] initWithName:@"" andColor:nil];
+        [tagCollection addTagToCollection:tag];
+    }
+        
     return YES;
 }
 							
@@ -59,6 +79,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[SKTagCollection sharedInstance]] forKey:@"tagCollection"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[SKAssetURLTagsMap sharedInstance]] forKey:@"tagsMap"];
 }
 
 @end

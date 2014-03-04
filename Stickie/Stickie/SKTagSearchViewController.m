@@ -10,7 +10,7 @@
 #import "SKTagCollection.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SKPhotoCell.h"
-
+#import "SKDetailViewController.h"
 
 @interface SKTagSearchViewController()
 {
@@ -30,18 +30,14 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 @implementation SKTagSearchViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.screenName = @"Tag Search Screen";
+    [_topLeftButton setTitle:_topLeftText forState:UIControlStateNormal];
+    [_topRightButton setTitle:_topRightText forState:UIControlStateNormal];
+    [_botLeftButton setTitle:_botLeftText forState:UIControlStateNormal];
+    [_botRightButton setTitle:_botRightText forState:UIControlStateNormal];
     blue = NO, red = NO, green = NO, pink = NO;
 	// Do any additional setup after loading the view.
     _assets = [[NSMutableArray alloc] init];
@@ -83,136 +79,19 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     return 1;
 }
 
-//- (IBAction)blueButton:(id)sender
-//{
-//    [self viewDidLoad];
-//    [_collectionView reloadData];
-//
-//    if (!blue){
-//        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
-//        {
-//            [_assets addObject:myasset];
-//            [_collectionView reloadData];
-//        };
-//
-//        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
-//        {
-//            NSLog(@"Cannot access Library Assets");
-//        };
-//        
-//        SKTagCollection *collection = [SKTagCollection sharedInstance];
-//        SKImageTag *tag = [[SKImageTag alloc] init];
-//        tag.tagName = @"Food";
-//        
-//        SKTagData *tagData = [collection getTagInfo:tag];
-//        NSMutableArray *imageURLs = [tagData imageURLs];
-//        
-//        for (NSURL *url in imageURLs) {
-//            [library assetForURL:url resultBlock:resultblock failureBlock:failureblock];
-//        }
-//        blue = YES;
-//    }
-//}
-//- (IBAction)redButton:(id)sender {
-//    [self viewDidLoad];
-//    [_collectionView reloadData];
-//
-//    if (!red){
-//        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
-//        {
-//            [_assets addObject:myasset];
-//            [_collectionView reloadData];
-//        };
-//        
-//        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
-//        {
-//            NSLog(@"Cannot access Library Assets");
-//        };
-//        
-//        SKTagCollection *collection = [SKTagCollection sharedInstance];
-//        SKImageTag *tag = [[SKImageTag alloc] init];
-//        tag.tagName = @"Favs";
-//        
-//        SKTagData *tagData = [collection getTagInfo:tag];
-//        NSMutableArray *imageURLs = [tagData imageURLs];
-//        
-//        for (NSURL *url in imageURLs) {
-//            [library assetForURL:url resultBlock:resultblock failureBlock:failureblock];
-//        }
-//        red = YES;
-//    }
-//}
-//- (IBAction)greenButton:(id)sender {
-//    [self viewDidLoad];
-//    [_collectionView reloadData];
-//
-//    if (!green){
-//        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
-//        {
-//            [_assets addObject:myasset];
-//            [_collectionView reloadData];
-//        };
-//        
-//        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
-//        {
-//            NSLog(@"Cannot access Library Assets");
-//        };
-//        
-//        SKTagCollection *collection = [SKTagCollection sharedInstance];
-//        SKImageTag *tag = [[SKImageTag alloc] init];
-//        tag.tagName = @"Trips";
-//        
-//        SKTagData *tagData = [collection getTagInfo:tag];
-//        NSMutableArray *imageURLs = [tagData imageURLs];
-//        
-//        for (NSURL *url in imageURLs) {
-//            [library assetForURL:url resultBlock:resultblock failureBlock:failureblock];
-//        }
-//        green = YES;
-//    }
-//}
-//- (IBAction)pinkButton:(id)sender {
-//    [self viewDidLoad];
-//    [_collectionView reloadData];
-//
-//    if (!pink){
-//        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
-//        {
-//            [_assets addObject:myasset];
-//            [_collectionView reloadData];
-//        };
-//        
-//        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
-//        {
-//            NSLog(@"Cannot access Library Assets");
-//        };
-//        
-//        SKTagCollection *collection = [SKTagCollection sharedInstance];
-//        SKImageTag *tag = [[SKImageTag alloc] init];
-//        tag.tagName = @"Pets";
-//        
-//        SKTagData *tagData = [collection getTagInfo:tag];
-//        NSMutableArray *imageURLs = [tagData imageURLs];
-//        
-//        for (NSURL *url in imageURLs) {
-//            [library assetForURL:url resultBlock:resultblock failureBlock:failureblock];
-//        }
-//        pink = YES;
-//    }
-//}
-
--(IBAction) colorButton:(id)sender {
+-(IBAction) colorButton:(id)sender
+{
     [self viewDidLoad];
     [_collectionView reloadData];
     BOOL beenClickedBefore;
     
     NSString *buttonPressed = [sender currentTitle];
     
-    if ([buttonPressed isEqualToString:@"Food"])
+    if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text])
         beenClickedBefore = blue;
-    else if ([buttonPressed isEqualToString:@"Favs"])
+    else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text])
         beenClickedBefore = red;
-    else if ([buttonPressed isEqualToString:@"Trips"])
+    else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text])
         beenClickedBefore = green;
     else
         beenClickedBefore = pink;
@@ -240,15 +119,28 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [library assetForURL:url resultBlock:resultblock failureBlock:failureblock];
         }
         
-        if ([buttonPressed isEqualToString:@"Food"])
+        if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text])
             blue = YES;
-        else if ([buttonPressed isEqualToString:@"Favs"])
+        else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text])
             red = YES;
-        else if ([buttonPressed isEqualToString:@"Trips"])
+        else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text])
             green = YES;
         else
             pink = YES;
     }
 }
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showTagDetail"])
+    {
+        NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
+        ALAsset *asset = self.assets[indexPath.row];
+        NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
+        ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+        UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+        SKDetailViewController *detailViewController = [segue destinationViewController];
+        detailViewController.image = image;
+        detailViewController.imageURL = url;
+    }
+}
 @end

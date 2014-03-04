@@ -20,6 +20,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.screenName = @"Enlarged Photo Screen";
     self.imageView.image = self.image;
 }
 - (IBAction)backMain:(id)sender {

@@ -65,20 +65,10 @@
     return (SKTagData *) [tagDataMap objectForKey: tag];
 }
 
-//- (void) updateCollectionWithTag: (SKImageTag *) tag
-//{
-//    if (![allUserTags containsObject: tag]) {
-//        [allUserTags addObject: tag];
-//        SKTagData *data = [[SKTagData alloc] init];
-//        data.tagColor = tag.tagColor;
-//        [tagDataMap setObject:data forKey: tag];
-//    }
-//    else {
-//        SKTagData *currentData = [tagDataMap objectForKey:tag];
-//        currentData.tagFrequencyInPhotos++;
-//        [tagDataMap setObject:currentData forKey:tag];
-//    }
-//}
+- (NSMutableArray *) getAllTags
+{
+    return allUserTags;
+}
 
 - (void) addTagToCollection: (SKImageTag *) tag
 {
@@ -121,29 +111,6 @@
     SKTagData *tagData = [tagDataMap objectForKey:tag];
     return [tagData.imageURLs containsObject:url];
 }
-
-/* This method likely is not necessary anymore. */
-//- (void) changeTag: (SKImageTag *) tag toFreqOneHigherOrLower: (SKHigherOrLower) choice
-//{
-//    if (![allUserTags containsObject: tag]) {
-//        @throw [NSException exceptionWithName: @"TagNotFoundException" reason: @"The specified tag was not found." userInfo:nil];
-//    }
-//    
-//    SKTagData *data = [tagDataMap objectForKey: tag];
-//    
-//    switch (choice) {
-//        case HIGHER:
-//            data.tagFrequencyInPhotos++;
-//            [tagDataMap setObject: data forKey: tag];
-//            break;
-//        case LOWER:
-//            if (data.tagFrequencyInPhotos > 0) {
-//                data.tagFrequencyInPhotos--;
-//                [tagDataMap setObject: data forKey: tag];
-//            }
-//            break;
-//    }
-//}
 
 - (void) changeTag: (SKImageTag *) tag toColor: (UIColor *) color
 {

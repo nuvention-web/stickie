@@ -23,4 +23,21 @@
     return self;
 }
 
+- (id) initWithCoder:(NSCoder *) decoder
+{
+    _tagFrequencyInPhotos = [decoder decodeIntegerForKey:@"tagFrequencyInPhotos"];
+    _tagColor = [decoder decodeObjectForKey:@"tagColor"];
+    _imageURLs = [decoder decodeObjectForKey:@"imageURLs"];
+    
+    return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+    [encoder encodeInteger:_tagFrequencyInPhotos forKey:@"tagFrequencyInPhotos"];
+    [encoder encodeObject:_tagColor forKey:@"tagColor"];
+    [encoder encodeObject:_imageURLs forKey:@"imageURLs"];
+    
+}
+
 @end

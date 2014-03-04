@@ -9,9 +9,7 @@
 #import "SKAssetURLTagsMap.h"
 
 @interface SKAssetURLTagsMap () {
-    
     NSMutableDictionary *assetURLToTagsMap;
-    
 }
 
 @end
@@ -43,7 +41,7 @@
     // Unarchive the singleton instance.
     SKAssetURLTagsMap *instance = [SKAssetURLTagsMap sharedInstance];
     
-    instance->assetURLToTagsMap = [decoder decodeObjectForKey:@"assetURLToTagMap"];
+    instance->assetURLToTagsMap = [decoder decodeObjectForKey:@"assetURLTagsMap"];
     
     return instance;
 }
@@ -53,7 +51,7 @@
     // Archive the singleton instance.
     SKAssetURLTagsMap *instance = [SKAssetURLTagsMap sharedInstance];
     
-    [encoder encodeObject:instance->assetURLToTagsMap forKey:@"assetURLToTagMap"];
+    [encoder encodeObject:instance->assetURLToTagsMap forKey:@"assetURLTagsMap"];
 }
 
 - (NSMutableArray *) getTagsForAssetURL: (NSURL *) imageURL
@@ -73,6 +71,20 @@
         [tags addObject:tag];
         [assetURLToTagsMap setObject: tags forKey: imageURL];
     }
+}
+
+- (BOOL) doesURL: (NSURL *) url haveTag: (SKImageTag *) tag
+{
+//    return [[self getTagsForAssetURL:url] containsObject:tag];
+    
+    NSMutableArray *tags = [self getTagsForAssetURL:url];
+    
+    if (!tags)
+        return NO;
+    else {
+        return [tags count] > 0;
+    }
+    
 }
 
 - (void) removeAllTagsForURL: (NSURL *) imageURL

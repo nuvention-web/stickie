@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
+@interface SKTagSearchViewController : GAITrackedViewController
 
-@interface SKTagSearchViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIButton *topLeftButton;
+@property (strong, nonatomic) IBOutlet UIButton *topRightButton;
+@property (strong, nonatomic) IBOutlet UIButton *botLeftButton;
+@property (strong, nonatomic) IBOutlet UIButton *botRightButton;
+
+@property (strong, nonatomic) NSString *topLeftText;
+@property (strong, nonatomic) NSString *topRightText;
+@property (strong, nonatomic) NSString *botLeftText;
+@property (strong, nonatomic) NSString *botRightText;
 
 @end
