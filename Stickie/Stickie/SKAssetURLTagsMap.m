@@ -82,7 +82,7 @@
     if (!tags)
         return NO;
     else {
-        return [tags count] > 0;
+        return [tags containsObject:tag];
     }
     
 }
