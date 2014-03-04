@@ -103,7 +103,7 @@
     NSInteger section = 0;
     NSInteger item = [self collectionView:_collectionView numberOfItemsInSection:section] - 1;
     NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
-    [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+    [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -268,6 +268,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
                                            self,
                                            @selector(image:finishedSavingWithError:contextInfo:),
                                            nil);
+        
     }
     else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
     {
@@ -279,6 +280,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 finishedSavingWithError:(NSError *)error
  contextInfo:(void *)contextInfo
 {
+    [self viewDidLoad];
+    [_collectionView reloadData];
     if (error) {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Save failed"
@@ -288,8 +291,6 @@ finishedSavingWithError:(NSError *)error
                               otherButtonTitles:nil];
         [alert show];
     }
-    [self viewDidLoad];
-    [_collectionView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
