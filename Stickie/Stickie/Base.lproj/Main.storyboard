@@ -205,7 +205,7 @@
                                 <rect key="frame" x="20" y="92" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <state key="normal" backgroundImage="BlueCircle_192x192.png">
+                                <state key="normal" backgroundImage="TopLeftCircle.png">
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
@@ -216,7 +216,7 @@
                                 <rect key="frame" x="93" y="92" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <state key="normal" backgroundImage="RedCircle_192x192.png">
+                                <state key="normal" backgroundImage="TopRightCircle.png">
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
@@ -227,7 +227,7 @@
                                 <rect key="frame" x="167" y="92" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <state key="normal" backgroundImage="GreenCircle_192x192.png">
+                                <state key="normal" backgroundImage="BottomLeftCircle.png">
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
@@ -238,7 +238,7 @@
                                 <rect key="frame" x="240" y="92" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <state key="normal" backgroundImage="PinkCircle_192x192.png">
+                                <state key="normal" backgroundImage="BottomRightCircle.png">
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
@@ -407,16 +407,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BlueCircle_192x192.png" width="192" height="192"/>
         <image name="Bottom Left - Red.png" width="500" height="500"/>
         <image name="Bottom Right - Orange.png" width="500" height="500"/>
+        <image name="BottomLeftCircle.png" width="192" height="192"/>
+        <image name="BottomRightCircle.png" width="192" height="192"/>
         <image name="Camera Icon.png" width="768" height="647"/>
-        <image name="GreenCircle_192x192.png" width="192" height="192"/>
-        <image name="PinkCircle_192x192.png" width="192" height="192"/>
-        <image name="RedCircle_192x192.png" width="192" height="192"/>
         <image name="SearchStickie_222x222.png" width="222" height="222"/>
         <image name="Top Right - Green.png" width="500" height="500"/>
         <image name="TopLeftBlue.png" width="500" height="500"/>
+        <image name="TopLeftCircle.png" width="192" height="192"/>
+        <image name="TopRightCircle.png" width="192" height="192"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

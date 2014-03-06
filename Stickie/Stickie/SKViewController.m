@@ -50,6 +50,7 @@
 /* Load images at app startup */
 - (void)viewDidLoad
 {
+
     [super viewDidLoad];
     self.screenName = @"Home Screen";
     
@@ -70,8 +71,6 @@
     
     /* Removed top margin in collection view at startup */
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    
     _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
 
@@ -108,12 +107,12 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    if (retainScroll < 1) {
+    if (retainScroll < 1 ) {
         NSInteger section = 0;
         NSInteger item = [self collectionView:_collectionView numberOfItemsInSection:section] - 1;
         NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
         [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
-        retainScroll = YES;
+        retainScroll ++;
     }
 }
 
@@ -268,17 +267,18 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     NSString *mediaType = info[UIImagePickerControllerMediaType];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
     
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = info[UIImagePickerControllerOriginalImage];
         
 
-        if (_newMedia)
+        if (_newMedia){
+            retainScroll = 0;
             UIImageWriteToSavedPhotosAlbum(image,
                                            self,
                                            @selector(image:finishedSavingWithError:contextInfo:),
                                            nil);
+        }
         
     }
     else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
@@ -293,6 +293,8 @@ finishedSavingWithError:(NSError *)error
 {
     [self viewDidLoad];
     [_collectionView reloadData];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
     if (error) {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Save failed"
