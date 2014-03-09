@@ -16,6 +16,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "SKTagSearchViewController.h"
 #import "SKTagAssignViewController.h"
+#import "SKLongPressButton.h"
 
 
 @interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
@@ -92,6 +93,7 @@
     } failureBlock:^(NSError *error) {
         NSLog(@"Error loading images %@", error);
     }];
+    
     UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
     longGestureRecognizer.minimumPressDuration = 0.15;
     longGestureRecognizer.delegate = self;
@@ -104,6 +106,11 @@
     else {
         retainScroll++;
     }
+    
+    [self.topLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+    [self.topRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+    [self.botLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+    [self.botRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -186,6 +193,24 @@
         }
         default:
             break;
+    }
+}
+
+-(void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer{
+    CGPoint point = [gestureRecognizer locationInView:self.view];
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        
+        if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
+            [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
+        
+        else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128)
+           [self performSegueWithIdentifier:@"topRightTagEdit" sender:self];
+        
+        else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568)
+            [self performSegueWithIdentifier:@"botLeftTagEdit" sender:self];
+        
+        else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
+            [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
     }
 }
 
@@ -324,36 +349,65 @@ finishedSavingWithError:(NSError *)error
     {
         SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
         tagSearchViewController.topLeftText = _topLeftLabel.text;
-        NSLog(@"%@", _topLeftLabel.text);
         tagSearchViewController.topRightText = _topRightLabel.text;
         tagSearchViewController.botLeftText = _botLeftLabel.text;
         tagSearchViewController.botRightText = _botRightLabel.text;
     }
     else if ([[segue identifier] isEqualToString:@"topLeftTag"]){
+        SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
+        tagSearchViewController.topLeftText = _topLeftLabel.text;
+        tagSearchViewController.topRightText = _topRightLabel.text;
+        tagSearchViewController.botLeftText = _botLeftLabel.text;
+        tagSearchViewController.botRightText = _botRightLabel.text;
+        tagSearchViewController.callButtonOnLoad = @"topLeftButton";
+    }
+    else if ([[segue identifier] isEqualToString:@"topRightTag"]){
+        SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
+        tagSearchViewController.topLeftText = _topLeftLabel.text;
+        tagSearchViewController.topRightText = _topRightLabel.text;
+        tagSearchViewController.botLeftText = _botLeftLabel.text;
+        tagSearchViewController.botRightText = _botRightLabel.text;
+        tagSearchViewController.callButtonOnLoad = @"topRightButton";
+    }
+    else if ([[segue identifier] isEqualToString:@"botLeftTag"]){
+        SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
+        tagSearchViewController.topLeftText = _topLeftLabel.text;
+        tagSearchViewController.topRightText = _topRightLabel.text;
+        tagSearchViewController.botLeftText = _botLeftLabel.text;
+        tagSearchViewController.botRightText = _botRightLabel.text;
+        tagSearchViewController.callButtonOnLoad = @"botLeftButton";
+    }
+    else if ([[segue identifier] isEqualToString:@"botRightTag"]){
+        SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
+        tagSearchViewController.topLeftText = _topLeftLabel.text;
+        tagSearchViewController.topRightText = _topRightLabel.text;
+        tagSearchViewController.botLeftText = _botLeftLabel.text;
+        tagSearchViewController.botRightText = _botRightLabel.text;
+        tagSearchViewController.callButtonOnLoad = @"botRightButton";
+    }
+    else if ([[segue identifier] isEqualToString:@"topLeftTagEdit"]) {
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         tagAssignViewController.source = @"topLeft";
         tagAssignViewController.delegate = self;
     }
-    else if ([[segue identifier] isEqualToString:@"topRightTag"]){
+    else if ([[segue identifier] isEqualToString:@"topRightTagEdit"]) {
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         tagAssignViewController.source = @"topRight";
         tagAssignViewController.delegate = self;
-        
     }
-    else if ([[segue identifier] isEqualToString:@"botLeftTag"]){
+    else if ([[segue identifier] isEqualToString:@"botLeftTagEdit"]) {
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         tagAssignViewController.source = @"botLeft";
         tagAssignViewController.delegate = self;
     }
-    else if ([[segue identifier] isEqualToString:@"botRightTag"]){
+    else if ([[segue identifier] isEqualToString:@"botLeftTagEdit"]) {
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
-        tagAssignViewController.source = @"botRight";
+        tagAssignViewController.source = @"botLeft";
         tagAssignViewController.delegate = self;
-
     }
 }
 

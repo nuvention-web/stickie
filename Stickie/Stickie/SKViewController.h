@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SKTagAssignViewController.h"
 #import "GAITrackedViewController.h"
+#import "SKLongPressButton.h"
 
 @interface SKViewController : GAITrackedViewController <SKTagAssignViewControllerDelegate>
 
@@ -16,5 +17,12 @@
 @property (strong, nonatomic) IBOutlet UILabel *topRightLabel;
 @property (strong, nonatomic) IBOutlet UILabel *botLeftLabel;
 @property (strong, nonatomic) IBOutlet UILabel *botRightLabel;
+
+@property (strong, nonatomic) IBOutlet SKLongPressButton *topLeftCorner;
+@property (strong, nonatomic) IBOutlet SKLongPressButton *topRightCorner;
+@property (strong, nonatomic) IBOutlet SKLongPressButton *botLeftCorner;
+@property (strong, nonatomic) IBOutlet SKLongPressButton *botRightCorner;
+
+-(void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer;
 
 @end

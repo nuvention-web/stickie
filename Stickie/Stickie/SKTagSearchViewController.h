@@ -19,5 +19,8 @@
 @property (strong, nonatomic) NSString *topRightText;
 @property (strong, nonatomic) NSString *botLeftText;
 @property (strong, nonatomic) NSString *botRightText;
+@property (strong, nonatomic) NSString *callButtonOnLoad;
+
+-(IBAction) colorButton:(id)sender;
 
 @end

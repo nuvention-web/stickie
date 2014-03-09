@@ -43,6 +43,7 @@
 		14D8FF6318C8ED6100D65440 /* BottomRightCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D8FF5F18C8ED6100D65440 /* BottomRightCircle.png */; };
 		14D8FF6418C8ED6100D65440 /* TopLeftCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D8FF6018C8ED6100D65440 /* TopLeftCircle.png */; };
 		14D8FF6518C8ED6100D65440 /* TopRightCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D8FF6118C8ED6100D65440 /* TopRightCircle.png */; };
+		9382AE1518CCFD550025EC09 /* SKLongPressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382AE1418CCFD550025EC09 /* SKLongPressButton.m */; };
 		93E82086189828F100877D38 /* SKAssetURLTagsMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8207E189828F100877D38 /* SKAssetURLTagsMap.m */; };
 		93E82087189828F100877D38 /* SKImageTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82080189828F100877D38 /* SKImageTag.m */; };
 		93E82088189828F100877D38 /* SKTagCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82082189828F100877D38 /* SKTagCollection.m */; };
@@ -112,6 +113,8 @@
 		14D8FF5F18C8ED6100D65440 /* BottomRightCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BottomRightCircle.png; sourceTree = "<group>"; };
 		14D8FF6018C8ED6100D65440 /* TopLeftCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TopLeftCircle.png; sourceTree = "<group>"; };
 		14D8FF6118C8ED6100D65440 /* TopRightCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TopRightCircle.png; sourceTree = "<group>"; };
+		9382AE1318CCFD550025EC09 /* SKLongPressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLongPressButton.h; sourceTree = "<group>"; };
+		9382AE1418CCFD550025EC09 /* SKLongPressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLongPressButton.m; sourceTree = "<group>"; };
 		93E8207D189828F100877D38 /* SKAssetURLTagsMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAssetURLTagsMap.h; sourceTree = "<group>"; };
 		93E8207E189828F100877D38 /* SKAssetURLTagsMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagsMap.m; sourceTree = "<group>"; };
 		93E8207F189828F100877D38 /* SKImageTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKImageTag.h; sourceTree = "<group>"; };
@@ -248,6 +251,8 @@
 				149FB2A81890845B00D44DB2 /* Main.storyboard */,
 				149FB2AB1890845B00D44DB2 /* SKViewController.h */,
 				149FB2AC1890845B00D44DB2 /* SKViewController.m */,
+				9382AE1318CCFD550025EC09 /* SKLongPressButton.h */,
+				9382AE1418CCFD550025EC09 /* SKLongPressButton.m */,
 				1499CDC418BEE3CB00D0C0EA /* SKTagAssignViewController.h */,
 				1499CDC518BEE3CB00D0C0EA /* SKTagAssignViewController.m */,
 				14985C641890F037004B3ECB /* SKDetailViewController.h */,
@@ -421,6 +426,7 @@
 				14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */,
 				93E82088189828F100877D38 /* SKTagCollection.m in Sources */,
 				149FB2AD1890845B00D44DB2 /* SKViewController.m in Sources */,
+				9382AE1518CCFD550025EC09 /* SKLongPressButton.m in Sources */,
 				149FB2A31890845B00D44DB2 /* main.m in Sources */,
 				93E82086189828F100877D38 /* SKAssetURLTagsMap.m in Sources */,
 			);

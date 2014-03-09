@@ -47,6 +47,19 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)viewWillAppear: (BOOL) animation
+{
+    /* Can call a button press from a previous view. */
+    if ([_callButtonOnLoad isEqualToString:@"topLeftButton"])
+        [_topLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    else if ([_callButtonOnLoad isEqualToString:@"topRightButton"])
+        [_topRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    else if ([_callButtonOnLoad isEqualToString:@"botLeftButton"])
+        [_botLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    else if ([_callButtonOnLoad isEqualToString:@"botRightButton"])
+        [_botRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
