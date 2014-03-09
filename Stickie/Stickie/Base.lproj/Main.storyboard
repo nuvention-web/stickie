@@ -57,7 +57,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ida-78-yow" customClass="SKLongPressButton">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="topLeftCorner" image="TopLeftBlue.png">
+                                        <state key="normal" title="topLeftCorner" image="BlueCorner.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -81,7 +81,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nzz-3R-C1g" customClass="SKLongPressButton">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="topRightCorner" image="Top Right - Green.png">
+                                        <state key="normal" title="topRightCorner" image="GreenCorner.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -105,7 +105,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="y0n-mJ-YeQ" customClass="SKLongPressButton">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="botLeftCorner" image="Bottom Left - Red.png">
+                                        <state key="normal" title="botLeftCorner" image="RedCorner.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -129,7 +129,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4pC-6C-CtT" customClass="SKLongPressButton">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="botRightCorner" image="Bottom Right - Orange.png">
+                                        <state key="normal" title="botRightCorner" image="OrangeCorner.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -168,10 +168,10 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="rED-uW-Iah">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="53N-NE-0rf">
-                                <rect key="frame" x="269" y="7" width="35" height="30"/>
+                                <rect key="frame" x="267" y="7" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="Button" image="Camera Icon.png">
+                                <state key="normal" title="Button" image="App - camera icon (3-8-2014).png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -213,7 +213,7 @@
                                 <rect key="frame" x="20" y="92" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <state key="normal" backgroundImage="TopLeftCircle.png">
+                                <state key="normal" backgroundImage="BlueCircle.png">
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
@@ -224,7 +224,7 @@
                                 <rect key="frame" x="93" y="92" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <state key="normal" backgroundImage="TopRightCircle.png">
+                                <state key="normal" backgroundImage="GreenCircle.png">
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
@@ -235,7 +235,7 @@
                                 <rect key="frame" x="167" y="92" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <state key="normal" backgroundImage="BottomLeftCircle.png">
+                                <state key="normal" backgroundImage="RedCircle.png">
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
@@ -246,7 +246,7 @@
                                 <rect key="frame" x="240" y="92" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <state key="normal" backgroundImage="BottomRightCircle.png">
+                                <state key="normal" backgroundImage="OrangeCircle.png">
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
@@ -416,16 +416,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Bottom Left - Red.png" width="500" height="500"/>
-        <image name="Bottom Right - Orange.png" width="500" height="500"/>
-        <image name="BottomLeftCircle.png" width="192" height="192"/>
-        <image name="BottomRightCircle.png" width="192" height="192"/>
-        <image name="Camera Icon.png" width="768" height="647"/>
+        <image name="App - camera icon (3-8-2014).png" width="795" height="639"/>
+        <image name="BlueCircle.png" width="525" height="525"/>
+        <image name="BlueCorner.png" width="501" height="501"/>
+        <image name="GreenCircle.png" width="504" height="504"/>
+        <image name="GreenCorner.png" width="501" height="501"/>
+        <image name="OrangeCircle.png" width="504" height="504"/>
+        <image name="OrangeCorner.png" width="501" height="501"/>
+        <image name="RedCircle.png" width="504" height="504"/>
+        <image name="RedCorner.png" width="501" height="501"/>
         <image name="SearchStickie_222x222.png" width="222" height="222"/>
-        <image name="Top Right - Green.png" width="500" height="500"/>
-        <image name="TopLeftBlue.png" width="500" height="500"/>
-        <image name="TopLeftCircle.png" width="192" height="192"/>
-        <image name="TopRightCircle.png" width="192" height="192"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -433,8 +433,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="kNa-3S-pJo"/>
         <segue reference="gwP-KI-MWf"/>
         <segue reference="w2s-Lq-cI3"/>
+        <segue reference="XUF-iZ-BJj"/>
     </inferredMetricsTieBreakers>
 </document>
