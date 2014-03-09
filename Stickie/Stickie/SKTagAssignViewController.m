@@ -13,7 +13,10 @@
 @end
 
 @implementation SKTagAssignViewController
-
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    _tagTextField.placeholder = _preLabel;
+}
 - (IBAction)cancel:(id)sender
 {
     [self.delegate tagAssignViewControllerDidCancel:self];

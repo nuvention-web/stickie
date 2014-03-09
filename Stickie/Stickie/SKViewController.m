@@ -195,13 +195,13 @@
     
     SKImageTag *tag;
     
-    UIAlertView *alertTag = [[UIAlertView alloc] initWithTitle:@"You tagged a picture."
+    UIAlertView *alertTag = [[UIAlertView alloc] initWithTitle:@"Tagged!"
                                                     message:nil
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     
-    UIAlertView *alertRemove = [[UIAlertView alloc] initWithTitle:@"You untagged a picture."
+    UIAlertView *alertRemove = [[UIAlertView alloc] initWithTitle:@"Untagged"
                                                        message:nil
                                                       delegate:nil
                                              cancelButtonTitle:@"OK"
@@ -334,12 +334,16 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         tagAssignViewController.source = @"topLeft";
         tagAssignViewController.delegate = self;
+        tagAssignViewController.preLabel = _topLeftLabel.text;
+
     }
     else if ([[segue identifier] isEqualToString:@"topRightTag"]){
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         tagAssignViewController.source = @"topRight";
         tagAssignViewController.delegate = self;
+        tagAssignViewController.preLabel = _topRightLabel.text;
+
         
     }
     else if ([[segue identifier] isEqualToString:@"botLeftTag"]){
@@ -347,12 +351,15 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         tagAssignViewController.source = @"botLeft";
         tagAssignViewController.delegate = self;
+        tagAssignViewController.preLabel = _botLeftLabel.text;
+
     }
     else if ([[segue identifier] isEqualToString:@"botRightTag"]){
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         tagAssignViewController.source = @"botRight";
         tagAssignViewController.delegate = self;
+        tagAssignViewController.preLabel = _botRightLabel.text;
 
     }
 }

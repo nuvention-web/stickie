@@ -18,6 +18,7 @@
 @interface SKTagAssignViewController : UITableViewController
 
 @property (nonatomic) NSString *source;
+@property (nonatomic) NSString *preLabel;
 
 @property (nonatomic, weak) id <SKTagAssignViewControllerDelegate> delegate;
 - (IBAction)cancel:(id)sender;
