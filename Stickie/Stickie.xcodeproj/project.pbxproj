@@ -42,6 +42,7 @@
 		9385098018CD2EA1001AE7DC /* OrangeCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097718CD2EA1001AE7DC /* OrangeCorner.png */; };
 		9385098118CD2EA1001AE7DC /* RedCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097818CD2EA1001AE7DC /* RedCircle.png */; };
 		9385098218CD2EA1001AE7DC /* RedCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097918CD2EA1001AE7DC /* RedCorner.png */; };
+		9385098518CD3044001AE7DC /* SKLongPressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385098418CD3044001AE7DC /* SKLongPressButton.m */; };
 		93E82086189828F100877D38 /* SKAssetURLTagsMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8207E189828F100877D38 /* SKAssetURLTagsMap.m */; };
 		93E82087189828F100877D38 /* SKImageTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82080189828F100877D38 /* SKImageTag.m */; };
 		93E82088189828F100877D38 /* SKTagCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82082189828F100877D38 /* SKTagCollection.m */; };
@@ -110,6 +111,8 @@
 		9385097718CD2EA1001AE7DC /* OrangeCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrangeCorner.png; sourceTree = "<group>"; };
 		9385097818CD2EA1001AE7DC /* RedCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCircle.png; sourceTree = "<group>"; };
 		9385097918CD2EA1001AE7DC /* RedCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCorner.png; sourceTree = "<group>"; };
+		9385098318CD3044001AE7DC /* SKLongPressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLongPressButton.h; sourceTree = "<group>"; };
+		9385098418CD3044001AE7DC /* SKLongPressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLongPressButton.m; sourceTree = "<group>"; };
 		93E8207D189828F100877D38 /* SKAssetURLTagsMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAssetURLTagsMap.h; sourceTree = "<group>"; };
 		93E8207E189828F100877D38 /* SKAssetURLTagsMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagsMap.m; sourceTree = "<group>"; };
 		93E8207F189828F100877D38 /* SKImageTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKImageTag.h; sourceTree = "<group>"; };
@@ -230,6 +233,8 @@
 				149FB2AC1890845B00D44DB2 /* SKViewController.m */,
 				1499CDC418BEE3CB00D0C0EA /* SKTagAssignViewController.h */,
 				1499CDC518BEE3CB00D0C0EA /* SKTagAssignViewController.m */,
+				9385098318CD3044001AE7DC /* SKLongPressButton.h */,
+				9385098418CD3044001AE7DC /* SKLongPressButton.m */,
 				14985C641890F037004B3ECB /* SKDetailViewController.h */,
 				14985C651890F037004B3ECB /* SKDetailViewController.m */,
 				14B0C7A618A30B43008B65C3 /* SKTagSearchViewController.h */,
@@ -416,6 +421,7 @@
 				14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */,
 				93E82088189828F100877D38 /* SKTagCollection.m in Sources */,
 				149FB2AD1890845B00D44DB2 /* SKViewController.m in Sources */,
+				9385098518CD3044001AE7DC /* SKLongPressButton.m in Sources */,
 				149FB2A31890845B00D44DB2 /* main.m in Sources */,
 				93E82086189828F100877D38 /* SKAssetURLTagsMap.m in Sources */,
 			);
