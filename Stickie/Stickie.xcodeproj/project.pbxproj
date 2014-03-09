@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		14540B8618C3FDA5004185F7 /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14540B8418C3FDA5004185F7 /* libAdIdAccess.a */; };
 		14540B8718C3FDA5004185F7 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14540B8518C3FDA5004185F7 /* libGoogleAnalyticsServices.a */; };
-		147F61A118CCED330033F70A /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 147F61A018CCED330033F70A /* Images */; };
 		14985C661890F037004B3ECB /* SKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14985C651890F037004B3ECB /* SKDetailViewController.m */; };
 		1499CDC618BEE3CB00D0C0EA /* SKTagAssignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499CDC518BEE3CB00D0C0EA /* SKTagAssignViewController.m */; };
 		149FB2971890845B00D44DB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2961890845B00D44DB2 /* Foundation.framework */; };
@@ -59,7 +58,6 @@
 		14540B8318C3FDA5004185F7 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		14540B8418C3FDA5004185F7 /* libAdIdAccess.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdIdAccess.a; sourceTree = "<group>"; };
 		14540B8518C3FDA5004185F7 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
-		147F61A018CCED330033F70A /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = SOURCE_ROOT; };
 		14985C641890F037004B3ECB /* SKDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDetailViewController.h; sourceTree = "<group>"; };
 		14985C651890F037004B3ECB /* SKDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDetailViewController.m; sourceTree = "<group>"; };
 		1499CDC418BEE3CB00D0C0EA /* SKTagAssignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagAssignViewController.h; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 		149FB29C1890845B00D44DB2 /* Stickie */ = {
 			isa = PBXGroup;
 			children = (
-				147F61A018CCED330033F70A /* Images */,
 				14540B7B18C3FDA5004185F7 /* GoogleAnalyticsServicesiOS_3.03c */,
 				149FB2A51890845B00D44DB2 /* SKAppDelegate.h */,
 				149FB2A61890845B00D44DB2 /* SKAppDelegate.m */,
@@ -342,7 +339,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				147F61A118CCED330033F70A /* Images in Resources */,
 				149FB2AF1890845B00D44DB2 /* Images.xcassets in Resources */,
 				149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */,
 				149FB2AA1890845B00D44DB2 /* Main.storyboard in Resources */,
