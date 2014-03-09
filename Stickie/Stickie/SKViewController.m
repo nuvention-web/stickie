@@ -422,10 +422,7 @@ finishedSavingWithError:(NSError *)error
     else if ([[segue identifier] isEqualToString:@"botLeftTagEdit"]) {
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
-        if ([_botRightLabel.text isEqualToString:@""]) {
-            tagAssignViewController.createTag = YES;
-        }
-        tagAssignViewController.source = @"botRight";
+        tagAssignViewController.source = @"botLeft";
         tagAssignViewController.delegate = self;
         tagAssignViewController.preLabel = _botRightLabel.text;
 
