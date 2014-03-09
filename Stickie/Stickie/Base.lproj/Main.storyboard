@@ -54,14 +54,14 @@
                                 <rect key="frame" x="0.0" y="63" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ida-78-yow">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ida-78-yow" customClass="SKLongPressButton">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="BlueCorner" image="BlueCorner.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="iXZ-cN-TVP" kind="modal" identifier="topLeftTag" id="DV0-Mc-7un"/>
+                                            <segue destination="lsA-Em-eke" kind="push" identifier="topLeftTag" id="9Lq-CT-BBf"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d0k-6x-Qhh">
@@ -78,14 +78,14 @@
                                 <rect key="frame" x="255" y="63" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nzz-3R-C1g">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nzz-3R-C1g" customClass="SKLongPressButton">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="RedCorner" image="GreenCorner.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="iXZ-cN-TVP" kind="modal" identifier="topRightTag" id="uZh-4e-u4L"/>
+                                            <segue destination="lsA-Em-eke" kind="push" identifier="topRightTag" id="MwU-ZH-Bpp"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aHt-Lw-nUa">
@@ -102,14 +102,14 @@
                                 <rect key="frame" x="0.0" y="503" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="y0n-mJ-YeQ">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="y0n-mJ-YeQ" customClass="SKLongPressButton">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="GreenCorner" image="RedCorner.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="iXZ-cN-TVP" kind="modal" identifier="botLeftTag" id="GKa-30-X3s"/>
+                                            <segue destination="lsA-Em-eke" kind="push" identifier="botLeftTag" id="HT1-Rb-ZNM"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Da7-GR-7sd">
@@ -126,14 +126,14 @@
                                 <rect key="frame" x="255" y="503" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4pC-6C-CtT">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4pC-6C-CtT" customClass="SKLongPressButton">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="PinkCorner" image="OrangeCorner.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="iXZ-cN-TVP" kind="modal" identifier="botRightTag" id="Buw-Fm-mcW"/>
+                                            <segue destination="lsA-Em-eke" kind="push" identifier="botRightTag" id="gwP-KI-MWf"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IGM-6F-hVZ">
@@ -181,12 +181,20 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="botLeftCorner" destination="y0n-mJ-YeQ" id="h7R-nD-Sv1"/>
                         <outlet property="botLeftLabel" destination="Da7-GR-7sd" id="3eO-aj-Ek2"/>
+                        <outlet property="botRightCorner" destination="4pC-6C-CtT" id="imH-jl-Ojj"/>
                         <outlet property="botRightLabel" destination="IGM-6F-hVZ" id="jxz-Wq-o12"/>
                         <outlet property="collectionView" destination="InS-wl-dcP" id="CrP-He-TVc"/>
                         <outlet property="dNewImageView" destination="owN-vc-Jt0" id="1cr-pa-KFG"/>
+                        <outlet property="topLeftCorner" destination="ida-78-yow" id="fSk-5O-RwC"/>
                         <outlet property="topLeftLabel" destination="d0k-6x-Qhh" id="Z1P-67-vJ0"/>
+                        <outlet property="topRightCorner" destination="nzz-3R-C1g" id="9c5-DS-NQS"/>
                         <outlet property="topRightLabel" destination="aHt-Lw-nUa" id="hlb-D2-RQT"/>
+                        <segue destination="iXZ-cN-TVP" kind="modal" identifier="topLeftTagEdit" id="VMZ-Ez-5hG"/>
+                        <segue destination="iXZ-cN-TVP" kind="modal" identifier="topRightTagEdit" id="BTy-yC-D4U"/>
+                        <segue destination="iXZ-cN-TVP" kind="modal" identifier="botLeftTagEdit" id="5Gd-67-bcx"/>
+                        <segue destination="iXZ-cN-TVP" kind="modal" identifier="botRightTagEdit" id="w2s-Lq-cI3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -356,6 +364,7 @@
         <scene sceneID="2vN-os-lN4">
             <objects>
                 <navigationController definesPresentationContext="YES" id="iXZ-cN-TVP" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="YY0-n9-1F9"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pT6-pb-Whn">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
