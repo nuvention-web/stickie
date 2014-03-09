@@ -19,7 +19,7 @@
 - (void) addTag: (SKImageTag *) tag forAssetURL: (NSURL *) imageURL;
 - (BOOL) doesURL: (NSURL *) url haveTag: (SKImageTag *) tag;
 - (void) removeTag: (SKImageTag *) tag forAssetURL: (NSURL *) imageURL;
--(void) removeAllMappingsToTag: (SKImageTag *) tag;
+- (void) removeAllMappingsToTag: (SKImageTag *) tag;
 - (void) removeAllTagsForURL: (NSURL *) imageURL;
 - (void) removeAllURLs;
 

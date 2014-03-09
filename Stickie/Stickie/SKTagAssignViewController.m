@@ -8,14 +8,23 @@
 
 #import "SKTagAssignViewController.h"
 
-@interface SKTagAssignViewController ()
+@interface SKTagAssignViewController () {
+    BOOL delTag;
+}
 
 @end
 
 @implementation SKTagAssignViewController
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+//    if (_createTag) {
+        self.navigationItem.title = @"create tag";
+//    }
+//    else {
+//        self.navigationItem.title = @"edit tag";
+//    }
     _tagTextField.placeholder = _preLabel;
+    delTag = NO;
 }
 - (IBAction)cancel:(id)sender
 {
@@ -23,7 +32,31 @@
 }
 - (IBAction)done:(id)sender
 {
-    [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text for:_source];
+    [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text for:_source andDelete:YES];
 }
-
+- (IBAction)deleteTag:(id)sender {
+    UIAlertView *alertEmpty = [[UIAlertView alloc] initWithTitle:@"No tag to delete."
+                                                          message:nil
+                                                         delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+    
+    UIAlertView *alertDelete = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to delete this tag?"
+                                                       message:nil
+                                                      delegate:self
+                                             cancelButtonTitle:@"Cancel"
+                                             otherButtonTitles:@"Delete Tag",nil];
+    if ([_preLabel isEqualToString:@""]) {
+        [alertEmpty show];
+    }
+    else {
+        [alertDelete show];
+    }
+}
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        delTag = YES;
+        [self.delegate tagAssignViewController:self didAddTag:@"" for:_source andDelete:delTag];
+        }
+}
 @end

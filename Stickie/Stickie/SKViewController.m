@@ -324,7 +324,6 @@ finishedSavingWithError:(NSError *)error
     {
         SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
         tagSearchViewController.topLeftText = _topLeftLabel.text;
-        NSLog(@"%@", _topLeftLabel.text);
         tagSearchViewController.topRightText = _topRightLabel.text;
         tagSearchViewController.botLeftText = _botLeftLabel.text;
         tagSearchViewController.botRightText = _botRightLabel.text;
@@ -332,6 +331,9 @@ finishedSavingWithError:(NSError *)error
     else if ([[segue identifier] isEqualToString:@"topLeftTag"]){
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        if ([_topLeftLabel.text isEqualToString:@""]) {
+            tagAssignViewController.createTag = YES;
+        }
         tagAssignViewController.source = @"topLeft";
         tagAssignViewController.delegate = self;
         tagAssignViewController.preLabel = _topLeftLabel.text;
@@ -340,6 +342,9 @@ finishedSavingWithError:(NSError *)error
     else if ([[segue identifier] isEqualToString:@"topRightTag"]){
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        if ([_topRightLabel.text isEqualToString:@""]) {
+            tagAssignViewController.createTag = YES;
+        }
         tagAssignViewController.source = @"topRight";
         tagAssignViewController.delegate = self;
         tagAssignViewController.preLabel = _topRightLabel.text;
@@ -349,6 +354,9 @@ finishedSavingWithError:(NSError *)error
     else if ([[segue identifier] isEqualToString:@"botLeftTag"]){
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        if ([_botLeftLabel.text isEqualToString:@""]) {
+            tagAssignViewController.createTag = YES;
+        }
         tagAssignViewController.source = @"botLeft";
         tagAssignViewController.delegate = self;
         tagAssignViewController.preLabel = _botLeftLabel.text;
@@ -357,6 +365,9 @@ finishedSavingWithError:(NSError *)error
     else if ([[segue identifier] isEqualToString:@"botRightTag"]){
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        if ([_botRightLabel.text isEqualToString:@""]) {
+            tagAssignViewController.createTag = YES;
+        }
         tagAssignViewController.source = @"botRight";
         tagAssignViewController.delegate = self;
         tagAssignViewController.preLabel = _botRightLabel.text;
@@ -369,7 +380,7 @@ finishedSavingWithError:(NSError *)error
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR for:(NSString *)corner
+-(void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR for:(NSString *)corner andDelete:(BOOL)delete
 {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKImageTag *tag = [[SKImageTag alloc] initWithName:tagSTR andColor:nil];
@@ -378,32 +389,40 @@ finishedSavingWithError:(NSError *)error
     
     if (![tagCollection isTagInCollection:tag]) {
         if ([corner isEqualToString:@"topLeft"]) {
-            [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topLeftLabel.text andColor:nil]];
-            [tagCollection removeTag: oldTag];
+            if (delete) {
+                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topLeftLabel.text andColor:nil]];
+                [tagCollection removeTag: oldTag];
+            }
             if (![tag.tagName isEqualToString:@""]){
                 [tagCollection addTagToCollection:tag];
             }
             _topLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"topRight"]) {
-            [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topRightLabel.text andColor:nil]];
-            [tagCollection removeTag: oldTag];
+            if (delete) {
+                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topRightLabel.text andColor:nil]];
+                [tagCollection removeTag: oldTag];
+            }
             if (![tag.tagName isEqualToString:@""]){
                 [tagCollection addTagToCollection:tag];
             }
             _topRightLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botLeft"]) {
-            [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botLeftLabel.text andColor:nil]];
-            [tagCollection removeTag: oldTag];
+            if (delete) {
+                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botLeftLabel.text andColor:nil]];
+                [tagCollection removeTag: oldTag];
+            }
             if (![tag.tagName isEqualToString:@""]){
                 [tagCollection addTagToCollection:tag];
             }
             _botLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botRight"]) {
-            [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botRightLabel.text andColor:nil]];
-            [tagCollection removeTag: oldTag];
+            if (delete) {
+                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botRightLabel.text andColor:nil]];
+                [tagCollection removeTag: oldTag];
+            }
             if (![tag.tagName isEqualToString:@""]){
                 [tagCollection addTagToCollection:tag];
             }
