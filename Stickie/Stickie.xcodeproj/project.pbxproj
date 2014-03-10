@@ -30,11 +30,11 @@
 		14A2A3E618C3BAB1006D3FFC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E518C3BAB1006D3FFC /* CoreData.framework */; };
 		14A2A3E818C3BABF006D3FFC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */; };
 		14A2A3EA18C3BAD4006D3FFC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E918C3BAD4006D3FFC /* libz.dylib */; };
-		14A497B518CD1D2A00AD43FC /* BlueCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A497AC18CD1D2A00AD43FC /* BlueCircle.png */; };
+		14A497BE18CD311D00AD43FC /* SearchStickie_222x222.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A497BD18CD311D00AD43FC /* SearchStickie_222x222.png */; };
+		14A497C018CD31A000AD43FC /* BlueCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A497BF18CD31A000AD43FC /* BlueCircle.png */; };
 		14B0C7A018A2EFA4008B65C3 /* SKTagCollectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */; };
 		14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */; };
 		9385097A18CD2EA1001AE7DC /* App - camera icon (3-8-2014).png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */; };
-		9385097B18CD2EA1001AE7DC /* BlueCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097218CD2EA1001AE7DC /* BlueCircle.png */; };
 		9385097C18CD2EA1001AE7DC /* BlueCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097318CD2EA1001AE7DC /* BlueCorner.png */; };
 		9385097D18CD2EA1001AE7DC /* GreenCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097418CD2EA1001AE7DC /* GreenCircle.png */; };
 		9385097E18CD2EA1001AE7DC /* GreenCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097518CD2EA1001AE7DC /* GreenCorner.png */; };
@@ -98,12 +98,12 @@
 		14A2A3E518C3BAB1006D3FFC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		14A2A3E918C3BAD4006D3FFC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		14A497AC18CD1D2A00AD43FC /* BlueCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueCircle.png; sourceTree = "<group>"; };
+		14A497BD18CD311D00AD43FC /* SearchStickie_222x222.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchStickie_222x222.png; sourceTree = "<group>"; };
+		14A497BF18CD31A000AD43FC /* BlueCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueCircle.png; sourceTree = "<group>"; };
 		14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagCollectionTest.m; sourceTree = "<group>"; };
 		14B0C7A618A30B43008B65C3 /* SKTagSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagSearchViewController.h; sourceTree = "<group>"; };
 		14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagSearchViewController.m; sourceTree = "<group>"; };
 		9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "App - camera icon (3-8-2014).png"; sourceTree = "<group>"; };
-		9385097218CD2EA1001AE7DC /* BlueCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueCircle.png; sourceTree = "<group>"; };
 		9385097318CD2EA1001AE7DC /* BlueCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueCorner.png; sourceTree = "<group>"; };
 		9385097418CD2EA1001AE7DC /* GreenCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenCircle.png; sourceTree = "<group>"; };
 		9385097518CD2EA1001AE7DC /* GreenCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenCorner.png; sourceTree = "<group>"; };
@@ -288,8 +288,9 @@
 		9385097018CD2EA1001AE7DC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				14A497BF18CD31A000AD43FC /* BlueCircle.png */,
+				14A497BD18CD311D00AD43FC /* SearchStickie_222x222.png */,
 				9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */,
-				9385097218CD2EA1001AE7DC /* BlueCircle.png */,
 				9385097318CD2EA1001AE7DC /* BlueCorner.png */,
 				9385097418CD2EA1001AE7DC /* GreenCircle.png */,
 				9385097518CD2EA1001AE7DC /* GreenCorner.png */,
@@ -390,10 +391,10 @@
 				9385097C18CD2EA1001AE7DC /* BlueCorner.png in Resources */,
 				149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */,
 				9385097E18CD2EA1001AE7DC /* GreenCorner.png in Resources */,
+				14A497C018CD31A000AD43FC /* BlueCircle.png in Resources */,
 				149FB2AA1890845B00D44DB2 /* Main.storyboard in Resources */,
 				9385097D18CD2EA1001AE7DC /* GreenCircle.png in Resources */,
-				14A497B518CD1D2A00AD43FC /* BlueCircle.png in Resources */,
-				9385097B18CD2EA1001AE7DC /* BlueCircle.png in Resources */,
+				14A497BE18CD311D00AD43FC /* SearchStickie_222x222.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

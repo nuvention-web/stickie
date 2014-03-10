@@ -160,7 +160,7 @@
                                 <rect key="frame" x="16" y="4" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="17"/>
-                                <state key="normal" title="Search" image="76E494DF-5ACB-4241-8C1D-49D84D65A5E6"/>
+                                <state key="normal" title="Search" image="SearchStickie_222x222.png"/>
                                 <connections>
                                     <segue destination="lsA-Em-eke" kind="push" identifier="tagSearch" id="ZiL-3a-YzY"/>
                                 </connections>
@@ -428,23 +428,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="76E494DF-5ACB-4241-8C1D-49D84D65A5E6" width="222" height="222">
-            <mutableData key="keyedArchiveRepresentation">
-YnBsaXN0MDDUAQIDBAUGPD1YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBMU
-GR4fJSYtMDY5VSRudWxs1QkKCwwNDg8QERJWTlNTaXplViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBz
-V05TQ29sb3KAAoAMEiTAAACAA4AKWnsyMjIsIDIyMn3SFQoWGFpOUy5vYmplY3RzoReABIAJ0hUKGhii
-GxyABYAGgAkQBdMgCiEiIyRXTlMuYmFzZVtOUy5yZWxhdGl2ZYAAgAiAB18Q12ZpbGU6Ly8vQXBwbGlj
-YXRpb25zL1hjb2RlLmFwcC9Db250ZW50cy9EZXZlbG9wZXIvUGxhdGZvcm1zL2lQaG9uZVNpbXVsYXRv
-ci5wbGF0Zm9ybS9EZXZlbG9wZXIvTGlicmFyeS9YY29kZS9Qcml2YXRlUGx1Z0lucy9JREVJbnRlcmZh
-Y2VCdWlsZGVyQ29jb2FUb3VjaEludGVncmF0aW9uLmlkZXBsdWdpbi9Db250ZW50cy9SZXNvdXJjZXMv
-SUJVSU1pc3NpbmdJbWFnZS50aWZm0icoKSpaJGNsYXNzbmFtZVgkY2xhc3Nlc1VOU1VSTKIrLFVOU1VS
-TFhOU09iamVjdNInKC4vV05TQXJyYXmiLizTMTIKMzQ1V05TV2hpdGVcTlNDb2xvclNwYWNlRDAgMAAQ
-A4AL0icoNzhXTlNDb2xvcqI3LNInKDo7V05TSW1hZ2WiOixfEA9OU0tleWVkQXJjaGl2ZXLRPj9Ucm9v
-dIABAAgAEQAaACMALQAyADcARQBLAFYAXQBkAHEAeACAAIIAhACJAIsAjQCYAJ0AqACqAKwArgCzALYA
-uAC6ALwAvgDFAM0A2QDbAN0A3wG5Ab4ByQHSAdgB2wHhAeoB7wH3AfoCAQIJAhYCGwIdAh8CJAIsAi8C
-NAI8Aj8CUQJUAlkAAAAAAAACAQAAAAAAAABAAAAAAAAAAAAAAAAAAAACWw
-</mutableData>
-        </image>
         <image name="App - camera icon (3-8-2014).png" width="795" height="639"/>
         <image name="BlueCircle.png" width="525" height="525"/>
         <image name="BlueCorner.png" width="501" height="501"/>
@@ -454,6 +437,7 @@ NAI8Aj8CUQJUAlkAAAAAAAACAQAAAAAAAABAAAAAAAAAAAAAAAAAAAACWw
         <image name="OrangeCorner.png" width="501" height="501"/>
         <image name="RedCircle.png" width="504" height="504"/>
         <image name="RedCorner.png" width="501" height="501"/>
+        <image name="SearchStickie_222x222.png" width="222" height="222"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -461,8 +445,8 @@ NAI8Aj8CUQJUAlkAAAAAAAACAQAAAAAAAABAAAAAAAAAAAAAAAAAAAACWw
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="kNa-3S-pJo"/>
         <segue reference="w2s-Lq-cI3"/>
-        <segue reference="gwP-KI-MWf"/>
+        <segue reference="ZiL-3a-YzY"/>
+        <segue reference="kNa-3S-pJo"/>
     </inferredMetricsTieBreakers>
 </document>

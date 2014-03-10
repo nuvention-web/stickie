@@ -232,7 +232,7 @@
                                              cancelButtonTitle:@"OK"
                                              otherButtonTitles:nil];
     UIAlertView *alertEmptyTag = [[UIAlertView alloc] initWithTitle:@"The tag is unlabeled."
-                                                          message:nil
+                                                          message:@"Press on the corner to create tag."
                                                          delegate:nil
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
@@ -352,6 +352,7 @@ finishedSavingWithError:(NSError *)error
         tagSearchViewController.topRightText = _topRightLabel.text;
         tagSearchViewController.botLeftText = _botLeftLabel.text;
         tagSearchViewController.botRightText = _botRightLabel.text;
+        
     }
     else if ([[segue identifier] isEqualToString:@"topLeftTag"]){
         SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
@@ -419,10 +420,13 @@ finishedSavingWithError:(NSError *)error
         tagAssignViewController.preLabel = _botLeftLabel.text;
 
     }
-    else if ([[segue identifier] isEqualToString:@"botLeftTagEdit"]) {
+    else if ([[segue identifier] isEqualToString:@"botRightTagEdit"]) {
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
-        tagAssignViewController.source = @"botLeft";
+        if ([_botRightLabel.text isEqualToString:@""]) {
+            tagAssignViewController.createTag = YES;
+        }
+        tagAssignViewController.source = @"botRight";
         tagAssignViewController.delegate = self;
         tagAssignViewController.preLabel = _botRightLabel.text;
 
