@@ -12,16 +12,19 @@
 
 @protocol SKTagAssignViewControllerDelegate <NSObject>
 - (void)tagAssignViewControllerDidCancel:(SKTagAssignViewController *)controller;
-- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag: (NSString *)tag for: (NSString *)corner;
+- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag: (NSString *)tag for: (NSString *)corner andDelete: (BOOL) delete;
 @end
 
-@interface SKTagAssignViewController : UITableViewController
+@interface SKTagAssignViewController : UITableViewController <UIAlertViewDelegate>
 
 @property (nonatomic) NSString *source;
-
+@property (nonatomic) NSString *preLabel;
+@property (nonatomic) BOOL createTag;
 @property (nonatomic, weak) id <SKTagAssignViewControllerDelegate> delegate;
 - (IBAction)cancel:(id)sender;
 - (IBAction)done:(id)sender;
+- (IBAction)deleteTag:(id)sender;
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex;
 @property (weak, nonatomic) IBOutlet UITextField *tagTextField;
 
 @end

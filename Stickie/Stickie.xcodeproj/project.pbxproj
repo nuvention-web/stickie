@@ -9,10 +9,8 @@
 /* Begin PBXBuildFile section */
 		14540B8618C3FDA5004185F7 /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14540B8418C3FDA5004185F7 /* libAdIdAccess.a */; };
 		14540B8718C3FDA5004185F7 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14540B8518C3FDA5004185F7 /* libGoogleAnalyticsServices.a */; };
-		1490A0FD189207E500453D61 /* camera_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = 1490A0FC189207E500453D61 /* camera_512x512.png */; };
 		14985C661890F037004B3ECB /* SKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14985C651890F037004B3ECB /* SKDetailViewController.m */; };
 		1499CDC618BEE3CB00D0C0EA /* SKTagAssignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499CDC518BEE3CB00D0C0EA /* SKTagAssignViewController.m */; };
-		149A97F8189F750D007FF0D4 /* ReturnButton283_283.png in Resources */ = {isa = PBXBuildFile; fileRef = 149A97F7189F750D007FF0D4 /* ReturnButton283_283.png */; };
 		149FB2971890845B00D44DB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2961890845B00D44DB2 /* Foundation.framework */; };
 		149FB2991890845B00D44DB2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2981890845B00D44DB2 /* CoreGraphics.framework */; };
 		149FB29B1890845B00D44DB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB29A1890845B00D44DB2 /* UIKit.framework */; };
@@ -28,22 +26,23 @@
 		149FB2C01890845C00D44DB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 149FB2BE1890845C00D44DB2 /* InfoPlist.strings */; };
 		149FB2EB1890997000D44DB2 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2EA1890997000D44DB2 /* AssetsLibrary.framework */; };
 		149FB2EE18909D3500D44DB2 /* SKPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */; };
-		14A2A31518C3B7F6006D3FFC /* Camera Icon - app.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A2A31418C3B7F6006D3FFC /* Camera Icon - app.png */; };
 		14A2A3E418C3BAA5006D3FFC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E318C3BAA5006D3FFC /* AdSupport.framework */; };
 		14A2A3E618C3BAB1006D3FFC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E518C3BAB1006D3FFC /* CoreData.framework */; };
 		14A2A3E818C3BABF006D3FFC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */; };
 		14A2A3EA18C3BAD4006D3FFC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E918C3BAD4006D3FFC /* libz.dylib */; };
+		14A497BE18CD311D00AD43FC /* SearchStickie_222x222.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A497BD18CD311D00AD43FC /* SearchStickie_222x222.png */; };
+		14A497C018CD31A000AD43FC /* BlueCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A497BF18CD31A000AD43FC /* BlueCircle.png */; };
 		14B0C7A018A2EFA4008B65C3 /* SKTagCollectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */; };
-		14B0C7A218A2F348008B65C3 /* SearchStickie_222x222.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7A118A2F348008B65C3 /* SearchStickie_222x222.png */; };
 		14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */; };
-		14B0C7B118A31016008B65C3 /* BlueCircle_192x192.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7A918A31016008B65C3 /* BlueCircle_192x192.png */; };
-		14B0C7B318A31016008B65C3 /* GreenCircle_192x192.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7AB18A31016008B65C3 /* GreenCircle_192x192.png */; };
-		14B0C7B518A31016008B65C3 /* PinkCircle_192x192.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7AD18A31016008B65C3 /* PinkCircle_192x192.png */; };
-		14B0C7B618A31016008B65C3 /* PinkCorner_106x106.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7AE18A31016008B65C3 /* PinkCorner_106x106.png */; };
-		14B0C7B718A31016008B65C3 /* RedCircle_192x192.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7AF18A31016008B65C3 /* RedCircle_192x192.png */; };
-		14B0C7B818A31016008B65C3 /* RedCorner_106x106.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B0C7B018A31016008B65C3 /* RedCorner_106x106.png */; };
-		14FB8A8318BEBCCD00A0B195 /* GreenCorner_106x106.png in Resources */ = {isa = PBXBuildFile; fileRef = 14FB8A8218BEBCCD00A0B195 /* GreenCorner_106x106.png */; };
-		14FB8A8518BEBCD300A0B195 /* BlueCorner_106x106.png in Resources */ = {isa = PBXBuildFile; fileRef = 14FB8A8418BEBCD300A0B195 /* BlueCorner_106x106.png */; };
+		9385097A18CD2EA1001AE7DC /* App - camera icon (3-8-2014).png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */; };
+		9385097C18CD2EA1001AE7DC /* BlueCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097318CD2EA1001AE7DC /* BlueCorner.png */; };
+		9385097D18CD2EA1001AE7DC /* GreenCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097418CD2EA1001AE7DC /* GreenCircle.png */; };
+		9385097E18CD2EA1001AE7DC /* GreenCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097518CD2EA1001AE7DC /* GreenCorner.png */; };
+		9385097F18CD2EA1001AE7DC /* OrangeCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097618CD2EA1001AE7DC /* OrangeCircle.png */; };
+		9385098018CD2EA1001AE7DC /* OrangeCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097718CD2EA1001AE7DC /* OrangeCorner.png */; };
+		9385098118CD2EA1001AE7DC /* RedCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097818CD2EA1001AE7DC /* RedCircle.png */; };
+		9385098218CD2EA1001AE7DC /* RedCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097918CD2EA1001AE7DC /* RedCorner.png */; };
+		9385098518CD3044001AE7DC /* SKLongPressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385098418CD3044001AE7DC /* SKLongPressButton.m */; };
 		93E82086189828F100877D38 /* SKAssetURLTagsMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8207E189828F100877D38 /* SKAssetURLTagsMap.m */; };
 		93E82087189828F100877D38 /* SKImageTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82080189828F100877D38 /* SKImageTag.m */; };
 		93E82088189828F100877D38 /* SKTagCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82082189828F100877D38 /* SKTagCollection.m */; };
@@ -70,12 +69,10 @@
 		14540B8318C3FDA5004185F7 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		14540B8418C3FDA5004185F7 /* libAdIdAccess.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdIdAccess.a; sourceTree = "<group>"; };
 		14540B8518C3FDA5004185F7 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
-		1490A0FC189207E500453D61 /* camera_512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_512x512.png; sourceTree = "<group>"; };
 		14985C641890F037004B3ECB /* SKDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDetailViewController.h; sourceTree = "<group>"; };
 		14985C651890F037004B3ECB /* SKDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDetailViewController.m; sourceTree = "<group>"; };
 		1499CDC418BEE3CB00D0C0EA /* SKTagAssignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagAssignViewController.h; sourceTree = "<group>"; };
 		1499CDC518BEE3CB00D0C0EA /* SKTagAssignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagAssignViewController.m; sourceTree = "<group>"; };
-		149A97F7189F750D007FF0D4 /* ReturnButton283_283.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReturnButton283_283.png; sourceTree = "<group>"; };
 		149FB2931890845B00D44DB2 /* Stickie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stickie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FB2961890845B00D44DB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		149FB2981890845B00D44DB2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -97,23 +94,25 @@
 		149FB2EA1890997000D44DB2 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		149FB2EC18909D3500D44DB2 /* SKPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPhotoCell.h; sourceTree = "<group>"; };
 		149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPhotoCell.m; sourceTree = "<group>"; };
-		14A2A31418C3B7F6006D3FFC /* Camera Icon - app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Camera Icon - app.png"; sourceTree = "<group>"; };
 		14A2A3E318C3BAA5006D3FFC /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		14A2A3E518C3BAB1006D3FFC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		14A2A3E918C3BAD4006D3FFC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		14A497BD18CD311D00AD43FC /* SearchStickie_222x222.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchStickie_222x222.png; sourceTree = "<group>"; };
+		14A497BF18CD31A000AD43FC /* BlueCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueCircle.png; sourceTree = "<group>"; };
 		14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagCollectionTest.m; sourceTree = "<group>"; };
-		14B0C7A118A2F348008B65C3 /* SearchStickie_222x222.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchStickie_222x222.png; sourceTree = "<group>"; };
 		14B0C7A618A30B43008B65C3 /* SKTagSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagSearchViewController.h; sourceTree = "<group>"; };
 		14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagSearchViewController.m; sourceTree = "<group>"; };
-		14B0C7A918A31016008B65C3 /* BlueCircle_192x192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueCircle_192x192.png; sourceTree = "<group>"; };
-		14B0C7AB18A31016008B65C3 /* GreenCircle_192x192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenCircle_192x192.png; sourceTree = "<group>"; };
-		14B0C7AD18A31016008B65C3 /* PinkCircle_192x192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinkCircle_192x192.png; sourceTree = "<group>"; };
-		14B0C7AE18A31016008B65C3 /* PinkCorner_106x106.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinkCorner_106x106.png; sourceTree = "<group>"; };
-		14B0C7AF18A31016008B65C3 /* RedCircle_192x192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCircle_192x192.png; sourceTree = "<group>"; };
-		14B0C7B018A31016008B65C3 /* RedCorner_106x106.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCorner_106x106.png; sourceTree = "<group>"; };
-		14FB8A8218BEBCCD00A0B195 /* GreenCorner_106x106.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenCorner_106x106.png; sourceTree = "<group>"; };
-		14FB8A8418BEBCD300A0B195 /* BlueCorner_106x106.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueCorner_106x106.png; sourceTree = "<group>"; };
+		9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "App - camera icon (3-8-2014).png"; sourceTree = "<group>"; };
+		9385097318CD2EA1001AE7DC /* BlueCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueCorner.png; sourceTree = "<group>"; };
+		9385097418CD2EA1001AE7DC /* GreenCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenCircle.png; sourceTree = "<group>"; };
+		9385097518CD2EA1001AE7DC /* GreenCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenCorner.png; sourceTree = "<group>"; };
+		9385097618CD2EA1001AE7DC /* OrangeCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrangeCircle.png; sourceTree = "<group>"; };
+		9385097718CD2EA1001AE7DC /* OrangeCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrangeCorner.png; sourceTree = "<group>"; };
+		9385097818CD2EA1001AE7DC /* RedCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCircle.png; sourceTree = "<group>"; };
+		9385097918CD2EA1001AE7DC /* RedCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCorner.png; sourceTree = "<group>"; };
+		9385098318CD3044001AE7DC /* SKLongPressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLongPressButton.h; sourceTree = "<group>"; };
+		9385098418CD3044001AE7DC /* SKLongPressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLongPressButton.m; sourceTree = "<group>"; };
 		93E8207D189828F100877D38 /* SKAssetURLTagsMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAssetURLTagsMap.h; sourceTree = "<group>"; };
 		93E8207E189828F100877D38 /* SKAssetURLTagsMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagsMap.m; sourceTree = "<group>"; };
 		93E8207F189828F100877D38 /* SKImageTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKImageTag.h; sourceTree = "<group>"; };
@@ -187,25 +186,6 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
-		1490A0F91892066300453D61 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				14FB8A8418BEBCD300A0B195 /* BlueCorner_106x106.png */,
-				14FB8A8218BEBCCD00A0B195 /* GreenCorner_106x106.png */,
-				14B0C7A918A31016008B65C3 /* BlueCircle_192x192.png */,
-				14B0C7AB18A31016008B65C3 /* GreenCircle_192x192.png */,
-				14B0C7AD18A31016008B65C3 /* PinkCircle_192x192.png */,
-				14A2A31418C3B7F6006D3FFC /* Camera Icon - app.png */,
-				14B0C7AE18A31016008B65C3 /* PinkCorner_106x106.png */,
-				14B0C7AF18A31016008B65C3 /* RedCircle_192x192.png */,
-				14B0C7B018A31016008B65C3 /* RedCorner_106x106.png */,
-				14B0C7A118A2F348008B65C3 /* SearchStickie_222x222.png */,
-				1490A0FC189207E500453D61 /* camera_512x512.png */,
-				149A97F7189F750D007FF0D4 /* ReturnButton283_283.png */,
-			);
-			path = Images;
-			sourceTree = SOURCE_ROOT;
-		};
 		149FB28A1890845B00D44DB2 = {
 			isa = PBXGroup;
 			children = (
@@ -244,8 +224,8 @@
 		149FB29C1890845B00D44DB2 /* Stickie */ = {
 			isa = PBXGroup;
 			children = (
+				9385097018CD2EA1001AE7DC /* Images */,
 				14540B7B18C3FDA5004185F7 /* GoogleAnalyticsServicesiOS_3.03c */,
-				1490A0F91892066300453D61 /* Images */,
 				149FB2A51890845B00D44DB2 /* SKAppDelegate.h */,
 				149FB2A61890845B00D44DB2 /* SKAppDelegate.m */,
 				149FB2A81890845B00D44DB2 /* Main.storyboard */,
@@ -253,6 +233,8 @@
 				149FB2AC1890845B00D44DB2 /* SKViewController.m */,
 				1499CDC418BEE3CB00D0C0EA /* SKTagAssignViewController.h */,
 				1499CDC518BEE3CB00D0C0EA /* SKTagAssignViewController.m */,
+				9385098318CD3044001AE7DC /* SKLongPressButton.h */,
+				9385098418CD3044001AE7DC /* SKLongPressButton.m */,
 				14985C641890F037004B3ECB /* SKDetailViewController.h */,
 				14985C651890F037004B3ECB /* SKDetailViewController.m */,
 				14B0C7A618A30B43008B65C3 /* SKTagSearchViewController.h */,
@@ -302,6 +284,23 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		9385097018CD2EA1001AE7DC /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				14A497BF18CD31A000AD43FC /* BlueCircle.png */,
+				14A497BD18CD311D00AD43FC /* SearchStickie_222x222.png */,
+				9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */,
+				9385097318CD2EA1001AE7DC /* BlueCorner.png */,
+				9385097418CD2EA1001AE7DC /* GreenCircle.png */,
+				9385097518CD2EA1001AE7DC /* GreenCorner.png */,
+				9385097618CD2EA1001AE7DC /* OrangeCircle.png */,
+				9385097718CD2EA1001AE7DC /* OrangeCorner.png */,
+				9385097818CD2EA1001AE7DC /* RedCircle.png */,
+				9385097918CD2EA1001AE7DC /* RedCorner.png */,
+			);
+			path = Images;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -383,21 +382,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1490A0FD189207E500453D61 /* camera_512x512.png in Resources */,
-				14B0C7B818A31016008B65C3 /* RedCorner_106x106.png in Resources */,
-				14FB8A8318BEBCCD00A0B195 /* GreenCorner_106x106.png in Resources */,
-				14B0C7B318A31016008B65C3 /* GreenCircle_192x192.png in Resources */,
-				14B0C7B118A31016008B65C3 /* BlueCircle_192x192.png in Resources */,
-				149A97F8189F750D007FF0D4 /* ReturnButton283_283.png in Resources */,
-				14A2A31518C3B7F6006D3FFC /* Camera Icon - app.png in Resources */,
+				9385098218CD2EA1001AE7DC /* RedCorner.png in Resources */,
 				149FB2AF1890845B00D44DB2 /* Images.xcassets in Resources */,
+				9385098118CD2EA1001AE7DC /* RedCircle.png in Resources */,
+				9385097F18CD2EA1001AE7DC /* OrangeCircle.png in Resources */,
+				9385098018CD2EA1001AE7DC /* OrangeCorner.png in Resources */,
+				9385097A18CD2EA1001AE7DC /* App - camera icon (3-8-2014).png in Resources */,
+				9385097C18CD2EA1001AE7DC /* BlueCorner.png in Resources */,
 				149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */,
-				14B0C7B618A31016008B65C3 /* PinkCorner_106x106.png in Resources */,
-				14B0C7B518A31016008B65C3 /* PinkCircle_192x192.png in Resources */,
+				9385097E18CD2EA1001AE7DC /* GreenCorner.png in Resources */,
+				14A497C018CD31A000AD43FC /* BlueCircle.png in Resources */,
 				149FB2AA1890845B00D44DB2 /* Main.storyboard in Resources */,
-				14FB8A8518BEBCD300A0B195 /* BlueCorner_106x106.png in Resources */,
-				14B0C7B718A31016008B65C3 /* RedCircle_192x192.png in Resources */,
-				14B0C7A218A2F348008B65C3 /* SearchStickie_222x222.png in Resources */,
+				9385097D18CD2EA1001AE7DC /* GreenCircle.png in Resources */,
+				14A497BE18CD311D00AD43FC /* SearchStickie_222x222.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +422,7 @@
 				14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */,
 				93E82088189828F100877D38 /* SKTagCollection.m in Sources */,
 				149FB2AD1890845B00D44DB2 /* SKViewController.m in Sources */,
+				9385098518CD3044001AE7DC /* SKLongPressButton.m in Sources */,
 				149FB2A31890845B00D44DB2 /* main.m in Sources */,
 				93E82086189828F100877D38 /* SKAssetURLTagsMap.m in Sources */,
 			);
@@ -565,6 +563,7 @@
 				INFOPLIST_FILE = "Stickie/Stickie-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					/Users/Grant/Desktop/GoogleAnalyticsServicesiOS_3.03c,
 					/Users/StephenZ/Desktop/stickie/Stickie/GoogleAnalyticsServicesiOS_3.03c,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -589,6 +588,7 @@
 				INFOPLIST_FILE = "Stickie/Stickie-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					/Users/Grant/Desktop/GoogleAnalyticsServicesiOS_3.03c,
 					/Users/StephenZ/Desktop/stickie/Stickie/GoogleAnalyticsServicesiOS_3.03c,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";

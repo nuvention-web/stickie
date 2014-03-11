@@ -16,6 +16,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "SKTagSearchViewController.h"
 #import "SKTagAssignViewController.h"
+#import "SKLongPressButton.h"
 
 
 @interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
@@ -24,6 +25,7 @@
     NSIndexPath *dIndexPath;
     UIImage *dImage;
     CGPoint defaultPoint;
+    NSInteger retainScroll;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
@@ -49,6 +51,7 @@
 /* Load images at app startup */
 - (void)viewDidLoad
 {
+
     [super viewDidLoad];
     self.screenName = @"Home Screen";
     
@@ -69,7 +72,6 @@
     
     /* Removed top margin in collection view at startup */
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
     _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
 
@@ -91,11 +93,34 @@
     } failureBlock:^(NSError *error) {
         NSLog(@"Error loading images %@", error);
     }];
+    
     UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
     longGestureRecognizer.minimumPressDuration = 0.15;
     longGestureRecognizer.delegate = self;
     _dNewImageView.userInteractionEnabled = YES;
     [self.collectionView addGestureRecognizer:longGestureRecognizer];
+    
+    if (!retainScroll) {
+        retainScroll = 0;
+    }
+    else {
+        retainScroll++;
+    }
+    
+    [self.topLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+    [self.topRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+    [self.botLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+    [self.botRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    if (retainScroll < 1 ) {
+        NSInteger section = 0;
+        NSInteger item = [self collectionView:_collectionView numberOfItemsInSection:section] - 1;
+        NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+        [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+        retainScroll ++;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -125,6 +150,11 @@
 - (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 4;
+}
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
 }
 
 - (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
@@ -166,25 +196,43 @@
     }
 }
 
+-(void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer{
+    CGPoint point = [gestureRecognizer locationInView:self.view];
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        
+        if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
+            [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
+        
+        else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128)
+           [self performSegueWithIdentifier:@"topRightTagEdit" sender:self];
+        
+        else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568)
+            [self performSegueWithIdentifier:@"botLeftTagEdit" sender:self];
+        
+        else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
+            [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
+    }
+}
+
 -(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     
     SKImageTag *tag;
     
-    UIAlertView *alertTag = [[UIAlertView alloc] initWithTitle:@"You tagged a picture."
+    UIAlertView *alertTag = [[UIAlertView alloc] initWithTitle:@"Tagged!"
                                                     message:nil
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     
-    UIAlertView *alertRemove = [[UIAlertView alloc] initWithTitle:@"You untagged a picture."
+    UIAlertView *alertRemove = [[UIAlertView alloc] initWithTitle:@"Untagged"
                                                        message:nil
                                                       delegate:nil
                                              cancelButtonTitle:@"OK"
                                              otherButtonTitles:nil];
     UIAlertView *alertEmptyTag = [[UIAlertView alloc] initWithTitle:@"The tag is unlabeled."
-                                                          message:nil
+                                                          message:@"Press on the corner to create tag."
                                                          delegate:nil
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
@@ -244,17 +292,19 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     NSString *mediaType = info[UIImagePickerControllerMediaType];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
     
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = info[UIImagePickerControllerOriginalImage];
         
 
-        if (_newMedia)
+        if (_newMedia){
+            retainScroll = 0;
             UIImageWriteToSavedPhotosAlbum(image,
                                            self,
                                            @selector(image:finishedSavingWithError:contextInfo:),
                                            nil);
+        }
+        
     }
     else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
     {
@@ -266,6 +316,10 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 finishedSavingWithError:(NSError *)error
  contextInfo:(void *)contextInfo
 {
+    [self viewDidLoad];
+    [_collectionView reloadData];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
     if (error) {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Save failed"
@@ -275,8 +329,6 @@ finishedSavingWithError:(NSError *)error
                               otherButtonTitles:nil];
         [alert show];
     }
-    [self viewDidLoad];
-    [_collectionView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -297,35 +349,86 @@ finishedSavingWithError:(NSError *)error
     {
         SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
         tagSearchViewController.topLeftText = _topLeftLabel.text;
-        NSLog(@"%@", _topLeftLabel.text);
         tagSearchViewController.topRightText = _topRightLabel.text;
         tagSearchViewController.botLeftText = _botLeftLabel.text;
         tagSearchViewController.botRightText = _botRightLabel.text;
-    }
-    else if ([[segue identifier] isEqualToString:@"topLeftTag"]){
-        UINavigationController *navigationController = [segue destinationViewController];
-        SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
-        tagAssignViewController.source = @"topLeft";
-        tagAssignViewController.delegate = self;
-    }
-    else if ([[segue identifier] isEqualToString:@"topRightTag"]){
-        UINavigationController *navigationController = [segue destinationViewController];
-        SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
-        tagAssignViewController.source = @"topRight";
-        tagAssignViewController.delegate = self;
         
     }
+    else if ([[segue identifier] isEqualToString:@"topLeftTag"]){
+        SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
+        tagSearchViewController.topLeftText = _topLeftLabel.text;
+        tagSearchViewController.topRightText = _topRightLabel.text;
+        tagSearchViewController.botLeftText = _botLeftLabel.text;
+        tagSearchViewController.botRightText = _botRightLabel.text;
+        tagSearchViewController.callButtonOnLoad = @"topLeftButton";
+    }
+    else if ([[segue identifier] isEqualToString:@"topRightTag"]){
+        SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
+        tagSearchViewController.topLeftText = _topLeftLabel.text;
+        tagSearchViewController.topRightText = _topRightLabel.text;
+        tagSearchViewController.botLeftText = _botLeftLabel.text;
+        tagSearchViewController.botRightText = _botRightLabel.text;
+        tagSearchViewController.callButtonOnLoad = @"topRightButton";
+    }
     else if ([[segue identifier] isEqualToString:@"botLeftTag"]){
-        UINavigationController *navigationController = [segue destinationViewController];
-        SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
-        tagAssignViewController.source = @"botLeft";
-        tagAssignViewController.delegate = self;
+        SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
+        tagSearchViewController.topLeftText = _topLeftLabel.text;
+        tagSearchViewController.topRightText = _topRightLabel.text;
+        tagSearchViewController.botLeftText = _botLeftLabel.text;
+        tagSearchViewController.botRightText = _botRightLabel.text;
+        tagSearchViewController.callButtonOnLoad = @"botLeftButton";
     }
     else if ([[segue identifier] isEqualToString:@"botRightTag"]){
+        SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
+        tagSearchViewController.topLeftText = _topLeftLabel.text;
+        tagSearchViewController.topRightText = _topRightLabel.text;
+        tagSearchViewController.botLeftText = _botLeftLabel.text;
+        tagSearchViewController.botRightText = _botRightLabel.text;
+        tagSearchViewController.callButtonOnLoad = @"botRightButton";
+    }
+    else if ([[segue identifier] isEqualToString:@"topLeftTagEdit"]) {
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        if ([_topLeftLabel.text isEqualToString:@""]) {
+            tagAssignViewController.createTag = YES;
+        }
+        tagAssignViewController.source = @"topLeft";
+        tagAssignViewController.delegate = self;
+        tagAssignViewController.preLabel = _topLeftLabel.text;
+
+    }
+    else if ([[segue identifier] isEqualToString:@"topRightTagEdit"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        if ([_topRightLabel.text isEqualToString:@""]) {
+            tagAssignViewController.createTag = YES;
+        }
+        tagAssignViewController.source = @"topRight";
+        tagAssignViewController.delegate = self;
+        tagAssignViewController.preLabel = _topRightLabel.text;
+
+        
+    }
+    else if ([[segue identifier] isEqualToString:@"botLeftTagEdit"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        if ([_botLeftLabel.text isEqualToString:@""]) {
+            tagAssignViewController.createTag = YES;
+        }
+        tagAssignViewController.source = @"botLeft";
+        tagAssignViewController.delegate = self;
+        tagAssignViewController.preLabel = _botLeftLabel.text;
+
+    }
+    else if ([[segue identifier] isEqualToString:@"botRightTagEdit"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
+        if ([_botRightLabel.text isEqualToString:@""]) {
+            tagAssignViewController.createTag = YES;
+        }
         tagAssignViewController.source = @"botRight";
         tagAssignViewController.delegate = self;
+        tagAssignViewController.preLabel = _botRightLabel.text;
 
     }
 }
@@ -335,51 +438,52 @@ finishedSavingWithError:(NSError *)error
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR for:(NSString *)corner
+-(void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR for:(NSString *)corner andDelete:(BOOL)delete
 {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKImageTag *tag = [[SKImageTag alloc] initWithName:tagSTR andColor:nil];
     SKImageTag *oldTag =[SKImageTag alloc];
     SKAssetURLTagsMap *urlTagsMap = [SKAssetURLTagsMap sharedInstance];
+    
     if (![tagCollection isTagInCollection:tag]) {
         if ([corner isEqualToString:@"topLeft"]) {
-            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_topLeftLabel.text andColor:nil]];
-            NSMutableArray *urls = tagData.imageURLs;
-            for (NSURL *url in urls){
-                [urlTagsMap removeTag:oldTag forAssetURL:url];
+            if (delete) {
+                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topLeftLabel.text andColor:nil]];
+                [tagCollection removeTag: oldTag];
             }
-            [tagCollection removeTag: oldTag];
-            [tagCollection addTagToCollection:tag];
+            if (![tag.tagName isEqualToString:@""]){
+                [tagCollection addTagToCollection:tag];
+            }
             _topLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"topRight"]) {
-            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_topRightLabel.text andColor:nil]];
-            NSMutableArray *urls = tagData.imageURLs;
-            for (NSURL *url in urls){
-                [urlTagsMap removeTag:oldTag forAssetURL:url];
+            if (delete) {
+                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topRightLabel.text andColor:nil]];
+                [tagCollection removeTag: oldTag];
             }
-            [tagCollection removeTag: oldTag];
-            [tagCollection addTagToCollection:tag];
+            if (![tag.tagName isEqualToString:@""]){
+                [tagCollection addTagToCollection:tag];
+            }
             _topRightLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botLeft"]) {
-            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_botLeftLabel.text andColor:nil]];
-            NSMutableArray *urls = tagData.imageURLs;
-            for (NSURL *url in urls){
-                [urlTagsMap removeTag:oldTag forAssetURL:url];
+            if (delete) {
+                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botLeftLabel.text andColor:nil]];
+                [tagCollection removeTag: oldTag];
             }
-            [tagCollection removeTag: oldTag];
-            [tagCollection addTagToCollection:tag];
+            if (![tag.tagName isEqualToString:@""]){
+                [tagCollection addTagToCollection:tag];
+            }
             _botLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botRight"]) {
-            SKTagData *tagData = [tagCollection getTagInfo:[oldTag initWithName:_botRightLabel.text andColor:nil]];
-            NSMutableArray *urls = tagData.imageURLs;
-            for (NSURL *url in urls){
-                [urlTagsMap removeTag:oldTag forAssetURL:url];
+            if (delete) {
+                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botRightLabel.text andColor:nil]];
+                [tagCollection removeTag: oldTag];
             }
-            [tagCollection removeTag: oldTag];
-            [tagCollection addTagToCollection:tag];
+            if (![tag.tagName isEqualToString:@""]){
+                [tagCollection addTagToCollection:tag];
+            }
             _botRightLabel.text = tagSTR;
         }
     }

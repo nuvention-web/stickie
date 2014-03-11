@@ -82,7 +82,7 @@
     if (!tags)
         return NO;
     else {
-        return [tags count] > 0;
+        return [tags containsObject:tag];
     }
     
 }
@@ -107,6 +107,17 @@
     else {
         [tags removeObject:tag];
         [assetURLToTagsMap setObject:tags forKey:imageURL];
+    }
+}
+
+-(void) removeAllMappingsToTag: (SKImageTag *) tag
+{
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    SKTagData *tagData = [tagCollection getTagInfo: tag];
+    NSMutableArray *urls = tagData.imageURLs;
+    
+    for (NSURL *url in urls){
+        [self removeTag:tag forAssetURL:url];
     }
 }
 
