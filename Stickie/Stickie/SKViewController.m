@@ -198,20 +198,17 @@
 
 -(void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer{
     CGPoint point = [gestureRecognizer locationInView:self.view];
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        
-        if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
-            [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
-        
-        else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128)
-           [self performSegueWithIdentifier:@"topRightTagEdit" sender:self];
-        
-        else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568)
-            [self performSegueWithIdentifier:@"botLeftTagEdit" sender:self];
-        
-        else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
-            [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
-    }
+    if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
+        [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
+    
+    else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128)
+       [self performSegueWithIdentifier:@"topRightTagEdit" sender:self];
+    
+    else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568)
+        [self performSegueWithIdentifier:@"botLeftTagEdit" sender:self];
+    
+    else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
+        [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
 }
 
 -(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
@@ -238,8 +235,6 @@
                                                 otherButtonTitles:nil];
     
     /* Tag event occurs in top-left corner */
- 
-    
     if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
         tag = [[SKImageTag alloc] initWithName:_topLeftLabel.text andColor:nil];
 
@@ -328,6 +323,28 @@ finishedSavingWithError:(NSError *)error
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil];
         [alert show];
+    }
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if ([_topLeftLabel.text isEqualToString:@""] && [identifier isEqualToString:@"topLeftTag"]) {
+        [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
+        return NO;
+    }
+    else if ([_topRightLabel.text isEqualToString:@""] && [identifier isEqualToString:@"topRightTag"]){
+        [self performSegueWithIdentifier:@"topRightTagEdit" sender:self];
+        return NO;
+    }
+    else if ([_botLeftLabel.text isEqualToString:@""] && [identifier isEqualToString:@"botLeftTag"]){
+        [self performSegueWithIdentifier:@"botLeftTagEdit" sender:self];
+        return NO;
+    }
+    else if ([_botRightLabel.text isEqualToString:@""] && [identifier isEqualToString:@"botRightTag"]){
+        [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
+        return NO;
+    }
+    else {
+        return YES;
     }
 }
 
