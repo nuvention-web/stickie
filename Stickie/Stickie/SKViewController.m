@@ -118,8 +118,10 @@
         NSInteger section = 0;
         NSInteger item = [self collectionView:_collectionView numberOfItemsInSection:section] - 1;
         NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
-        [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
-        retainScroll ++;
+        if (item > -1) {
+            [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+            retainScroll ++;
+        }
     }
 }
 
