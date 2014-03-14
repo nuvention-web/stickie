@@ -11,20 +11,28 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SKPhotoCell.h"
 #import "SKDetailViewController.h"
+#import "SKAssetURLTagsMap.h"
 
-@interface SKTagSearchViewController()
+@interface SKTagSearchViewController()<UIGestureRecognizerDelegate>
 {
     ALAssetsLibrary *library;
     BOOL blue;
     BOOL red;
     BOOL green;
     BOOL pink;
+    SKPhotoCell *dCell;
+    NSIndexPath *dIndexPath;
+    UIImage *dImage;
+    CGPoint defaultPoint;
+    NSString *currentTag;
+    BOOL untag;
 }
 
 typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
 typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property(nonatomic, strong) NSMutableArray *assets;
+@property (weak, nonatomic) IBOutlet UIImageView *dNewImageView;
 
 @end
 
@@ -99,15 +107,19 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     BOOL beenClickedBefore;
     
     NSString *buttonPressed = [sender currentTitle];
-    
-    if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text])
+    currentTag = buttonPressed;
+    if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text]){
         beenClickedBefore = blue;
-    else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text])
+    }
+    else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text]){
         beenClickedBefore = red;
-    else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text])
+    }
+    else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text]){
         beenClickedBefore = green;
-    else
+    }
+    else{
         beenClickedBefore = pink;
+    }
     
     if (!beenClickedBefore) {
         ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
@@ -140,8 +152,86 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             green = YES;
         else
             pink = YES;
+        UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
+        longGestureRecognizer.minimumPressDuration = 0.15;
+        longGestureRecognizer.delegate = self;
+        _dNewImageView.userInteractionEnabled = YES;
+        [self.collectionView addGestureRecognizer:longGestureRecognizer];
     }
 }
+
+-(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
+    CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
+    CGPoint anotherPoint = [self.view convertPoint:newPoint fromView:self.collectionView];
+    switch (gestureRecognizer.state) {
+        case UIGestureRecognizerStateBegan: {
+            dIndexPath = [self.collectionView indexPathForItemAtPoint:newPoint];
+            if (dIndexPath == nil){
+                NSLog(@"Couldn't find index path");
+            }
+            dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
+            dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
+            [dCell.asset valueForProperty:ALAssetPropertyURLs];
+            [_dNewImageView setCenter:anotherPoint];
+            [_dNewImageView setImage:dImage];
+            [_dNewImageView addGestureRecognizer:gestureRecognizer];
+            break;
+        }
+        case UIGestureRecognizerStateChanged: {
+            [_dNewImageView setCenter:anotherPoint];
+            break;
+        }
+        case UIGestureRecognizerStateEnded: {
+            _dNewImageView.image = nil;
+            [_dNewImageView setCenter:defaultPoint];
+            NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
+            [self recordTags: anotherPoint forURL: url];
+            [self.collectionView addGestureRecognizer:gestureRecognizer];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+-(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
+    
+    SKImageTag *tag;
+    
+    UIAlertView *alertRemove = [[UIAlertView alloc] initWithTitle:@"Untagged"
+                                                          message:nil
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+    
+//    UIAlertView *alertDelete = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to untag this photo?"
+//                                                          message:nil
+//                                                         delegate:self
+//                                                cancelButtonTitle:@"Cancel"
+//                                                otherButtonTitles:@"Untag",nil];
+  
+    if (point.x >= 86 && point.x <= 234 && point.y >= 524 && point.y <= 568){
+        tag = [[SKImageTag alloc] initWithName:currentTag andColor:nil];
+//        [alertDelete show];
+        if (![tag.tagName isEqualToString:@""]) {
+            if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
+                [urlToTagMap removeTag:tag forAssetURL:assetURL];
+                [tagCollection removeImageURL:assetURL forTag:tag];
+                [alertRemove show];
+                [self viewDidLoad];
+                [_collectionView reloadData];
+            }
+        }
+    }
+
+}
+//- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+//    if (buttonIndex == 1) {
+//        untag = YES;
+//    }
+//}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showTagDetail"])

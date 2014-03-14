@@ -254,7 +254,7 @@
                                 </connections>
                             </button>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="tMz-6e-eQE">
-                                <rect key="frame" x="4" y="165" width="312" height="383"/>
+                                <rect key="frame" x="4" y="165" width="312" height="351"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2xP-ik-xqu">
@@ -289,6 +289,28 @@
                                     <outlet property="delegate" destination="lsA-Em-eke" id="MA6-03-muD"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" id="m8x-sH-FWd">
+                                <rect key="frame" x="86" y="524" width="148" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" alpha="0.94999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Half circle.png" id="JF1-lX-dTc">
+                                        <rect key="frame" x="0.0" y="0.0" width="148" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="untag" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XVv-cF-0xa">
+                                        <rect key="frame" x="48" y="11" width="53" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="19"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="LF4-q9-nxJ">
+                                <rect key="frame" x="14" y="11" width="73" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -297,6 +319,7 @@
                         <outlet property="botLeftButton" destination="d3b-qy-B1F" id="ier-If-vAi"/>
                         <outlet property="botRightButton" destination="pPm-qW-BA7" id="6cl-j7-UhU"/>
                         <outlet property="collectionView" destination="tMz-6e-eQE" id="Qd5-QW-JP7"/>
+                        <outlet property="dNewImageView" destination="LF4-q9-nxJ" id="mTm-DX-Lna"/>
                         <outlet property="topLeftButton" destination="MJE-Ka-gKq" id="aMV-xm-0kj"/>
                         <outlet property="topRightButton" destination="GqL-SY-fLM" id="0lW-ek-akc"/>
                     </connections>
@@ -433,6 +456,7 @@
         <image name="BlueCorner.png" width="501" height="501"/>
         <image name="GreenCircle.png" width="504" height="504"/>
         <image name="GreenCorner.png" width="501" height="501"/>
+        <image name="Half circle.png" width="420" height="88"/>
         <image name="OrangeCircle.png" width="504" height="504"/>
         <image name="OrangeCorner.png" width="501" height="501"/>
         <image name="RedCircle.png" width="504" height="504"/>
@@ -446,7 +470,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="VMZ-Ez-5hG"/>
-        <segue reference="kNa-3S-pJo"/>
-        <segue reference="ZiL-3a-YzY"/>
+        <segue reference="MwU-ZH-Bpp"/>
+        <segue reference="XUF-iZ-BJj"/>
     </inferredMetricsTieBreakers>
 </document>
