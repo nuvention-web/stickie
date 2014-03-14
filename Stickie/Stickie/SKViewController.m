@@ -48,10 +48,14 @@
     return library;
 }
 
+-(void) applicationWillEnterForeground:(NSNotification *) notification
+{
+    [self viewDidLoad];
+}
+
 /* Load images at app startup */
 - (void)viewDidLoad
 {
-
     [super viewDidLoad];
     self.screenName = @"Home Screen";
     
@@ -111,6 +115,11 @@
     [self.topRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
     [self.botLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
     [self.botRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillEnterForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

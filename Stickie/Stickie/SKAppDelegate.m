@@ -11,6 +11,7 @@
 #import "SKImageTag.h"
 #import "SKAssetURLTagsMap.h"
 #import "GAI.h"
+#import "SKViewController.h"
 
 @implementation SKAppDelegate
 
