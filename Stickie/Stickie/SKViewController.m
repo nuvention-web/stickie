@@ -50,23 +50,6 @@
 
 -(void) applicationWillEnterForeground:(NSNotification *) notification
 {
-//    /* Check to ensure no photos have been deleted while the user switched applications */
-//    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-//    SKAssetURLTagsMap *tagsMap = [SKAssetURLTagsMap sharedInstance];
-//    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
-//    NSArray *urlArray = [tagsMap allURLs];
-//    
-//    for (NSURL* url in urlArray) {
-//        [library assetForURL:url resultBlock:^(ALAsset *asset) {
-//            if (!asset) {
-//                [tagsMap removeAllTagsForURL:url];
-//                [tagCollection removeAllInstancesOfURL:url];
-//            }
-//        } failureBlock:^(NSError *error) {
-//           [NSException raise:@"Asset Processing Error." format: @"There was an error processing the required ALAssets."];
-//        }];
-//    }
-    
     /* Reload view so user changes are recognized */
     [self viewDidLoad];
 }
