@@ -21,6 +21,7 @@
 - (BOOL) isURL: (NSURL *) url associatedWithTag: (SKImageTag *) tag;
 - (void) changeTag: (SKImageTag *) tag toColor: (UIColor *) color;
 - (void) removeImageURL: (NSURL *) url forTag: (SKImageTag *) tag;
+- (void) removeAllInstancesOfURL: (NSURL *) url;
 - (void) removeTag: (SKImageTag *) tag;
 
 /* DANGER, DRAGONS LIE AHEAD: This method will nuke all tags in the collection: */

@@ -87,6 +87,11 @@
     
 }
 
+- (NSArray *) allURLs
+{
+    return [assetURLToTagsMap allKeys];
+}
+
 - (void) removeAllTagsForURL: (NSURL *) imageURL
 {
     if (![assetURLToTagsMap objectForKey:imageURL]) {
