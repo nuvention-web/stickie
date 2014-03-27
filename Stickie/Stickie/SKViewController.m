@@ -62,6 +62,13 @@
     
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     NSMutableArray *tagArray = [tagCollection getAllTags];
+
+    /* Reinitialize tags as empty when view loads again, then replace as necessary */
+    _topLeftLabel.text = @"";
+    _topRightLabel.text = @"";
+    _botLeftLabel.text = @"";
+    _botRightLabel.text = @"";
+    
     if ([tagArray count] > 0) {
         _topLeftLabel.text = ((SKImageTag *) tagArray[0]).tagName;
     }
