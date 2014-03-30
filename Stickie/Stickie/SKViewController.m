@@ -91,7 +91,7 @@
     
     defaultPoint = CGPointMake(0.0, 0.0);
     
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if(result)
             {
@@ -333,7 +333,6 @@ finishedSavingWithError:(NSError *)error
     [self viewDidLoad];
     [_collectionView reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
-
     if (error) {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Save failed"
