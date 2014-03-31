@@ -150,7 +150,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             red = YES;
         else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text])
             green = YES;
-        else
+        else if ([buttonPressed isEqualToString:_botRightButton.titleLabel.text])
             pink = YES;
         UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
         longGestureRecognizer.minimumPressDuration = 0.15;
@@ -220,8 +220,18 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                 [urlToTagMap removeTag:tag forAssetURL:assetURL];
                 [tagCollection removeImageURL:assetURL forTag:tag];
                 [alertRemove show];
-                [self viewDidLoad];
-                [_collectionView reloadData];
+                if ([currentTag isEqualToString:_topLeftButton.titleLabel.text]){
+                    [_topLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([currentTag isEqualToString:_topRightButton.titleLabel.text]){
+                    [_topRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([currentTag isEqualToString:_botLeftButton.titleLabel.text]){
+                    [_botLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([currentTag isEqualToString:_botRightButton.titleLabel.text]){
+                    [_botRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
             }
         }
     }
