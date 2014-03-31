@@ -308,6 +308,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
                                            @selector(image:finishedSavingWithError:contextInfo:),
                                            nil);
         }
+        
+        [NSThread sleepForTimeInterval:1];
     }
     else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
     {

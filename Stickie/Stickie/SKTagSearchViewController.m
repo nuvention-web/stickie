@@ -38,6 +38,12 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 @implementation SKTagSearchViewController
 
+-(void) applicationWillEnterForeground:(NSNotification *) notification
+{
+    /* Reload view so user changes are recognized */
+    [_collectionView reloadData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -50,6 +56,11 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 	// Do any additional setup after loading the view.
     _assets = [[NSMutableArray alloc] init];
     library = [[ALAssetsLibrary alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillEnterForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
 }
 - (IBAction)backMain:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
