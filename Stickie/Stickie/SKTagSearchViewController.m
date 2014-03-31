@@ -40,7 +40,18 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 -(void) applicationWillEnterForeground:(NSNotification *) notification
 {
-    /* Reload view so user changes are recognized */
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    for (ALAsset *item in _assets) {
+        NSURL *itemURL = [item valueForProperty:ALAssetPropertyURLs];
+        [library assetForURL:itemURL resultBlock:^(ALAsset *asset) {
+            if (!asset) {
+                [_assets removeObject:item];
+            }
+        } failureBlock:^(NSError *error) {
+            [NSException raise:@"Asset Processing Error." format: @"There was an error processing the required ALAssets."];
+        }];
+    }
+
     [_collectionView reloadData];
 }
 
