@@ -25,7 +25,7 @@
     NSIndexPath *dIndexPath;
     UIImage *dImage;
     CGPoint defaultPoint;
-    NSInteger retainScroll;
+    BOOL retainScroll;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
@@ -89,7 +89,7 @@
 
     ALAssetsLibrary *assetsLibrary = [SKViewController defaultAssetsLibrary];
     
-    defaultPoint = CGPointMake(0.0, 0.0);
+    defaultPoint = CGPointMake(50.0, 0.0);
     
     [assetsLibrary enumerateGroupsWithTypes:(ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary)usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
@@ -112,13 +112,6 @@
     _dNewImageView.userInteractionEnabled = YES;
     [self.collectionView addGestureRecognizer:longGestureRecognizer];
     
-    if (!retainScroll) {
-        retainScroll = 0;
-    }
-    else {
-        retainScroll++;
-    }
-    
     [self.topLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
     [self.topRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
     [self.botLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
@@ -131,13 +124,13 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    if (retainScroll < 1 ) {
+    if (!retainScroll) {
         NSInteger section = 0;
         NSInteger item = [self collectionView:_collectionView numberOfItemsInSection:section] - 1;
         NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+        retainScroll = YES;
         if (item > -1) {
             [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
-            retainScroll ++;
         }
     }
 }
@@ -306,26 +299,21 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     NSString *mediaType = info[UIImagePickerControllerMediaType];
     
-    
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = info[UIImagePickerControllerOriginalImage];
-        
-
         if (_newMedia){
-            retainScroll = 0;
+            retainScroll = NO;
             UIImageWriteToSavedPhotosAlbum(image,
                                            self,
                                            @selector(image:finishedSavingWithError:contextInfo:),
                                            nil);
         }
-        
     }
     else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
     {
         // Code here to support video if enabled
     }
 }
-
 -(void)image:(UIImage *)image
 finishedSavingWithError:(NSError *)error
  contextInfo:(void *)contextInfo
@@ -333,6 +321,7 @@ finishedSavingWithError:(NSError *)error
     [self viewDidLoad];
     [_collectionView reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
+
     if (error) {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Save failed"
