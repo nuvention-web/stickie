@@ -136,6 +136,7 @@
             [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
         }
     }
+    NSLog(@"I'm in viewDidAppear");
 }
 
 - (void)didReceiveMemoryWarning
@@ -311,8 +312,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
                                            @selector(image:finishedSavingWithError:contextInfo:),
                                            nil);
         }
-        
-        [NSThread sleepForTimeInterval:1];
     }
     else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
     {
@@ -323,10 +322,12 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 finishedSavingWithError:(NSError *)error
  contextInfo:(void *)contextInfo
 {
+    NSLog(@"I'm in save image");
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
     [self viewDidLoad];
     [_collectionView reloadData];
-    [self dismissViewControllerAnimated:YES completion:nil];
-
+    
     if (error) {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Save failed"
