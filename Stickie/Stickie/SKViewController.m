@@ -325,7 +325,7 @@ finishedSavingWithError:(NSError *)error
     
     [self viewDidLoad];
     [_collectionView reloadData];
-    
+
     if (error) {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Save failed"
