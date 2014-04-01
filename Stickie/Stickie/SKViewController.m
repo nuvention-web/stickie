@@ -136,7 +136,6 @@
             [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
         }
     }
-    NSLog(@"I'm in viewDidAppear");
 }
 
 - (void)didReceiveMemoryWarning
@@ -322,7 +321,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 finishedSavingWithError:(NSError *)error
  contextInfo:(void *)contextInfo
 {
-    NSLog(@"I'm in save image");
     [self dismissViewControllerAnimated:YES completion:nil];
     
     [self viewDidLoad];
