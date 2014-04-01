@@ -117,10 +117,13 @@
     [self.botLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
     [self.botRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWillEnterForeground:)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
+    
+    /* Note, the notification center is intentially left unremoved from this view in viewWillDisappear - for the cases that a photo is deleted when the user is outside this application */
 }
 
 -(void)viewDidAppear:(BOOL)animated {

@@ -40,19 +40,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 -(void) applicationWillEnterForeground:(NSNotification *) notification
 {
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    for (ALAsset *item in _assets) {
-        NSURL *itemURL = [item valueForProperty:ALAssetPropertyURLs];
-        [library assetForURL:itemURL resultBlock:^(ALAsset *asset) {
-            if (!asset) {
-                [_assets removeObject:item];
-            }
-        } failureBlock:^(NSError *error) {
-            [NSException raise:@"Asset Processing Error." format: @"There was an error processing the required ALAssets."];
-        }];
-    }
-
-    [_collectionView reloadData];
+    [self viewWillAppear:NO];
 }
 
 - (void)viewDidLoad
@@ -68,6 +56,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     _assets = [[NSMutableArray alloc] init];
     library = [[ALAssetsLibrary alloc] init];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWillEnterForeground:)
                                                  name:UIApplicationWillEnterForegroundNotification
@@ -144,17 +133,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     }
     
     if (!beenClickedBefore) {
-        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
-        {
-            [_assets addObject:myasset];
-            [_collectionView reloadData];
-        };
-        
-        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
-        {
-            NSLog(@"Cannot access Library Assets");
-        };
-        
         SKTagCollection *collection = [SKTagCollection sharedInstance];
         SKImageTag *tag = [[SKImageTag alloc] init];
         tag.tagName = buttonPressed;
@@ -163,7 +141,19 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         NSMutableArray *imageURLs = [tagData imageURLs];
         
         for (NSURL *url in imageURLs) {
-            [library assetForURL:url resultBlock:resultblock failureBlock:failureblock];
+            [library assetForURL:url resultBlock:^(ALAsset *myasset) {
+                /* Check if asset is still valid */
+                if (myasset) {
+                    [_assets addObject:myasset];
+                    [_collectionView reloadData];
+                }
+                /* If not valid, update imageURLs - this may not be necessary. */
+                else {
+                    [imageURLs removeObject:url];
+                }
+            } failureBlock:^(NSError *myerror) {
+                NSLog(@"Cannot access Library Assets");
+            }];
         }
         
         if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text])
@@ -277,5 +267,10 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         detailViewController.image = image;
         detailViewController.imageURL = url;
     }
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end
