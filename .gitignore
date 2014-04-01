@@ -1,5 +1,5 @@
 .DS_Store
-build/
+Stickie/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
