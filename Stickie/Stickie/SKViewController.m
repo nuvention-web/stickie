@@ -322,7 +322,6 @@ finishedSavingWithError:(NSError *)error
  contextInfo:(void *)contextInfo
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    
     [self viewDidLoad];
     [_collectionView reloadData];
 
