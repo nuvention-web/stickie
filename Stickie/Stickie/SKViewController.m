@@ -281,7 +281,10 @@
 
 //Take photo
 - (IBAction)takePhotoButtonTapped:(id)sender {
+    [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.5];
 
+}
+-(void)useCamera{
     if ([UIImagePickerController isSourceTypeAvailable:
          UIImagePickerControllerSourceTypeCamera])
     {
@@ -322,9 +325,6 @@ finishedSavingWithError:(NSError *)error
  contextInfo:(void *)contextInfo
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self viewDidLoad];
-    [_collectionView reloadData];
-
     if (error) {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Save failed"
@@ -334,6 +334,11 @@ finishedSavingWithError:(NSError *)error
                               otherButtonTitles:nil];
         [alert show];
     }
+    [self performSelector:@selector(reloadView) withObject:nil afterDelay:0.5];
+}
+-(void)reloadView{
+    [self viewDidLoad];
+    [_collectionView reloadData];
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
