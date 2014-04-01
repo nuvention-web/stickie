@@ -334,7 +334,7 @@ finishedSavingWithError:(NSError *)error
                               otherButtonTitles:nil];
         [alert show];
     }
-    [self performSelector:@selector(reloadView) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(reloadView) withObject:nil afterDelay:0.3];
 }
 -(void)reloadView{
     [self viewDidLoad];
