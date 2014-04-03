@@ -190,18 +190,17 @@
             if (dIndexPath == nil){
                 NSLog(@"Couldn't find index path");
             }
-            else {
-                dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
-                dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
-                [dCell.asset valueForProperty:ALAssetPropertyURLs];
-                [_dNewImageView setCenter:anotherPoint];
-                [_dNewImageView setImage:dImage];
-                [_dNewImageView addGestureRecognizer:gestureRecognizer];
-                [_dNewImageView.layer setBorderColor: [[UIColor blackColor] CGColor]];
-                [_dNewImageView.layer setBorderWidth: 3.0];
-                _dNewImageView.layer.cornerRadius = dImage.size.width / 3.0;
-                _dNewImageView.layer.masksToBounds = YES;
-            }
+            dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
+            dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
+            [dCell.asset valueForProperty:ALAssetPropertyURLs];
+            anotherPoint.y -= DISTANCE_ABOVE_FINGER;
+            [_dNewImageView setCenter:anotherPoint];
+            [_dNewImageView setImage:dImage];
+            [_dNewImageView addGestureRecognizer:gestureRecognizer];
+            [_dNewImageView.layer setBorderColor: [borderColor CGColor]];
+            [_dNewImageView.layer setBorderWidth: BORDER_SIZE];
+            _dNewImageView.layer.cornerRadius = dImage.size.width / CORNER_RADIUS_CONSTANT;
+            _dNewImageView.layer.masksToBounds = YES;
             break;
         }
         case UIGestureRecognizerStateChanged: {
@@ -267,22 +266,19 @@
     UIButton *button;
     
     /* Tag event occurs in top-left corner */
-    if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y)
+    if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y) {
         tag = [[SKImageTag alloc] initWithName:_topLeftLabel.text andColor:nil];
         button = _topLeftCorner;
     }
-
-    else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y)
+    else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y) {
         tag = [[SKImageTag alloc] initWithName:_topRightLabel.text andColor:nil];
         button = _topRightCorner;
     }
-
-    else if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568)
+    else if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568) {
         tag = [[SKImageTag alloc] initWithName:_botLeftLabel.text andColor:nil];
         button = _botLeftCorner;
     }
-
-    else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568)
+    else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568) {
         tag = [[SKImageTag alloc] initWithName:_botRightLabel.text andColor:nil];
         button = _botRightCorner;
     }
