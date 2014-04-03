@@ -177,6 +177,11 @@
 }
 
 -(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
+    int DISTANCE_ABOVE_FINGER = 50;
+    int BORDER_SIZE = 1.0;
+    int CORNER_RADIUS_CONSTANT = 3.0;
+    UIColor *borderColor = [UIColor blackColor];
+    
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
     CGPoint anotherPoint = [self.view convertPoint:newPoint fromView:self.collectionView];
     switch (gestureRecognizer.state) {
@@ -200,6 +205,7 @@
             break;
         }
         case UIGestureRecognizerStateChanged: {
+            anotherPoint.y -= DISTANCE_ABOVE_FINGER;
             [_dNewImageView setCenter:anotherPoint];
             break;
         }
@@ -232,6 +238,11 @@
 }
 #pragma mark Drag and Drop Tagging
 -(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
+    
+    /* Constants to define how close thumbnail must be to a given corner in order for a tag to register */
+    int TAG_SENSITIVITY_X = dImage.size.width/1.8;
+    int TAG_SENSITITVITY_Y = dImage.size.height/1.8;
+    
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     
@@ -256,22 +267,22 @@
     UIButton *button;
     
     /* Tag event occurs in top-left corner */
-    if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128) {
+    if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y)
         tag = [[SKImageTag alloc] initWithName:_topLeftLabel.text andColor:nil];
         button = _topLeftCorner;
     }
 
-    else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128) {
+    else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y)
         tag = [[SKImageTag alloc] initWithName:_topRightLabel.text andColor:nil];
         button = _topRightCorner;
     }
 
-    else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568) {
+    else if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568)
         tag = [[SKImageTag alloc] initWithName:_botLeftLabel.text andColor:nil];
         button = _botLeftCorner;
     }
 
-    else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568) {
+    else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568)
         tag = [[SKImageTag alloc] initWithName:_botRightLabel.text andColor:nil];
         button = _botRightCorner;
     }
