@@ -328,11 +328,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stickie/SKAppDelegate.m"
-            timestampString = "418251309.439187"
+            timestampString = "418253888.419398"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "-checkAndHandleDeletedPhotos"
             landmarkType = "5">
          </BreakpointContent>

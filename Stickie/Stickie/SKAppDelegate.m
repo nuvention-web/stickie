@@ -99,7 +99,6 @@
     for (NSURL* url in urlArray) {
         [library assetForURL:url resultBlock:^(ALAsset *asset) {
             if (!asset) {
-                NSLog(@"%@", url);
                 [urlToTagMap removeURL:url];
                 [tagCollection removeAllInstancesOfURL:url];
             }
