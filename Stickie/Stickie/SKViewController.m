@@ -259,31 +259,49 @@
                                              cancelButtonTitle:@"OK"
                                              otherButtonTitles:nil];
     UIAlertView *alertEmptyTag = [[UIAlertView alloc] initWithTitle:@"The tag is unlabeled."
-                                                          message:@"Press on the corner to create tag."
+                                                          message:@"Tap on the corner to create tag."
                                                          delegate:nil
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
+    UIButton *button;
     
     /* Tag event occurs in top-left corner */
     if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y)
         tag = [[SKImageTag alloc] initWithName:_topLeftLabel.text andColor:nil];
+        button = _topLeftCorner;
+    }
 
     else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y)
         tag = [[SKImageTag alloc] initWithName:_topRightLabel.text andColor:nil];
+        button = _topRightCorner;
+    }
 
     else if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568)
         tag = [[SKImageTag alloc] initWithName:_botLeftLabel.text andColor:nil];
+        button = _botLeftCorner;
+    }
 
     else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568)
         tag = [[SKImageTag alloc] initWithName:_botRightLabel.text andColor:nil];
+        button = _botRightCorner;
+    }
     
     if (![tag.tagName isEqualToString:@""]) {
         if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
-            [alertTag show];
+            [UIView animateWithDuration:0.6 animations:^{
+                button.alpha = 0.0;
+            } completion:^(BOOL finished) {
+                button.alpha = 1.0;
+            }];
             [urlToTagMap addTag: tag forAssetURL:assetURL];
             [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
         }
         else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
+//            [UIView animateWithDuration:0.6 animations:^{
+//                button.alpha = 0.0;
+//            } completion:^(BOOL finished) {
+//                button.alpha = 1.0;
+//            }];
             [alertRemove show];
             [urlToTagMap removeTag:tag forAssetURL:assetURL];
             [tagCollection removeImageURL:assetURL forTag:tag];
