@@ -241,8 +241,8 @@
 -(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
     
     /* Constants to define how close thumbnail must be to a given corner in order for a tag to register */
-    int TAG_SENSITIVITY_X = dImage.size.width/1.8;
-    int TAG_SENSITITVITY_Y = dImage.size.height/1.8;
+    int TAG_SENSITIVITY_X = dImage.size.width/5.0;
+    int TAG_SENSITITVITY_Y = dImage.size.height/5.0;
     
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
