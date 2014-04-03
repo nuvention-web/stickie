@@ -217,16 +217,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                                                          delegate:nil
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
-    
-//    UIAlertView *alertDelete = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to untag this photo?"
-//                                                          message:nil
-//                                                         delegate:self
-//                                                cancelButtonTitle:@"Cancel"
-//                                                otherButtonTitles:@"Untag",nil];
-  
+
     if (point.x >= 86 && point.x <= 234 && point.y >= 524 && point.y <= 568){
         tag = [[SKImageTag alloc] initWithName:currentTag andColor:nil];
-//        [alertDelete show];
         if (![tag.tagName isEqualToString:@""]) {
             if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
                 [urlToTagMap removeTag:tag forAssetURL:assetURL];
@@ -249,11 +242,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     }
 
 }
-//- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-//    if (buttonIndex == 1) {
-//        untag = YES;
-//    }
-//}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showTagDetail"])

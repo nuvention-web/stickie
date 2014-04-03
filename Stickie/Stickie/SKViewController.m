@@ -210,7 +210,7 @@
             break;
     }
 }
-
+#pragma mark Edit Tag
 -(void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer{
     CGPoint point = [gestureRecognizer locationInView:self.view];
     if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
@@ -225,7 +225,7 @@
     else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
         [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
 }
-
+#pragma mark Drag and Drop Tagging
 -(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
@@ -278,7 +278,7 @@
         [alertEmptyTag show];
     }
 }
-
+#pragma make Camera Methods
 //Take photo
 - (IBAction)takePhotoButtonTapped:(id)sender {
     [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.3];
@@ -341,6 +341,7 @@ finishedSavingWithError:(NSError *)error
     [_collectionView reloadData];
 }
 
+#pragma mark Segue Handling
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([_topLeftLabel.text isEqualToString:@""] && [identifier isEqualToString:@"topLeftTag"]) {
         [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
@@ -465,6 +466,7 @@ finishedSavingWithError:(NSError *)error
     }
 }
 
+#pragma mark Tag Assign Delegate Methods
 - (void)tagAssignViewControllerDidCancel:(SKTagAssignViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -478,44 +480,43 @@ finishedSavingWithError:(NSError *)error
     SKAssetURLTagsMap *urlTagsMap = [SKAssetURLTagsMap sharedInstance];
     
     if (![tagCollection isTagInCollection:tag]) {
+        if (![tag.tagName isEqualToString:@""]){
+            [tagCollection addTagToCollection:tag];
+        }
         if ([corner isEqualToString:@"topLeft"]) {
-            if (delete) {
-                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topLeftLabel.text andColor:nil]];
-                [tagCollection removeTag: oldTag];
+            oldTag = [oldTag initWithName:_topLeftLabel.text andColor:nil];
+            if (!delete) {
+                [urlTagsMap transferURLSFrom:oldTag to:tag];
             }
-            if (![tag.tagName isEqualToString:@""]){
-                [tagCollection addTagToCollection:tag];
-            }
+            [urlTagsMap removeAllMappingsToTag:oldTag];
+            [tagCollection removeTag:oldTag];
             _topLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"topRight"]) {
-            if (delete) {
-                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topRightLabel.text andColor:nil]];
-                [tagCollection removeTag: oldTag];
+            oldTag = [oldTag initWithName:_topRightLabel.text andColor:nil];
+            if (!delete) {
+                [urlTagsMap transferURLSFrom:oldTag to:tag];
             }
-            if (![tag.tagName isEqualToString:@""]){
-                [tagCollection addTagToCollection:tag];
-            }
+            [urlTagsMap removeAllMappingsToTag:oldTag];
+            [tagCollection removeTag: oldTag];
             _topRightLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botLeft"]) {
-            if (delete) {
-                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botLeftLabel.text andColor:nil]];
-                [tagCollection removeTag: oldTag];
+            oldTag = [oldTag initWithName:_botLeftLabel.text andColor:nil];
+            if (!delete) {
+                [urlTagsMap transferURLSFrom:oldTag to:tag];
             }
-            if (![tag.tagName isEqualToString:@""]){
-                [tagCollection addTagToCollection:tag];
-            }
+            [urlTagsMap removeAllMappingsToTag:oldTag];
+            [tagCollection removeTag:oldTag];
             _botLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botRight"]) {
-            if (delete) {
-                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botRightLabel.text andColor:nil]];
-                [tagCollection removeTag: oldTag];
+            oldTag = [oldTag initWithName:_botRightLabel.text andColor:nil];
+            if (!delete) {
+                [urlTagsMap transferURLSFrom:oldTag to:tag];
             }
-            if (![tag.tagName isEqualToString:@""]){
-                [tagCollection addTagToCollection:tag];
-            }
+            [urlTagsMap removeAllMappingsToTag:oldTag];
+            [tagCollection removeTag:oldTag];
             _botRightLabel.text = tagSTR;
         }
     }

@@ -72,7 +72,15 @@
         [assetURLToTagsMap setObject: tags forKey: imageURL];
     }
 }
-
+- (void) transferURLSFrom: (SKImageTag *) oldTag to: (SKImageTag *) newTag
+{
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    SKTagData *tagData = [tagCollection getTagInfo: oldTag];
+    for (NSURL *url in tagData.imageURLs) {
+        [tagCollection updateCollectionWithTag:newTag forImageURL:url];
+        [self addTag: newTag forAssetURL:url];
+    }
+}
 - (BOOL) doesURL: (NSURL *) url haveTag: (SKImageTag *) tag
 {
 //    return [[self getTagsForAssetURL:url] containsObject:tag];

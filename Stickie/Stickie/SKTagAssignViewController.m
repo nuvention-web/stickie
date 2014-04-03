@@ -8,9 +8,7 @@
 
 #import "SKTagAssignViewController.h"
 
-@interface SKTagAssignViewController () {
-    BOOL delTag;
-}
+@interface SKTagAssignViewController ()
 
 @end
 
@@ -24,7 +22,6 @@
         self.navigationItem.title = @"edit tag";
     }
     _tagTextField.placeholder = _preLabel;
-    delTag = NO;
 }
 - (IBAction)cancel:(id)sender
 {
@@ -32,7 +29,12 @@
 }
 - (IBAction)done:(id)sender
 {
-    [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text for:_source andDelete:YES];
+    if ([_tagTextField.text isEqualToString:@""]) {
+        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text for:_source andDelete:YES];
+    }
+    else {
+        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text for:_source andDelete:NO];
+    }
 }
 - (IBAction)deleteTag:(id)sender {
     UIAlertView *alertEmpty = [[UIAlertView alloc] initWithTitle:@"No tag to delete."
@@ -55,8 +57,7 @@
 }
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        delTag = YES;
-        [self.delegate tagAssignViewController:self didAddTag:@"" for:_source andDelete:delTag];
+        [self.delegate tagAssignViewController:self didAddTag:@"" for:_source andDelete:YES];
         }
 }
 @end
