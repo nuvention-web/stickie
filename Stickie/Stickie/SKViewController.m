@@ -177,7 +177,7 @@
 }
 
 -(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
-    int DISTANCE_ABOVE_FINGER = 50;
+    int DISTANCE_ABOVE_FINGER = 30;
     int BORDER_SIZE = 1.0;
     int CORNER_RADIUS_CONSTANT = 3.0;
     UIColor *borderColor = [UIColor blackColor];
@@ -268,11 +268,11 @@
     UIButton *button;
     
     /* Tag event occurs in top-left corner */
-    if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y) {
+    if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X * 1.5 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
         tag = [[SKImageTag alloc] initWithName:_topLeftLabel.text andColor:nil];
         button = _topLeftCorner;
     }
-    else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y) {
+    else if (point.x >= 255 - TAG_SENSITIVITY_X * 1.5 && point.x <= 320 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
         tag = [[SKImageTag alloc] initWithName:_topRightLabel.text andColor:nil];
         button = _topRightCorner;
     }

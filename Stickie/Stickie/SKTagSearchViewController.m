@@ -173,7 +173,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 -(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
-    int DISTANCE_ABOVE_FINGER = 50;
+    int DISTANCE_ABOVE_FINGER = 30;
     int BORDER_SIZE = 1.0;
     int CORNER_RADIUS_CONSTANT = 3.0;
     UIColor *borderColor = [UIColor blackColor];
@@ -218,6 +218,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 -(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
+    int TAG_SENSITIVITY = 30;
+    
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     
@@ -229,7 +231,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
 
-    if (point.x >= 86 && point.x <= 234 && point.y >= 524 && point.y <= 568){
+    if (point.x >= 86 && point.x <= 234 && point.y >= 524 - TAG_SENSITIVITY && point.y <= 568){
         tag = [[SKImageTag alloc] initWithName:currentTag andColor:nil];
         if (![tag.tagName isEqualToString:@""]) {
             if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
