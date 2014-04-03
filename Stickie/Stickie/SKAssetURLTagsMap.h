@@ -22,6 +22,7 @@
 - (NSArray *) allURLs;
 - (void) removeTag: (SKImageTag *) tag forAssetURL: (NSURL *) imageURL;
 - (void) removeAllMappingsToTag: (SKImageTag *) tag;
+- (void) removeURL: (NSURL *) imageURL;
 - (void) removeAllTagsForURL: (NSURL *) imageURL;
 - (void) removeAllURLs;
 

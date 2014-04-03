@@ -87,8 +87,9 @@
     
     NSMutableArray *tags = [self getTagsForAssetURL:url];
     
-    if (!tags)
+    if (!tags) {
         return NO;
+    }
     else {
         return [tags containsObject:tag];
     }
@@ -98,6 +99,14 @@
 - (NSArray *) allURLs
 {
     return [assetURLToTagsMap allKeys];
+}
+-(void)removeURL:(NSURL *)imageURL{
+    if (![assetURLToTagsMap objectForKey:imageURL]) {
+        [NSException raise:@"URL not found." format:@"URL %@ not found.", [imageURL absoluteString]];
+    }
+    else {
+        [assetURLToTagsMap removeObjectForKey:imageURL];
+    }
 }
 
 - (void) removeAllTagsForURL: (NSURL *) imageURL
