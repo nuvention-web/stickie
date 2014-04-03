@@ -173,6 +173,11 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 -(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
+    int DISTANCE_ABOVE_FINGER = 50;
+    int BORDER_SIZE = 1.0;
+    int CORNER_RADIUS_CONSTANT = 3.0;
+    UIColor *borderColor = [UIColor blackColor];
+    
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
     CGPoint anotherPoint = [self.view convertPoint:newPoint fromView:self.collectionView];
     switch (gestureRecognizer.state) {
@@ -184,12 +189,18 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
             dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
             [dCell.asset valueForProperty:ALAssetPropertyURLs];
+            anotherPoint.y -= DISTANCE_ABOVE_FINGER;
             [_dNewImageView setCenter:anotherPoint];
             [_dNewImageView setImage:dImage];
             [_dNewImageView addGestureRecognizer:gestureRecognizer];
+            [_dNewImageView.layer setBorderColor: [borderColor CGColor]];
+            [_dNewImageView.layer setBorderWidth: BORDER_SIZE];
+            _dNewImageView.layer.cornerRadius = dImage.size.width / CORNER_RADIUS_CONSTANT;
+            _dNewImageView.layer.masksToBounds = YES;
             break;
         }
         case UIGestureRecognizerStateChanged: {
+            anotherPoint.y -= DISTANCE_ABOVE_FINGER;
             [_dNewImageView setCenter:anotherPoint];
             break;
         }

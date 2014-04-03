@@ -576,7 +576,7 @@
 					/Users/StephenZ/Desktop/stickie/Stickie/GoogleAnalyticsServicesiOS_3.03c,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "127D92DA-9A27-4681-A78F-ACFD1A37A389";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -603,7 +603,7 @@
 					/Users/StephenZ/Desktop/stickie/Stickie/GoogleAnalyticsServicesiOS_3.03c,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "127D92DA-9A27-4681-A78F-ACFD1A37A389";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

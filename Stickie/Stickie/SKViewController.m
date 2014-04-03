@@ -177,6 +177,11 @@
 }
 
 -(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
+    int DISTANCE_ABOVE_FINGER = 50;
+    int BORDER_SIZE = 1.0;
+    int CORNER_RADIUS_CONSTANT = 3.0;
+    UIColor *borderColor = [UIColor blackColor];
+    
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
     CGPoint anotherPoint = [self.view convertPoint:newPoint fromView:self.collectionView];
     switch (gestureRecognizer.state) {
@@ -188,16 +193,18 @@
             dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
             dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
             [dCell.asset valueForProperty:ALAssetPropertyURLs];
+            anotherPoint.y -= DISTANCE_ABOVE_FINGER;
             [_dNewImageView setCenter:anotherPoint];
             [_dNewImageView setImage:dImage];
             [_dNewImageView addGestureRecognizer:gestureRecognizer];
-            [_dNewImageView.layer setBorderColor: [[UIColor blackColor] CGColor]];
-            [_dNewImageView.layer setBorderWidth: 3.0];
-            _dNewImageView.layer.cornerRadius = dImage.size.width / 3.0;
+            [_dNewImageView.layer setBorderColor: [borderColor CGColor]];
+            [_dNewImageView.layer setBorderWidth: BORDER_SIZE];
+            _dNewImageView.layer.cornerRadius = dImage.size.width / CORNER_RADIUS_CONSTANT;
             _dNewImageView.layer.masksToBounds = YES;
             break;
         }
         case UIGestureRecognizerStateChanged: {
+            anotherPoint.y -= DISTANCE_ABOVE_FINGER;
             [_dNewImageView setCenter:anotherPoint];
             break;
         }
@@ -230,6 +237,11 @@
 }
 #pragma mark Drag and Drop Tagging
 -(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
+    
+    /* Constants to define how close thumbnail must be to a given corner in order for a tag to register */
+    int TAG_SENSITIVITY_X = dImage.size.width/1.8;
+    int TAG_SENSITITVITY_Y = dImage.size.height/1.8;
+    
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     
@@ -253,16 +265,16 @@
                                                 otherButtonTitles:nil];
     
     /* Tag event occurs in top-left corner */
-    if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
+    if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y)
         tag = [[SKImageTag alloc] initWithName:_topLeftLabel.text andColor:nil];
 
-    else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128)
+    else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y)
         tag = [[SKImageTag alloc] initWithName:_topRightLabel.text andColor:nil];
 
-    else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568)
+    else if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568)
         tag = [[SKImageTag alloc] initWithName:_botLeftLabel.text andColor:nil];
 
-    else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
+    else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568)
         tag = [[SKImageTag alloc] initWithName:_botRightLabel.text andColor:nil];
     
     if (![tag.tagName isEqualToString:@""]) {
