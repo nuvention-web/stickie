@@ -185,16 +185,18 @@
             if (dIndexPath == nil){
                 NSLog(@"Couldn't find index path");
             }
-            dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
-            dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
-            [dCell.asset valueForProperty:ALAssetPropertyURLs];
-            [_dNewImageView setCenter:anotherPoint];
-            [_dNewImageView setImage:dImage];
-            [_dNewImageView addGestureRecognizer:gestureRecognizer];
-            [_dNewImageView.layer setBorderColor: [[UIColor blackColor] CGColor]];
-            [_dNewImageView.layer setBorderWidth: 3.0];
-            _dNewImageView.layer.cornerRadius = dImage.size.width / 3.0;
-            _dNewImageView.layer.masksToBounds = YES;
+            else {
+                dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
+                dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
+                [dCell.asset valueForProperty:ALAssetPropertyURLs];
+                [_dNewImageView setCenter:anotherPoint];
+                [_dNewImageView setImage:dImage];
+                [_dNewImageView addGestureRecognizer:gestureRecognizer];
+                [_dNewImageView.layer setBorderColor: [[UIColor blackColor] CGColor]];
+                [_dNewImageView.layer setBorderWidth: 3.0];
+                _dNewImageView.layer.cornerRadius = dImage.size.width / 3.0;
+                _dNewImageView.layer.masksToBounds = YES;
+            }
             break;
         }
         case UIGestureRecognizerStateChanged: {
