@@ -191,6 +191,10 @@
             [_dNewImageView setCenter:anotherPoint];
             [_dNewImageView setImage:dImage];
             [_dNewImageView addGestureRecognizer:gestureRecognizer];
+            [_dNewImageView.layer setBorderColor: [[UIColor blackColor] CGColor]];
+            [_dNewImageView.layer setBorderWidth: 3.0];
+            _dNewImageView.layer.cornerRadius = dImage.size.width / 3.0;
+            _dNewImageView.layer.masksToBounds = YES;
             break;
         }
         case UIGestureRecognizerStateChanged: {
