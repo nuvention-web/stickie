@@ -281,7 +281,7 @@
 
 //Take photo
 - (IBAction)takePhotoButtonTapped:(id)sender {
-    [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.3];
 
 }
 -(void)useCamera{

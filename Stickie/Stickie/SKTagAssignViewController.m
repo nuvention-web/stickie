@@ -17,12 +17,12 @@
 @implementation SKTagAssignViewController
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    if (_createTag) {
+    if (_createTag) {
         self.navigationItem.title = @"create tag";
-//    }
-//    else {
-//        self.navigationItem.title = @"edit tag";
-//    }
+    }
+    else {
+        self.navigationItem.title = @"edit tag";
+    }
     _tagTextField.placeholder = _preLabel;
     delTag = NO;
 }
