@@ -206,16 +206,26 @@
             break;
         }
         case UIGestureRecognizerStateChanged: {
-            anotherPoint.y -= DISTANCE_ABOVE_FINGER;
-            [_dNewImageView setCenter:anotherPoint];
+            if (dIndexPath == nil){
+                NSLog(@"Couldn't find index path");
+            }
+            else {
+                anotherPoint.y -= DISTANCE_ABOVE_FINGER;
+                [_dNewImageView setCenter:anotherPoint];
+            }
             break;
         }
         case UIGestureRecognizerStateEnded: {
-            _dNewImageView.image = nil;
-            [_dNewImageView setCenter:defaultPoint];
-            NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
-            [self recordTags: anotherPoint forURL: url];
-            [self.collectionView addGestureRecognizer:gestureRecognizer];
+            if (dIndexPath == nil){
+                NSLog(@"Couldn't find index path");
+            }
+            else {
+                _dNewImageView.image = nil;
+                [_dNewImageView setCenter:defaultPoint];
+                NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
+                [self recordTags: anotherPoint forURL: url];
+                [self.collectionView addGestureRecognizer:gestureRecognizer];
+            }
             break;
         }
         default:
