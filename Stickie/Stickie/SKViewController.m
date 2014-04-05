@@ -419,6 +419,8 @@ finishedSavingWithError:(NSError *)error
         SKDetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.image = image;
         detailViewController.imageURL = url;
+        detailViewController.assets = _assets;
+        detailViewController->imageIndex = indexPath.row;
     }
     else if ([[segue identifier] isEqualToString:@"tagSearch"])
     {
