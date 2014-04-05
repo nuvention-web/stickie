@@ -25,7 +25,7 @@
     /* So UIImageView is centered properly. */
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    /* Allocates memory for and initializes new subview to house initial image */
+    /* Allocates memory for and initializes new subview to house initial image. */
     imageView = [[UIImageView alloc] init];
     CGRect aRect = CGRectMake(0.0, 0.0, self.scrollView.frame.size.width,self.scrollView.frame.size.height);
     [imageView setFrame: aRect];
@@ -38,7 +38,7 @@
     self.scrollView.maximumZoomScale = 10.0;
     [self.scrollView setZoomScale:self.scrollView.minimumZoomScale];
     
-    /* Add swiping gesture recognizers to image */
+    /* Add swiping gesture recognizers to image. */
     imageView.userInteractionEnabled = YES;
     UISwipeGestureRecognizer *rightSwipe=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     rightSwipe.direction=UISwipeGestureRecognizerDirectionRight;
@@ -55,7 +55,7 @@
     [super viewWillAppear:animated];
     self.screenName = @"Enlarged Photo Screen";
     
-    /* Sets image for imageView as well as handles scaling. */
+    /* Sets initial image for imageView as well as handles scaling. */
     imageView.image = self.image;
     imageView.contentMode = UIViewContentModeScaleAspectFit;
 }
