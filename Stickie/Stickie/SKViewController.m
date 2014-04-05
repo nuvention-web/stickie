@@ -93,8 +93,7 @@
     
     [assetsLibrary enumerateGroupsWithTypes:(ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary)usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-            if(result)
-            {
+            if(result) {
                 [tmpAssets addObject:result];
             }
         }];
@@ -178,6 +177,11 @@
 }
 
 -(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
+    int DISTANCE_ABOVE_FINGER = 30;
+    int BORDER_SIZE = 1.0;
+    int CORNER_RADIUS_CONSTANT = 3.0;
+    UIColor *borderColor = [UIColor blackColor];
+    
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
     CGPoint anotherPoint = [self.view convertPoint:newPoint fromView:self.collectionView];
     switch (gestureRecognizer.state) {
@@ -186,31 +190,49 @@
             if (dIndexPath == nil){
                 NSLog(@"Couldn't find index path");
             }
-            dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
-            dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
-            [dCell.asset valueForProperty:ALAssetPropertyURLs];
-            [_dNewImageView setCenter:anotherPoint];
-            [_dNewImageView setImage:dImage];
-            [_dNewImageView addGestureRecognizer:gestureRecognizer];
+            else {
+                dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
+                dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
+                [dCell.asset valueForProperty:ALAssetPropertyURLs];
+                anotherPoint.y -= DISTANCE_ABOVE_FINGER;
+                [_dNewImageView setCenter:anotherPoint];
+                [_dNewImageView setImage:dImage];
+                [_dNewImageView addGestureRecognizer:gestureRecognizer];
+                [_dNewImageView.layer setBorderColor: [borderColor CGColor]];
+                [_dNewImageView.layer setBorderWidth: BORDER_SIZE];
+                _dNewImageView.layer.cornerRadius = dImage.size.width / CORNER_RADIUS_CONSTANT;
+                _dNewImageView.layer.masksToBounds = YES;
+            }
             break;
         }
         case UIGestureRecognizerStateChanged: {
-            [_dNewImageView setCenter:anotherPoint];
+            if (dIndexPath == nil){
+                NSLog(@"Couldn't find index path");
+            }
+            else {
+                anotherPoint.y -= DISTANCE_ABOVE_FINGER;
+                [_dNewImageView setCenter:anotherPoint];
+            }
             break;
         }
         case UIGestureRecognizerStateEnded: {
-            _dNewImageView.image = nil;
-            [_dNewImageView setCenter:defaultPoint];
-            NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
-            [self recordTags: anotherPoint forURL: url];
-            [self.collectionView addGestureRecognizer:gestureRecognizer];
+            if (dIndexPath == nil){
+                NSLog(@"Couldn't find index path");
+            }
+            else {
+                _dNewImageView.image = nil;
+                [_dNewImageView setCenter:defaultPoint];
+                NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
+                [self recordTags: anotherPoint forURL: url];
+                [self.collectionView addGestureRecognizer:gestureRecognizer];
+            }
             break;
         }
         default:
             break;
     }
 }
-
+#pragma mark Edit Tag
 -(void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer{
     CGPoint point = [gestureRecognizer locationInView:self.view];
     if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
@@ -225,8 +247,13 @@
     else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
         [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
 }
-
+#pragma mark Drag and Drop Tagging
 -(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
+    
+    /* Constants to define how close thumbnail must be to a given corner in order for a tag to register */
+    int TAG_SENSITIVITY_X = dImage.size.width/5.0;
+    int TAG_SENSITITVITY_Y = dImage.size.height/5.0;
+    
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     
@@ -244,31 +271,46 @@
                                              cancelButtonTitle:@"OK"
                                              otherButtonTitles:nil];
     UIAlertView *alertEmptyTag = [[UIAlertView alloc] initWithTitle:@"The tag is unlabeled."
-                                                          message:@"Press on the corner to create tag."
+                                                          message:@"Tap on the corner to create tag."
                                                          delegate:nil
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
+    UIButton *button;
     
     /* Tag event occurs in top-left corner */
-    if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
+    if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X * 1.5 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
         tag = [[SKImageTag alloc] initWithName:_topLeftLabel.text andColor:nil];
-
-    else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128)
+        button = _topLeftCorner;
+    }
+    else if (point.x >= 255 - TAG_SENSITIVITY_X * 1.5 && point.x <= 320 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
         tag = [[SKImageTag alloc] initWithName:_topRightLabel.text andColor:nil];
-
-    else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568)
+        button = _topRightCorner;
+    }
+    else if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568) {
         tag = [[SKImageTag alloc] initWithName:_botLeftLabel.text andColor:nil];
-
-    else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
+        button = _botLeftCorner;
+    }
+    else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568) {
         tag = [[SKImageTag alloc] initWithName:_botRightLabel.text andColor:nil];
+        button = _botRightCorner;
+    }
     
     if (![tag.tagName isEqualToString:@""]) {
         if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
-            [alertTag show];
+            [UIView animateWithDuration:0.6 animations:^{
+                button.alpha = 0.0;
+            } completion:^(BOOL finished) {
+                button.alpha = 1.0;
+            }];
             [urlToTagMap addTag: tag forAssetURL:assetURL];
             [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
         }
         else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
+//            [UIView animateWithDuration:0.6 animations:^{
+//                button.alpha = 0.0;
+//            } completion:^(BOOL finished) {
+//                button.alpha = 1.0;
+//            }];
             [alertRemove show];
             [urlToTagMap removeTag:tag forAssetURL:assetURL];
             [tagCollection removeImageURL:assetURL forTag:tag];
@@ -278,7 +320,7 @@
         [alertEmptyTag show];
     }
 }
-
+#pragma make Camera Methods
 //Take photo
 - (IBAction)takePhotoButtonTapped:(id)sender {
     [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.3];
@@ -341,6 +383,7 @@ finishedSavingWithError:(NSError *)error
     [_collectionView reloadData];
 }
 
+#pragma mark Segue Handling
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([_topLeftLabel.text isEqualToString:@""] && [identifier isEqualToString:@"topLeftTag"]) {
         [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
@@ -465,6 +508,7 @@ finishedSavingWithError:(NSError *)error
     }
 }
 
+#pragma mark Tag Assign Delegate Methods
 - (void)tagAssignViewControllerDidCancel:(SKTagAssignViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -478,44 +522,43 @@ finishedSavingWithError:(NSError *)error
     SKAssetURLTagsMap *urlTagsMap = [SKAssetURLTagsMap sharedInstance];
     
     if (![tagCollection isTagInCollection:tag]) {
+        if (![tag.tagName isEqualToString:@""]){
+            [tagCollection addTagToCollection:tag];
+        }
         if ([corner isEqualToString:@"topLeft"]) {
-            if (delete) {
-                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topLeftLabel.text andColor:nil]];
-                [tagCollection removeTag: oldTag];
+            oldTag = [oldTag initWithName:_topLeftLabel.text andColor:nil];
+            if (!delete) {
+                [urlTagsMap transferURLSFrom:oldTag to:tag];
             }
-            if (![tag.tagName isEqualToString:@""]){
-                [tagCollection addTagToCollection:tag];
-            }
+            [urlTagsMap removeAllMappingsToTag:oldTag];
+            [tagCollection removeTag:oldTag];
             _topLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"topRight"]) {
-            if (delete) {
-                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_topRightLabel.text andColor:nil]];
-                [tagCollection removeTag: oldTag];
+            oldTag = [oldTag initWithName:_topRightLabel.text andColor:nil];
+            if (!delete) {
+                [urlTagsMap transferURLSFrom:oldTag to:tag];
             }
-            if (![tag.tagName isEqualToString:@""]){
-                [tagCollection addTagToCollection:tag];
-            }
+            [urlTagsMap removeAllMappingsToTag:oldTag];
+            [tagCollection removeTag: oldTag];
             _topRightLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botLeft"]) {
-            if (delete) {
-                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botLeftLabel.text andColor:nil]];
-                [tagCollection removeTag: oldTag];
+            oldTag = [oldTag initWithName:_botLeftLabel.text andColor:nil];
+            if (!delete) {
+                [urlTagsMap transferURLSFrom:oldTag to:tag];
             }
-            if (![tag.tagName isEqualToString:@""]){
-                [tagCollection addTagToCollection:tag];
-            }
+            [urlTagsMap removeAllMappingsToTag:oldTag];
+            [tagCollection removeTag:oldTag];
             _botLeftLabel.text = tagSTR;
         }
         else if ([corner isEqualToString:@"botRight"]) {
-            if (delete) {
-                [urlTagsMap removeAllMappingsToTag: [oldTag initWithName:_botRightLabel.text andColor:nil]];
-                [tagCollection removeTag: oldTag];
+            oldTag = [oldTag initWithName:_botRightLabel.text andColor:nil];
+            if (!delete) {
+                [urlTagsMap transferURLSFrom:oldTag to:tag];
             }
-            if (![tag.tagName isEqualToString:@""]){
-                [tagCollection addTagToCollection:tag];
-            }
+            [urlTagsMap removeAllMappingsToTag:oldTag];
+            [tagCollection removeTag:oldTag];
             _botRightLabel.text = tagSTR;
         }
     }

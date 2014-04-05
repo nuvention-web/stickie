@@ -99,7 +99,7 @@
     for (NSURL* url in urlArray) {
         [library assetForURL:url resultBlock:^(ALAsset *asset) {
             if (!asset) {
-                [urlToTagMap removeAllTagsForURL:url];
+                [urlToTagMap removeURL:url];
                 [tagCollection removeAllInstancesOfURL:url];
             }
         } failureBlock:^(NSError *error) {

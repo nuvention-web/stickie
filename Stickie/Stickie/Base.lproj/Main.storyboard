@@ -147,7 +147,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="owN-vc-Jt0">
-                                <rect key="frame" x="124" y="68" width="73" height="73"/>
+                                <rect key="frame" x="124" y="68" width="105" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -308,7 +308,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="LF4-q9-nxJ">
-                                <rect key="frame" x="14" y="11" width="73" height="73"/>
+                                <rect key="frame" x="14" y="11" width="105" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -469,8 +469,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="VMZ-Ez-5hG"/>
-        <segue reference="MwU-ZH-Bpp"/>
+        <segue reference="w2s-Lq-cI3"/>
+        <segue reference="ZiL-3a-YzY"/>
         <segue reference="XUF-iZ-BJj"/>
     </inferredMetricsTieBreakers>
 </document>

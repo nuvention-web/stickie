@@ -173,6 +173,11 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 -(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
+    int DISTANCE_ABOVE_FINGER = 30;
+    int BORDER_SIZE = 1.0;
+    int CORNER_RADIUS_CONSTANT = 3.0;
+    UIColor *borderColor = [UIColor blackColor];
+    
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
     CGPoint anotherPoint = [self.view convertPoint:newPoint fromView:self.collectionView];
     switch (gestureRecognizer.state) {
@@ -181,16 +186,29 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             if (dIndexPath == nil){
                 NSLog(@"Couldn't find index path");
             }
-            dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
-            dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
-            [dCell.asset valueForProperty:ALAssetPropertyURLs];
-            [_dNewImageView setCenter:anotherPoint];
-            [_dNewImageView setImage:dImage];
-            [_dNewImageView addGestureRecognizer:gestureRecognizer];
+            else {
+                dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
+                dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
+                [dCell.asset valueForProperty:ALAssetPropertyURLs];
+                anotherPoint.y -= DISTANCE_ABOVE_FINGER;
+                [_dNewImageView setCenter:anotherPoint];
+                [_dNewImageView setImage:dImage];
+                [_dNewImageView addGestureRecognizer:gestureRecognizer];
+                [_dNewImageView.layer setBorderColor: [borderColor CGColor]];
+                [_dNewImageView.layer setBorderWidth: BORDER_SIZE];
+                _dNewImageView.layer.cornerRadius = dImage.size.width / CORNER_RADIUS_CONSTANT;
+                _dNewImageView.layer.masksToBounds = YES;
+            }
             break;
         }
         case UIGestureRecognizerStateChanged: {
-            [_dNewImageView setCenter:anotherPoint];
+            if (dIndexPath == nil){
+                NSLog(@"Couldn't find index path");
+            }
+            else {
+                anotherPoint.y -= DISTANCE_ABOVE_FINGER;
+                [_dNewImageView setCenter:anotherPoint];
+            }
             break;
         }
         case UIGestureRecognizerStateEnded: {
@@ -207,6 +225,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 -(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
+    int TAG_SENSITIVITY = 30;
+    
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     
@@ -217,16 +237,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                                                          delegate:nil
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
-    
-//    UIAlertView *alertDelete = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to untag this photo?"
-//                                                          message:nil
-//                                                         delegate:self
-//                                                cancelButtonTitle:@"Cancel"
-//                                                otherButtonTitles:@"Untag",nil];
-  
-    if (point.x >= 86 && point.x <= 234 && point.y >= 524 && point.y <= 568){
+
+    if (point.x >= 86 && point.x <= 234 && point.y >= 524 - TAG_SENSITIVITY && point.y <= 568){
         tag = [[SKImageTag alloc] initWithName:currentTag andColor:nil];
-//        [alertDelete show];
         if (![tag.tagName isEqualToString:@""]) {
             if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
                 [urlToTagMap removeTag:tag forAssetURL:assetURL];
@@ -249,11 +262,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     }
 
 }
-//- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-//    if (buttonIndex == 1) {
-//        untag = YES;
-//    }
-//}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showTagDetail"])
