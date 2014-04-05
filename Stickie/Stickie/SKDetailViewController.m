@@ -76,6 +76,8 @@
                 width = -self.scrollView.frame.size.width;
             }
             break;
+        default:
+            break;
     }
     
     /* Select next image. */
