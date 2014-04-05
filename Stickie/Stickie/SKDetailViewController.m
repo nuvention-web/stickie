@@ -20,10 +20,6 @@
 
 @implementation SKDetailViewController
 
-typedef enum {
-    RIGHT, LEFT
-} Direction;
-
 -(void) viewDidLoad
 {
     /* So UIImageView is centered properly. */
@@ -41,25 +37,6 @@ typedef enum {
     self.scrollView.minimumZoomScale = 1.0;
     self.scrollView.maximumZoomScale = 10.0;
     [self.scrollView setZoomScale:self.scrollView.minimumZoomScale];
-    
-//    /* Necessary for swiping between images */
-//    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * [_assets count], self.scrollView.frame.size.height);
-//    
-//    for (int i = 0; i < [_assets count]; i++) {
-//        CGRect frame;
-//        frame.origin.x = self.scrollView.frame.size.width * i;
-//        frame.origin.y = 0;
-//        frame.size = self.scrollView.frame.size;
-//        
-//        ALAsset *asset = _assets[i];
-//        ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
-//        UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
-//        
-//        UIImageView* imgView = [[UIImageView alloc] init];
-//        imgView.image = image;
-//        imgView.frame = frame;
-//        [self.scrollView addSubview:imgView];
-//    }
     
     /* Add swiping gesture recognizers to image */
     imageView.userInteractionEnabled = YES;
@@ -85,46 +62,54 @@ typedef enum {
 
 -(void)handleSwipe: (UISwipeGestureRecognizer *)recognizer
 {
+    CGFloat width = 0.0;
     switch (recognizer.direction) {
         case UISwipeGestureRecognizerDirectionRight:
             if (imageIndex != 0) {
                 imageIndex--;
+                width = self.scrollView.frame.size.width;
             }
             break;
         case UISwipeGestureRecognizerDirectionLeft:
             if (imageIndex != [_assets count] -1) {
                 imageIndex++;
+                width = -self.scrollView.frame.size.width;
             }
-            break;
-        default:
             break;
     }
     
-    /* Select new image to be displayed from gesture. */
+    /* Select next image. */
     ALAsset *asset = _assets[imageIndex];
     ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
     UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
     
     /* Prepare new image to be displayed in view. */
     UIImageView *newImageView = [[UIImageView alloc] init];
+    [newImageView setFrame: CGRectMake(-width, 0.0, imageView.frame.size.width, imageView.frame.size.height)];;
     [self.scrollView addSubview:newImageView];
     newImageView.image = image;
-    [newImageView setFrame:imageView.frame];
     newImageView.contentMode =  UIViewContentModeScaleAspectFit;
     
-    /* Animate swipe. */
-    
+    /* Animate Swipe */
+    [UIView animateWithDuration:0.25f
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         [newImageView setFrame:imageView.frame];
+                         [imageView setFrame:CGRectMake(width, 0.0, imageView.frame.size.width, imageView.frame.size.height)];
+                     }
+                     completion:^(BOOL finished){
+                         /* Post-animation cleanup. */
+                         imageView.image = newImageView.image;
+                         [imageView setFrame:newImageView.frame];
+                         [newImageView removeFromSuperview];
+                     }];
+
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     return imageView;
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)sender {
-    // Switch the indicator when more than 50% of the previous/next page is visible
-    CGFloat pageWidth = self.scrollView.frame.size.width;
-    int page = floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
 }
 
 - (IBAction)backMain:(id)sender {
