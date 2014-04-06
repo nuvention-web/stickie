@@ -106,6 +106,7 @@
     }];
     
     UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
+    
     longGestureRecognizer.minimumPressDuration = 0.15;
     longGestureRecognizer.delegate = self;
     _dNewImageView.userInteractionEnabled = YES;
@@ -225,6 +226,8 @@
                 NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
                 [self recordTags: anotherPoint forURL: url];
                 [self.collectionView addGestureRecognizer:gestureRecognizer];
+                NSLog(@"Number of Gesture Recognizers on self.collectionView: %d", [self.collectionView.gestureRecognizers count]);
+                NSLog(@"Number of Gesture Recognizers on _dNewImageView: %d", [_dNewImageView.gestureRecognizers count]);
             }
             break;
         }
@@ -270,6 +273,7 @@
                                                       delegate:nil
                                              cancelButtonTitle:@"OK"
                                              otherButtonTitles:nil];
+    
     UIAlertView *alertEmptyTag = [[UIAlertView alloc] initWithTitle:@"The tag is unlabeled."
                                                           message:@"Tap on the corner to create tag."
                                                          delegate:nil
@@ -306,11 +310,6 @@
             [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
         }
         else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
-//            [UIView animateWithDuration:0.6 animations:^{
-//                button.alpha = 0.0;
-//            } completion:^(BOOL finished) {
-//                button.alpha = 1.0;
-//            }];
             [alertRemove show];
             [urlToTagMap removeTag:tag forAssetURL:assetURL];
             [tagCollection removeImageURL:assetURL forTag:tag];
@@ -419,6 +418,8 @@ finishedSavingWithError:(NSError *)error
         SKDetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.image = image;
         detailViewController.imageURL = url;
+        detailViewController.assets = _assets;
+        detailViewController->imageIndex = indexPath.row;
     }
     else if ([[segue identifier] isEqualToString:@"tagSearch"])
     {
