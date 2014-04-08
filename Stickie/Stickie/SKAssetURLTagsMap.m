@@ -72,19 +72,41 @@
         [assetURLToTagsMap setObject: tags forKey: imageURL];
     }
 }
-
+- (void) transferURLSFrom: (SKImageTag *) oldTag to: (SKImageTag *) newTag
+{
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    SKTagData *tagData = [tagCollection getTagInfo: oldTag];
+    for (NSURL *url in tagData.imageURLs) {
+        [tagCollection updateCollectionWithTag:newTag forImageURL:url];
+        [self addTag: newTag forAssetURL:url];
+    }
+}
 - (BOOL) doesURL: (NSURL *) url haveTag: (SKImageTag *) tag
 {
 //    return [[self getTagsForAssetURL:url] containsObject:tag];
     
     NSMutableArray *tags = [self getTagsForAssetURL:url];
     
-    if (!tags)
+    if (!tags) {
         return NO;
+    }
     else {
         return [tags containsObject:tag];
     }
     
+}
+
+- (NSArray *) allURLs
+{
+    return [assetURLToTagsMap allKeys];
+}
+-(void)removeURL:(NSURL *)imageURL{
+    if (![assetURLToTagsMap objectForKey:imageURL]) {
+        [NSException raise:@"URL not found." format:@"URL %@ not found.", [imageURL absoluteString]];
+    }
+    else {
+        [assetURLToTagsMap removeObjectForKey:imageURL];
+    }
 }
 
 - (void) removeAllTagsForURL: (NSURL *) imageURL

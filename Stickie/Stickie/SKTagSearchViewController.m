@@ -11,24 +11,37 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SKPhotoCell.h"
 #import "SKDetailViewController.h"
+#import "SKAssetURLTagsMap.h"
 
-@interface SKTagSearchViewController()
+@interface SKTagSearchViewController()<UIGestureRecognizerDelegate>
 {
     ALAssetsLibrary *library;
     BOOL blue;
     BOOL red;
     BOOL green;
     BOOL pink;
+    SKPhotoCell *dCell;
+    NSIndexPath *dIndexPath;
+    UIImage *dImage;
+    CGPoint defaultPoint;
+    NSString *currentTag;
+    BOOL untag;
 }
 
 typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
 typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property(nonatomic, strong) NSMutableArray *assets;
+@property (weak, nonatomic) IBOutlet UIImageView *dNewImageView;
 
 @end
 
 @implementation SKTagSearchViewController
+
+-(void) applicationWillEnterForeground:(NSNotification *) notification
+{
+    [self viewWillAppear:NO];
+}
 
 - (void)viewDidLoad
 {
@@ -42,6 +55,12 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 	// Do any additional setup after loading the view.
     _assets = [[NSMutableArray alloc] init];
     library = [[ALAssetsLibrary alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillEnterForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
 }
 - (IBAction)backMain:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -99,28 +118,21 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     BOOL beenClickedBefore;
     
     NSString *buttonPressed = [sender currentTitle];
-    
-    if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text])
+    currentTag = buttonPressed;
+    if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text]){
         beenClickedBefore = blue;
-    else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text])
+    }
+    else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text]){
         beenClickedBefore = red;
-    else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text])
+    }
+    else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text]){
         beenClickedBefore = green;
-    else
+    }
+    else{
         beenClickedBefore = pink;
+    }
     
     if (!beenClickedBefore) {
-        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
-        {
-            [_assets addObject:myasset];
-            [_collectionView reloadData];
-        };
-        
-        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
-        {
-            NSLog(@"Cannot access Library Assets");
-        };
-        
         SKTagCollection *collection = [SKTagCollection sharedInstance];
         SKImageTag *tag = [[SKImageTag alloc] init];
         tag.tagName = buttonPressed;
@@ -129,7 +141,19 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         NSMutableArray *imageURLs = [tagData imageURLs];
         
         for (NSURL *url in imageURLs) {
-            [library assetForURL:url resultBlock:resultblock failureBlock:failureblock];
+            [library assetForURL:url resultBlock:^(ALAsset *myasset) {
+                /* Check if asset is still valid */
+                if (myasset) {
+                    [_assets addObject:myasset];
+                    [_collectionView reloadData];
+                }
+                /* If not valid, update imageURLs - this may not be necessary. */
+                else {
+                    [imageURLs removeObject:url];
+                }
+            } failureBlock:^(NSError *myerror) {
+                NSLog(@"Cannot access Library Assets");
+            }];
         }
         
         if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text])
@@ -138,9 +162,105 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             red = YES;
         else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text])
             green = YES;
-        else
+        else if ([buttonPressed isEqualToString:_botRightButton.titleLabel.text])
             pink = YES;
+        UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
+        longGestureRecognizer.minimumPressDuration = 0.15;
+        longGestureRecognizer.delegate = self;
+        _dNewImageView.userInteractionEnabled = YES;
+        [self.collectionView addGestureRecognizer:longGestureRecognizer];
     }
+}
+
+-(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
+    int DISTANCE_ABOVE_FINGER = 30;
+    int BORDER_SIZE = 1.0;
+    int CORNER_RADIUS_CONSTANT = 3.0;
+    UIColor *borderColor = [UIColor blackColor];
+    
+    CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
+    CGPoint anotherPoint = [self.view convertPoint:newPoint fromView:self.collectionView];
+    switch (gestureRecognizer.state) {
+        case UIGestureRecognizerStateBegan: {
+            dIndexPath = [self.collectionView indexPathForItemAtPoint:newPoint];
+            if (dIndexPath == nil){
+                NSLog(@"Couldn't find index path");
+            }
+            else {
+                dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
+                dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
+                [dCell.asset valueForProperty:ALAssetPropertyURLs];
+                anotherPoint.y -= DISTANCE_ABOVE_FINGER;
+                [_dNewImageView setCenter:anotherPoint];
+                [_dNewImageView setImage:dImage];
+                [_dNewImageView addGestureRecognizer:gestureRecognizer];
+                [_dNewImageView.layer setBorderColor: [borderColor CGColor]];
+                [_dNewImageView.layer setBorderWidth: BORDER_SIZE];
+                _dNewImageView.layer.cornerRadius = dImage.size.width / CORNER_RADIUS_CONSTANT;
+                _dNewImageView.layer.masksToBounds = YES;
+            }
+            break;
+        }
+        case UIGestureRecognizerStateChanged: {
+            if (dIndexPath == nil){
+                NSLog(@"Couldn't find index path");
+            }
+            else {
+                anotherPoint.y -= DISTANCE_ABOVE_FINGER;
+                [_dNewImageView setCenter:anotherPoint];
+            }
+            break;
+        }
+        case UIGestureRecognizerStateEnded: {
+            _dNewImageView.image = nil;
+            [_dNewImageView setCenter:defaultPoint];
+            NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
+            [self recordTags: anotherPoint forURL: url];
+            [self.collectionView addGestureRecognizer:gestureRecognizer];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+-(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
+    int TAG_SENSITIVITY = 30;
+    
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
+    
+    SKImageTag *tag;
+    
+    UIAlertView *alertRemove = [[UIAlertView alloc] initWithTitle:@"Untagged"
+                                                          message:nil
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+
+    if (point.x >= 86 && point.x <= 234 && point.y >= 524 - TAG_SENSITIVITY && point.y <= 568){
+        tag = [[SKImageTag alloc] initWithName:currentTag andColor:nil];
+        if (![tag.tagName isEqualToString:@""]) {
+            if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
+                [urlToTagMap removeTag:tag forAssetURL:assetURL];
+                [tagCollection removeImageURL:assetURL forTag:tag];
+                [alertRemove show];
+                if ([currentTag isEqualToString:_topLeftButton.titleLabel.text]){
+                    [_topLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([currentTag isEqualToString:_topRightButton.titleLabel.text]){
+                    [_topRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([currentTag isEqualToString:_botLeftButton.titleLabel.text]){
+                    [_botLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([currentTag isEqualToString:_botRightButton.titleLabel.text]){
+                    [_botRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+            }
+        }
+    }
+
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -154,6 +274,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         SKDetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.image = image;
         detailViewController.imageURL = url;
+        detailViewController.assets = _assets;
+        detailViewController->imageIndex = indexPath.row;
     }
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

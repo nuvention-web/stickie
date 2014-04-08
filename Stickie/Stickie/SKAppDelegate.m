@@ -11,6 +11,7 @@
 #import "SKImageTag.h"
 #import "SKAssetURLTagsMap.h"
 #import "GAI.h"
+#import "SKViewController.h"
 
 @implementation SKAppDelegate
 
@@ -50,6 +51,8 @@
         SKImageTag *tag = [[SKImageTag alloc] initWithName:@"" andColor:nil];
         [tagCollection addTagToCollection:tag];
     }
+    
+    [self checkAndHandleDeletedPhotos];
         
     return YES;
 }
@@ -69,6 +72,8 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    [self checkAndHandleDeletedPhotos];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -81,6 +86,26 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[SKTagCollection sharedInstance]] forKey:@"tagCollection"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[SKAssetURLTagsMap sharedInstance]] forKey:@"tagsMap"];
+}
+
+- (void) checkAndHandleDeletedPhotos
+{
+    /* Check to ensure no photos have been deleted while the user switched applications. */
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    NSArray *urlArray = [urlToTagMap allURLs];
+    
+    for (NSURL* url in urlArray) {
+        [library assetForURL:url resultBlock:^(ALAsset *asset) {
+            if (!asset) {
+                [urlToTagMap removeURL:url];
+                [tagCollection removeAllInstancesOfURL:url];
+            }
+        } failureBlock:^(NSError *error) {
+            [NSException raise:@"Asset Processing Error." format: @"There was an error processing the required ALAssets."];
+        }];
+    }
 }
 
 @end
