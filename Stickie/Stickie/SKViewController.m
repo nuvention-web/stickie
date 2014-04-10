@@ -167,13 +167,31 @@
     SKPhotoCell *cell = (SKPhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     ALAsset *asset = self.assets[indexPath.row];
-    
+    NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
+
     cell.asset = asset;
-    if ([[urlToTagMap doesURL:[asset valueForProperty:ALAssetPropertyAssetURL] haveTag:]] isEqualToString:_topLeftLabel.text]) {
+    
+    cell.topLeftCorner = NO;
+    cell.topRightCorner = NO;
+    cell.botLeftCorner = NO;
+    cell.botRightCorner = NO;
+    
+    SKImageTag *topLeftTag = [[SKImageTag alloc] initWithName:_topLeftLabel.text andColor:nil];
+    SKImageTag *topRightTag = [[SKImageTag alloc] initWithName:_topRightLabel.text andColor:nil];
+    SKImageTag *botLeftTag = [[SKImageTag alloc] initWithName:_botLeftLabel.text andColor:nil];
+    SKImageTag *botRightTag = [[SKImageTag alloc] initWithName:_botRightLabel.text andColor:nil];
+
+    if ([urlToTagMap doesURL:url haveTag:topLeftTag]) {
         cell.topLeftCorner = YES;
     }
-    if ([[asset valueForProperty:ALAssetPropertyAssetURL] isEqualToString:_topRightLabel.text]) {
+    if ([urlToTagMap doesURL:url haveTag:topRightTag]) {
         cell.topRightCorner = YES;
+    }
+    if ([urlToTagMap doesURL:url haveTag:botLeftTag]) {
+        cell.botLeftCorner = YES;
+    }
+    if ([urlToTagMap doesURL:url haveTag:botRightTag]) {
+        cell.botRightCorner = YES;
     }
     return cell;
 }

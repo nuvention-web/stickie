@@ -45,7 +45,6 @@
     if (_botRightCorner) {
         [botRightWatermarkImage drawInRect:CGRectMake(3*backgroundImage.size.width/4, 3*backgroundImage.size.width/4, backgroundImage.size.width/4, backgroundImage.size.width/4)];
     }
-    
     UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     self.photoImageView.image = result;
