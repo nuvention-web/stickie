@@ -93,7 +93,7 @@
     newImageView.contentMode =  UIViewContentModeScaleAspectFit;
     
     /* Animate Swipe */
-    [UIView animateWithDuration:0.25f
+    [UIView animateWithDuration:0.15f
                           delay:0.0f
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
                      animations:^{
