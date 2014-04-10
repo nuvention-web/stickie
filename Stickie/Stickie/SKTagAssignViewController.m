@@ -22,7 +22,7 @@
     else {
         self.navigationItem.title = @"edit tag";
     }
-    _tagTextField.placeholder = _preLabel;
+    _tagTextField.text = _preLabel;
 }
 
 - (IBAction) cancel:(id)sender
