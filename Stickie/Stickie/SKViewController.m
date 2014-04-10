@@ -308,7 +308,7 @@
     
     if (![tag.tagName isEqualToString:@""]) {
         if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
-            [UIView animateWithDuration:0.6 animations:^{
+            [UIView animateWithDuration:1.2 animations:^{
                 button.alpha = 0.0;
             } completion:^(BOOL finished) {
                 button.alpha = 1.0;
