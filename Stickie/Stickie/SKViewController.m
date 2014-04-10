@@ -165,34 +165,16 @@
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SKPhotoCell *cell = (SKPhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
-    SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
+    
     ALAsset *asset = self.assets[indexPath.row];
-    NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
 
     cell.asset = asset;
     
-    cell.topLeftCorner = NO;
-    cell.topRightCorner = NO;
-    cell.botLeftCorner = NO;
-    cell.botRightCorner = NO;
+    cell.topLeftCorner = _topLeftLabel.text;
+    cell.topRightCorner = _topRightLabel.text;
+    cell.botLeftCorner = _botLeftLabel.text;
+    cell.botRightCorner = _botRightLabel.text;
     
-    SKImageTag *topLeftTag = [[SKImageTag alloc] initWithName:_topLeftLabel.text andColor:nil];
-    SKImageTag *topRightTag = [[SKImageTag alloc] initWithName:_topRightLabel.text andColor:nil];
-    SKImageTag *botLeftTag = [[SKImageTag alloc] initWithName:_botLeftLabel.text andColor:nil];
-    SKImageTag *botRightTag = [[SKImageTag alloc] initWithName:_botRightLabel.text andColor:nil];
-
-    if ([urlToTagMap doesURL:url haveTag:topLeftTag]) {
-        cell.topLeftCorner = YES;
-    }
-    if ([urlToTagMap doesURL:url haveTag:topRightTag]) {
-        cell.topRightCorner = YES;
-    }
-    if ([urlToTagMap doesURL:url haveTag:botLeftTag]) {
-        cell.botLeftCorner = YES;
-    }
-    if ([urlToTagMap doesURL:url haveTag:botRightTag]) {
-        cell.botRightCorner = YES;
-    }
     return cell;
 }
 
@@ -300,12 +282,6 @@
     SKImageTag *tag;
     UIButton *button;
     
-    UIAlertView *alertRemove = [[UIAlertView alloc] initWithTitle:@"Untagged"
-                                                       message:nil
-                                                      delegate:nil
-                                             cancelButtonTitle:@"OK"
-                                             otherButtonTitles:nil];
-    
     UIAlertView *alertEmptyTag = [[UIAlertView alloc] initWithTitle:@"The tag is unlabeled."
                                                           message:@"Tap on the corner to create tag."
                                                          delegate:nil
@@ -332,7 +308,7 @@
     
     if (![tag.tagName isEqualToString:@""]) {
         if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
-            [UIView animateWithDuration:1.2 animations:^{
+            [UIView animateWithDuration:0.1 animations:^{
                 button.alpha = 0.0;
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.9 animations:^{
@@ -347,12 +323,20 @@
             [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
         }
         else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
-            [alertRemove show];
-            
+            [UIView animateWithDuration:0.1 animations:^{
+                button.alpha = 0.0;
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.9 animations:^{
+                    button.alpha = 1.0;
+                } completion:^(BOOL finished) {
+                    // Cleanup stuff.
+                }];
+            }];
             /* Logic for removing a tag from a new image - it is necessary to update both urlToTagMap and tagCollection. */
             [urlToTagMap removeTag:tag forAssetURL:assetURL];
             [tagCollection removeImageURL:assetURL forTag:tag];
         }
+        [self loadImageAssets];
     }
     else {
         [alertEmptyTag show];

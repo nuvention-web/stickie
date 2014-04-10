@@ -12,10 +12,10 @@
 @interface SKPhotoCell : UICollectionViewCell
 
 @property (nonatomic, strong) ALAsset *asset;
-@property (nonatomic) BOOL topLeftCorner;
-@property (nonatomic) BOOL topRightCorner;
-@property (nonatomic) BOOL botLeftCorner;
-@property (nonatomic) BOOL botRightCorner;
+@property (nonatomic) NSString* topLeftCorner;
+@property (nonatomic) NSString* topRightCorner;
+@property (nonatomic) NSString* botLeftCorner;
+@property (nonatomic) NSString* botRightCorner;
 
 
 @end

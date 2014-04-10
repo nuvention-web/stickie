@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stickie/SKViewController.m"
-            timestampString = "418859403.611368"
+            timestampString = "418861117.038398"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "357"
+            endingLineNumber = "357"
             landmarkName = "-useCamera"
             landmarkType = "5">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stickie/SKViewController.m"
-            timestampString = "418859403.611368"
+            timestampString = "418861117.038398"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "363"
-            endingLineNumber = "363"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
             landmarkName = "-takePhotoButtonTapped:"
             landmarkType = "5">
          </BreakpointContent>
@@ -296,11 +296,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stickie/SKViewController.m"
-            timestampString = "418859403.611368"
+            timestampString = "418861117.038398"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "577"
-            endingLineNumber = "577"
+            startingLineNumber = "563"
+            endingLineNumber = "563"
             landmarkName = "-tagAssignViewController:didAddTag:for:andDelete:"
             landmarkType = "5">
          </BreakpointContent>
