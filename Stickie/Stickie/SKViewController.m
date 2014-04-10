@@ -146,6 +146,10 @@
             [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
         }
     }
+    else {
+       [self loadImageAssets]; 
+    }
+
 }
 
 - (void)didReceiveMemoryWarning

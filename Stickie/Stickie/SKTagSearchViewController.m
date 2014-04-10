@@ -263,19 +263,12 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     SKImageTag *tag;
     
-    UIAlertView *alertRemove = [[UIAlertView alloc] initWithTitle:@"Untagged"
-                                                          message:nil
-                                                         delegate:nil
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
-
     if (point.x >= 86 && point.x <= 234 && point.y >= 524 - TAG_SENSITIVITY && point.y <= 568){
         tag = [[SKImageTag alloc] initWithName:currentTag andColor:nil];
         if (![tag.tagName isEqualToString:@""]) {
             if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
                 [urlToTagMap removeTag:tag forAssetURL:assetURL];
                 [tagCollection removeImageURL:assetURL forTag:tag];
-                [alertRemove show];
                 if ([currentTag isEqualToString:_topLeftButton.titleLabel.text]){
                     [_topLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
                 }
