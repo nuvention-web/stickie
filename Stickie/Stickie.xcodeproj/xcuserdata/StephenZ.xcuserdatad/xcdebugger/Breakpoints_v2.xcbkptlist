@@ -191,7 +191,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "341"
             endingLineNumber = "341"
-            landmarkName = "-useCamera"
+            landmarkName = "-takePhotoButtonTapped:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

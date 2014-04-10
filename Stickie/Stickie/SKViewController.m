@@ -192,7 +192,7 @@
     int DISTANCE_ABOVE_FINGER = 30;
     int BORDER_SIZE = 1.0;
     int CORNER_RADIUS = 3.0;
-    UIColor *borderColor = [UIColor blackColor];
+    UIColor *borderColor = [UIColor colorWithRed:166.0/255.0 green:169.0/255.0 blue:172.0/255.0 alpha:1.0];
     
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
     CGPoint anotherPoint = [self.view convertPoint:newPoint fromView:self.collectionView];
