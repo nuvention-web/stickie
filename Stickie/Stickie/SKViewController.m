@@ -165,10 +165,16 @@
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SKPhotoCell *cell = (SKPhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
-    
+    SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     ALAsset *asset = self.assets[indexPath.row];
-    cell.asset = asset;
     
+    cell.asset = asset;
+    if ([[urlToTagMap doesURL:[asset valueForProperty:ALAssetPropertyAssetURL] haveTag:]] isEqualToString:_topLeftLabel.text]) {
+        cell.topLeftCorner = YES;
+    }
+    if ([[asset valueForProperty:ALAssetPropertyAssetURL] isEqualToString:_topRightLabel.text]) {
+        cell.topRightCorner = YES;
+    }
     return cell;
 }
 
