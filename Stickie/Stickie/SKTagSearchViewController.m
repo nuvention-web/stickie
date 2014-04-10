@@ -16,10 +16,10 @@
 @interface SKTagSearchViewController()<UIGestureRecognizerDelegate>
 {
     ALAssetsLibrary *library;
-    BOOL blue;
-    BOOL red;
-    BOOL green;
-    BOOL pink;
+    BOOL topLeftClicked;
+    BOOL topRightClicked;
+    BOOL botLeftClicked;
+    BOOL botRightClicked;
     SKPhotoCell *dCell;
     NSIndexPath *dIndexPath;
     UIImage *dImage;
@@ -38,45 +38,77 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 @implementation SKTagSearchViewController
 
--(void) applicationWillEnterForeground:(NSNotification *) notification
-{
-    [self viewWillAppear:NO];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.screenName = @"Tag Search Screen";
+    self.screenName = @"Tag Search Screen";     // Necessary for Google Analytics
+    
+    /* Sets titles of buttons. */
     [_topLeftButton setTitle:_topLeftText forState:UIControlStateNormal];
     [_topRightButton setTitle:_topRightText forState:UIControlStateNormal];
     [_botLeftButton setTitle:_botLeftText forState:UIControlStateNormal];
     [_botRightButton setTitle:_botRightText forState:UIControlStateNormal];
-    blue = NO, red = NO, green = NO, pink = NO;
-	// Do any additional setup after loading the view.
+    
+    /* Initialization stuff. */
+    topLeftClicked = NO, topRightClicked = NO, botLeftClicked = NO, botRightClicked = NO;
     _assets = [[NSMutableArray alloc] init];
     library = [[ALAssetsLibrary alloc] init];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
+    longGestureRecognizer.minimumPressDuration = 0.15;
+    longGestureRecognizer.delegate = self;
+    _dNewImageView.userInteractionEnabled = YES;
+    [self.collectionView addGestureRecognizer:longGestureRecognizer];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWillEnterForeground:)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
 }
-- (IBAction)backMain:(id)sender {
+
+- (void) viewWillAppear: (BOOL) animation
+{
+    /* Pre-populating view according to button selected. */
+    if ([_callButtonOnLoad isEqualToString:@"topLeftButton"]) {
+        topLeftClicked = YES;
+    }
+    else if ([_callButtonOnLoad isEqualToString:@"topRightButton"]) {
+        topRightClicked = YES;
+    }
+    else if ([_callButtonOnLoad isEqualToString:@"botLeftButton"]) {
+        botLeftClicked = YES;
+    }
+    else if ([_callButtonOnLoad isEqualToString:@"botRightButton"]) {
+        botRightClicked = YES;
+    }
+    
+    [self loadCurrentTag];
+}
+
+- (void) loadCurrentTag
+{
+    if (topLeftClicked) {
+        [_topLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    }
+    else if (topRightClicked) {
+        [_topRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    }
+    else if (botLeftClicked) {
+        [_botLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    }
+    else if (botRightClicked) {
+        [_botRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    }
+}
+
+- (IBAction) backMain:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)viewWillAppear: (BOOL) animation
+- (void) applicationWillEnterForeground:(NSNotification *) notification
 {
-    /* Can call a button press from a previous view. */
-    if ([_callButtonOnLoad isEqualToString:@"topLeftButton"])
-        [_topLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-    else if ([_callButtonOnLoad isEqualToString:@"topRightButton"])
-        [_topRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-    else if ([_callButtonOnLoad isEqualToString:@"botLeftButton"])
-        [_botLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-    else if ([_callButtonOnLoad isEqualToString:@"botRightButton"])
-        [_botRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    library = [[ALAssetsLibrary alloc] init];
+    [self loadCurrentTag];
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,7 +128,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     ALAsset *asset = self.assets[indexPath.row];
     cell.asset = asset;
-    cell.backgroundColor = [UIColor redColor];
     
     return cell;
 }
@@ -113,23 +144,26 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 -(IBAction) colorButton:(id)sender
 {
-    [self viewDidLoad];
+    /* Reset view. */
+    topLeftClicked = NO, topRightClicked = NO, botLeftClicked = NO, botRightClicked = NO;
+    [_assets removeAllObjects];
     [_collectionView reloadData];
+    
     BOOL beenClickedBefore;
     
     NSString *buttonPressed = [sender currentTitle];
     currentTag = buttonPressed;
     if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text]){
-        beenClickedBefore = blue;
+        beenClickedBefore = topLeftClicked;
     }
     else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text]){
-        beenClickedBefore = red;
+        beenClickedBefore = topRightClicked;
     }
     else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text]){
-        beenClickedBefore = green;
+        beenClickedBefore = botLeftClicked;
     }
     else{
-        beenClickedBefore = pink;
+        beenClickedBefore = botRightClicked;
     }
     
     if (!beenClickedBefore) {
@@ -157,18 +191,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         }
         
         if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text])
-            blue = YES;
+            topLeftClicked = YES;
         else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text])
-            red = YES;
+            topRightClicked = YES;
         else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text])
-            green = YES;
+            botLeftClicked = YES;
         else if ([buttonPressed isEqualToString:_botRightButton.titleLabel.text])
-            pink = YES;
-        UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
-        longGestureRecognizer.minimumPressDuration = 0.15;
-        longGestureRecognizer.delegate = self;
-        _dNewImageView.userInteractionEnabled = YES;
-        [self.collectionView addGestureRecognizer:longGestureRecognizer];
+            botRightClicked = YES;
     }
 }
 
@@ -193,6 +222,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                 anotherPoint.y -= DISTANCE_ABOVE_FINGER;
                 [_dNewImageView setCenter:anotherPoint];
                 [_dNewImageView setImage:dImage];
+                [self.collectionView removeGestureRecognizer:gestureRecognizer];    // Transferring recognizer to draggable thumbnail.
                 [_dNewImageView addGestureRecognizer:gestureRecognizer];
                 [_dNewImageView.layer setBorderColor: [borderColor CGColor]];
                 [_dNewImageView.layer setBorderWidth: BORDER_SIZE];
@@ -216,6 +246,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [_dNewImageView setCenter:defaultPoint];
             NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
             [self recordTags: anotherPoint forURL: url];
+            [_dNewImageView removeGestureRecognizer:gestureRecognizer];     // Transferring recongizer back to collection view.
             [self.collectionView addGestureRecognizer:gestureRecognizer];
             break;
         }
@@ -281,6 +312,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    /* Cleanup. */
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

@@ -13,6 +13,7 @@
 @end
 
 @implementation SKTagAssignViewController
+
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (_createTag) {
@@ -23,11 +24,13 @@
     }
     _tagTextField.placeholder = _preLabel;
 }
-- (IBAction)cancel:(id)sender
+
+- (IBAction) cancel:(id)sender
 {
     [self.delegate tagAssignViewControllerDidCancel:self];
 }
-- (IBAction)done:(id)sender
+
+- (IBAction) done:(id)sender
 {
     if ([_tagTextField.text isEqualToString:@""]) {
         [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text for:_source andDelete:YES];
@@ -36,7 +39,8 @@
         [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text for:_source andDelete:NO];
     }
 }
-- (IBAction)deleteTag:(id)sender {
+
+- (IBAction) deleteTag:(id)sender {
     UIAlertView *alertEmpty = [[UIAlertView alloc] initWithTitle:@"No tag to delete."
                                                           message:nil
                                                          delegate:self
@@ -55,9 +59,10 @@
         [alertDelete show];
     }
 }
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+
+- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         [self.delegate tagAssignViewController:self didAddTag:@"" for:_source andDelete:YES];
-        }
+    }
 }
 @end

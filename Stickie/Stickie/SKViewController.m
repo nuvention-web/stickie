@@ -48,27 +48,56 @@
     return library;
 }
 
--(void) applicationWillEnterForeground:(NSNotification *) notification
-{
-    /* Reload view so user changes are recognized */
-    [self viewDidLoad];
-}
-
 /* Load images at app startup */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.screenName = @"Home Screen";
+    self.screenName = @"Home Screen";                   // For Google Analytics.
+    self.automaticallyAdjustsScrollViewInsets = NO;     // Necessary to remove erroneous spacing at top of collection view.
+    defaultPoint = CGPointMake(50.0, 0.0);              // Sets default point for draggable ghost image.
     
+    [self loadTags];
+    [self loadImageAssets];
+    
+    /* Setting up long-press gesture recognizer and adding it to collectionView and corner buttons */
+    UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
+    longGestureRecognizer.minimumPressDuration = 0.15;
+    longGestureRecognizer.delegate = self;
+    _dNewImageView.userInteractionEnabled = YES;
+    [self.collectionView addGestureRecognizer:longGestureRecognizer];
+    [self.topLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+    [self.topRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+    [self.botLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+    [self.botRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+    
+    /* Add observer to main view controller to determine when this specific view enters foreground. */
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillEnterForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
+    
+    /* Note, the notification center is intentially left unremoved from this view in viewWillDisappear - for the cases that a photo is deleted when the user is outside this application */
+}
+
+- (void) applicationWillEnterForeground:(NSNotification *) notification
+{
+    /* Reload view so user changes are recognized */
+    [self loadImageAssets];
+}
+
+/* Sets name of tags based on serialized tag information. */
+- (void)loadTags
+{
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     NSMutableArray *tagArray = [tagCollection getAllTags];
-
+    
     /* Reinitialize tags as empty when view loads again, then replace as necessary */
     _topLeftLabel.text = @"";
     _topRightLabel.text = @"";
     _botLeftLabel.text = @"";
     _botRightLabel.text = @"";
     
+    /* Adds names to tags in appropriate order. */
     if ([tagArray count] > 0) {
         _topLeftLabel.text = ((SKImageTag *) tagArray[0]).tagName;
     }
@@ -81,15 +110,15 @@
     if ([tagArray count] > 3) {
         _botRightLabel.text = ((SKImageTag *) tagArray[3]).tagName;
     }
-    
-    /* Removed top margin in collection view at startup */
-    self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+/* Enumerates through all user ALAssets and collects them in _assets. */
+- (void)loadImageAssets
+{
     _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
-
-    ALAssetsLibrary *assetsLibrary = [SKViewController defaultAssetsLibrary];
     
-    defaultPoint = CGPointMake(50.0, 0.0);
+    ALAssetsLibrary *assetsLibrary = [SKViewController defaultAssetsLibrary];
     
     [assetsLibrary enumerateGroupsWithTypes:(ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary)usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
@@ -104,29 +133,10 @@
     } failureBlock:^(NSError *error) {
         NSLog(@"Error loading images %@", error);
     }];
-    
-    UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
-    
-    longGestureRecognizer.minimumPressDuration = 0.15;
-    longGestureRecognizer.delegate = self;
-    _dNewImageView.userInteractionEnabled = YES;
-    [self.collectionView addGestureRecognizer:longGestureRecognizer];
-    
-    [self.topLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
-    [self.topRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
-    [self.botLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
-    [self.botRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillEnterForeground:)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
-    
-    /* Note, the notification center is intentially left unremoved from this view in viewWillDisappear - for the cases that a photo is deleted when the user is outside this application */
 }
 
--(void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
+    /* Automatically scrolls to bottom of collection view so user will see most recent photos. */
     if (!retainScroll) {
         NSInteger section = 0;
         NSInteger item = [self collectionView:_collectionView numberOfItemsInSection:section] - 1;
@@ -151,7 +161,7 @@
     return self.assets.count;
 }
 
-//Load images into cells
+/* Load images into cells. */
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SKPhotoCell *cell = (SKPhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
@@ -161,13 +171,14 @@
     
     return cell;
 }
-//Adjust image spacing
+
+/* Adjust image spacing. */
 - (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 4;
 }
 
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
@@ -177,10 +188,10 @@
     return 1;
 }
 
--(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
+- (void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
     int DISTANCE_ABOVE_FINGER = 30;
     int BORDER_SIZE = 1.0;
-    int CORNER_RADIUS_CONSTANT = 3.0;
+    int CORNER_RADIUS = 3.0;
     UIColor *borderColor = [UIColor blackColor];
     
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
@@ -189,8 +200,9 @@
         case UIGestureRecognizerStateBegan: {
             dIndexPath = [self.collectionView indexPathForItemAtPoint:newPoint];
             if (dIndexPath == nil){
-                NSLog(@"Couldn't find index path");
+                NSLog(@"Couldn't find index path.");
             }
+            /* Loading data into draggable thumbnail image. */
             else {
                 dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
                 dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
@@ -198,17 +210,18 @@
                 anotherPoint.y -= DISTANCE_ABOVE_FINGER;
                 [_dNewImageView setCenter:anotherPoint];
                 [_dNewImageView setImage:dImage];
+                [self.collectionView removeGestureRecognizer:gestureRecognizer];    // Transferring gesture recognizer to draggable thumbnail image.
                 [_dNewImageView addGestureRecognizer:gestureRecognizer];
                 [_dNewImageView.layer setBorderColor: [borderColor CGColor]];
                 [_dNewImageView.layer setBorderWidth: BORDER_SIZE];
-                _dNewImageView.layer.cornerRadius = dImage.size.width / CORNER_RADIUS_CONSTANT;
+                _dNewImageView.layer.cornerRadius = dImage.size.width / CORNER_RADIUS;
                 _dNewImageView.layer.masksToBounds = YES;
             }
             break;
         }
         case UIGestureRecognizerStateChanged: {
             if (dIndexPath == nil){
-                NSLog(@"Couldn't find index path");
+                NSLog(@"Couldn't find index path.");
             }
             else {
                 anotherPoint.y -= DISTANCE_ABOVE_FINGER;
@@ -218,16 +231,15 @@
         }
         case UIGestureRecognizerStateEnded: {
             if (dIndexPath == nil){
-                NSLog(@"Couldn't find index path");
+                NSLog(@"Couldn't find index path.");
             }
             else {
                 _dNewImageView.image = nil;
                 [_dNewImageView setCenter:defaultPoint];
                 NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
                 [self recordTags: anotherPoint forURL: url];
+                [_dNewImageView removeGestureRecognizer:gestureRecognizer];     // Transferring gesture recognizer back to collection view.
                 [self.collectionView addGestureRecognizer:gestureRecognizer];
-                NSLog(@"Number of Gesture Recognizers on self.collectionView: %d", [self.collectionView.gestureRecognizers count]);
-                NSLog(@"Number of Gesture Recognizers on _dNewImageView: %d", [_dNewImageView.gestureRecognizers count]);
             }
             break;
         }
@@ -235,8 +247,9 @@
             break;
     }
 }
+
 #pragma mark Edit Tag
--(void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer{
+- (void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer{
     CGPoint point = [gestureRecognizer locationInView:self.view];
     if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
         [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
@@ -250,8 +263,9 @@
     else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
         [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
 }
+
 #pragma mark Drag and Drop Tagging
--(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
+- (void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
     
     /* Constants to define how close thumbnail must be to a given corner in order for a tag to register */
     int TAG_SENSITIVITY_X = dImage.size.width/5.0;
@@ -259,14 +273,8 @@
     
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
-    
     SKImageTag *tag;
-    
-    UIAlertView *alertTag = [[UIAlertView alloc] initWithTitle:@"Tagged!"
-                                                    message:nil
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
+    UIButton *button;
     
     UIAlertView *alertRemove = [[UIAlertView alloc] initWithTitle:@"Untagged"
                                                        message:nil
@@ -279,7 +287,6 @@
                                                          delegate:nil
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
-    UIButton *button;
     
     /* Tag event occurs in top-left corner */
     if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X * 1.5 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
@@ -306,11 +313,15 @@
             } completion:^(BOOL finished) {
                 button.alpha = 1.0;
             }];
+            
+            /* Logic for tagging a new image - it is necessary to update both urlToTagMap and tagCollection. */
             [urlToTagMap addTag: tag forAssetURL:assetURL];
             [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
         }
         else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
             [alertRemove show];
+            
+            /* Logic for removing a tag from a new image - it is necessary to update both urlToTagMap and tagCollection. */
             [urlToTagMap removeTag:tag forAssetURL:assetURL];
             [tagCollection removeImageURL:assetURL forTag:tag];
         }
@@ -319,13 +330,15 @@
         [alertEmptyTag show];
     }
 }
+
 #pragma make Camera Methods
-//Take photo
+/* Take photo. */
 - (IBAction)takePhotoButtonTapped:(id)sender {
     [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.3];
-
 }
--(void)useCamera{
+
+/* Setup for image picker. */
+- (void)useCamera{
     if ([UIImagePickerController isSourceTypeAvailable:
          UIImagePickerControllerSourceTypeCamera])
     {
@@ -341,7 +354,8 @@
         _newMedia = YES;
     }
 }
--(void)imagePickerController:(UIImagePickerController *)picker
+
+- (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     NSString *mediaType = info[UIImagePickerControllerMediaType];
@@ -361,7 +375,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         // Code here to support video if enabled
     }
 }
--(void)image:(UIImage *)image
+
+- (void)image:(UIImage *)image
 finishedSavingWithError:(NSError *)error
  contextInfo:(void *)contextInfo
 {
@@ -375,10 +390,12 @@ finishedSavingWithError:(NSError *)error
                               otherButtonTitles:nil];
         [alert show];
     }
-    [self performSelector:@selector(reloadView) withObject:nil afterDelay:0.3];
+    [self performSelector:@selector(reloadCollectionView) withObject:nil afterDelay:0.3];
 }
--(void)reloadView{
-    [self viewDidLoad];
+
+/* Reloads collection view. */
+- (void)reloadCollectionView{
+    [self loadImageAssets];
     [_collectionView reloadData];
 }
 
@@ -407,7 +424,7 @@ finishedSavingWithError:(NSError *)error
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //Enlarge Image
+    /* Enlarge Image. */
     if ([[segue identifier] isEqualToString:@"showDetail"])
     {
         NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
@@ -421,47 +438,37 @@ finishedSavingWithError:(NSError *)error
         detailViewController.assets = _assets;
         detailViewController->imageIndex = indexPath.row;
     }
+    
+    /* Routes to tag search view. */
     else if ([[segue identifier] isEqualToString:@"tagSearch"])
     {
         SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
-        tagSearchViewController.topLeftText = _topLeftLabel.text;
-        tagSearchViewController.topRightText = _topRightLabel.text;
-        tagSearchViewController.botLeftText = _botLeftLabel.text;
-        tagSearchViewController.botRightText = _botRightLabel.text;
-        
+        [self assignTagText:tagSearchViewController];
     }
+    
+    /* Prepopulates selected tag in tag search view. */
     else if ([[segue identifier] isEqualToString:@"topLeftTag"]){
         SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
-        tagSearchViewController.topLeftText = _topLeftLabel.text;
-        tagSearchViewController.topRightText = _topRightLabel.text;
-        tagSearchViewController.botLeftText = _botLeftLabel.text;
-        tagSearchViewController.botRightText = _botRightLabel.text;
+        [self assignTagText:tagSearchViewController];
         tagSearchViewController.callButtonOnLoad = @"topLeftButton";
     }
     else if ([[segue identifier] isEqualToString:@"topRightTag"]){
         SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
-        tagSearchViewController.topLeftText = _topLeftLabel.text;
-        tagSearchViewController.topRightText = _topRightLabel.text;
-        tagSearchViewController.botLeftText = _botLeftLabel.text;
-        tagSearchViewController.botRightText = _botRightLabel.text;
+        [self assignTagText:tagSearchViewController];
         tagSearchViewController.callButtonOnLoad = @"topRightButton";
     }
     else if ([[segue identifier] isEqualToString:@"botLeftTag"]){
         SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
-        tagSearchViewController.topLeftText = _topLeftLabel.text;
-        tagSearchViewController.topRightText = _topRightLabel.text;
-        tagSearchViewController.botLeftText = _botLeftLabel.text;
-        tagSearchViewController.botRightText = _botRightLabel.text;
+        [self assignTagText:tagSearchViewController];
         tagSearchViewController.callButtonOnLoad = @"botLeftButton";
     }
     else if ([[segue identifier] isEqualToString:@"botRightTag"]){
         SKTagSearchViewController *tagSearchViewController = [segue destinationViewController];
-        tagSearchViewController.topLeftText = _topLeftLabel.text;
-        tagSearchViewController.topRightText = _topRightLabel.text;
-        tagSearchViewController.botLeftText = _botLeftLabel.text;
-        tagSearchViewController.botRightText = _botRightLabel.text;
+        [self assignTagText:tagSearchViewController];
         tagSearchViewController.callButtonOnLoad = @"botRightButton";
     }
+    
+    /* For tag editing. */
     else if ([[segue identifier] isEqualToString:@"topLeftTagEdit"]) {
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
@@ -509,13 +516,23 @@ finishedSavingWithError:(NSError *)error
     }
 }
 
+/* Assigns label to corner. */
+- (void) assignTagText: (SKTagSearchViewController *) tagSearchViewController
+{
+    tagSearchViewController.topLeftText = _topLeftLabel.text;
+    tagSearchViewController.topRightText = _topRightLabel.text;
+    tagSearchViewController.botLeftText = _botLeftLabel.text;
+    tagSearchViewController.botRightText = _botRightLabel.text;
+}
+
 #pragma mark Tag Assign Delegate Methods
 - (void)tagAssignViewControllerDidCancel:(SKTagAssignViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR for:(NSString *)corner andDelete:(BOOL)delete
+/* Edit or delete tags from SKTagAssignViewController. */
+- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR for:(NSString *)corner andDelete:(BOOL)delete
 {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKImageTag *tag = [[SKImageTag alloc] initWithName:tagSTR andColor:nil];
