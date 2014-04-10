@@ -308,10 +308,17 @@
     
     if (![tag.tagName isEqualToString:@""]) {
         if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
-            [UIView animateWithDuration:0.6 animations:^{
+            
+            [UIView animateWithDuration:0.1 animations:^{
                 button.alpha = 0.0;
             } completion:^(BOOL finished) {
+                // Cleanup stuff.
+            }];
+            
+            [UIView animateWithDuration:0.9 animations:^{
                 button.alpha = 1.0;
+            } completion:^(BOOL finished) {
+                // Cleanup stuff.
             }];
             
             /* Logic for tagging a new image - it is necessary to update both urlToTagMap and tagCollection. */
