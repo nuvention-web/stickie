@@ -1,0 +1,701 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		14540B8618C3FDA5004185F7 /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14540B8418C3FDA5004185F7 /* libAdIdAccess.a */; };
+		14540B8718C3FDA5004185F7 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14540B8518C3FDA5004185F7 /* libGoogleAnalyticsServices.a */; };
+		14985C661890F037004B3ECB /* SKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14985C651890F037004B3ECB /* SKDetailViewController.m */; };
+		1499CDC618BEE3CB00D0C0EA /* SKTagAssignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499CDC518BEE3CB00D0C0EA /* SKTagAssignViewController.m */; };
+		149FB2971890845B00D44DB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2961890845B00D44DB2 /* Foundation.framework */; };
+		149FB2991890845B00D44DB2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2981890845B00D44DB2 /* CoreGraphics.framework */; };
+		149FB29B1890845B00D44DB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB29A1890845B00D44DB2 /* UIKit.framework */; };
+		149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 149FB29F1890845B00D44DB2 /* InfoPlist.strings */; };
+		149FB2A31890845B00D44DB2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 149FB2A21890845B00D44DB2 /* main.m */; };
+		149FB2A71890845B00D44DB2 /* SKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 149FB2A61890845B00D44DB2 /* SKAppDelegate.m */; };
+		149FB2AA1890845B00D44DB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FB2A81890845B00D44DB2 /* Main.storyboard */; };
+		149FB2AD1890845B00D44DB2 /* SKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149FB2AC1890845B00D44DB2 /* SKViewController.m */; };
+		149FB2AF1890845B00D44DB2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149FB2AE1890845B00D44DB2 /* Images.xcassets */; };
+		149FB2B61890845B00D44DB2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2B51890845B00D44DB2 /* XCTest.framework */; };
+		149FB2B71890845C00D44DB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2961890845B00D44DB2 /* Foundation.framework */; };
+		149FB2B81890845C00D44DB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB29A1890845B00D44DB2 /* UIKit.framework */; };
+		149FB2C01890845C00D44DB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 149FB2BE1890845C00D44DB2 /* InfoPlist.strings */; };
+		149FB2EB1890997000D44DB2 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FB2EA1890997000D44DB2 /* AssetsLibrary.framework */; };
+		149FB2EE18909D3500D44DB2 /* SKPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */; };
+		14A2A3E418C3BAA5006D3FFC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E318C3BAA5006D3FFC /* AdSupport.framework */; };
+		14A2A3E618C3BAB1006D3FFC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E518C3BAB1006D3FFC /* CoreData.framework */; };
+		14A2A3E818C3BABF006D3FFC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */; };
+		14A2A3EA18C3BAD4006D3FFC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E918C3BAD4006D3FFC /* libz.dylib */; };
+		14A30C0E18D4055B008212CD /* Half circle new.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A30C0D18D4055B008212CD /* Half circle new.png */; };
+		14A497BE18CD311D00AD43FC /* SearchStickie_222x222.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A497BD18CD311D00AD43FC /* SearchStickie_222x222.png */; };
+		14A497C018CD31A000AD43FC /* BlueCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A497BF18CD31A000AD43FC /* BlueCircle.png */; };
+		14B0C7A018A2EFA4008B65C3 /* SKTagCollectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */; };
+		14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */; };
+		9385097A18CD2EA1001AE7DC /* App - camera icon (3-8-2014).png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */; };
+		9385097C18CD2EA1001AE7DC /* BlueCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097318CD2EA1001AE7DC /* BlueCorner.png */; };
+		9385097D18CD2EA1001AE7DC /* GreenCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097418CD2EA1001AE7DC /* GreenCircle.png */; };
+		9385097E18CD2EA1001AE7DC /* GreenCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097518CD2EA1001AE7DC /* GreenCorner.png */; };
+		9385097F18CD2EA1001AE7DC /* OrangeCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097618CD2EA1001AE7DC /* OrangeCircle.png */; };
+		9385098018CD2EA1001AE7DC /* OrangeCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097718CD2EA1001AE7DC /* OrangeCorner.png */; };
+		9385098118CD2EA1001AE7DC /* RedCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097818CD2EA1001AE7DC /* RedCircle.png */; };
+		9385098218CD2EA1001AE7DC /* RedCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097918CD2EA1001AE7DC /* RedCorner.png */; };
+		9385098518CD3044001AE7DC /* SKLongPressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385098418CD3044001AE7DC /* SKLongPressButton.m */; };
+		93E82086189828F100877D38 /* SKAssetURLTagsMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8207E189828F100877D38 /* SKAssetURLTagsMap.m */; };
+		93E82087189828F100877D38 /* SKImageTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82080189828F100877D38 /* SKImageTag.m */; };
+		93E82088189828F100877D38 /* SKTagCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82082189828F100877D38 /* SKTagCollection.m */; };
+		93E82089189828F100877D38 /* SKTagData.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82084189828F100877D38 /* SKTagData.m */; };
+		93E8208C189829A400877D38 /* SKAssetURLTagMapTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		149FB2B91890845C00D44DB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 149FB28B1890845B00D44DB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 149FB2921890845B00D44DB2;
+			remoteInfo = Stickie;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		14540B7E18C3FDA5004185F7 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		14540B7F18C3FDA5004185F7 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		14540B8018C3FDA5004185F7 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		14540B8118C3FDA5004185F7 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		14540B8218C3FDA5004185F7 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		14540B8318C3FDA5004185F7 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		14540B8418C3FDA5004185F7 /* libAdIdAccess.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdIdAccess.a; sourceTree = "<group>"; };
+		14540B8518C3FDA5004185F7 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		14985C641890F037004B3ECB /* SKDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDetailViewController.h; sourceTree = "<group>"; };
+		14985C651890F037004B3ECB /* SKDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDetailViewController.m; sourceTree = "<group>"; };
+		1499CDC418BEE3CB00D0C0EA /* SKTagAssignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagAssignViewController.h; sourceTree = "<group>"; };
+		1499CDC518BEE3CB00D0C0EA /* SKTagAssignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagAssignViewController.m; sourceTree = "<group>"; };
+		149FB2931890845B00D44DB2 /* Stickie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stickie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		149FB2961890845B00D44DB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		149FB2981890845B00D44DB2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		149FB29A1890845B00D44DB2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		149FB29E1890845B00D44DB2 /* Stickie-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Stickie-Info.plist"; sourceTree = "<group>"; };
+		149FB2A01890845B00D44DB2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		149FB2A21890845B00D44DB2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		149FB2A41890845B00D44DB2 /* Stickie-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Stickie-Prefix.pch"; sourceTree = "<group>"; };
+		149FB2A51890845B00D44DB2 /* SKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKAppDelegate.h; sourceTree = "<group>"; };
+		149FB2A61890845B00D44DB2 /* SKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKAppDelegate.m; sourceTree = "<group>"; };
+		149FB2A91890845B00D44DB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		149FB2AB1890845B00D44DB2 /* SKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKViewController.h; sourceTree = "<group>"; };
+		149FB2AC1890845B00D44DB2 /* SKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKViewController.m; sourceTree = "<group>"; };
+		149FB2AE1890845B00D44DB2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		149FB2B41890845B00D44DB2 /* StickieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StickieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		149FB2B51890845B00D44DB2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		149FB2BD1890845C00D44DB2 /* StickieTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StickieTests-Info.plist"; sourceTree = "<group>"; };
+		149FB2BF1890845C00D44DB2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		149FB2EA1890997000D44DB2 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		149FB2EC18909D3500D44DB2 /* SKPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPhotoCell.h; sourceTree = "<group>"; };
+		149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPhotoCell.m; sourceTree = "<group>"; };
+		14A2A3E318C3BAA5006D3FFC /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		14A2A3E518C3BAB1006D3FFC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		14A2A3E918C3BAD4006D3FFC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		14A30C0D18D4055B008212CD /* Half circle new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Half circle new.png"; sourceTree = "<group>"; };
+		14A497BD18CD311D00AD43FC /* SearchStickie_222x222.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchStickie_222x222.png; sourceTree = "<group>"; };
+		14A497BF18CD31A000AD43FC /* BlueCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueCircle.png; sourceTree = "<group>"; };
+		14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagCollectionTest.m; sourceTree = "<group>"; };
+		14B0C7A618A30B43008B65C3 /* SKTagSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagSearchViewController.h; sourceTree = "<group>"; };
+		14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagSearchViewController.m; sourceTree = "<group>"; };
+		9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "App - camera icon (3-8-2014).png"; sourceTree = "<group>"; };
+		9385097318CD2EA1001AE7DC /* BlueCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueCorner.png; sourceTree = "<group>"; };
+		9385097418CD2EA1001AE7DC /* GreenCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenCircle.png; sourceTree = "<group>"; };
+		9385097518CD2EA1001AE7DC /* GreenCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenCorner.png; sourceTree = "<group>"; };
+		9385097618CD2EA1001AE7DC /* OrangeCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrangeCircle.png; sourceTree = "<group>"; };
+		9385097718CD2EA1001AE7DC /* OrangeCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrangeCorner.png; sourceTree = "<group>"; };
+		9385097818CD2EA1001AE7DC /* RedCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCircle.png; sourceTree = "<group>"; };
+		9385097918CD2EA1001AE7DC /* RedCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCorner.png; sourceTree = "<group>"; };
+		9385098318CD3044001AE7DC /* SKLongPressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLongPressButton.h; sourceTree = "<group>"; };
+		9385098418CD3044001AE7DC /* SKLongPressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLongPressButton.m; sourceTree = "<group>"; };
+		93E8207D189828F100877D38 /* SKAssetURLTagsMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAssetURLTagsMap.h; sourceTree = "<group>"; };
+		93E8207E189828F100877D38 /* SKAssetURLTagsMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagsMap.m; sourceTree = "<group>"; };
+		93E8207F189828F100877D38 /* SKImageTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKImageTag.h; sourceTree = "<group>"; };
+		93E82080189828F100877D38 /* SKImageTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKImageTag.m; sourceTree = "<group>"; };
+		93E82081189828F100877D38 /* SKTagCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagCollection.h; sourceTree = "<group>"; };
+		93E82082189828F100877D38 /* SKTagCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagCollection.m; sourceTree = "<group>"; };
+		93E82083189828F100877D38 /* SKTagData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagData.h; sourceTree = "<group>"; };
+		93E82084189828F100877D38 /* SKTagData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagData.m; sourceTree = "<group>"; };
+		93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagMapTest.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		149FB2901890845B00D44DB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14A2A3EA18C3BAD4006D3FFC /* libz.dylib in Frameworks */,
+				14A2A3E818C3BABF006D3FFC /* SystemConfiguration.framework in Frameworks */,
+				14A2A3E618C3BAB1006D3FFC /* CoreData.framework in Frameworks */,
+				14540B8718C3FDA5004185F7 /* libGoogleAnalyticsServices.a in Frameworks */,
+				14A2A3E418C3BAA5006D3FFC /* AdSupport.framework in Frameworks */,
+				14540B8618C3FDA5004185F7 /* libAdIdAccess.a in Frameworks */,
+				149FB2EB1890997000D44DB2 /* AssetsLibrary.framework in Frameworks */,
+				149FB2991890845B00D44DB2 /* CoreGraphics.framework in Frameworks */,
+				149FB29B1890845B00D44DB2 /* UIKit.framework in Frameworks */,
+				149FB2971890845B00D44DB2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		149FB2B11890845B00D44DB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				149FB2B61890845B00D44DB2 /* XCTest.framework in Frameworks */,
+				149FB2B81890845C00D44DB2 /* UIKit.framework in Frameworks */,
+				149FB2B71890845C00D44DB2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14540B7B18C3FDA5004185F7 /* GoogleAnalyticsServicesiOS_3.03c */ = {
+			isa = PBXGroup;
+			children = (
+				14540B7C18C3FDA5004185F7 /* GoogleAnalytics */,
+				14540B8418C3FDA5004185F7 /* libAdIdAccess.a */,
+				14540B8518C3FDA5004185F7 /* libGoogleAnalyticsServices.a */,
+			);
+			path = GoogleAnalyticsServicesiOS_3.03c;
+			sourceTree = SOURCE_ROOT;
+		};
+		14540B7C18C3FDA5004185F7 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				14540B7D18C3FDA5004185F7 /* Library */,
+			);
+			path = GoogleAnalytics;
+			sourceTree = "<group>";
+		};
+		14540B7D18C3FDA5004185F7 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				14540B7E18C3FDA5004185F7 /* GAI.h */,
+				14540B7F18C3FDA5004185F7 /* GAIDictionaryBuilder.h */,
+				14540B8018C3FDA5004185F7 /* GAIFields.h */,
+				14540B8118C3FDA5004185F7 /* GAILogger.h */,
+				14540B8218C3FDA5004185F7 /* GAITrackedViewController.h */,
+				14540B8318C3FDA5004185F7 /* GAITracker.h */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		149FB28A1890845B00D44DB2 = {
+			isa = PBXGroup;
+			children = (
+				149FB29C1890845B00D44DB2 /* Stickie */,
+				149FB2BB1890845C00D44DB2 /* StickieTests */,
+				149FB2951890845B00D44DB2 /* Frameworks */,
+				149FB2941890845B00D44DB2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		149FB2941890845B00D44DB2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				149FB2931890845B00D44DB2 /* Stickie.app */,
+				149FB2B41890845B00D44DB2 /* StickieTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		149FB2951890845B00D44DB2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14A2A3E918C3BAD4006D3FFC /* libz.dylib */,
+				14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */,
+				14A2A3E518C3BAB1006D3FFC /* CoreData.framework */,
+				14A2A3E318C3BAA5006D3FFC /* AdSupport.framework */,
+				149FB2EA1890997000D44DB2 /* AssetsLibrary.framework */,
+				149FB2961890845B00D44DB2 /* Foundation.framework */,
+				149FB2981890845B00D44DB2 /* CoreGraphics.framework */,
+				149FB29A1890845B00D44DB2 /* UIKit.framework */,
+				149FB2B51890845B00D44DB2 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		149FB29C1890845B00D44DB2 /* Stickie */ = {
+			isa = PBXGroup;
+			children = (
+				9385097018CD2EA1001AE7DC /* Images */,
+				14540B7B18C3FDA5004185F7 /* GoogleAnalyticsServicesiOS_3.03c */,
+				149FB2A51890845B00D44DB2 /* SKAppDelegate.h */,
+				149FB2A61890845B00D44DB2 /* SKAppDelegate.m */,
+				149FB2A81890845B00D44DB2 /* Main.storyboard */,
+				149FB2AB1890845B00D44DB2 /* SKViewController.h */,
+				149FB2AC1890845B00D44DB2 /* SKViewController.m */,
+				14B0C7A618A30B43008B65C3 /* SKTagSearchViewController.h */,
+				14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */,
+				1499CDC418BEE3CB00D0C0EA /* SKTagAssignViewController.h */,
+				1499CDC518BEE3CB00D0C0EA /* SKTagAssignViewController.m */,
+				9385098318CD3044001AE7DC /* SKLongPressButton.h */,
+				9385098418CD3044001AE7DC /* SKLongPressButton.m */,
+				14985C641890F037004B3ECB /* SKDetailViewController.h */,
+				14985C651890F037004B3ECB /* SKDetailViewController.m */,
+				149FB2EC18909D3500D44DB2 /* SKPhotoCell.h */,
+				149FB2ED18909D3500D44DB2 /* SKPhotoCell.m */,
+				93E8207F189828F100877D38 /* SKImageTag.h */,
+				93E82080189828F100877D38 /* SKImageTag.m */,
+				93E82083189828F100877D38 /* SKTagData.h */,
+				93E82084189828F100877D38 /* SKTagData.m */,
+				93E8207D189828F100877D38 /* SKAssetURLTagsMap.h */,
+				93E8207E189828F100877D38 /* SKAssetURLTagsMap.m */,
+				93E82081189828F100877D38 /* SKTagCollection.h */,
+				93E82082189828F100877D38 /* SKTagCollection.m */,
+				149FB2AE1890845B00D44DB2 /* Images.xcassets */,
+				149FB29D1890845B00D44DB2 /* Supporting Files */,
+			);
+			path = Stickie;
+			sourceTree = "<group>";
+		};
+		149FB29D1890845B00D44DB2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				149FB29E1890845B00D44DB2 /* Stickie-Info.plist */,
+				149FB29F1890845B00D44DB2 /* InfoPlist.strings */,
+				149FB2A21890845B00D44DB2 /* main.m */,
+				149FB2A41890845B00D44DB2 /* Stickie-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		149FB2BB1890845C00D44DB2 /* StickieTests */ = {
+			isa = PBXGroup;
+			children = (
+				93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */,
+				14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */,
+				149FB2BC1890845C00D44DB2 /* Supporting Files */,
+			);
+			path = StickieTests;
+			sourceTree = "<group>";
+		};
+		149FB2BC1890845C00D44DB2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				149FB2BD1890845C00D44DB2 /* StickieTests-Info.plist */,
+				149FB2BE1890845C00D44DB2 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9385097018CD2EA1001AE7DC /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				14A30C0D18D4055B008212CD /* Half circle new.png */,
+				14A497BF18CD31A000AD43FC /* BlueCircle.png */,
+				14A497BD18CD311D00AD43FC /* SearchStickie_222x222.png */,
+				9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */,
+				9385097318CD2EA1001AE7DC /* BlueCorner.png */,
+				9385097418CD2EA1001AE7DC /* GreenCircle.png */,
+				9385097518CD2EA1001AE7DC /* GreenCorner.png */,
+				9385097618CD2EA1001AE7DC /* OrangeCircle.png */,
+				9385097718CD2EA1001AE7DC /* OrangeCorner.png */,
+				9385097818CD2EA1001AE7DC /* RedCircle.png */,
+				9385097918CD2EA1001AE7DC /* RedCorner.png */,
+			);
+			path = Images;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		149FB2921890845B00D44DB2 /* Stickie */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 149FB2C51890845C00D44DB2 /* Build configuration list for PBXNativeTarget "Stickie" */;
+			buildPhases = (
+				149FB28F1890845B00D44DB2 /* Sources */,
+				149FB2901890845B00D44DB2 /* Frameworks */,
+				149FB2911890845B00D44DB2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Stickie;
+			productName = Stickie;
+			productReference = 149FB2931890845B00D44DB2 /* Stickie.app */;
+			productType = "com.apple.product-type.application";
+		};
+		149FB2B31890845B00D44DB2 /* StickieTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 149FB2C81890845C00D44DB2 /* Build configuration list for PBXNativeTarget "StickieTests" */;
+			buildPhases = (
+				149FB2B01890845B00D44DB2 /* Sources */,
+				149FB2B11890845B00D44DB2 /* Frameworks */,
+				149FB2B21890845B00D44DB2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				149FB2BA1890845C00D44DB2 /* PBXTargetDependency */,
+			);
+			name = StickieTests;
+			productName = StickieTests;
+			productReference = 149FB2B41890845B00D44DB2 /* StickieTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		149FB28B1890845B00D44DB2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SK;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Stickie Inc.";
+				TargetAttributes = {
+					149FB2921890845B00D44DB2 = {
+						DevelopmentTeam = 3SSP6848L7;
+					};
+					149FB2B31890845B00D44DB2 = {
+						TestTargetID = 149FB2921890845B00D44DB2;
+					};
+				};
+			};
+			buildConfigurationList = 149FB28E1890845B00D44DB2 /* Build configuration list for PBXProject "Stickie" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 149FB28A1890845B00D44DB2;
+			productRefGroup = 149FB2941890845B00D44DB2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				149FB2921890845B00D44DB2 /* Stickie */,
+				149FB2B31890845B00D44DB2 /* StickieTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		149FB2911890845B00D44DB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9385098218CD2EA1001AE7DC /* RedCorner.png in Resources */,
+				149FB2AF1890845B00D44DB2 /* Images.xcassets in Resources */,
+				9385098118CD2EA1001AE7DC /* RedCircle.png in Resources */,
+				9385097F18CD2EA1001AE7DC /* OrangeCircle.png in Resources */,
+				9385098018CD2EA1001AE7DC /* OrangeCorner.png in Resources */,
+				9385097A18CD2EA1001AE7DC /* App - camera icon (3-8-2014).png in Resources */,
+				9385097C18CD2EA1001AE7DC /* BlueCorner.png in Resources */,
+				149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */,
+				9385097E18CD2EA1001AE7DC /* GreenCorner.png in Resources */,
+				14A30C0E18D4055B008212CD /* Half circle new.png in Resources */,
+				14A497C018CD31A000AD43FC /* BlueCircle.png in Resources */,
+				149FB2AA1890845B00D44DB2 /* Main.storyboard in Resources */,
+				9385097D18CD2EA1001AE7DC /* GreenCircle.png in Resources */,
+				14A497BE18CD311D00AD43FC /* SearchStickie_222x222.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		149FB2B21890845B00D44DB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				149FB2C01890845C00D44DB2 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		149FB28F1890845B00D44DB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93E82089189828F100877D38 /* SKTagData.m in Sources */,
+				14985C661890F037004B3ECB /* SKDetailViewController.m in Sources */,
+				1499CDC618BEE3CB00D0C0EA /* SKTagAssignViewController.m in Sources */,
+				149FB2EE18909D3500D44DB2 /* SKPhotoCell.m in Sources */,
+				149FB2A71890845B00D44DB2 /* SKAppDelegate.m in Sources */,
+				93E82087189828F100877D38 /* SKImageTag.m in Sources */,
+				14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */,
+				93E82088189828F100877D38 /* SKTagCollection.m in Sources */,
+				149FB2AD1890845B00D44DB2 /* SKViewController.m in Sources */,
+				9385098518CD3044001AE7DC /* SKLongPressButton.m in Sources */,
+				149FB2A31890845B00D44DB2 /* main.m in Sources */,
+				93E82086189828F100877D38 /* SKAssetURLTagsMap.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		149FB2B01890845B00D44DB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14B0C7A018A2EFA4008B65C3 /* SKTagCollectionTest.m in Sources */,
+				93E8208C189829A400877D38 /* SKAssetURLTagMapTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		149FB2BA1890845C00D44DB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 149FB2921890845B00D44DB2 /* Stickie */;
+			targetProxy = 149FB2B91890845C00D44DB2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		149FB29F1890845B00D44DB2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				149FB2A01890845B00D44DB2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		149FB2A81890845B00D44DB2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				149FB2A91890845B00D44DB2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		149FB2BE1890845C00D44DB2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				149FB2BF1890845C00D44DB2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		149FB2C31890845C00D44DB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+<<<<<<< HEAD
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sahand Sepehrnia (P79QM9U27L)";
+=======
+				CODE_SIGN_IDENTITY = "";
+>>>>>>> rename
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+<<<<<<< HEAD
+				PROVISIONING_PROFILE = "127D92DA-9A27-4681-A78F-ACFD1A37A389";
+=======
+				PROVISIONING_PROFILE = "A81965D3-DDF4-4C1A-85E0-0AB880187573";
+>>>>>>> rename
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		149FB2C41890845C00D44DB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+<<<<<<< HEAD
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sahand Sepehrnia (P79QM9U27L)";
+=======
+				CODE_SIGN_IDENTITY = "";
+>>>>>>> rename
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+<<<<<<< HEAD
+				PROVISIONING_PROFILE = "127D92DA-9A27-4681-A78F-ACFD1A37A389";
+=======
+				PROVISIONING_PROFILE = "A81965D3-DDF4-4C1A-85E0-0AB880187573";
+>>>>>>> rename
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		149FB2C61890845C00D44DB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Stickie/Stickie-Prefix.pch";
+				INFOPLIST_FILE = "Stickie/Stickie-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Grant/Desktop/GoogleAnalyticsServicesiOS_3.03c,
+					/Users/StephenZ/Desktop/stickie/Stickie/GoogleAnalyticsServicesiOS_3.03c,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		149FB2C71890845C00D44DB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Stickie/Stickie-Prefix.pch";
+				INFOPLIST_FILE = "Stickie/Stickie-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Grant/Desktop/GoogleAnalyticsServicesiOS_3.03c,
+					/Users/StephenZ/Desktop/stickie/Stickie/GoogleAnalyticsServicesiOS_3.03c,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		149FB2C91890845C00D44DB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Stickie.app/Stickie";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Stickie/Stickie-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "StickieTests/StickieTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		149FB2CA1890845C00D44DB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Stickie.app/Stickie";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Stickie/Stickie-Prefix.pch";
+				INFOPLIST_FILE = "StickieTests/StickieTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		149FB28E1890845B00D44DB2 /* Build configuration list for PBXProject "Stickie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				149FB2C31890845C00D44DB2 /* Debug */,
+				149FB2C41890845C00D44DB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		149FB2C51890845C00D44DB2 /* Build configuration list for PBXNativeTarget "Stickie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				149FB2C61890845C00D44DB2 /* Debug */,
+				149FB2C71890845C00D44DB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		149FB2C81890845C00D44DB2 /* Build configuration list for PBXNativeTarget "StickieTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				149FB2C91890845C00D44DB2 /* Debug */,
+				149FB2CA1890845C00D44DB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 149FB28B1890845B00D44DB2 /* Project object */;
+}
