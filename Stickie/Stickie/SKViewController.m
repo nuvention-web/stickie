@@ -91,25 +91,74 @@
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     NSMutableArray *tagArray = [tagCollection getAllTags];
     
+    if (![self tagLocationsAreUnique:tagArray]) {
+        [NSException raise:@"Non-unique locations" format:@"User tags found which non-unique locations (excluding SKCornerLocationUndefined"];
+    }
+    
     /* Reinitialize tags as empty when view loads again, then replace as necessary */
     _topLeftLabel.text = @"";
     _topRightLabel.text = @"";
     _botLeftLabel.text = @"";
     _botRightLabel.text = @"";
     
-    /* Adds names to tags in appropriate order. */
-    if ([tagArray count] > 0) {
-        _topLeftLabel.text = ((SKImageTag *) tagArray[0]).tagName;
+    /* Initialize array of location options for the case a tag has location SKCornerLocationUndefined, which is used for dummy tags and loading the view. */
+    NSMutableArray *locationOptions = [[NSMutableArray alloc] init];
+    [locationOptions addObject: [NSNumber numberWithInt:SKCornerLocationTopLeft]];
+    [locationOptions addObject: [NSNumber numberWithInt:SKCornerLocationTopRight]];
+    [locationOptions addObject: [NSNumber numberWithInt:SKCornerLocationBottomLeft]];
+    [locationOptions addObject: [NSNumber numberWithInt:SKCornerLocationBottomRight]];
+    
+    for (SKImageTag* tag in tagArray) {
+        /* Place tags according to their locations. */
+        if (tag.tagLocation == SKCornerLocationTopLeft) {
+            _topLeftLabel.text = tag.tagName;
+        }
+        else if (tag.tagLocation == SKCornerLocationTopRight) {
+            _topRightLabel.text = tag.tagName;
+        }
+        else if (tag.tagLocation == SKCornerLocationBottomLeft) {
+            _botLeftLabel.text = tag.tagName;
+        }
+        else if (tag.tagLocation == SKCornerLocationBottomRight) {
+            _botRightLabel.text = tag.tagName;
+        }
+        /* Account for SKCornerLocation undefined. */
+        else {
+            NSInteger cornerToAddLabel = [locationOptions[0] integerValue];
+            
+            if (cornerToAddLabel == SKCornerLocationTopLeft) {
+                _topLeftLabel.text = ((SKImageTag *) tagArray[0]).tagName;
+            }
+            else if (cornerToAddLabel == SKCornerLocationTopRight) {
+                _topRightLabel.text = ((SKImageTag *) tagArray[1]).tagName;
+            }
+            else if (cornerToAddLabel == SKCornerLocationBottomLeft) {
+                _botLeftLabel.text = ((SKImageTag *) tagArray[2]).tagName;
+            }
+            else if (cornerToAddLabel == SKCornerLocationBottomRight) {
+                _botRightLabel.text = ((SKImageTag *) tagArray[3]).tagName;
+            }
+            [locationOptions removeObjectAtIndex:0];    // Updated location options.
+        }
+        
+        /* Update location options. */
+        if (tag.tagLocation != SKCornerLocationUndefined) {
+            [locationOptions removeObject:[NSNumber numberWithInt:tag.tagLocation]];
+        }
     }
-    if ([tagArray count] > 1) {
-        _topRightLabel.text = ((SKImageTag *) tagArray[1]).tagName;
+}
+
+/* Returns NO if tagArray has SKImageTag objects with non-unique tagLocations (excluding SKCornerLocationUndefined) and YES otherwise. */
+- (BOOL) tagLocationsAreUnique: (NSMutableArray *) tagArray
+{
+    NSMutableArray *locations = [[NSMutableArray alloc] init];
+    for (SKImageTag* tag in tagArray) {
+        if ([locations containsObject:[NSNumber numberWithInt:tag.tagLocation]] && tag.tagLocation != SKCornerLocationUndefined) {
+            return NO;
+        }
+        [locations addObject: [NSNumber numberWithInt:tag.tagLocation]];
     }
-    if ([tagArray count] > 2) {
-        _botLeftLabel.text = ((SKImageTag *) tagArray[2]).tagName;
-    }
-    if ([tagArray count] > 3) {
-        _botRightLabel.text = ((SKImageTag *) tagArray[3]).tagName;
-    }
+    return YES;
 }
 
 /* Enumerates through all user ALAssets and collects them in _assets. */

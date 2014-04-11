@@ -170,6 +170,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         SKTagCollection *collection = [SKTagCollection sharedInstance];
         SKImageTag *tag = [[SKImageTag alloc] init];
         tag.tagName = buttonPressed;
+        
+        /* Define a location for equality comparisons (undefined not factored in). */
         tag.tagLocation = SKCornerLocationUndefined;
         
         SKTagData *tagData = [collection getTagInfo:tag];

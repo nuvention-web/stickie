@@ -10,12 +10,13 @@
 
 @interface SKImageTag : NSObject <NSCopying, NSCoding>
 
+/* Useful for characterizing location of tags, corner buttons. */
 typedef enum {
-    SKCornerLocationTopRight,
+    SKCornerLocationUndefined,
     SKCornerLocationTopLeft,
+    SKCornerLocationTopRight,
     SKCornerLocationBottomLeft,
     SKCornerLocationBottomRight,
-    SKCornerLocationUndefined
 } SKCornerLocation;
 
 @property (nonatomic) NSString *tagName;

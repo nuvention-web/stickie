@@ -45,12 +45,11 @@
 
 - (BOOL) isEqualToTag:(SKImageTag *) tag
 {
-    /* Objective-C is weird with equality (i.e. [nil isEqual:nil] evaluates to NO) */
+    /* Objective-C is weird with equality (i.e. [nil isEqual:nil] evaluates to NO)
+     * NOTE: Location is not a factor in determining equality. */
     if (([tag.tagName isEqualToString:_tagName] || (!tag.tagName && !_tagName)) &&
         ([tag.tagColor isEqual:_tagColor] || (!tag.tagColor && !_tagColor))) {
-        if (tag.tagLocation == _tagLocation || tag.tagLocation == SKCornerLocationUndefined || _tagLocation == SKCornerLocationUndefined) {
-            return YES;
-        }
+        return YES;
     }
     return NO;
 }
@@ -70,7 +69,7 @@
 
 - (NSUInteger) hash
 {
-    return [self.tagName hash] ^ [self.tagColor hash] ^ [[NSNumber numberWithInt:self.tagLocation+1] hash];
+    return [self.tagName hash] ^ [self.tagColor hash];
 }
 
 - (id) copyWithZone: (NSZone *)zone
