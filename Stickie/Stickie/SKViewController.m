@@ -195,6 +195,10 @@
             [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
         }
     }
+    else {
+       [self loadImageAssets]; 
+    }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -205,24 +209,30 @@
 
 #pragma mark - collection view data source
 
-- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.assets.count;
 }
 
 /* Load images into cells. */
-- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SKPhotoCell *cell = (SKPhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     
     ALAsset *asset = self.assets[indexPath.row];
+
     cell.asset = asset;
+    
+    cell.topLeftCorner = _topLeftLabel.text;
+    cell.topRightCorner = _topRightLabel.text;
+    cell.botLeftCorner = _botLeftLabel.text;
+    cell.botRightCorner = _botRightLabel.text;
     
     return cell;
 }
 
 /* Adjust image spacing. */
-- (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 4;
 }
@@ -325,12 +335,6 @@
     SKImageTag *tag;
     UIButton *button;
     
-    UIAlertView *alertRemove = [[UIAlertView alloc] initWithTitle:@"Untagged"
-                                                       message:nil
-                                                      delegate:nil
-                                             cancelButtonTitle:@"OK"
-                                             otherButtonTitles:nil];
-    
     UIAlertView *alertEmptyTag = [[UIAlertView alloc] initWithTitle:@"The tag is unlabeled."
                                                           message:@"Tap on the corner to create tag."
                                                          delegate:nil
@@ -372,12 +376,20 @@
             [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
         }
         else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
-            [alertRemove show];
-            
+            [UIView animateWithDuration:0.1 animations:^{
+                button.alpha = 0.0;
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.9 animations:^{
+                    button.alpha = 1.0;
+                } completion:^(BOOL finished) {
+                    // Cleanup stuff.
+                }];
+            }];
             /* Logic for removing a tag from a new image - it is necessary to update both urlToTagMap and tagCollection. */
             [urlToTagMap removeTag:tag forAssetURL:assetURL];
             [tagCollection removeImageURL:assetURL forTag:tag];
         }
+        [self loadImageAssets];
     }
     else {
         [alertEmptyTag show];
@@ -570,7 +582,7 @@ finishedSavingWithError:(NSError *)error
 }
 
 /* Assigns label to corner. */
-- (void) assignTagText: (SKTagSearchViewController *) tagSearchViewController
+- (void)assignTagText: (SKTagSearchViewController *) tagSearchViewController
 {
     tagSearchViewController.topLeftText = _topLeftLabel.text;
     tagSearchViewController.topRightText = _topRightLabel.text;
