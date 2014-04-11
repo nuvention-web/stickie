@@ -20,7 +20,7 @@
 
 @implementation SKDetailViewController
 
--(void) viewDidLoad
+-(void)viewDidLoad
 {
     /* So UIImageView is centered properly. */
     self.automaticallyAdjustsScrollViewInsets = NO;

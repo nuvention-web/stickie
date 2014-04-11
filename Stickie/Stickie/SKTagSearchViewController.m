@@ -66,7 +66,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                                                object:nil];
 }
 
-- (void) viewWillAppear: (BOOL) animation
+- (void)viewWillAppear: (BOOL) animation
 {
     /* Pre-populating view according to button selected. */
     if ([_callButtonOnLoad isEqualToString:@"topLeftButton"]) {
@@ -85,7 +85,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [self loadCurrentTag];
 }
 
-- (void) loadCurrentTag
+- (void)loadCurrentTag
 {
     if (topLeftClicked) {
         [_topLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
@@ -105,7 +105,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void) applicationWillEnterForeground:(NSNotification *) notification
+- (void)applicationWillEnterForeground:(NSNotification *) notification
 {
     library = [[ALAssetsLibrary alloc] init];
     [self loadCurrentTag];
@@ -117,12 +117,12 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     // Dispose of any resources that can be recreated.
 }
 
-- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.assets.count;
 }
 
-- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SKPhotoCell *cell = (SKPhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"searchCell" forIndexPath:indexPath];
     
@@ -132,19 +132,50 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     return cell;
 }
 
-- (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 4;
 }
 
-- (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     return 1;
 }
 
--(IBAction) colorButton:(id)sender
+-(IBAction)colorButton:(id)sender
 {
     /* Reset view. */
+    UIImage *topLeftButtonImage = [UIImage imageNamed:@"BlueCircle.png"];
+    UIImage *topRightButtonImage = [UIImage imageNamed:@"GreenCircle.png"];
+    UIImage *botLeftButtonImage = [UIImage imageNamed:@"RedCircle.png"];
+    UIImage *botRightButtonImage = [UIImage imageNamed:@"OrangeCircle.png"];
+    [_topLeftButton setBackgroundImage:topLeftButtonImage forState:UIControlStateNormal];
+    [self.view addSubview:_topLeftButton];
+    [_topRightButton setBackgroundImage:topRightButtonImage forState:UIControlStateNormal];
+    [self.view addSubview:_topLeftButton];
+    [_botLeftButton setBackgroundImage:botLeftButtonImage forState:UIControlStateNormal];
+    [self.view addSubview:_topLeftButton];
+    [_botRightButton setBackgroundImage:botRightButtonImage forState:UIControlStateNormal];
+    [self.view addSubview:_topLeftButton];
+    
+    CGRect  TLButtonFrame = _topLeftButton.frame;
+    TLButtonFrame.size = CGSizeMake(65, 65);
+    TLButtonFrame.origin = CGPointMake(12,92);
+    _topLeftButton.frame = TLButtonFrame;
+    CGRect  TRButtonFrame = _topRightButton.frame;
+    TRButtonFrame.size = CGSizeMake(65, 65);
+    TRButtonFrame.origin = CGPointMake(89,92);
+    _topRightButton.frame = TRButtonFrame;
+    CGRect  BLButtonFrame = _botLeftButton.frame;
+    BLButtonFrame.size = CGSizeMake(65, 65);
+    BLButtonFrame.origin = CGPointMake(167,92);
+    _botLeftButton.frame = BLButtonFrame;
+    CGRect  BRButtonFrame = _botRightButton.frame;
+    BRButtonFrame.size = CGSizeMake(65, 65);
+    BRButtonFrame.origin = CGPointMake(244,92);
+    _botRightButton.frame = BRButtonFrame;
+    
+    
     topLeftClicked = NO, topRightClicked = NO, botLeftClicked = NO, botRightClicked = NO;
     [_assets removeAllObjects];
     [_collectionView reloadData];
@@ -190,14 +221,42 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             }];
         }
         
-        if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text])
+        if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text]){
+            topLeftButtonImage = [UIImage imageNamed:@"BlueWithRetrieval.png"];
+            TLButtonFrame.size = CGSizeMake(69, 69);
+            TLButtonFrame.origin = CGPointMake(10,90);
+            _topLeftButton.frame = TLButtonFrame;
+            [_topLeftButton setBackgroundImage:topLeftButtonImage forState:UIControlStateNormal];
+            [self.view addSubview:_topLeftButton];
             topLeftClicked = YES;
-        else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text])
+        }
+        else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text]){
+            topRightButtonImage = [UIImage imageNamed:@"GreenWithRetrieval.png"];
+            TRButtonFrame.size = CGSizeMake(69, 69);
+            TRButtonFrame.origin = CGPointMake(87,90);
+            _topRightButton.frame = TRButtonFrame;
+            [_topRightButton setBackgroundImage:topRightButtonImage forState:UIControlStateNormal];
+            [self.view addSubview:_topRightButton];
             topRightClicked = YES;
-        else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text])
+        }
+        else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text]){
+            botLeftButtonImage = [UIImage imageNamed:@"RedWithRetrieval.png"];
+            BLButtonFrame.size = CGSizeMake(69, 69);
+            BLButtonFrame.origin = CGPointMake(165,90);
+            _botLeftButton.frame = BLButtonFrame;
+            [_botLeftButton setBackgroundImage:botLeftButtonImage forState:UIControlStateNormal];
+            [self.view addSubview:_botLeftButton];
             botLeftClicked = YES;
-        else if ([buttonPressed isEqualToString:_botRightButton.titleLabel.text])
+        }
+        else if ([buttonPressed isEqualToString:_botRightButton.titleLabel.text]){
+            botRightButtonImage = [UIImage imageNamed:@"OrangeWithRetrieval.png"];
+            BRButtonFrame.size = CGSizeMake(69, 69);
+            BRButtonFrame.origin = CGPointMake(242,90);
+            _botRightButton.frame = BRButtonFrame;
+            [_botRightButton setBackgroundImage:botRightButtonImage forState:UIControlStateNormal];
+            [self.view addSubview:_botRightButton];
             botRightClicked = YES;
+        }
     }
 }
 

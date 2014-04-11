@@ -88,7 +88,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[SKAssetURLTagsMap sharedInstance]] forKey:@"tagsMap"];
 }
 
-- (void) checkAndHandleDeletedPhotos
+- (void)checkAndHandleDeletedPhotos
 {
     /* Check to ensure no photos have been deleted while the user switched applications. */
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];

@@ -160,13 +160,13 @@
 
 #pragma mark - collection view data source
 
-- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.assets.count;
 }
 
 /* Load images into cells. */
-- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SKPhotoCell *cell = (SKPhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     
@@ -183,7 +183,7 @@
 }
 
 /* Adjust image spacing. */
-- (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 4;
 }
@@ -533,7 +533,7 @@ finishedSavingWithError:(NSError *)error
 }
 
 /* Assigns label to corner. */
-- (void) assignTagText: (SKTagSearchViewController *) tagSearchViewController
+- (void)assignTagText: (SKTagSearchViewController *) tagSearchViewController
 {
     tagSearchViewController.topLeftText = _topLeftLabel.text;
     tagSearchViewController.topRightText = _topRightLabel.text;
