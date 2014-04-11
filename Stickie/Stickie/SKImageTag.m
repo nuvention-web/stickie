@@ -70,8 +70,7 @@
 
 - (NSUInteger) hash
 {
-    NSUInteger PRIME_SEED = 31;
-    return [self.tagName hash] ^ [self.tagColor hash] ^ ((self.tagLocation + 1) * PRIME_SEED);
+    return [self.tagName hash] ^ [self.tagColor hash] ^ [[NSNumber numberWithInt:self.tagLocation+1] hash];
 }
 
 - (id) copyWithZone: (NSZone *)zone
@@ -81,6 +80,7 @@
     if (tag) {
         tag.tagColor = _tagColor;
         tag.tagName = _tagName;
+        tag.tagLocation = _tagLocation;
     }
     return tag;
 }
