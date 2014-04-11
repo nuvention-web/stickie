@@ -10,10 +10,22 @@
 
 @interface SKImageTag : NSObject <NSCopying, NSCoding>
 
+typedef enum {
+    SKCornerLocationTopRight,
+    SKCornerLocationTopLeft,
+    SKCornerLocationBottomLeft,
+    SKCornerLocationBottomRight,
+    SKCornerLocationUndefined
+} SKCornerLocation;
+
 @property (nonatomic) NSString *tagName;
 @property (nonatomic) UIColor *tagColor;
+@property (nonatomic) SKCornerLocation tagLocation;
 
--(id)initWithName: (NSString *) str andColor: (UIColor *) color;
--(BOOL)isEqualToTag:(SKImageTag *) tag;
+/* DEPRECATED. */
+- (id) initWithName: (NSString *) name andColor: (UIColor *) color __attribute__((deprecated));
+
+- (id) initWithName: (NSString *) name location: (SKCornerLocation) location andColor: (UIColor *) color;
+- (BOOL) isEqualToTag:(SKImageTag *) tag;
 
 @end

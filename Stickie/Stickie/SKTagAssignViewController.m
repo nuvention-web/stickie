@@ -33,10 +33,10 @@
 - (IBAction) done:(id)sender
 {
     if ([_tagTextField.text isEqualToString:@""]) {
-        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text for:_source andDelete:YES];
+        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text forLocation:_location andDelete:YES];
     }
     else {
-        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text for:_source andDelete:NO];
+        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text forLocation:_location andDelete:NO];
     }
 }
 
@@ -62,7 +62,7 @@
 
 - (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        [self.delegate tagAssignViewController:self didAddTag:@"" for:_source andDelete:YES];
+        [self.delegate tagAssignViewController:self didAddTag:@"" forLocation:_location andDelete:YES];
     }
 }
 @end

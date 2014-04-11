@@ -48,7 +48,7 @@
     /* If there is nothing to unarchive. */
     if (!tagCollection) {
         tagCollection = [SKTagCollection sharedInstance];
-        SKImageTag *tag = [[SKImageTag alloc] initWithName:@"" andColor:nil];
+        SKImageTag *tag = [[SKImageTag alloc] initWithName:@"" location:SKCornerLocationUndefined andColor:nil];
         [tagCollection addTagToCollection:tag];
     }
     

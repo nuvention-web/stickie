@@ -120,26 +120,5 @@
     [tagCollection removeAllTags];
 }
 
-//-(void)testChangeTagToFreqOneHigherOrLower
-//{
-//    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
-//    [tagCollection removeAllTags];
-//    
-//    SKImageTag *tag = [[SKImageTag alloc] init];
-//    tag.tagName = @"john";
-//    [tagCollection updateCollectionWithTag: tag];
-//    SKTagData *data = [tagCollection getTagInfo:tag];
-//    XCTAssertTrue(data.tagFrequencyInPhotos == 1, "john appears in collection only once.");
-//    
-//    [tagCollection changeTag:tag toFreqOneHigherOrLower:HIGHER];
-//    data = [tagCollection getTagInfo:tag];
-//    XCTAssertTrue(data.tagFrequencyInPhotos == 2, "john has a frequency of 2.");
-//    
-//    [tagCollection changeTag:tag toFreqOneHigherOrLower:LOWER];
-//    data = [tagCollection getTagInfo:tag];
-//    XCTAssertTrue(data.tagFrequencyInPhotos == 1, "john has a frequency of 1.");
-//    [tagCollection removeAllTags];
-//}
-
 
 @end

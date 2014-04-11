@@ -270,7 +270,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                                                 otherButtonTitles:nil];
 
     if (point.x >= 86 && point.x <= 234 && point.y >= 524 - TAG_SENSITIVITY && point.y <= 568){
-        tag = [[SKImageTag alloc] initWithName:currentTag andColor:nil];
+        tag = [[SKImageTag alloc] initWithName:currentTag location:SKCornerLocationUndefined andColor:nil];
         if (![tag.tagName isEqualToString:@""]) {
             if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
                 [urlToTagMap removeTag:tag forAssetURL:assetURL];
@@ -306,7 +306,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         detailViewController.image = image;
         detailViewController.imageURL = url;
         detailViewController.assets = _assets;
-        detailViewController->imageIndex = indexPath.row;
+        detailViewController->imageIndex = (int) indexPath.row;
     }
 }
 

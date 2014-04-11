@@ -290,25 +290,25 @@
     
     /* Tag event occurs in top-left corner */
     if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X * 1.5 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
-        tag = [[SKImageTag alloc] initWithName:_topLeftLabel.text andColor:nil];
+        tag = [[SKImageTag alloc] initWithName:_topLeftLabel.text location:SKCornerLocationTopLeft andColor:nil];
         button = _topLeftCorner;
     }
     else if (point.x >= 255 - TAG_SENSITIVITY_X * 1.5 && point.x <= 320 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
-        tag = [[SKImageTag alloc] initWithName:_topRightLabel.text andColor:nil];
+        tag = [[SKImageTag alloc] initWithName:_topRightLabel.text location:SKCornerLocationTopRight andColor:nil];
         button = _topRightCorner;
     }
     else if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568) {
-        tag = [[SKImageTag alloc] initWithName:_botLeftLabel.text andColor:nil];
+        tag = [[SKImageTag alloc] initWithName:_botLeftLabel.text location:SKCornerLocationBottomLeft andColor:nil];
         button = _botLeftCorner;
     }
     else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568) {
-        tag = [[SKImageTag alloc] initWithName:_botRightLabel.text andColor:nil];
+        tag = [[SKImageTag alloc] initWithName:_botRightLabel.text location:SKCornerLocationBottomRight andColor:nil];
         button = _botRightCorner;
     }
     
     if (![tag.tagName isEqualToString:@""]) {
         if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
-            [UIView animateWithDuration:1.2 animations:^{
+            [UIView animateWithDuration:0.1 animations:^{
                 button.alpha = 0.0;
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.9 animations:^{
@@ -440,7 +440,7 @@ finishedSavingWithError:(NSError *)error
         detailViewController.image = image;
         detailViewController.imageURL = url;
         detailViewController.assets = _assets;
-        detailViewController->imageIndex = indexPath.row;
+        detailViewController->imageIndex = (int) indexPath.row;
     }
     
     /* Routes to tag search view. */
@@ -479,7 +479,7 @@ finishedSavingWithError:(NSError *)error
         if ([_topLeftLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
         }
-        tagAssignViewController.source = @"topLeft";
+        tagAssignViewController.location = SKCornerLocationTopLeft;
         tagAssignViewController.delegate = self;
         tagAssignViewController.preLabel = _topLeftLabel.text;
 
@@ -490,7 +490,7 @@ finishedSavingWithError:(NSError *)error
         if ([_topRightLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
         }
-        tagAssignViewController.source = @"topRight";
+        tagAssignViewController.location = SKCornerLocationTopRight;
         tagAssignViewController.delegate = self;
         tagAssignViewController.preLabel = _topRightLabel.text;
 
@@ -502,7 +502,7 @@ finishedSavingWithError:(NSError *)error
         if ([_botLeftLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
         }
-        tagAssignViewController.source = @"botLeft";
+        tagAssignViewController.location = SKCornerLocationBottomLeft;
         tagAssignViewController.delegate = self;
         tagAssignViewController.preLabel = _botLeftLabel.text;
 
@@ -513,7 +513,7 @@ finishedSavingWithError:(NSError *)error
         if ([_botRightLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
         }
-        tagAssignViewController.source = @"botRight";
+        tagAssignViewController.location = SKCornerLocationBottomRight;
         tagAssignViewController.delegate = self;
         tagAssignViewController.preLabel = _botRightLabel.text;
 
@@ -536,10 +536,10 @@ finishedSavingWithError:(NSError *)error
 }
 
 /* Edit or delete tags from SKTagAssignViewController. */
-- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR for:(NSString *)corner andDelete:(BOOL)delete
+- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR forLocation:(SKCornerLocation) cornerLocation andDelete:(BOOL)delete
 {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
-    SKImageTag *tag = [[SKImageTag alloc] initWithName:tagSTR andColor:nil];
+    SKImageTag *tag = [[SKImageTag alloc] initWithName:tagSTR location:cornerLocation andColor:nil];
     SKImageTag *oldTag =[SKImageTag alloc];
     SKAssetURLTagsMap *urlTagsMap = [SKAssetURLTagsMap sharedInstance];
     
@@ -547,8 +547,8 @@ finishedSavingWithError:(NSError *)error
         if (![tag.tagName isEqualToString:@""]){
             [tagCollection addTagToCollection:tag];
         }
-        if ([corner isEqualToString:@"topLeft"]) {
-            oldTag = [oldTag initWithName:_topLeftLabel.text andColor:nil];
+        if (cornerLocation == SKCornerLocationTopLeft) {
+            oldTag = [oldTag initWithName:_topLeftLabel.text location:cornerLocation andColor:nil];
             if (!delete) {
                 [urlTagsMap transferURLSFrom:oldTag to:tag];
             }
@@ -556,8 +556,8 @@ finishedSavingWithError:(NSError *)error
             [tagCollection removeTag:oldTag];
             _topLeftLabel.text = tagSTR;
         }
-        else if ([corner isEqualToString:@"topRight"]) {
-            oldTag = [oldTag initWithName:_topRightLabel.text andColor:nil];
+        else if (cornerLocation == SKCornerLocationTopRight) {
+            oldTag = [oldTag initWithName:_topRightLabel.text location:cornerLocation andColor:nil];
             if (!delete) {
                 [urlTagsMap transferURLSFrom:oldTag to:tag];
             }
@@ -565,8 +565,8 @@ finishedSavingWithError:(NSError *)error
             [tagCollection removeTag: oldTag];
             _topRightLabel.text = tagSTR;
         }
-        else if ([corner isEqualToString:@"botLeft"]) {
-            oldTag = [oldTag initWithName:_botLeftLabel.text andColor:nil];
+        else if (cornerLocation == SKCornerLocationBottomLeft) {
+            oldTag = [oldTag initWithName:_botLeftLabel.text location:cornerLocation andColor:nil];
             if (!delete) {
                 [urlTagsMap transferURLSFrom:oldTag to:tag];
             }
@@ -574,8 +574,8 @@ finishedSavingWithError:(NSError *)error
             [tagCollection removeTag:oldTag];
             _botLeftLabel.text = tagSTR;
         }
-        else if ([corner isEqualToString:@"botRight"]) {
-            oldTag = [oldTag initWithName:_botRightLabel.text andColor:nil];
+        else if (cornerLocation == SKCornerLocationBottomRight) {
+            oldTag = [oldTag initWithName:_botRightLabel.text location:cornerLocation andColor:nil];
             if (!delete) {
                 [urlTagsMap transferURLSFrom:oldTag to:tag];
             }
