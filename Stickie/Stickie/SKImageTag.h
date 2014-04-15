@@ -27,6 +27,8 @@ typedef enum {
 - (id) initWithName: (NSString *) name andColor: (UIColor *) color __attribute__((deprecated));
 
 - (id) initWithName: (NSString *) name location: (SKCornerLocation) location andColor: (UIColor *) color;
+
+/* Compares equality of tags. NOTE: tagLocation is not factored into tag equality; however, tagName and tagColor IS. */
 - (BOOL) isEqualToTag:(SKImageTag *) tag;
 
 @end
