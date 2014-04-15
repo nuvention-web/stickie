@@ -53,30 +53,54 @@
 {
     [super viewDidLoad];
     self.screenName = @"Home Screen";                   // For Google Analytics.
-    self.automaticallyAdjustsScrollViewInsets = NO;     // Necessary to remove erroneous spacing at top of collection view.
-    defaultPoint = CGPointMake(50.0, 0.0);              // Sets default point for draggable ghost image.
-    
-    [self loadTags];
-    [self loadImageAssets];
-    
-    /* Setting up long-press gesture recognizer and adding it to collectionView and corner buttons */
-    UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
-    longGestureRecognizer.minimumPressDuration = 0.15;
-    longGestureRecognizer.delegate = self;
-    _dNewImageView.userInteractionEnabled = YES;
-    [self.collectionView addGestureRecognizer:longGestureRecognizer];
-    [self.topLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
-    [self.topRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
-    [self.botLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
-    [self.botRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
-    
-    /* Add observer to main view controller to determine when this specific view enters foreground. */
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillEnterForeground:)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
-    
-    /* Note, the notification center is intentially left unremoved from this view in viewWillDisappear - for the cases that a photo is deleted when the user is outside this application */
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"wasLaunchedBefore"]) {
+        [[self navigationController] setNavigationBarHidden:YES animated:YES];
+        _pageImages = @[@"page1.png", @"page2.png", @"page3.png"];
+        
+        // Create page view controller
+        self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
+        self.pageViewController.dataSource = self;
+        
+        SKTutorialViewController *startingViewController = [self viewControllerAtIndex:0];
+        NSArray *viewControllers = @[startingViewController];
+        [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        
+        // Change the size of page view controller
+        self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        
+        [self addChildViewController:_pageViewController];
+        [self.view addSubview:_pageViewController.view];
+        [self.pageViewController didMoveToParentViewController:self];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"wasLaunchedBefore"];
+    }
+    else {
+        [[self navigationController] setNavigationBarHidden:NO animated:YES];
+      
+        self.automaticallyAdjustsScrollViewInsets = NO;     // Necessary to remove erroneous spacing at top of collection view.
+        defaultPoint = CGPointMake(50.0, 0.0);              // Sets default point for draggable ghost image.
+        
+        [self loadTags];
+        [self loadImageAssets];
+        
+        /* Setting up long-press gesture recognizer and adding it to collectionView and corner buttons */
+        UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
+        longGestureRecognizer.minimumPressDuration = 0.15;
+        longGestureRecognizer.delegate = self;
+        _dNewImageView.userInteractionEnabled = YES;
+        [self.collectionView addGestureRecognizer:longGestureRecognizer];
+        [self.topLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+        [self.topRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+        [self.botLeftCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+        [self.botRightCorner setLongTouchAction:@selector(longPressCornerRecognized:) withTarget:self];
+        
+        /* Add observer to main view controller to determine when this specific view enters foreground. */
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationWillEnterForeground:)
+                                                     name:UIApplicationWillEnterForegroundNotification
+                                                   object:nil];
+        
+        /* Note, the notification center is intentially left unremoved from this view in viewWillDisappear - for the cases that a photo is deleted when the user is outside this application */
+    }
 }
 
 - (void) applicationWillEnterForeground:(NSNotification *) notification
@@ -85,6 +109,62 @@
     [self loadImageAssets];
 }
 
+#pragma mark - Tutorial Page View Controller Data Source
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+{
+    NSUInteger index = ((SKTutorialViewController*) viewController).pageIndex;
+    
+    if ((index == 0) || (index == NSNotFound)) {
+        return nil;
+    }
+    
+    index--;
+    return [self viewControllerAtIndex:index];
+}
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+{
+    NSUInteger index = ((SKTutorialViewController*) viewController).pageIndex;
+    
+    if (index == NSNotFound) {
+        return nil;
+    }
+    
+    index++;
+    if (index == [self.pageImages count]) {
+        [((SKTutorialViewController*) viewController).view bringSubviewToFront:((SKTutorialViewController*) viewController).startButton];
+    }
+    return [self viewControllerAtIndex:index];
+}
+
+- (SKTutorialViewController *)viewControllerAtIndex:(NSUInteger)index
+{
+    if (([self.pageImages count] == 0) || (index >= [self.pageImages count])) {
+        return nil;
+    }
+    
+    // Create a new view controller and pass suitable data.
+    SKTutorialViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialViewController"];
+    pageContentViewController.imageFile = self.pageImages[index];
+    pageContentViewController.pageIndex = index;
+    [pageContentViewController.view sendSubviewToBack:pageContentViewController.startButton];
+
+    
+    return pageContentViewController;
+}
+
+- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
+{
+    return [self.pageImages count];
+}
+
+- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
+{
+    return 0;
+}
+
+#pragma mark - Main Screen
 /* Sets name of tags based on serialized tag information. */
 - (void)loadTags
 {
