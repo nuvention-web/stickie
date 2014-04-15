@@ -20,10 +20,10 @@
 {
     _asset = asset;
     SKAssetURLTagsMap *urlTagsMap = [SKAssetURLTagsMap sharedInstance];
-    SKImageTag *topLeftTag = [[SKImageTag alloc] initWithName:_topLeftCorner andColor:nil];
-    SKImageTag *topRightTag = [[SKImageTag alloc] initWithName:_topRightCorner andColor:nil];
-    SKImageTag *botLeftTag = [[SKImageTag alloc] initWithName:_botLeftCorner andColor:nil];
-    SKImageTag *botRightTag = [[SKImageTag alloc] initWithName:_botRightCorner andColor:nil];
+    SKImageTag *topLeftTag = [[SKImageTag alloc] initWithName:_topLeftCorner location:SKCornerLocationTopLeft andColor:nil];
+    SKImageTag *topRightTag = [[SKImageTag alloc] initWithName:_topRightCorner location:SKCornerLocationTopRight andColor:nil];
+    SKImageTag *botLeftTag = [[SKImageTag alloc] initWithName:_botLeftCorner location:SKCornerLocationBottomLeft andColor:nil];
+    SKImageTag *botRightTag = [[SKImageTag alloc] initWithName:_botRightCorner location:SKCornerLocationBottomRight andColor:nil];
     NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
     UIImage *backgroundImage = [UIImage imageWithCGImage:[asset thumbnail]];
     UIImage *topLeftWatermarkImage = [UIImage imageNamed:@"BlueCorner.png"];

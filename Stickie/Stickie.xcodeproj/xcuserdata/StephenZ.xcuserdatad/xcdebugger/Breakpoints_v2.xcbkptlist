@@ -127,7 +127,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "120"
             endingLineNumber = "120"
-            landmarkName = "-loadImageAssets"
+            landmarkName = "-loadTags"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -143,7 +143,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "119"
             endingLineNumber = "119"
-            landmarkName = "-loadImageAssets"
+            landmarkName = "-loadTags"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -159,7 +159,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "118"
             endingLineNumber = "118"
-            landmarkName = "-loadImageAssets"
+            landmarkName = "-loadTags"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -175,7 +175,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "361"
             endingLineNumber = "361"
-            landmarkName = "-useCamera"
+            landmarkName = "-recordTags:forURL:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -191,7 +191,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "353"
             endingLineNumber = "353"
-            landmarkName = "-takePhotoButtonTapped:"
+            landmarkName = "-recordTags:forURL:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -301,7 +301,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "567"
             endingLineNumber = "567"
-            landmarkName = "-tagAssignViewController:didAddTag:for:andDelete:"
+            landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
