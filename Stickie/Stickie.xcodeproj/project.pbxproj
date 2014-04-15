@@ -591,6 +591,7 @@
 					"$(inherited)",
 					/Users/Grant/Desktop/GoogleAnalyticsServicesiOS_3.03c,
 					/Users/StephenZ/Desktop/stickie/Stickie/GoogleAnalyticsServicesiOS_3.03c,
+					/Users/gsheld/stickie/GoogleAnalyticsServicesiOS_3.06,
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -619,6 +620,7 @@
 					"$(inherited)",
 					/Users/Grant/Desktop/GoogleAnalyticsServicesiOS_3.03c,
 					/Users/StephenZ/Desktop/stickie/Stickie/GoogleAnalyticsServicesiOS_3.03c,
+					/Users/gsheld/stickie/GoogleAnalyticsServicesiOS_3.06,
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
