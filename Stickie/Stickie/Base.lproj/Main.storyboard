@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="SJT-Fy-lx7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="SJT-Fy-lx7">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--View Controller - MainGallery-->
@@ -13,26 +13,26 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="InS-wl-dcP">
-                                <rect key="frame" x="8" y="130" width="304" height="365"/>
+                                <rect key="frame" x="4" y="132" width="312" height="366"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Yub-vE-j5q">
-                                    <size key="itemSize" width="73" height="73"/>
+                                    <size key="itemSize" width="75" height="75"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="Prg-ZQ-8I9" customClass="SKPhotoCell">
-                                        <rect key="frame" x="0.0" y="64" width="73" height="73"/>
+                                        <rect key="frame" x="0.0" y="64" width="75" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="73" height="73"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="mIl-fn-xEd">
-                                                    <rect key="frame" x="0.0" y="0.0" width="73" height="73"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="77" height="77"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <gestureRecognizers/>
                                                 </imageView>
@@ -54,20 +54,20 @@
                                 <rect key="frame" x="0.0" y="63" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ida-78-yow">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ida-78-yow" customClass="SKLongPressButton">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="BlueCorner" image="BlueCorner_106x106.png">
+                                        <state key="normal" title="topLeftCorner" image="BlueCorner.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="iXZ-cN-TVP" kind="modal" identifier="topLeftTag" id="DV0-Mc-7un"/>
+                                            <segue destination="lsA-Em-eke" kind="push" identifier="topLeftTag" id="9Lq-CT-BBf"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d0k-6x-Qhh">
-                                        <rect key="frame" x="0.0" y="11" width="55" height="21"/>
+                                        <rect key="frame" x="0.0" y="13" width="56" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -78,20 +78,20 @@
                                 <rect key="frame" x="255" y="63" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nzz-3R-C1g">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nzz-3R-C1g" customClass="SKLongPressButton">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="RedCorner" image="RedCorner_106x106.png">
+                                        <state key="normal" title="topRightCorner" image="GreenCorner.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="iXZ-cN-TVP" kind="modal" identifier="topRightTag" id="uZh-4e-u4L"/>
+                                            <segue destination="lsA-Em-eke" kind="push" identifier="topRightTag" id="MwU-ZH-Bpp"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aHt-Lw-nUa">
-                                        <rect key="frame" x="11" y="11" width="51" height="21"/>
+                                        <rect key="frame" x="9" y="13" width="56" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -102,20 +102,20 @@
                                 <rect key="frame" x="0.0" y="503" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="y0n-mJ-YeQ">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="y0n-mJ-YeQ" customClass="SKLongPressButton">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="GreenCorner" image="GreenCorner_106x106.png">
+                                        <state key="normal" title="botLeftCorner" image="RedCorner.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="iXZ-cN-TVP" kind="modal" identifier="botLeftTag" id="GKa-30-X3s"/>
+                                            <segue destination="lsA-Em-eke" kind="push" identifier="botLeftTag" id="HT1-Rb-ZNM"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Da7-GR-7sd">
-                                        <rect key="frame" x="0.0" y="24" width="53" height="21"/>
+                                        <rect key="frame" x="0.0" y="29" width="56" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -126,18 +126,18 @@
                                 <rect key="frame" x="255" y="503" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4pC-6C-CtT">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4pC-6C-CtT" customClass="SKLongPressButton">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="PinkCorner" image="PinkCorner_106x106.png">
+                                        <state key="normal" title="botRightCorner" image="OrangeCorner.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="iXZ-cN-TVP" kind="modal" identifier="botRightTag" id="Buw-Fm-mcW"/>
+                                            <segue destination="lsA-Em-eke" kind="push" identifier="botRightTag" id="gwP-KI-MWf"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IGM-6F-hVZ">
-                                        <rect key="frame" x="20" y="24" width="45" height="21"/>
+                                        <rect key="frame" x="9" y="29" width="56" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -147,7 +147,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="owN-vc-Jt0">
-                                <rect key="frame" x="124" y="68" width="73" height="73"/>
+                                <rect key="frame" x="124" y="68" width="105" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -155,7 +155,7 @@
                         <gestureRecognizers/>
                     </view>
                     <navigationItem key="navigationItem" title="stickie" id="uyL-ej-GPD">
-                        <barButtonItem key="leftBarButtonItem" id="0Ma-hi-8nK">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="0Ma-hi-8nK">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ga5-JI-haJ">
                                 <rect key="frame" x="16" y="4" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -168,10 +168,10 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="rED-uW-Iah">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="53N-NE-0rf">
-                                <rect key="frame" x="269" y="4" width="35" height="35"/>
+                                <rect key="frame" x="267" y="7" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="Button" image="Camera Icon - app.png">
+                                <state key="normal" title="Button" image="App - camera icon (3-8-2014).png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -181,12 +181,20 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="botLeftCorner" destination="y0n-mJ-YeQ" id="h7R-nD-Sv1"/>
                         <outlet property="botLeftLabel" destination="Da7-GR-7sd" id="3eO-aj-Ek2"/>
+                        <outlet property="botRightCorner" destination="4pC-6C-CtT" id="imH-jl-Ojj"/>
                         <outlet property="botRightLabel" destination="IGM-6F-hVZ" id="jxz-Wq-o12"/>
                         <outlet property="collectionView" destination="InS-wl-dcP" id="CrP-He-TVc"/>
                         <outlet property="dNewImageView" destination="owN-vc-Jt0" id="1cr-pa-KFG"/>
+                        <outlet property="topLeftCorner" destination="ida-78-yow" id="fSk-5O-RwC"/>
                         <outlet property="topLeftLabel" destination="d0k-6x-Qhh" id="Z1P-67-vJ0"/>
+                        <outlet property="topRightCorner" destination="nzz-3R-C1g" id="9c5-DS-NQS"/>
                         <outlet property="topRightLabel" destination="aHt-Lw-nUa" id="hlb-D2-RQT"/>
+                        <segue destination="iXZ-cN-TVP" kind="modal" identifier="topLeftTagEdit" id="VMZ-Ez-5hG"/>
+                        <segue destination="iXZ-cN-TVP" kind="modal" identifier="topRightTagEdit" id="BTy-yC-D4U"/>
+                        <segue destination="iXZ-cN-TVP" kind="modal" identifier="botLeftTagEdit" id="5Gd-67-bcx"/>
+                        <segue destination="iXZ-cN-TVP" kind="modal" identifier="botRightTagEdit" id="w2s-Lq-cI3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -205,8 +213,8 @@
                                 <rect key="frame" x="20" y="92" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <state key="normal" title="Food" backgroundImage="BlueCircle_192x192.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" backgroundImage="BlueCircle.png">
+                                    <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
                                     <action selector="colorButton:" destination="lsA-Em-eke" eventType="touchUpInside" id="KvC-mA-8ac"/>
@@ -216,8 +224,8 @@
                                 <rect key="frame" x="93" y="92" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <state key="normal" title="Favs" backgroundImage="RedCircle_192x192.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" backgroundImage="GreenCircle.png">
+                                    <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
                                     <action selector="colorButton:" destination="lsA-Em-eke" eventType="touchUpInside" id="MOQ-2g-dwH"/>
@@ -227,8 +235,8 @@
                                 <rect key="frame" x="167" y="92" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <state key="normal" title="Trips" backgroundImage="GreenCircle_192x192.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" backgroundImage="RedCircle.png">
+                                    <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
                                     <action selector="colorButton:" destination="lsA-Em-eke" eventType="touchUpInside" id="yC6-gq-wRr"/>
@@ -238,33 +246,33 @@
                                 <rect key="frame" x="240" y="92" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <state key="normal" title="Pets" backgroundImage="PinkCircle_192x192.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" backgroundImage="OrangeCircle.png">
+                                    <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
                                     <action selector="colorButton:" destination="lsA-Em-eke" eventType="touchUpInside" id="uDQ-Mg-o2D"/>
                                 </connections>
                             </button>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="tMz-6e-eQE">
-                                <rect key="frame" x="8" y="165" width="304" height="383"/>
+                                <rect key="frame" x="4" y="165" width="312" height="351"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2xP-ik-xqu">
-                                    <size key="itemSize" width="73" height="73"/>
+                                    <size key="itemSize" width="75" height="75"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="searchCell" id="Jy2-Be-o1a" customClass="SKPhotoCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="73" height="73"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="73" height="73"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="JN6-zq-JQl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="73" height="73"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -281,6 +289,28 @@
                                     <outlet property="delegate" destination="lsA-Em-eke" id="MA6-03-muD"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" id="m8x-sH-FWd">
+                                <rect key="frame" x="86" y="524" width="148" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" alpha="0.94999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Half circle new.png" id="JF1-lX-dTc">
+                                        <rect key="frame" x="0.0" y="0.0" width="148" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="untag" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XVv-cF-0xa">
+                                        <rect key="frame" x="45" y="16" width="62" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="23"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="LF4-q9-nxJ">
+                                <rect key="frame" x="14" y="11" width="105" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -289,6 +319,7 @@
                         <outlet property="botLeftButton" destination="d3b-qy-B1F" id="ier-If-vAi"/>
                         <outlet property="botRightButton" destination="pPm-qW-BA7" id="6cl-j7-UhU"/>
                         <outlet property="collectionView" destination="tMz-6e-eQE" id="Qd5-QW-JP7"/>
+                        <outlet property="dNewImageView" destination="LF4-q9-nxJ" id="mTm-DX-Lna"/>
                         <outlet property="topLeftButton" destination="MJE-Ka-gKq" id="aMV-xm-0kj"/>
                         <outlet property="topRightButton" destination="GqL-SY-fLM" id="0lW-ek-akc"/>
                     </connections>
@@ -297,14 +328,26 @@
             </objects>
             <point key="canvasLocation" x="1385" y="922"/>
         </scene>
-        <!--Tag Assign View Controller - assign tag-->
+        <!--Tag Assign View Controller - create tag-->
         <scene sceneID="z6b-I1-ufu">
             <objects>
                 <tableViewController id="YEi-U5-gnl" customClass="SKTagAssignViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Aji-mb-i9j">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Aji-mb-i9j">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xuv-MR-gr4">
+                            <rect key="frame" x="0.0" y="173" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <state key="normal" title="Delete Tag">
+                                <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="deleteTag:" destination="YEi-U5-gnl" eventType="touchUpInside" id="z8v-du-6ob"/>
+                            </connections>
+                        </button>
                         <sections>
                             <tableViewSection headerTitle="Enter Tag Name" id="cR6-un-fNd">
                                 <cells>
@@ -315,8 +358,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontSizeToFit="NO" minimumFontSize="17" id="QLL-eQ-nmN">
-                                                    <rect key="frame" x="20" y="7" width="280" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontSizeToFit="NO" minimumFontSize="17" id="QLL-eQ-nmN">
+                                                    <rect key="frame" x="10" y="7" width="300" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -328,7 +371,7 @@
                             </tableViewSection>
                         </sections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="assign tag" id="fzv-2b-c1m">
+                    <navigationItem key="navigationItem" title="create tag" id="fzv-2b-c1m">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="1rQ-Ha-2Eh">
                             <connections>
                                 <action selector="cancel:" destination="YEi-U5-gnl" id="edk-eK-ccD"/>
@@ -352,6 +395,7 @@
         <scene sceneID="2vN-os-lN4">
             <objects>
                 <navigationController definesPresentationContext="YES" id="iXZ-cN-TVP" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="YY0-n9-1F9"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pT6-pb-Whn">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -371,16 +415,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="0pj-zq-Gd7">
-                                <rect key="frame" x="0.0" y="65" width="320" height="503"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
-                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Un1-zK-b0f">
+                                <rect key="frame" x="0.0" y="63" width="321" height="505"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="a0Q-AW-JRL"/>
                     <connections>
-                        <outlet property="imageView" destination="0pj-zq-Gd7" id="DJR-id-veV"/>
+                        <outlet property="scrollView" destination="Un1-zK-b0f" id="brJ-3N-4C9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XaU-nU-OUK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -407,15 +451,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BlueCircle_192x192.png" width="192" height="192"/>
-        <image name="BlueCorner_106x106.png" width="106" height="106"/>
-        <image name="Camera Icon - app.png" width="500" height="500"/>
-        <image name="GreenCircle_192x192.png" width="192" height="192"/>
-        <image name="GreenCorner_106x106.png" width="106" height="106"/>
-        <image name="PinkCircle_192x192.png" width="192" height="192"/>
-        <image name="PinkCorner_106x106.png" width="106" height="106"/>
-        <image name="RedCircle_192x192.png" width="192" height="192"/>
-        <image name="RedCorner_106x106.png" width="106" height="106"/>
+        <image name="App - camera icon (3-8-2014).png" width="795" height="639"/>
+        <image name="BlueCircle.png" width="525" height="525"/>
+        <image name="BlueCorner.png" width="501" height="501"/>
+        <image name="GreenCircle.png" width="504" height="504"/>
+        <image name="GreenCorner.png" width="501" height="501"/>
+        <image name="Half circle new.png" width="619" height="185"/>
+        <image name="OrangeCircle.png" width="504" height="504"/>
+        <image name="OrangeCorner.png" width="501" height="501"/>
+        <image name="RedCircle.png" width="504" height="504"/>
+        <image name="RedCorner.png" width="501" height="501"/>
         <image name="SearchStickie_222x222.png" width="222" height="222"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -424,7 +469,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="GKa-30-X3s"/>
-        <segue reference="kNa-3S-pJo"/>
+        <segue reference="w2s-Lq-cI3"/>
+        <segue reference="ZiL-3a-YzY"/>
+        <segue reference="XUF-iZ-BJj"/>
     </inferredMetricsTieBreakers>
 </document>

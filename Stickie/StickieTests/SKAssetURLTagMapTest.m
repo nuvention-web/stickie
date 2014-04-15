@@ -12,8 +12,6 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Foundation/Foundation.h>
 
-//#undef NSLog
-
 @interface SKAssetURLTagsMapTest : XCTestCase
 
 typedef void (^ALAssetsLibraryGroupsEnumerationResultsBlock)(ALAssetsGroup *group, BOOL *stop);

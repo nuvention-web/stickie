@@ -136,6 +136,21 @@
     }
 }
 
+- (void) removeAllInstancesOfURL:(NSURL *)url
+{
+    NSArray *tagDataKeys = [tagDataMap allKeys];
+    SKTagData *currentData;
+    
+    for (SKImageTag* tag in tagDataKeys) {
+        currentData = [tagDataMap objectForKey:tag];
+        if ([currentData.imageURLs containsObject:url]) {
+            [currentData.imageURLs removeObject:url];
+            currentData.tagFrequencyInPhotos--;
+            [tagDataMap setObject:currentData forKey:tag];
+        }
+    }
+}
+
 - (void) removeTag: (SKImageTag *) tag;
 {
     [allUserTags removeObject:tag];

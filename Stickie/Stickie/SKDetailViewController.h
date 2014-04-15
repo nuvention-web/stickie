@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "GAITrackedViewController.h"
 
-@interface SKDetailViewController : GAITrackedViewController
+@interface SKDetailViewController : GAITrackedViewController {
+    @public
+    int imageIndex;
+}
 
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSURL *imageURL;
+@property (nonatomic, strong) NSArray *assets;
 
 @end
