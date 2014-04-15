@@ -589,9 +589,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/Grant/Desktop/GoogleAnalyticsServicesiOS_3.03c,
+					"~/stickie/Stickie/GoogleAnalyticsServicesiOS_3.03c",
 					/Users/StephenZ/Desktop/stickie/Stickie/GoogleAnalyticsServicesiOS_3.03c,
-					/Users/gsheld/stickie/GoogleAnalyticsServicesiOS_3.06,
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -618,9 +617,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/Grant/Desktop/GoogleAnalyticsServicesiOS_3.03c,
+					"~/stickie/Stickie/GoogleAnalyticsServicesiOS_3.03c",
 					/Users/StephenZ/Desktop/stickie/Stickie/GoogleAnalyticsServicesiOS_3.03c,
-					/Users/gsheld/stickie/GoogleAnalyticsServicesiOS_3.06,
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
