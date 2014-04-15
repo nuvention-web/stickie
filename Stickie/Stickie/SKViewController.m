@@ -255,6 +255,7 @@
     
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
     CGPoint anotherPoint = [self.view convertPoint:newPoint fromView:self.collectionView];
+    
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStateBegan: {
             dIndexPath = [self.collectionView indexPathForItemAtPoint:newPoint];
@@ -268,6 +269,7 @@
                 [dCell.asset valueForProperty:ALAssetPropertyURLs];
                 anotherPoint.y -= DISTANCE_ABOVE_FINGER;
                 [_dNewImageView setCenter:anotherPoint];
+                [_dNewImageView setHidden:NO];
                 [_dNewImageView setImage:dImage];
                 [self.collectionView removeGestureRecognizer:gestureRecognizer];    // Transferring gesture recognizer to draggable thumbnail image.
                 [_dNewImageView addGestureRecognizer:gestureRecognizer];
@@ -293,10 +295,10 @@
                 NSLog(@"Couldn't find index path.");
             }
             else {
-                _dNewImageView.image = nil;
                 [_dNewImageView setCenter:defaultPoint];
+                [_dNewImageView setHidden:YES];
                 NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
-                [self recordTags: anotherPoint forURL: url];
+                [self recordTags: anotherPoint forURL: url andIndexPath: dIndexPath];
                 [_dNewImageView removeGestureRecognizer:gestureRecognizer];     // Transferring gesture recognizer back to collection view.
                 [self.collectionView addGestureRecognizer:gestureRecognizer];
             }
@@ -324,7 +326,7 @@
 }
 
 #pragma mark Drag and Drop Tagging
-- (void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
+- (void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL andIndexPath: (NSIndexPath *) path {
     
     /* Constants to define how close thumbnail must be to a given corner in order for a tag to register */
     int TAG_SENSITIVITY_X = dImage.size.width/5.0;
@@ -389,7 +391,8 @@
             [urlToTagMap removeTag:tag forAssetURL:assetURL];
             [tagCollection removeImageURL:assetURL forTag:tag];
         }
-        [self loadImageAssets];
+        [_collectionView reloadItemsAtIndexPaths: [[NSArray alloc] initWithObjects:path, nil]];
+        
     }
     else {
         [alertEmptyTag show];

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="SJT-Fy-lx7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="SJT-Fy-lx7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -412,7 +412,7 @@
             <objects>
                 <viewController id="BWr-p7-POP" customClass="SKDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vSG-gW-jGV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Un1-zK-b0f">
@@ -422,6 +422,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="a0Q-AW-JRL"/>
                     <connections>
                         <outlet property="scrollView" destination="Un1-zK-b0f" id="brJ-3N-4C9"/>
@@ -469,8 +470,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ZiL-3a-YzY"/>
         <segue reference="w2s-Lq-cI3"/>
-        <segue reference="XUF-iZ-BJj"/>
+        <segue reference="ZiL-3a-YzY"/>
+        <segue reference="kNa-3S-pJo"/>
     </inferredMetricsTieBreakers>
 </document>
