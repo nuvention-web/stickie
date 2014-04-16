@@ -412,7 +412,7 @@
             <objects>
                 <viewController id="BWr-p7-POP" customClass="SKDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vSG-gW-jGV">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                         <subviews>
                             <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Un1-zK-b0f">
@@ -422,7 +422,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="a0Q-AW-JRL"/>
                     <connections>
                         <outlet property="scrollView" destination="Un1-zK-b0f" id="brJ-3N-4C9"/>
@@ -515,8 +514,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="XUF-iZ-BJj"/>
+        <segue reference="gwP-KI-MWf"/>
+        <segue reference="L4W-cC-CoX"/>
         <segue reference="w2s-Lq-cI3"/>
-        <segue reference="ZiL-3a-YzY"/>
-        <segue reference="kNa-3S-pJo"/>
     </inferredMetricsTieBreakers>
 </document>
