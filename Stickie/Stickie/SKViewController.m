@@ -52,7 +52,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _pageImages = @[@"page1.png", @"page2.png", @"page3.png"];
+    _pageImages = @[@"page1.png", @"page2.png", @"page3.png", @"page4.png"];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"wasLaunchedBefore"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"wasLaunchedBefore"];
         [self loadTutorial];
@@ -163,8 +163,7 @@
     
     // Change the size of page view controller
     self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    
-    
+        
     [self addChildViewController:_pageViewController];
     [self.view addSubview:_pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
