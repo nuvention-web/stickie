@@ -158,7 +158,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [_botRightButton setBackgroundImage:botRightButtonImage forState:UIControlStateNormal];
     [self.view addSubview:_topLeftButton];
     
-    CGRect  TLButtonFrame = _topLeftButton.frame;
+    CGRect TLButtonFrame = _topLeftButton.frame;
     TLButtonFrame.size = CGSizeMake(65, 65);
     TLButtonFrame.origin = CGPointMake(12,92);
     _topLeftButton.frame = TLButtonFrame;
@@ -283,6 +283,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                 [dCell.asset valueForProperty:ALAssetPropertyURLs];
                 anotherPoint.y -= DISTANCE_ABOVE_FINGER;
                 [_dNewImageView setCenter:anotherPoint];
+                [_dNewImageView setHidden:NO];
                 [_dNewImageView setImage:dImage];
                 [self.collectionView removeGestureRecognizer:gestureRecognizer];    // Transferring recognizer to draggable thumbnail.
                 [_dNewImageView addGestureRecognizer:gestureRecognizer];
@@ -304,7 +305,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             break;
         }
         case UIGestureRecognizerStateEnded: {
-            _dNewImageView.image = nil;
+            [_dNewImageView setHidden:YES];
             [_dNewImageView setCenter:defaultPoint];
             NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
             [self recordTags: anotherPoint forURL: url];
