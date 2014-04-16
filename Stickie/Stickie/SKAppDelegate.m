@@ -26,9 +26,9 @@
     /* Sets appearance of page view controller */
     UIPageControl *pageControl = [UIPageControl appearance];
     pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-    pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:124.0/255.0 green:203.0/255.0 blue:255.0/255.0 alpha:1.0];
     pageControl.backgroundColor = [UIColor whiteColor];
-    
+
     /* Sets background color of navigation bar */
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:243.0/255.0 green:243.0/255.0 blue:243.0/255.0 alpha:1.0]];
     

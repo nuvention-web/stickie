@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1402253718FDB8100058F68C /* SKTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1402253618FDB8100058F68C /* SKTutorialViewController.m */; };
-		1402253B18FDC2750058F68C /* page1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1402253818FDC2750058F68C /* page1.png */; };
-		1402253C18FDC2750058F68C /* page2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1402253918FDC2750058F68C /* page2.png */; };
 		1402253D18FDC2750058F68C /* page3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1402253A18FDC2750058F68C /* page3.png */; };
 		14540B8618C3FDA5004185F7 /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14540B8418C3FDA5004185F7 /* libAdIdAccess.a */; };
 		14540B8718C3FDA5004185F7 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14540B8518C3FDA5004185F7 /* libGoogleAnalyticsServices.a */; };
@@ -43,6 +41,8 @@
 		14B6AF3318F766E200598E17 /* GreenWithRetrieval.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B6AF3018F766E200598E17 /* GreenWithRetrieval.png */; };
 		14B6AF3418F766E200598E17 /* OrangeWithRetrieval.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B6AF3118F766E200598E17 /* OrangeWithRetrieval.png */; };
 		14B6AF3518F766E200598E17 /* RedWithRetrieval.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B6AF3218F766E200598E17 /* RedWithRetrieval.png */; };
+		14DECD4218FE001300A9DB68 /* page1.png in Resources */ = {isa = PBXBuildFile; fileRef = 14DECD4018FE001300A9DB68 /* page1.png */; };
+		14DECD4318FE001300A9DB68 /* page2.png in Resources */ = {isa = PBXBuildFile; fileRef = 14DECD4118FE001300A9DB68 /* page2.png */; };
 		9385097A18CD2EA1001AE7DC /* App - camera icon (3-8-2014).png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */; };
 		9385097C18CD2EA1001AE7DC /* BlueCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097318CD2EA1001AE7DC /* BlueCorner.png */; };
 		9385097D18CD2EA1001AE7DC /* GreenCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097418CD2EA1001AE7DC /* GreenCircle.png */; };
@@ -72,8 +72,6 @@
 /* Begin PBXFileReference section */
 		1402253518FDB8100058F68C /* SKTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTutorialViewController.h; sourceTree = "<group>"; };
 		1402253618FDB8100058F68C /* SKTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTutorialViewController.m; sourceTree = "<group>"; };
-		1402253818FDC2750058F68C /* page1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page1.png; sourceTree = "<group>"; };
-		1402253918FDC2750058F68C /* page2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page2.png; sourceTree = "<group>"; };
 		1402253A18FDC2750058F68C /* page3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page3.png; sourceTree = "<group>"; };
 		14540B7E18C3FDA5004185F7 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		14540B7F18C3FDA5004185F7 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
@@ -122,6 +120,8 @@
 		14B6AF3018F766E200598E17 /* GreenWithRetrieval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenWithRetrieval.png; sourceTree = "<group>"; };
 		14B6AF3118F766E200598E17 /* OrangeWithRetrieval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrangeWithRetrieval.png; sourceTree = "<group>"; };
 		14B6AF3218F766E200598E17 /* RedWithRetrieval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedWithRetrieval.png; sourceTree = "<group>"; };
+		14DECD4018FE001300A9DB68 /* page1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page1.png; sourceTree = "<group>"; };
+		14DECD4118FE001300A9DB68 /* page2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page2.png; sourceTree = "<group>"; };
 		9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "App - camera icon (3-8-2014).png"; sourceTree = "<group>"; };
 		9385097318CD2EA1001AE7DC /* BlueCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueCorner.png; sourceTree = "<group>"; };
 		9385097418CD2EA1001AE7DC /* GreenCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenCircle.png; sourceTree = "<group>"; };
@@ -309,8 +309,8 @@
 		9385097018CD2EA1001AE7DC /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				1402253818FDC2750058F68C /* page1.png */,
-				1402253918FDC2750058F68C /* page2.png */,
+				14DECD4018FE001300A9DB68 /* page1.png */,
+				14DECD4118FE001300A9DB68 /* page2.png */,
 				1402253A18FDC2750058F68C /* page3.png */,
 				14B6AF3018F766E200598E17 /* GreenWithRetrieval.png */,
 				14B6AF3118F766E200598E17 /* OrangeWithRetrieval.png */,
@@ -413,10 +413,12 @@
 			files = (
 				9385098218CD2EA1001AE7DC /* RedCorner.png in Resources */,
 				149FB2AF1890845B00D44DB2 /* Images.xcassets in Resources */,
+				14DECD4318FE001300A9DB68 /* page2.png in Resources */,
 				9385098118CD2EA1001AE7DC /* RedCircle.png in Resources */,
 				9385097F18CD2EA1001AE7DC /* OrangeCircle.png in Resources */,
 				14B6AF3318F766E200598E17 /* GreenWithRetrieval.png in Resources */,
 				9385098018CD2EA1001AE7DC /* OrangeCorner.png in Resources */,
+				14DECD4218FE001300A9DB68 /* page1.png in Resources */,
 				9385097A18CD2EA1001AE7DC /* App - camera icon (3-8-2014).png in Resources */,
 				14B6AF3418F766E200598E17 /* OrangeWithRetrieval.png in Resources */,
 				9385097C18CD2EA1001AE7DC /* BlueCorner.png in Resources */,
@@ -424,13 +426,11 @@
 				9385097E18CD2EA1001AE7DC /* GreenCorner.png in Resources */,
 				14A30C0E18D4055B008212CD /* Half circle new.png in Resources */,
 				14A497C018CD31A000AD43FC /* BlueCircle.png in Resources */,
-				1402253B18FDC2750058F68C /* page1.png in Resources */,
 				14B6AF2F18F7619800598E17 /* BlueWithRetrieval.png in Resources */,
 				14B6AF3518F766E200598E17 /* RedWithRetrieval.png in Resources */,
 				149FB2AA1890845B00D44DB2 /* Main.storyboard in Resources */,
 				9385097D18CD2EA1001AE7DC /* GreenCircle.png in Resources */,
 				14A497BE18CD311D00AD43FC /* SearchStickie_222x222.png in Resources */,
-				1402253C18FDC2750058F68C /* page2.png in Resources */,
 				1402253D18FDC2750058F68C /* page3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

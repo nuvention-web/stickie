@@ -7,13 +7,13 @@
         <!--View Controller - MainGallery-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="iPhone5" title="MainGallery" id="vXZ-lx-hvc" customClass="SKViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="iPhone5" title="MainGallery" automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="SKViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="InS-wl-dcP">
-                                <rect key="frame" x="4" y="129" width="312" height="366"/>
+                                <rect key="frame" x="4" y="136" width="312" height="359"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -162,7 +162,7 @@
                                 <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="17"/>
                                 <state key="normal" title="Search" image="SearchStickie_222x222.png"/>
                                 <connections>
-                                    <segue destination="lsA-Em-eke" kind="push" identifier="tagSearch" id="ZiL-3a-YzY"/>
+                                    <action selector="tutorialButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="FEz-am-4lx"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -204,7 +204,7 @@
         <!--Tag Search View Controller - Tag Search-->
         <scene sceneID="DxD-Wm-cy3">
             <objects>
-                <viewController title="Tag Search" id="lsA-Em-eke" customClass="SKTagSearchViewController" sceneMemberID="viewController">
+                <viewController title="Tag Search" automaticallyAdjustsScrollViewInsets="NO" id="lsA-Em-eke" customClass="SKTagSearchViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fec-Hm-ZsD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -472,7 +472,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MQ9-rN-d5c">
-                                <rect key="frame" x="109" y="433" width="103" height="30"/>
+                                <rect key="frame" x="109" y="491" width="103" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Get Started!">
@@ -514,9 +514,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="w2s-Lq-cI3"/>
+        <segue reference="XUF-iZ-BJj"/>
+        <segue reference="gwP-KI-MWf"/>
         <segue reference="L4W-cC-CoX"/>
-        <segue reference="ZiL-3a-YzY"/>
-        <segue reference="kNa-3S-pJo"/>
+        <segue reference="w2s-Lq-cI3"/>
     </inferredMetricsTieBreakers>
 </document>

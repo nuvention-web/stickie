@@ -29,8 +29,8 @@
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
-@property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
-@property(nonatomic, strong) NSArray *assets;
+@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, strong) NSArray *assets;
 @property BOOL newMedia;
 
 @end
@@ -52,31 +52,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.screenName = @"Home Screen";                   // For Google Analytics.
+    _pageImages = @[@"page1.png", @"page2.png", @"page3.png"];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"wasLaunchedBefore"]) {
-        [[self navigationController] setNavigationBarHidden:YES animated:YES];
-        _pageImages = @[@"page1.png", @"page2.png", @"page3.png"];
-        
-        // Create page view controller
-        self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
-        self.pageViewController.dataSource = self;
-        
-        SKTutorialViewController *startingViewController = [self viewControllerAtIndex:0];
-        NSArray *viewControllers = @[startingViewController];
-        [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-        
-        // Change the size of page view controller
-        self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-        
-        [self addChildViewController:_pageViewController];
-        [self.view addSubview:_pageViewController.view];
-        [self.pageViewController didMoveToParentViewController:self];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"wasLaunchedBefore"];
+        [self loadTutorial];
     }
     else {
         [[self navigationController] setNavigationBarHidden:NO animated:YES];
-      
-        self.automaticallyAdjustsScrollViewInsets = NO;     // Necessary to remove erroneous spacing at top of collection view.
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+
         defaultPoint = CGPointMake(50.0, 0.0);              // Sets default point for draggable ghost image.
         
         [self loadTags];
@@ -118,7 +102,6 @@
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
     }
-    
     index--;
     return [self viewControllerAtIndex:index];
 }
@@ -150,7 +133,6 @@
     pageContentViewController.pageIndex = index;
     [pageContentViewController.view sendSubviewToBack:pageContentViewController.startButton];
 
-    
     return pageContentViewController;
 }
 
@@ -164,6 +146,32 @@
     return 0;
 }
 
+- (void)loadTutorial
+{
+    self.screenName = @"Tutorial Screen";                   // For Google Analytics.
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+
+    
+    // Create page view controller
+    self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
+    self.pageViewController.dataSource = self;
+    
+    SKTutorialViewController *startingViewController = [self viewControllerAtIndex:0];
+    NSArray *viewControllers = @[startingViewController];
+    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    
+    // Change the size of page view controller
+    self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    
+    
+    [self addChildViewController:_pageViewController];
+    [self.view addSubview:_pageViewController.view];
+    [self.pageViewController didMoveToParentViewController:self];
+}
+- (IBAction)tutorialButton:(id)sender {
+    [self loadTutorial];
+}
 #pragma mark - Main Screen
 /* Sets name of tags based on serialized tag information. */
 - (void)loadTags
