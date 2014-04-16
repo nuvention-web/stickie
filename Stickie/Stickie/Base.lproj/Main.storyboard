@@ -7,13 +7,13 @@
         <!--View Controller - MainGallery-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="iPhone5" title="MainGallery" id="vXZ-lx-hvc" customClass="SKViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="iPhone5" title="MainGallery" automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="SKViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="InS-wl-dcP">
-                                <rect key="frame" x="4" y="129" width="312" height="366"/>
+                                <rect key="frame" x="4" y="136" width="312" height="359"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -25,7 +25,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="Prg-ZQ-8I9" customClass="SKPhotoCell">
-                                        <rect key="frame" x="0.0" y="64" width="75" height="75"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
@@ -65,7 +65,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d0k-6x-Qhh">
-                                        <rect key="frame" x="0.0" y="13" width="60" height="21"/>
+                                        <rect key="frame" x="0.0" y="10" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -162,7 +162,7 @@
                                 <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="17"/>
                                 <state key="normal" title="Search" image="SearchStickie_222x222.png"/>
                                 <connections>
-                                    <segue destination="lsA-Em-eke" kind="push" identifier="tagSearch" id="ZiL-3a-YzY"/>
+                                    <action selector="tutorialButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="FEz-am-4lx"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -204,7 +204,7 @@
         <!--Tag Search View Controller - Tag Search-->
         <scene sceneID="DxD-Wm-cy3">
             <objects>
-                <viewController title="Tag Search" id="lsA-Em-eke" customClass="SKTagSearchViewController" sceneMemberID="viewController">
+                <viewController title="Tag Search" automaticallyAdjustsScrollViewInsets="NO" id="lsA-Em-eke" customClass="SKTagSearchViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fec-Hm-ZsD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -415,9 +415,9 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Un1-zK-b0f">
-                                <rect key="frame" x="0.0" y="-25" width="321" height="593"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Un1-zK-b0f">
+                                <rect key="frame" x="-1" y="64" width="321" height="504"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -449,6 +449,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7sc-pC-NOz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="251" y="198"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="SJV-bQ-VD2">
+            <objects>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="kdi-Lt-o7P" sceneMemberID="viewController">
+                    <size key="freeformSize" width="320" height="568"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fu7-iK-e1E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="251" y="948"/>
+        </scene>
+        <!--Tutorial View Controller-->
+        <scene sceneID="vqp-rW-fPs">
+            <objects>
+                <viewController storyboardIdentifier="TutorialViewController" id="pmF-Yr-Ua9" customClass="SKTutorialViewController" sceneMemberID="viewController">
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="u3a-OE-uM5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="MMH-pW-es1">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MQ9-rN-d5c">
+                                <rect key="frame" x="67" y="417" width="186" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="32"/>
+                                <state key="normal" title="Get Stickie!">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="vXZ-lx-hvc" kind="push" identifier="start" id="L4W-cC-CoX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="MMH-pW-es1" id="vIw-Lt-koa"/>
+                        <outlet property="startButton" destination="MQ9-rN-d5c" id="QVR-UN-Gyp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r5I-MR-4Q0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="777" y="948"/>
         </scene>
     </scenes>
     <resources>

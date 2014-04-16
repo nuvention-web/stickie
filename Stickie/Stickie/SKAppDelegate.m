@@ -34,7 +34,7 @@
         ]
      ];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-45915238-2"];
+
     
     /* For second prototype, these tags need to be added to the tag collection at startup. */
     SKTagCollection *tagCollection = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagCollection"]];
