@@ -10,10 +10,25 @@
 
 @interface SKImageTag : NSObject <NSCopying, NSCoding>
 
+/* Useful for characterizing location of tags, corner buttons. */
+typedef enum {
+    SKCornerLocationUndefined,
+    SKCornerLocationTopLeft,
+    SKCornerLocationTopRight,
+    SKCornerLocationBottomLeft,
+    SKCornerLocationBottomRight,
+} SKCornerLocation;
+
 @property (nonatomic) NSString *tagName;
 @property (nonatomic) UIColor *tagColor;
+@property (nonatomic) SKCornerLocation tagLocation;
 
--(id)initWithName: (NSString *) str andColor: (UIColor *) color;
--(BOOL)isEqualToTag:(SKImageTag *) tag;
+/* DEPRECATED. */
+- (id) initWithName: (NSString *) name andColor: (UIColor *) color __attribute__((deprecated));
+
+- (id) initWithName: (NSString *) name location: (SKCornerLocation) location andColor: (UIColor *) color;
+
+/* Compares equality of tags. NOTE: tagLocation is not factored into tag equality; however, tagName and tagColor IS. */
+- (BOOL) isEqualToTag:(SKImageTag *) tag;
 
 @end

@@ -18,8 +18,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    /* Tracker for Google Analytics */
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-45915238-2"];
+    
     // Override point for customization after application launch.
-
+    
+    /* Sets appearance of page view controller */
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:124.0/255.0 green:203.0/255.0 blue:255.0/255.0 alpha:1.0];
+    pageControl.backgroundColor = [UIColor whiteColor];
     /* Sets background color of navigation bar */
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:243.0/255.0 green:243.0/255.0 blue:243.0/255.0 alpha:1.0]];
     
@@ -36,7 +44,7 @@
         ]
      ];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-45915238-2"];
+
     
     /* For second prototype, these tags need to be added to the tag collection at startup. */
     SKTagCollection *tagCollection = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagCollection"]];
@@ -48,7 +56,7 @@
     /* If there is nothing to unarchive. */
     if (!tagCollection) {
         tagCollection = [SKTagCollection sharedInstance];
-        SKImageTag *tag = [[SKImageTag alloc] initWithName:@"" andColor:nil];
+        SKImageTag *tag = [[SKImageTag alloc] initWithName:@"" location:SKCornerLocationUndefined andColor:nil];
         [tagCollection addTagToCollection:tag];
     }
     
@@ -88,7 +96,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[SKAssetURLTagsMap sharedInstance]] forKey:@"tagsMap"];
 }
 
-- (void) checkAndHandleDeletedPhotos
+- (void)checkAndHandleDeletedPhotos
 {
     /* Check to ensure no photos have been deleted while the user switched applications. */
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];

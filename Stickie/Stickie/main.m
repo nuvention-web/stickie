@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 #import "SKAppDelegate.h"
+#import "SKTagCollection.h"
+#import "SKAssetURLTagsMap.h"
 
 int main(int argc, char * argv[])
 {
