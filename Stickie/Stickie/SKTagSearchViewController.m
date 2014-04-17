@@ -144,6 +144,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 -(IBAction)colorButton:(id)sender
 {
+    int const  TOP_ALIGN = 85;
     /* Reset view. */
     UIImage *topLeftButtonImage = [UIImage imageNamed:@"BlueCircle.png"];
     UIImage *topRightButtonImage = [UIImage imageNamed:@"GreenCircle.png"];
@@ -160,19 +161,19 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     CGRect TLButtonFrame = _topLeftButton.frame;
     TLButtonFrame.size = CGSizeMake(65, 65);
-    TLButtonFrame.origin = CGPointMake(12,92);
+    TLButtonFrame.origin = CGPointMake(12,TOP_ALIGN);
     _topLeftButton.frame = TLButtonFrame;
     CGRect  TRButtonFrame = _topRightButton.frame;
     TRButtonFrame.size = CGSizeMake(65, 65);
-    TRButtonFrame.origin = CGPointMake(89,92);
+    TRButtonFrame.origin = CGPointMake(89,TOP_ALIGN);
     _topRightButton.frame = TRButtonFrame;
     CGRect  BLButtonFrame = _botLeftButton.frame;
     BLButtonFrame.size = CGSizeMake(65, 65);
-    BLButtonFrame.origin = CGPointMake(167,92);
+    BLButtonFrame.origin = CGPointMake(167,TOP_ALIGN);
     _botLeftButton.frame = BLButtonFrame;
     CGRect  BRButtonFrame = _botRightButton.frame;
     BRButtonFrame.size = CGSizeMake(65, 65);
-    BRButtonFrame.origin = CGPointMake(244,92);
+    BRButtonFrame.origin = CGPointMake(244,TOP_ALIGN);
     _botRightButton.frame = BRButtonFrame;
     
     
@@ -227,7 +228,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text]){
             topLeftButtonImage = [UIImage imageNamed:@"BlueWithRetrieval.png"];
             TLButtonFrame.size = CGSizeMake(69, 69);
-            TLButtonFrame.origin = CGPointMake(10,90);
+            TLButtonFrame.origin = CGPointMake(10,TOP_ALIGN - 2);
             _topLeftButton.frame = TLButtonFrame;
             [_topLeftButton setBackgroundImage:topLeftButtonImage forState:UIControlStateNormal];
             [self.view addSubview:_topLeftButton];
@@ -236,7 +237,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text]){
             topRightButtonImage = [UIImage imageNamed:@"GreenWithRetrieval.png"];
             TRButtonFrame.size = CGSizeMake(69, 69);
-            TRButtonFrame.origin = CGPointMake(87,90);
+            TRButtonFrame.origin = CGPointMake(87,TOP_ALIGN - 2);
             _topRightButton.frame = TRButtonFrame;
             [_topRightButton setBackgroundImage:topRightButtonImage forState:UIControlStateNormal];
             [self.view addSubview:_topRightButton];
@@ -245,7 +246,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text]){
             botLeftButtonImage = [UIImage imageNamed:@"RedWithRetrieval.png"];
             BLButtonFrame.size = CGSizeMake(69, 69);
-            BLButtonFrame.origin = CGPointMake(165,90);
+            BLButtonFrame.origin = CGPointMake(165,TOP_ALIGN - 2);
             _botLeftButton.frame = BLButtonFrame;
             [_botLeftButton setBackgroundImage:botLeftButtonImage forState:UIControlStateNormal];
             [self.view addSubview:_botLeftButton];
@@ -254,7 +255,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         else if ([buttonPressed isEqualToString:_botRightButton.titleLabel.text]){
             botRightButtonImage = [UIImage imageNamed:@"OrangeWithRetrieval.png"];
             BRButtonFrame.size = CGSizeMake(69, 69);
-            BRButtonFrame.origin = CGPointMake(242,90);
+            BRButtonFrame.origin = CGPointMake(242,TOP_ALIGN - 2);
             _botRightButton.frame = BRButtonFrame;
             [_botRightButton setBackgroundImage:botRightButtonImage forState:UIControlStateNormal];
             [self.view addSubview:_botRightButton];
@@ -267,7 +268,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     int DISTANCE_ABOVE_FINGER = 30;
     int BORDER_SIZE = 1.0;
     int CORNER_RADIUS_CONSTANT = 3.0;
-    UIColor *borderColor = [UIColor blackColor];
+    UIColor *borderColor = [UIColor colorWithRed:166.0/255.0 green:169.0/255.0 blue:172.0/255.0 alpha:1.0];
     
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
     CGPoint anotherPoint = [self.view convertPoint:newPoint fromView:self.collectionView];
@@ -285,6 +286,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                 [_dNewImageView setCenter:anotherPoint];
                 [_dNewImageView setHidden:NO];
                 [_dNewImageView setImage:dImage];
+                [self.view bringSubviewToFront:_dNewImageView];
                 [self.collectionView removeGestureRecognizer:gestureRecognizer];    // Transferring recognizer to draggable thumbnail.
                 [_dNewImageView addGestureRecognizer:gestureRecognizer];
                 [_dNewImageView.layer setBorderColor: [borderColor CGColor]];
@@ -320,13 +322,14 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 -(void)recordTags: (CGPoint) point forURL: (NSURL *) assetURL {
     int TAG_SENSITIVITY = 30;
-    
+    int FRAME_HEIGHT = self.view.frame.size.height;
+
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     
     SKImageTag *tag;
     
-    if (point.x >= 86 && point.x <= 234 && point.y >= 524 - TAG_SENSITIVITY && point.y <= 568){
+    if (point.x >= 86 && point.x <= 234 && point.y >= FRAME_HEIGHT - 44 - TAG_SENSITIVITY && point.y <= FRAME_HEIGHT){
         tag = [[SKImageTag alloc] initWithName:currentTag location:SKCornerLocationUndefined andColor:nil];
         if (![tag.tagName isEqualToString:@""]) {
             if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
