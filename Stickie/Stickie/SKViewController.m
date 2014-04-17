@@ -488,8 +488,8 @@
             [urlToTagMap removeTag:tag forAssetURL:assetURL];
             [tagCollection removeImageURL:assetURL forTag:tag];
         }
-        [_collectionView reloadItemsAtIndexPaths: [[NSArray alloc] initWithObjects:path, nil]];
-        
+//            [_collectionView reloadItemsAtIndexPaths: [[NSArray alloc] initWithObjects:path, nil]]; // DOES NOT WORK FOR FIRST TAG (APPLE BUG?).
+        [_collectionView reloadData];
     }
     else {
         [alertEmptyTag show];
