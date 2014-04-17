@@ -44,11 +44,11 @@
         ]
      ];
     
-
-    
     /* For second prototype, these tags need to be added to the tag collection at startup. */
-    SKTagCollection *tagCollection = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagCollection"]];
-    SKAssetURLTagsMap *urlToTagMap = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagsMap"]];
+    
+    NSMutableDictionary *appState = [NSKeyedUnarchiver unarchiveObjectWithFile:[self filePathForSave: @"data"]];
+    SKTagCollection *tagCollection = [appState objectForKey:@"tCollect"];
+    SKAssetURLTagsMap *urlToTagMap = [appState objectForKey:@"tMap"];
     
     if (!urlToTagMap)
         urlToTagMap = [SKAssetURLTagsMap sharedInstance];
@@ -92,8 +92,13 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[SKTagCollection sharedInstance]] forKey:@"tagCollection"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[SKAssetURLTagsMap sharedInstance]] forKey:@"tagsMap"];
+    NSMutableDictionary *appState = [NSMutableDictionary dictionary];
+    [appState setObject:[SKTagCollection sharedInstance] forKey:@"tCollect"];
+    [appState setObject:[SKAssetURLTagsMap sharedInstance] forKey:@"tMap"];
+    BOOL result = [NSKeyedArchiver archiveRootObject:appState toFile: [self filePathForSave: @"data"]];
+    if (!result) {
+        NSLog(@"Failed to archive objects properly.");
+    }
 }
 
 - (void)checkAndHandleDeletedPhotos
@@ -114,6 +119,15 @@
             [NSException raise:@"Asset Processing Error." format: @"There was an error processing the required ALAssets."];
         }];
     }
+}
+
+- (NSString *)filePathForSave: (NSString *) nameOfFile
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *file = [documentsDirectory stringByAppendingString:@"/"];
+    file = [file stringByAppendingString:nameOfFile];
+    return file;
 }
 
 @end
