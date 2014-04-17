@@ -46,7 +46,7 @@
     
     /* For second prototype, these tags need to be added to the tag collection at startup. */
     
-    NSMutableDictionary *appState = [NSKeyedUnarchiver unarchiveObjectWithFile:[self filePathForSave: @"data"]];
+    NSMutableDictionary *appState = [NSKeyedUnarchiver unarchiveObjectWithFile:[self filePathForSave: @"stickie_data"]];
     SKTagCollection *tagCollection = [appState objectForKey:@"tCollect"];
     SKAssetURLTagsMap *urlToTagMap = [appState objectForKey:@"tMap"];
     
@@ -95,7 +95,7 @@
     NSMutableDictionary *appState = [NSMutableDictionary dictionary];
     [appState setObject:[SKTagCollection sharedInstance] forKey:@"tCollect"];
     [appState setObject:[SKAssetURLTagsMap sharedInstance] forKey:@"tMap"];
-    BOOL result = [NSKeyedArchiver archiveRootObject:appState toFile: [self filePathForSave: @"data"]];
+    BOOL result = [NSKeyedArchiver archiveRootObject:appState toFile: [self filePathForSave: @"stickie_data"]];
     if (!result) {
         NSLog(@"Failed to archive objects properly.");
     }
