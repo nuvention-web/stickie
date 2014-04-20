@@ -10,8 +10,12 @@
 #import "SKTagAssignViewController.h"
 #import "GAITrackedViewController.h"
 #import "SKLongPressButton.h"
+#import "SKTutorialViewController.h"
 
-@interface SKViewController : GAITrackedViewController <SKTagAssignViewControllerDelegate>
+@interface SKViewController : GAITrackedViewController <UIPageViewControllerDataSource, SKTagAssignViewControllerDelegate>
+
+@property (strong, nonatomic) UIPageViewController *pageViewController;
+@property (strong, nonatomic) NSArray *pageImages;
 
 @property (strong, nonatomic) IBOutlet UILabel *topLeftLabel;
 @property (strong, nonatomic) IBOutlet UILabel *topRightLabel;

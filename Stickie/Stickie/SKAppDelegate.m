@@ -18,8 +18,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    /* Tracker for Google Analytics */
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-45915238-2"];
+    
     // Override point for customization after application launch.
-
+    
+    /* Sets appearance of page view controller */
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:124.0/255.0 green:203.0/255.0 blue:255.0/255.0 alpha:1.0];
+    pageControl.backgroundColor = [UIColor whiteColor];
     /* Sets background color of navigation bar */
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:243.0/255.0 green:243.0/255.0 blue:243.0/255.0 alpha:1.0]];
     
@@ -36,11 +44,11 @@
         ]
      ];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-45915238-2"];
-    
     /* For second prototype, these tags need to be added to the tag collection at startup. */
-    SKTagCollection *tagCollection = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagCollection"]];
-    SKAssetURLTagsMap *urlToTagMap = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagsMap"]];
+    
+    NSMutableDictionary *appState = [NSKeyedUnarchiver unarchiveObjectWithFile:[self filePathForSave: @"stickie_data"]];
+    SKTagCollection *tagCollection = [appState objectForKey:@"tCollect"];
+    SKAssetURLTagsMap *urlToTagMap = [appState objectForKey:@"tMap"];
     
     if (!urlToTagMap)
         urlToTagMap = [SKAssetURLTagsMap sharedInstance];
@@ -48,7 +56,7 @@
     /* If there is nothing to unarchive. */
     if (!tagCollection) {
         tagCollection = [SKTagCollection sharedInstance];
-        SKImageTag *tag = [[SKImageTag alloc] initWithName:@"" andColor:nil];
+        SKImageTag *tag = [[SKImageTag alloc] initWithName:@"" location:SKCornerLocationUndefined andColor:nil];
         [tagCollection addTagToCollection:tag];
     }
     
@@ -67,6 +75,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [self saveUserDataWithName:@"stickie_data"];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -84,11 +93,21 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[SKTagCollection sharedInstance]] forKey:@"tagCollection"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[SKAssetURLTagsMap sharedInstance]] forKey:@"tagsMap"];
+    [self saveUserDataWithName:@"stickie_data"];
 }
 
-- (void) checkAndHandleDeletedPhotos
+- (void)saveUserDataWithName:(NSString *)name
+{
+    NSMutableDictionary *appState = [NSMutableDictionary dictionary];
+    [appState setObject:[SKTagCollection sharedInstance] forKey:@"tCollect"];
+    [appState setObject:[SKAssetURLTagsMap sharedInstance] forKey:@"tMap"];
+    BOOL result = [NSKeyedArchiver archiveRootObject:appState toFile: [self filePathForSave:name]];
+    if (!result) {
+        NSLog(@"Failed to archive objects properly.");
+    }
+}
+
+- (void)checkAndHandleDeletedPhotos
 {
     /* Check to ensure no photos have been deleted while the user switched applications. */
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
@@ -106,6 +125,15 @@
             [NSException raise:@"Asset Processing Error." format: @"There was an error processing the required ALAssets."];
         }];
     }
+}
+
+- (NSString *)filePathForSave: (NSString *) nameOfFile
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *file = [documentsDirectory stringByAppendingString:@"/"];
+    file = [file stringByAppendingString:nameOfFile];
+    return file;
 }
 
 @end

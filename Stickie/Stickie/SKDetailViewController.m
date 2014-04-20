@@ -20,7 +20,7 @@
 
 @implementation SKDetailViewController
 
--(void) viewDidLoad
+-(void)viewDidLoad
 {
     /* So UIImageView is centered properly. */
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -45,6 +45,10 @@
     
     UISwipeGestureRecognizer *leftSwipe=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     leftSwipe.direction=UISwipeGestureRecognizerDirectionLeft;
+    
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    [doubleTap setNumberOfTapsRequired:2];
+    [_scrollView addGestureRecognizer:doubleTap];
     
     [imageView addGestureRecognizer:leftSwipe];
     [imageView addGestureRecognizer:rightSwipe];
@@ -93,7 +97,7 @@
     newImageView.contentMode =  UIViewContentModeScaleAspectFit;
     
     /* Animate Swipe */
-    [UIView animateWithDuration:0.25f
+    [UIView animateWithDuration:0.15f
                           delay:0.0f
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
                      animations:^{
@@ -107,6 +111,38 @@
                          [newImageView removeFromSuperview];
                      }];
 
+}
+
+- (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
+    
+    float newScale = [_scrollView zoomScale] * 4.0;
+    
+    if (_scrollView.zoomScale > _scrollView.minimumZoomScale)
+    {
+        [_scrollView setZoomScale:_scrollView.minimumZoomScale animated:YES];
+    }
+    else
+    {
+        CGRect zoomRect = [self zoomRectForScale:newScale
+                                      withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
+        [_scrollView zoomToRect:zoomRect animated:YES];
+    }
+    
+}
+
+- (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
+    
+    CGRect zoomRect;
+    
+    zoomRect.size.height = [imageView frame].size.height / scale;
+    zoomRect.size.width  = [imageView frame].size.width  / scale;
+    
+    center = [imageView convertPoint:center fromView:_scrollView];
+    
+    zoomRect.origin.x    = center.x - ((zoomRect.size.width / 2.0));
+    zoomRect.origin.y    = center.y - ((zoomRect.size.height / 2.0));
+    
+    return zoomRect;
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView

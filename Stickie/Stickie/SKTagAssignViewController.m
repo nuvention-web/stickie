@@ -13,6 +13,7 @@
 @end
 
 @implementation SKTagAssignViewController
+
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (_createTag) {
@@ -21,21 +22,24 @@
     else {
         self.navigationItem.title = @"edit tag";
     }
-    _tagTextField.placeholder = _preLabel;
+    _tagTextField.text = _preLabel;
 }
+
 - (IBAction)cancel:(id)sender
 {
     [self.delegate tagAssignViewControllerDidCancel:self];
 }
+
 - (IBAction)done:(id)sender
 {
     if ([_tagTextField.text isEqualToString:@""]) {
-        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text for:_source andDelete:YES];
+        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text forLocation:_location andDelete:YES];
     }
     else {
-        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text for:_source andDelete:NO];
+        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text forLocation:_location andDelete:NO];
     }
 }
+
 - (IBAction)deleteTag:(id)sender {
     UIAlertView *alertEmpty = [[UIAlertView alloc] initWithTitle:@"No tag to delete."
                                                           message:nil
@@ -55,9 +59,10 @@
         [alertDelete show];
     }
 }
+
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        [self.delegate tagAssignViewController:self didAddTag:@"" for:_source andDelete:YES];
-        }
+        [self.delegate tagAssignViewController:self didAddTag:@"" forLocation:_location andDelete:YES];
+    }
 }
 @end

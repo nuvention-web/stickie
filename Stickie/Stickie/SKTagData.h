@@ -11,7 +11,7 @@
 @interface SKTagData : NSObject <NSCoding>
 
 @property (nonatomic) NSInteger tagFrequencyInPhotos;
-@property (nonatomic) UIColor *tagColor;
+@property (nonatomic) UIColor *tagColor; // POSSIBLY CAN BE REMOVED. NOT RELEVANT ANYMORE.
 @property (nonatomic) NSMutableArray *imageURLs;
 
 - (id) init;
