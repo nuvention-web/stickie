@@ -26,6 +26,7 @@
     UIImage *dImage;
     CGPoint defaultPoint;
     BOOL retainScroll;
+    BOOL close;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
@@ -52,12 +53,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _pageImages = @[@"page1.png", @"page2.png", @"page3.png", @"page4.png"];
+    _pageImages = @[@"page1.png", @"page2.png", @"page3.png", @"page4.png", @"page5.png"];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"wasLaunchedBefore"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"wasLaunchedBefore"];
+        close = YES;
         [self loadTutorial];
     }
     else {
+        close = NO;
         [[self navigationController] setNavigationBarHidden:NO animated:YES];
         [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
@@ -132,6 +135,9 @@
     pageContentViewController.imageFile = self.pageImages[index];
     pageContentViewController.pageIndex = index;
     [pageContentViewController.view sendSubviewToBack:pageContentViewController.startButton];
+    if (close) {
+        [pageContentViewController.view sendSubviewToBack:pageContentViewController.closeButton];
+    }
 
     return pageContentViewController;
 }
