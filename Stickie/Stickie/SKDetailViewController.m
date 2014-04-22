@@ -8,6 +8,7 @@
 
 #import "SKDetailViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 
 @interface SKDetailViewController () <UIScrollViewDelegate> {
@@ -125,6 +126,18 @@
                          [self setNavBarTitleWithIndex:imageIndex+1];
                      }];
 
+}
+
+- (IBAction)shareToFacebook:(id)sender {
+}
+
+- (IBAction)shareToInsta:(id)sender {
+}
+
+- (IBAction)shareToText:(id)sender {
+}
+
+- (IBAction)shareToMail:(id)sender {
 }
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="SJT-Fy-lx7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="SJT-Fy-lx7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -416,9 +416,51 @@
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                         <subviews>
                             <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Un1-zK-b0f">
-                                <rect key="frame" x="-1" y="64" width="321" height="504"/>
+                                <rect key="frame" x="-1" y="64" width="321" height="420"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fNw-SH-ikB">
+                                <rect key="frame" x="12" y="492" width="64" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="facebook.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareToFacebook:" destination="BWr-p7-POP" eventType="touchUpInside" id="das-Ag-8n7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rrk-Bq-C1V">
+                                <rect key="frame" x="166" y="492" width="65" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="iMessage.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareToFacebook:" destination="BWr-p7-POP" eventType="touchUpInside" id="sqm-Bd-WgK"/>
+                                    <action selector="shareToText:" destination="BWr-p7-POP" eventType="touchUpInside" id="0hw-Cd-6Mw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="s6r-g0-jX2">
+                                <rect key="frame" x="89" y="492" width="65" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="instagram.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareToInsta:" destination="BWr-p7-POP" eventType="touchUpInside" id="2sp-XN-5rr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Op-fG-ktR">
+                                <rect key="frame" x="239" y="492" width="65" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="Mail.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareToFacebook:" destination="BWr-p7-POP" eventType="touchUpInside" id="1Ef-hm-jHu"/>
+                                    <action selector="shareToMail:" destination="BWr-p7-POP" eventType="touchUpInside" id="hJX-Ee-Xi6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -513,11 +555,15 @@
         <image name="GreenCircle.png" width="504" height="504"/>
         <image name="GreenCorner.png" width="501" height="501"/>
         <image name="Half circle new.png" width="619" height="185"/>
+        <image name="Mail.png" width="128" height="128"/>
         <image name="OrangeCircle.png" width="504" height="504"/>
         <image name="OrangeCorner.png" width="501" height="501"/>
         <image name="RedCircle.png" width="504" height="504"/>
         <image name="RedCorner.png" width="501" height="501"/>
         <image name="SearchStickie_222x222.png" width="222" height="222"/>
+        <image name="facebook.png" width="256" height="256"/>
+        <image name="iMessage.png" width="64" height="64"/>
+        <image name="instagram.png" width="256" height="256"/>
         <image name="tutButton.png" width="419" height="203"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
