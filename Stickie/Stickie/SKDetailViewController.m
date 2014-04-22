@@ -24,7 +24,10 @@
 {
     /* So UIImageView is centered properly. */
     self.automaticallyAdjustsScrollViewInsets = NO;
-
+    
+    /* Set inital navigation bar title. */
+    [self setNavBarTitleWithIndex:imageIndex+1];
+    
     /* Allocates memory for and initializes new subview to house initial image. */
     imageView = [[UIImageView alloc] init];
     CGRect aRect = CGRectMake(0.0, 0.0, self.scrollView.frame.size.width,self.scrollView.frame.size.height);
@@ -52,6 +55,14 @@
     
     [imageView addGestureRecognizer:leftSwipe];
     [imageView addGestureRecognizer:rightSwipe];
+}
+
+- (void)setNavBarTitleWithIndex: (int)index
+{
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,32,32)];
+    [titleLabel setText:[NSString stringWithFormat:@"%d of %lu", index, (unsigned long)[_assets count]]];
+    [titleLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
+    [self.navigationItem setTitleView:titleLabel];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -109,6 +120,8 @@
                          imageView.image = newImageView.image;
                          [imageView setFrame:newImageView.frame];
                          [newImageView removeFromSuperview];
+                         
+                         [self setNavBarTitleWithIndex:imageIndex+1];
                      }];
 
 }
