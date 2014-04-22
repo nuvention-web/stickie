@@ -121,6 +121,7 @@
                          [imageView setFrame:newImageView.frame];
                          [newImageView removeFromSuperview];
                          
+                         /* Update nav bar title. */
                          [self setNavBarTitleWithIndex:imageIndex+1];
                      }];
 
