@@ -17,6 +17,8 @@
 #import "SKTagSearchViewController.h"
 #import "SKTagAssignViewController.h"
 #import "SKLongPressButton.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 
 @interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
@@ -61,6 +63,7 @@
     }
     else {
         close = NO;
+        self.screenName = @"Home Screen";                   // For Google Analytics.
         [[self navigationController] setNavigationBarHidden:NO animated:YES];
         [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
@@ -425,6 +428,7 @@
     int TAG_SENSITIVITY_X = dImage.size.width/5.0;
     int TAG_SENSITITVITY_Y = dImage.size.height/5.0;
     int FRAME_HEIGHT = self.view.frame.size.height;
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
@@ -466,6 +470,10 @@
     
     if (![tag.tagName isEqualToString:@""]) {
         if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"image_tag"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             [UIView animateWithDuration:0.1 animations:^{
                 button.alpha = 0.0;
             } completion:^(BOOL finished) {
@@ -481,6 +489,10 @@
             [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
         }
         else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"image_untag"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             [UIView animateWithDuration:0.1 animations:^{
                 button.alpha = 0.0;
             } completion:^(BOOL finished) {
@@ -502,7 +514,7 @@
     }
 }
 
-#pragma make Camera Methods
+#pragma mark Camera Methods
 /* Take photo. */
 - (IBAction)takePhotoButtonTapped:(id)sender {
     [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.3];
@@ -709,7 +721,6 @@ finishedSavingWithError:(NSError *)error
     SKImageTag *tag = [[SKImageTag alloc] initWithName:tagSTR location:cornerLocation andColor:nil];
     SKImageTag *oldTag =[SKImageTag alloc];
     SKAssetURLTagsMap *urlTagsMap = [SKAssetURLTagsMap sharedInstance];
-    
     if (![tagCollection isTagInCollection:tag]) {
         if (![tag.tagName isEqualToString:@""]){
             [tagCollection addTagToCollection:tag];

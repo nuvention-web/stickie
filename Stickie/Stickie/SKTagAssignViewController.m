@@ -7,6 +7,9 @@
 //
 
 #import "SKTagAssignViewController.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+
 
 @interface SKTagAssignViewController ()
 
@@ -16,11 +19,20 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     if (_createTag) {
         self.navigationItem.title = @"create tag";
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                              action:@"create_tag"  // Event action (required)
+                                                               label:nil         // Event label
+                                                               value:nil] build]];    // Event value
     }
     else {
         self.navigationItem.title = @"edit tag";
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                              action:@"edit_tag"  // Event action (required)
+                                                               label:nil         // Event label
+                                                               value:nil] build]];    // Event value
     }
     _tagTextField.text = _preLabel;
 }
@@ -62,6 +74,11 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                              action:@"delete_tag"  // Event action (required)
+                                                               label:nil         // Event label
+                                                               value:nil] build]];    // Event value
         [self.delegate tagAssignViewController:self didAddTag:@"" forLocation:_location andDelete:YES];
     }
 }
