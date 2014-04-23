@@ -142,6 +142,7 @@
     _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
     _docFile.delegate=self;
     _docFile.UTI = @"com.instagram.exclusivegram";
+    _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:@"Image Tagged via #stickie! #stickiepic",@"InstagramCaption", nil];
     [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
 }
 
