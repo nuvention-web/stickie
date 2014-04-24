@@ -32,6 +32,7 @@
 		149FD0911904778200189B18 /* page2.png in Resources */ = {isa = PBXBuildFile; fileRef = 149FD08D1904778200189B18 /* page2.png */; };
 		149FD0921904778200189B18 /* page3.png in Resources */ = {isa = PBXBuildFile; fileRef = 149FD08E1904778200189B18 /* page3.png */; };
 		149FD0931904778200189B18 /* page4.png in Resources */ = {isa = PBXBuildFile; fileRef = 149FD08F1904778200189B18 /* page4.png */; };
+		14A18CDF1909906700AB7BE7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A18CDE1909906700AB7BE7 /* MessageUI.framework */; };
 		14A2A3E418C3BAA5006D3FFC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E318C3BAA5006D3FFC /* AdSupport.framework */; };
 		14A2A3E618C3BAB1006D3FFC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E518C3BAB1006D3FFC /* CoreData.framework */; };
 		14A2A3E818C3BABF006D3FFC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */; };
@@ -119,6 +120,7 @@
 		149FD08D1904778200189B18 /* page2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page2.png; sourceTree = "<group>"; };
 		149FD08E1904778200189B18 /* page3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page3.png; sourceTree = "<group>"; };
 		149FD08F1904778200189B18 /* page4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page4.png; sourceTree = "<group>"; };
+		14A18CDE1909906700AB7BE7 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		14A2A3E318C3BAA5006D3FFC /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		14A2A3E518C3BAB1006D3FFC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -166,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14A18CDF1909906700AB7BE7 /* MessageUI.framework in Frameworks */,
 				14A2A3EA18C3BAD4006D3FFC /* libz.dylib in Frameworks */,
 				14A2A3E818C3BABF006D3FFC /* SystemConfiguration.framework in Frameworks */,
 				14A2A3E618C3BAB1006D3FFC /* CoreData.framework in Frameworks */,
@@ -246,6 +249,7 @@
 		149FB2951890845B00D44DB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				14A18CDE1909906700AB7BE7 /* MessageUI.framework */,
 				14A2A3E918C3BAD4006D3FFC /* libz.dylib */,
 				EC99068C19071FF80053DAC8 /* FacebookSDK.framework */,
 				14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */,

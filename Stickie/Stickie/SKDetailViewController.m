@@ -9,9 +9,10 @@
 #import "SKDetailViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import <MessageUI/MessageUI.h>
 
 
-@interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate> {
+@interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate, MFMailComposeViewControllerDelegate> {
     UIImageView *imageView;
 }
 
@@ -190,6 +191,51 @@
 }
 
 - (IBAction)shareToMail:(id)sender {
+    NSString *messageBody = @"Sent via <a href=\"https://itunes.apple.com/gb/app/stickie/id853858851?mt=8\">Stickie</a>!" ;
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+//    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:YES];
+    
+    UIImage* instaImage = self.image; //Top half of image Full Resolution.
+    NSString* imagePath = [NSString stringWithFormat:@"%@/image.png", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+    [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+    [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
+    
+
+    NSData *fileData = [NSData dataWithContentsOfFile:imagePath];
+    NSString *mimeType = @"image/png";
+
+    [mc addAttachmentData:fileData mimeType:mimeType fileName:@"image"];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+    
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
