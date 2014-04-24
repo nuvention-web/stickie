@@ -32,6 +32,7 @@
 		149FD0911904778200189B18 /* page2.png in Resources */ = {isa = PBXBuildFile; fileRef = 149FD08D1904778200189B18 /* page2.png */; };
 		149FD0921904778200189B18 /* page3.png in Resources */ = {isa = PBXBuildFile; fileRef = 149FD08E1904778200189B18 /* page3.png */; };
 		149FD0931904778200189B18 /* page4.png in Resources */ = {isa = PBXBuildFile; fileRef = 149FD08F1904778200189B18 /* page4.png */; };
+		14A18CDF1909906700AB7BE7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A18CDE1909906700AB7BE7 /* MessageUI.framework */; };
 		14A2A3E418C3BAA5006D3FFC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E318C3BAA5006D3FFC /* AdSupport.framework */; };
 		14A2A3E618C3BAB1006D3FFC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E518C3BAB1006D3FFC /* CoreData.framework */; };
 		14A2A3E818C3BABF006D3FFC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */; };
@@ -61,6 +62,11 @@
 		93E82088189828F100877D38 /* SKTagCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82082189828F100877D38 /* SKTagCollection.m */; };
 		93E82089189828F100877D38 /* SKTagData.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82084189828F100877D38 /* SKTagData.m */; };
 		93E8208C189829A400877D38 /* SKAssetURLTagMapTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */; };
+		EC99068D19071FF80053DAC8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC99068C19071FF80053DAC8 /* FacebookSDK.framework */; };
+		EC99068F190721E30053DAC8 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = EC99068E190721E30053DAC8 /* facebook.png */; };
+		EC990691190723120053DAC8 /* instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = EC990690190723120053DAC8 /* instagram.png */; };
+		EC990694190724E70053DAC8 /* iMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = EC990692190724E70053DAC8 /* iMessage.png */; };
+		EC990695190724E70053DAC8 /* Mail.png in Resources */ = {isa = PBXBuildFile; fileRef = EC990693190724E70053DAC8 /* Mail.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +120,7 @@
 		149FD08D1904778200189B18 /* page2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page2.png; sourceTree = "<group>"; };
 		149FD08E1904778200189B18 /* page3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page3.png; sourceTree = "<group>"; };
 		149FD08F1904778200189B18 /* page4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page4.png; sourceTree = "<group>"; };
+		14A18CDE1909906700AB7BE7 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		14A2A3E318C3BAA5006D3FFC /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		14A2A3E518C3BAB1006D3FFC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -149,6 +156,11 @@
 		93E82083189828F100877D38 /* SKTagData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagData.h; sourceTree = "<group>"; };
 		93E82084189828F100877D38 /* SKTagData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagData.m; sourceTree = "<group>"; };
 		93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagMapTest.m; sourceTree = "<group>"; };
+		EC99068C19071FF80053DAC8 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		EC99068E190721E30053DAC8 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
+		EC990690190723120053DAC8 /* instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instagram.png; sourceTree = "<group>"; };
+		EC990692190724E70053DAC8 /* iMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iMessage.png; sourceTree = "<group>"; };
+		EC990693190724E70053DAC8 /* Mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mail.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14A18CDF1909906700AB7BE7 /* MessageUI.framework in Frameworks */,
 				14A2A3EA18C3BAD4006D3FFC /* libz.dylib in Frameworks */,
 				14A2A3E818C3BABF006D3FFC /* SystemConfiguration.framework in Frameworks */,
 				14A2A3E618C3BAB1006D3FFC /* CoreData.framework in Frameworks */,
@@ -164,6 +177,7 @@
 				14540B8618C3FDA5004185F7 /* libAdIdAccess.a in Frameworks */,
 				149FB2EB1890997000D44DB2 /* AssetsLibrary.framework in Frameworks */,
 				149FB2991890845B00D44DB2 /* CoreGraphics.framework in Frameworks */,
+				EC99068D19071FF80053DAC8 /* FacebookSDK.framework in Frameworks */,
 				149FB29B1890845B00D44DB2 /* UIKit.framework in Frameworks */,
 				149FB2971890845B00D44DB2 /* Foundation.framework in Frameworks */,
 			);
@@ -235,7 +249,9 @@
 		149FB2951890845B00D44DB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				14A18CDE1909906700AB7BE7 /* MessageUI.framework */,
 				14A2A3E918C3BAD4006D3FFC /* libz.dylib */,
+				EC99068C19071FF80053DAC8 /* FacebookSDK.framework */,
 				14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */,
 				14A2A3E518C3BAB1006D3FFC /* CoreData.framework */,
 				14A2A3E318C3BAA5006D3FFC /* AdSupport.framework */,
@@ -323,8 +339,10 @@
 				149FD08F1904778200189B18 /* page4.png */,
 				14A38A4F19037661002AF61B /* page5.png */,
 				14A38A5019037661002AF61B /* tutButton.png */,
+				EC990690190723120053DAC8 /* instagram.png */,
 				149E0353190096DC00AE444C /* Cloud.png */,
 				14B6AF3018F766E200598E17 /* GreenWithRetrieval.png */,
+				EC99068E190721E30053DAC8 /* facebook.png */,
 				14B6AF3118F766E200598E17 /* OrangeWithRetrieval.png */,
 				14B6AF3218F766E200598E17 /* RedWithRetrieval.png */,
 				14B6AF2E18F7619800598E17 /* BlueWithRetrieval.png */,
@@ -334,6 +352,8 @@
 				9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */,
 				9385097318CD2EA1001AE7DC /* BlueCorner.png */,
 				9385097418CD2EA1001AE7DC /* GreenCircle.png */,
+				EC990692190724E70053DAC8 /* iMessage.png */,
+				EC990693190724E70053DAC8 /* Mail.png */,
 				9385097518CD2EA1001AE7DC /* GreenCorner.png */,
 				9385097618CD2EA1001AE7DC /* OrangeCircle.png */,
 				9385097718CD2EA1001AE7DC /* OrangeCorner.png */,
@@ -432,9 +452,11 @@
 				9385098018CD2EA1001AE7DC /* OrangeCorner.png in Resources */,
 				9385097A18CD2EA1001AE7DC /* App - camera icon (3-8-2014).png in Resources */,
 				14B6AF3418F766E200598E17 /* OrangeWithRetrieval.png in Resources */,
+				EC990694190724E70053DAC8 /* iMessage.png in Resources */,
 				9385097C18CD2EA1001AE7DC /* BlueCorner.png in Resources */,
 				14A38A5619037661002AF61B /* tutButton.png in Resources */,
 				149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */,
+				EC990695190724E70053DAC8 /* Mail.png in Resources */,
 				9385097E18CD2EA1001AE7DC /* GreenCorner.png in Resources */,
 				14A38A5519037661002AF61B /* page5.png in Resources */,
 				14A30C0E18D4055B008212CD /* Half circle new.png in Resources */,
@@ -444,8 +466,10 @@
 				14B6AF3518F766E200598E17 /* RedWithRetrieval.png in Resources */,
 				149FD0911904778200189B18 /* page2.png in Resources */,
 				149FB2AA1890845B00D44DB2 /* Main.storyboard in Resources */,
+				EC990691190723120053DAC8 /* instagram.png in Resources */,
 				149FD0921904778200189B18 /* page3.png in Resources */,
 				9385097D18CD2EA1001AE7DC /* GreenCircle.png in Resources */,
+				EC99068F190721E30053DAC8 /* facebook.png in Resources */,
 				14A497BE18CD311D00AD43FC /* SearchStickie_222x222.png in Resources */,
 				149E0354190096DC00AE444C /* Cloud.png in Resources */,
 			);
@@ -617,6 +641,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stickie/Stickie-Prefix.pch";
@@ -645,6 +670,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stickie/Stickie-Prefix.pch";
