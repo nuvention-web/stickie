@@ -156,7 +156,7 @@
         
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Facebook Not Installed"
-                              message: @"Please install Facebook for iOS to share your Stickies!"
+                              message: @"Please install Facebook for iOS to share your photos!"
                               delegate: self
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:@"Download", nil];
@@ -168,24 +168,43 @@
 
 - (void) alertView:(UIAlertView *) alertView clickedButtonAtIndex:(NSInteger) index {
     if(index == 1) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.com/apps/facebook"]];
+        if ([alertView.title isEqualToString:@"Facebook Not Installed"]) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.com/apps/facebook"]];
+        }
+        else if ([alertView.title isEqualToString:@"Instagram Not Installed"]) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.com/apps/instagram"]];
+        }
     }
 }
 
 - (IBAction)shareToInsta:(id)sender {
+    NSURL *instagramURL = [NSURL URLWithString:@"instagram://location?id=1"];
+    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+        //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
+        UIImage* instaImage = self.image; //Top half of image Full Resolution.
+        
+        NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+        [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
+        //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
+        _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
+        _docFile.delegate=self;
+        _docFile.UTI = @"com.instagram.exclusivegram";
+        _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:@"#stickie #stickiepic",@"InstagramCaption", nil];
+        [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Instagram Not Installed"
+                              message: @"Please install Instagram for iOS to share your photos!"
+                              delegate: self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:@"Download", nil];
+        
+        [alert show];
+        
+    }
 
-//    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
-    UIImage* instaImage = self.image; //Top half of image Full Resolution.
-
-    NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
-    [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
-    [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
-//    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
-    _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
-    _docFile.delegate=self;
-    _docFile.UTI = @"com.instagram.exclusivegram";
-    _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:@"#stickie #stickiepic",@"InstagramCaption", nil];
-    [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
 }
 
 -(UIImage*)thumbnailFromView:(UIView*)_myView{
