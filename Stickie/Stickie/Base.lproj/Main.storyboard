@@ -432,11 +432,11 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rrk-Bq-C1V">
                                 <rect key="frame" x="166" y="492" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <state key="normal" title="Button" image="iMessage.png">
+                                <state key="normal" title="Button" image="whatsapp.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="shareToText:" destination="BWr-p7-POP" eventType="touchUpInside" id="0hw-Cd-6Mw"/>
+                                    <action selector="shareToWhatsapp:" destination="BWr-p7-POP" eventType="touchUpInside" id="jMF-zN-NoQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="s6r-g0-jX2">
@@ -560,9 +560,9 @@
         <image name="RedCorner.png" width="501" height="501"/>
         <image name="SearchStickie_222x222.png" width="222" height="222"/>
         <image name="facebook.png" width="256" height="256"/>
-        <image name="iMessage.png" width="64" height="64"/>
         <image name="instagram.png" width="256" height="256"/>
         <image name="tutButton.png" width="419" height="203"/>
+        <image name="whatsapp.png" width="128" height="128"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

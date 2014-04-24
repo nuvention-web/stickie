@@ -169,16 +169,19 @@
 - (void) alertView:(UIAlertView *) alertView clickedButtonAtIndex:(NSInteger) index {
     if(index == 1) {
         if ([alertView.title isEqualToString:@"Facebook Not Installed"]) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.com/apps/facebook"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/facebook/id284882215?mt=8"]];
         }
         else if ([alertView.title isEqualToString:@"Instagram Not Installed"]) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.com/apps/instagram"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/instagram/id389801252?mt=8"]];
+        }
+        else if ([alertView.title isEqualToString:@"WhatsApp Not Installed"]) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/whatsapp-messenger/id310633997?mt=8"]];
         }
     }
 }
 
 - (IBAction)shareToInsta:(id)sender {
-    NSURL *instagramURL = [NSURL URLWithString:@"instagram://location?id=1"];
+    NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
         //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
         UIImage* instaImage = self.image; //Top half of image Full Resolution.
@@ -204,7 +207,6 @@
         [alert show];
         
     }
-
 }
 
 -(UIImage*)thumbnailFromView:(UIView*)_myView{
@@ -246,7 +248,32 @@
 	
 	return newimg;
 }
-- (IBAction)shareToText:(id)sender {
+
+- (IBAction)shareToWhatsapp:(id)sender {
+    NSURL *whatsURL = [NSURL URLWithString:@"whatsapp://"];
+    if ([[UIApplication sharedApplication] canOpenURL:whatsURL]) {
+        //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
+        UIImage* instaImage = self.image; //Top half of image Full Resolution.
+        
+        NSString* imagePath = [NSString stringWithFormat:@"%@/image.wai", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+        [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
+        //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
+        _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
+        _docFile.delegate=self;
+        _docFile.UTI = @"net.whatsapp.image";
+        [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"WhatsApp Not Installed"
+                              message: @"Please install WhatsApp for iOS to share your photos!"
+                              delegate: self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:@"Download", nil];
+        
+        [alert show];
+    }
 }
 
 - (IBAction)shareToMail:(id)sender {
