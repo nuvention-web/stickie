@@ -129,35 +129,46 @@
 }
 
 - (IBAction)shareToFacebook:(id)sender {
-    FBShareDialogPhotoParams *params = [[FBShareDialogPhotoParams alloc] init];
-    params.photos = @[imageView.image];
-    
-    [FBDialogs presentShareDialogWithPhotoParams:params
-                                     clientState:nil
-                                         handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-                                             if (error) {
-                                                 NSLog(@"Error: %@", error.description);
-                                             } else {
-                                                 NSLog(@"Success!");
-                                             }
-                                         }];
+    // If the Facebook app is installed and we can present the share dialog
+    if([FBDialogs canPresentShareDialogWithPhotos]) {
+        FBShareDialogPhotoParams *params = [[FBShareDialogPhotoParams alloc] init];
+        params.photos = @[imageView.image];
+        
+        [FBDialogs presentShareDialogWithPhotoParams:params
+                                         clientState:nil
+                                             handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                                 if (error) {
+                                                     NSLog(@"Error: %@", error.description);
+                                                 } else {
+                                                     NSLog(@"Success!");
+                                                 }
+                                             }];
+        
+    } else {
+        //The user doesn't have the Facebook for iOS app installed, so we can't present the Share Dialog
+        /*Fallback: You have two options
+         1. Share the photo as a Custom Story using a "share a photo" Open Graph action, and publish it using API calls.
+         See our Custom Stories tutorial: https://developers.facebook.com/docs/ios/open-graph
+         2. Upload the photo making a requestForUploadPhoto
+         See the reference: https://developers.facebook.com/docs/reference/ios/current/class/FBRequest/#requestForUploadPhoto:
+         */
+        
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Facebook Not Installed"
+                              message: @"Please install Facebook for iOS to share your Stickies!"
+                              delegate: self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:@"Download", nil];
+        
+        [alert show];
+    }
     
 }
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
-    
-    BOOL urlWasHandled = [FBAppCall handleOpenURL:url
-                                sourceApplication:sourceApplication
-                                  fallbackHandler:^(FBAppCall *call) {
-                                      NSLog(@"Unhandled deep link: %@", url);
-                                      // Here goes the code to handle the links
-                                      // Use the links to show a relevant view of your app to the user
-                                  }];
-    
-    return urlWasHandled;
+- (void) alertView:(UIAlertView *) alertView clickedButtonAtIndex:(NSInteger) index {
+    if(index == 1) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.com/apps/facebook"]];
+    }
 }
 
 - (IBAction)shareToInsta:(id)sender {
