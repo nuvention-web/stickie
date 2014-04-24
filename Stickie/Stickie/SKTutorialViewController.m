@@ -28,6 +28,7 @@
     [super viewDidLoad];
     
     self.backgroundImageView.image = [UIImage imageNamed:self.imageFile];
+    [self.startButton setCenter:CGPointMake(self.startButton.center.x, self.view.frame.size.height - 100)];
 }
 
 - (void)didReceiveMemoryWarning

@@ -9,9 +9,10 @@
 #import "SKDetailViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import <MessageUI/MessageUI.h>
 
 
-@interface SKDetailViewController () <UIScrollViewDelegate> {
+@interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate, MFMailComposeViewControllerDelegate> {
     UIImageView *imageView;
 }
 
@@ -172,12 +173,109 @@
 }
 
 - (IBAction)shareToInsta:(id)sender {
+
+//    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
+    UIImage* instaImage = self.image; //Top half of image Full Resolution.
+
+    NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+    [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+    [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
+//    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
+    _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
+    _docFile.delegate=self;
+    _docFile.UTI = @"com.instagram.exclusivegram";
+    _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:@"#stickie #stickiepic",@"InstagramCaption", nil];
+    [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
 }
 
+-(UIImage*)thumbnailFromView:(UIView*)_myView{
+	return [self thumbnailFromView:_myView withSize:_myView.frame.size];
+}
+
+-(UIImage*)thumbnailFromView:(UIView*)_myView withSize:(CGSize)viewsize{
+    
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
+        ([UIScreen mainScreen].scale == 2.0)) {
+        // Retina display
+        CGSize newSize = viewsize;
+        newSize.height=newSize.height*2;
+        newSize.width=newSize.width*2;
+        viewsize=newSize;
+    }
+    
+    UIGraphicsBeginImageContext(_myView.bounds.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
+    CGContextSetShouldAntialias(context, YES);
+	[_myView.layer renderInContext: context];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+    
+    
+	CGSize size = _myView.frame.size;
+	CGFloat scale = MAX(viewsize.width / size.width, viewsize.height / size.height);
+	
+	UIGraphicsBeginImageContext(viewsize);
+	CGFloat width = size.width * scale;
+	CGFloat height = size.height * scale;
+	float dwidth = ((viewsize.width - width) / 2.0f);
+	float dheight = ((viewsize.height - height) / 2.0f);
+	CGRect rect = CGRectMake(dwidth, dheight, size.width * scale, size.height * scale);
+	[image drawInRect:rect];
+	UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	
+	return newimg;
+}
 - (IBAction)shareToText:(id)sender {
 }
 
 - (IBAction)shareToMail:(id)sender {
+    NSString *messageBody = @"Sent via <a href=\"https://itunes.apple.com/gb/app/stickie/id853858851?mt=8\">Stickie</a>!" ;
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+//    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:YES];
+    
+    UIImage* instaImage = self.image; //Top half of image Full Resolution.
+    NSString* imagePath = [NSString stringWithFormat:@"%@/image.png", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+    [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+    [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
+    
+
+    NSData *fileData = [NSData dataWithContentsOfFile:imagePath];
+    NSString *mimeType = @"image/png";
+
+    [mc addAttachmentData:fileData mimeType:mimeType fileName:@"image"];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+    
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
