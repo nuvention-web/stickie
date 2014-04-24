@@ -11,7 +11,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 
-@interface SKDetailViewController () <UIScrollViewDelegate> {
+@interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate> {
     UIImageView *imageView;
 }
 
@@ -133,7 +133,8 @@
 
 - (IBAction)shareToInsta:(id)sender {
 
-    UIImage* instaImage = [self thumbnailFromView:imageView];
+//    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
+    UIImage* instaImage = self.image; //Top half of image Full Resolution.
 
     NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
     [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
@@ -142,7 +143,7 @@
     _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
     _docFile.delegate=self;
     _docFile.UTI = @"com.instagram.exclusivegram";
-    _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:@"Image Tagged via #stickie! #stickiepic",@"InstagramCaption", nil];
+    _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:@"#stickie #stickiepic",@"InstagramCaption", nil];
     [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
 }
 
