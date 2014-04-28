@@ -15,5 +15,6 @@
 @property NSUInteger pageIndex;
 @property NSString *imageFile;
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
 
 @end

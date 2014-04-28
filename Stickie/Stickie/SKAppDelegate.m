@@ -44,11 +44,11 @@
         ]
      ];
     
-
-    
     /* For second prototype, these tags need to be added to the tag collection at startup. */
-    SKTagCollection *tagCollection = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagCollection"]];
-    SKAssetURLTagsMap *urlToTagMap = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"tagsMap"]];
+    
+    NSMutableDictionary *appState = [NSKeyedUnarchiver unarchiveObjectWithFile:[self filePathForSave: @"stickie_data"]];
+    SKTagCollection *tagCollection = [appState objectForKey:@"tCollect"];
+    SKAssetURLTagsMap *urlToTagMap = [appState objectForKey:@"tMap"];
     
     if (!urlToTagMap)
         urlToTagMap = [SKAssetURLTagsMap sharedInstance];
@@ -75,6 +75,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [self saveUserDataWithName:@"stickie_data"];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -92,8 +93,18 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[SKTagCollection sharedInstance]] forKey:@"tagCollection"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[SKAssetURLTagsMap sharedInstance]] forKey:@"tagsMap"];
+    [self saveUserDataWithName:@"stickie_data"];
+}
+
+- (void)saveUserDataWithName:(NSString *)name
+{
+    NSMutableDictionary *appState = [NSMutableDictionary dictionary];
+    [appState setObject:[SKTagCollection sharedInstance] forKey:@"tCollect"];
+    [appState setObject:[SKAssetURLTagsMap sharedInstance] forKey:@"tMap"];
+    BOOL result = [NSKeyedArchiver archiveRootObject:appState toFile: [self filePathForSave:name]];
+    if (!result) {
+        NSLog(@"Failed to archive objects properly.");
+    }
 }
 
 - (void)checkAndHandleDeletedPhotos
@@ -114,6 +125,15 @@
             [NSException raise:@"Asset Processing Error." format: @"There was an error processing the required ALAssets."];
         }];
     }
+}
+
+- (NSString *)filePathForSave: (NSString *) nameOfFile
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *file = [documentsDirectory stringByAppendingString:@"/"];
+    file = [file stringByAppendingString:nameOfFile];
+    return file;
 }
 
 @end

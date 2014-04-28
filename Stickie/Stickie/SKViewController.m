@@ -26,6 +26,7 @@
     UIImage *dImage;
     CGPoint defaultPoint;
     BOOL retainScroll;
+    BOOL close;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
@@ -52,12 +53,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _pageImages = @[@"page1.png", @"page2.png", @"page3.png", @"page4.png"];
+    _pageImages = @[@"page1.png", @"page2.png", @"page3.png", @"page4.png", @"page5.png"];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"wasLaunchedBefore"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"wasLaunchedBefore"];
+        close = YES;
         [self loadTutorial];
     }
     else {
+        close = NO;
         [[self navigationController] setNavigationBarHidden:NO animated:YES];
         [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
@@ -132,6 +135,9 @@
     pageContentViewController.imageFile = self.pageImages[index];
     pageContentViewController.pageIndex = index;
     [pageContentViewController.view sendSubviewToBack:pageContentViewController.startButton];
+    if (close) {
+        [pageContentViewController.view sendSubviewToBack:pageContentViewController.closeButton];
+    }
 
     return pageContentViewController;
 }
@@ -418,6 +424,7 @@
     /* Constants to define how close thumbnail must be to a given corner in order for a tag to register */
     int TAG_SENSITIVITY_X = dImage.size.width/5.0;
     int TAG_SENSITITVITY_Y = dImage.size.height/5.0;
+    int FRAME_HEIGHT = self.view.frame.size.height;
     
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
@@ -435,18 +442,27 @@
         tag = [[SKImageTag alloc] initWithName:_topLeftLabel.text location:SKCornerLocationTopLeft andColor:nil];
         button = _topLeftCorner;
     }
+    /* Tag event occurs in top-right corner */
     else if (point.x >= 255 - TAG_SENSITIVITY_X * 1.5 && point.x <= 320 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
         tag = [[SKImageTag alloc] initWithName:_topRightLabel.text location:SKCornerLocationTopRight andColor:nil];
         button = _topRightCorner;
     }
-    else if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568) {
+    /* Tag event occurs in bot-left corner */
+    else if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= FRAME_HEIGHT - 65 - TAG_SENSITITVITY_Y && point.y <= FRAME_HEIGHT) {
         tag = [[SKImageTag alloc] initWithName:_botLeftLabel.text location:SKCornerLocationBottomLeft andColor:nil];
         button = _botLeftCorner;
     }
-    else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= 503 - TAG_SENSITITVITY_Y && point.y <= 568) {
+    /* Tag event occurs in bot-right corner */
+    else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= FRAME_HEIGHT - 65 - TAG_SENSITITVITY_Y && point.y <= FRAME_HEIGHT) {
         tag = [[SKImageTag alloc] initWithName:_botRightLabel.text location:SKCornerLocationBottomRight andColor:nil];
         button = _botRightCorner;
     }
+    /* Share Feature */
+    else if (point.x >= 135 && point.x <= 185 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
+        tag = [[SKImageTag alloc] initWithName:_topRightLabel.text location:SKCornerLocationTopRight andColor:nil];
+        button = _topRightCorner;
+    }
+
     
     if (![tag.tagName isEqualToString:@""]) {
         if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
@@ -478,8 +494,8 @@
             [urlToTagMap removeTag:tag forAssetURL:assetURL];
             [tagCollection removeImageURL:assetURL forTag:tag];
         }
-        [_collectionView reloadItemsAtIndexPaths: [[NSArray alloc] initWithObjects:path, nil]];
-        
+//            [_collectionView reloadItemsAtIndexPaths: [[NSArray alloc] initWithObjects:path, nil]]; // DOES NOT WORK FOR FIRST TAG (APPLE BUG?).
+        [_collectionView reloadData];
     }
     else {
         [alertEmptyTag show];
