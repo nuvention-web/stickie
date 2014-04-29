@@ -10,17 +10,40 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import <MessageUI/MessageUI.h>
-
+#import <QuartzCore/QuartzCore.h>
 
 @interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate, MFMailComposeViewControllerDelegate> {
     UIImageView *imageView;
 }
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIScrollView *shareScrollView;
 
 @end
 
 @implementation SKDetailViewController
+
+- (NSArray *)loadButtons
+{
+    UIButton *FACEBOOK_BUTTON = [[UIButton alloc] init];
+    [FACEBOOK_BUTTON setBackgroundImage:[UIImage imageNamed:@"facebook.png"] forState:UIControlStateNormal];
+    [FACEBOOK_BUTTON addTarget:self action:@selector(shareToFacebook) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *INSTAGRAM_BUTTON = [[UIButton alloc] init];
+    [INSTAGRAM_BUTTON setBackgroundImage:[UIImage imageNamed:@"instagram.png"] forState:UIControlStateNormal];
+    [INSTAGRAM_BUTTON addTarget:self action:@selector(shareToInsta) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *WHATSAPP_BUTTON = [[UIButton alloc] init];
+    [WHATSAPP_BUTTON setBackgroundImage:[UIImage imageNamed:@"instagram.png"] forState:UIControlStateNormal];
+    
+    UIButton *MAIL_BUTTON = [[UIButton alloc] init];
+    [MAIL_BUTTON setBackgroundImage:[UIImage imageNamed:@"Mail.png"] forState:UIControlStateNormal];
+    
+    UIButton *TWITTER_BUTTON = [[UIButton alloc] init];
+    [TWITTER_BUTTON setBackgroundImage:[UIImage imageNamed:@"instagram.png"] forState:UIControlStateNormal];
+    
+    return @[FACEBOOK_BUTTON, INSTAGRAM_BUTTON, WHATSAPP_BUTTON, MAIL_BUTTON, TWITTER_BUTTON];
+}
 
 -(void)viewDidLoad
 {
@@ -36,7 +59,7 @@
     [imageView setFrame: aRect];
     [self.scrollView addSubview:imageView];
     
-    [self createScrollMenuWithButtons:nil];
+    [self setupScrollMenuWithButtons:[self loadButtons]];
     
     /* Necessary for pinch-to-zoom. */
     self.scrollView.delegate = self;
@@ -61,24 +84,25 @@
     [imageView addGestureRecognizer:rightSwipe];
 }
 
-- (void)createScrollMenuWithButtons:(NSArray *)buttons
+- (void)setupScrollMenuWithButtons:(NSArray *)buttons
 {
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 484, self.view.frame.size.width, 84)];
-    
     int x = 0;
-    for (int i = 0; i < 8; i++) {
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, 100, 100)];
-        [button setTitle:[NSString stringWithFormat:@"Button %d", i] forState:UIControlStateNormal];
-        
-        [scrollView addSubview:button];
-        
-        x += button.frame.size.width;
+    for (UIButton* button in buttons) {
+        button.frame = CGRectMake(x, 8.75, 65, 65);
+        [_shareScrollView addSubview:button];
+        x += button.frame.size.width + 10;
     }
     
-    scrollView.contentSize = CGSizeMake(x, scrollView.frame.size.height);
-    scrollView.backgroundColor = [UIColor redColor];
+    _shareScrollView.contentSize = CGSizeMake(x, _shareScrollView.frame.size.height);
+    _shareScrollView.backgroundColor = [UIColor colorWithRed:243.0/255.0 green:243.0/255.0 blue:243.0/255.0 alpha:1.0];
+    [_shareScrollView setShowsHorizontalScrollIndicator:NO];
     
-    [self.view addSubview:scrollView];
+    CALayer *BottomBorder = [CALayer layer];
+    BottomBorder.frame = CGRectMake(0.0f, 484.0f, self.view.frame.size.width, 0.5f);
+    BottomBorder.backgroundColor = [UIColor grayColor].CGColor;
+    [self.view.layer addSublayer:BottomBorder];
+    
+    [self.view addSubview:_scrollView];
 }
 
 - (void)setNavBarTitleWithIndex: (int)index
@@ -151,7 +175,7 @@
 
 }
 
-- (IBAction)shareToFacebook:(id)sender {
+- (void)shareToFacebook {
     // If the Facebook app is installed and we can present the share dialog
     if([FBDialogs canPresentShareDialogWithPhotos]) {
         FBShareDialogPhotoParams *params = [[FBShareDialogPhotoParams alloc] init];
@@ -199,7 +223,7 @@
     }
 }
 
-- (IBAction)shareToInsta:(id)sender {
+- (void)shareToInsta {
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://location?id=1"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
         //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
@@ -268,10 +292,8 @@
 	
 	return newimg;
 }
-- (IBAction)shareToText:(id)sender {
-}
 
-- (IBAction)shareToMail:(id)sender {
+- (void)shareToMail:(id)sender {
     NSString *messageBody = @"Sent via <a href=\"https://itunes.apple.com/gb/app/stickie/id853858851?mt=8\">Stickie</a>!" ;
     
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
