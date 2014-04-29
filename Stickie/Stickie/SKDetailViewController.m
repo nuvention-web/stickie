@@ -184,7 +184,7 @@
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
         //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
-        UIImage* instaImage = self.image; //Top half of image Full Resolution.
+        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
         
         NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
         [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
@@ -193,7 +193,7 @@
         _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
         _docFile.delegate=self;
         _docFile.UTI = @"com.instagram.exclusivegram";
-        _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:@"#stickie #stickiepic",@"InstagramCaption", nil];
+        _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:@"  #stickie #stickiepic",@"InstagramCaption", nil];
         [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
     }
     else {
@@ -253,7 +253,7 @@
     NSURL *whatsURL = [NSURL URLWithString:@"whatsapp://"];
     if ([[UIApplication sharedApplication] canOpenURL:whatsURL]) {
         //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
-        UIImage* instaImage = self.image; //Top half of image Full Resolution.
+        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
         
         NSString* imagePath = [NSString stringWithFormat:@"%@/image.wai", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
         [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
@@ -277,27 +277,37 @@
 }
 
 - (IBAction)shareToMail:(id)sender {
-    NSString *messageBody = @"Sent via <a href=\"https://itunes.apple.com/gb/app/stickie/id853858851?mt=8\">Stickie</a>!" ;
-    
-    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
-    mc.mailComposeDelegate = self;
-//    [mc setSubject:emailTitle];
-    [mc setMessageBody:messageBody isHTML:YES];
-    
-    UIImage* instaImage = self.image; //Top half of image Full Resolution.
-    NSString* imagePath = [NSString stringWithFormat:@"%@/image.png", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
-    [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
-    [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
-    
+    if ([MFMailComposeViewController canSendMail]) {
+        NSString *messageBody = @"<br><br>Sent via <a href=\"https://itunes.apple.com/gb/app/stickie/id853858851?mt=8\">Stickie</a>." ;
+        
+        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+        mc.mailComposeDelegate = self;
+        [mc setMessageBody:messageBody isHTML:YES];
+        
+        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
+        NSString* imagePath = [NSString stringWithFormat:@"%@/image.png", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+        [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
+        
 
-    NSData *fileData = [NSData dataWithContentsOfFile:imagePath];
-    NSString *mimeType = @"image/png";
+        NSData *fileData = [NSData dataWithContentsOfFile:imagePath];
+        NSString *mimeType = @"image/png";
 
-    [mc addAttachmentData:fileData mimeType:mimeType fileName:@"image"];
-    
-    // Present mail view controller on screen
-    [self presentViewController:mc animated:YES completion:NULL];
-    
+        [mc addAttachmentData:fileData mimeType:mimeType fileName:@"image"];
+        
+        // Present mail view controller on screen
+        [self presentViewController:mc animated:YES completion:NULL];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Email Not Setup"
+                              message: @"Please set up email on your phone."
+                              delegate: self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        
+        [alert show];
+    }
 }
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
