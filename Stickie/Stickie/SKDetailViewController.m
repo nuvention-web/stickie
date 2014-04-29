@@ -46,7 +46,11 @@
     UIButton *TWITTER_BUTTON = [[UIButton alloc] init];
     [TWITTER_BUTTON setBackgroundImage:[UIImage imageNamed:@"instagram.png"] forState:UIControlStateNormal];
     
-    return @[FACEBOOK_BUTTON, INSTAGRAM_BUTTON, WHATSAPP_BUTTON, MAIL_BUTTON, TWITTER_BUTTON];
+    UIButton *OTHER_BUTTON = [[UIButton alloc] init];
+    [OTHER_BUTTON setBackgroundImage:[UIImage imageNamed:@"instagram.png"] forState:UIControlStateNormal];
+    [OTHER_BUTTON addTarget:self action:@selector(shareToOther) forControlEvents:UIControlEventTouchUpInside];
+    
+    return @[FACEBOOK_BUTTON, INSTAGRAM_BUTTON, WHATSAPP_BUTTON, MAIL_BUTTON, TWITTER_BUTTON, OTHER_BUTTON];
 }
 
 -(void)viewDidLoad
@@ -394,6 +398,11 @@
     
     // Close the Mail Interface
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)shareToOther
+{
+
 }
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
