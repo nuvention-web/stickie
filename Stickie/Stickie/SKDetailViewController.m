@@ -36,23 +36,23 @@
     [INSTAGRAM_BUTTON setBackgroundImage:[UIImage imageNamed:@"instagram.png"] forState:UIControlStateNormal];
     [INSTAGRAM_BUTTON addTarget:self action:@selector(shareToInsta) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *WHATSAPP_BUTTON = [[UIButton alloc] init];
-    [WHATSAPP_BUTTON setBackgroundImage:[UIImage imageNamed:@"whatsapp.png"] forState:UIControlStateNormal];
-    [WHATSAPP_BUTTON addTarget:self action:@selector(shareToWhatsapp) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *MESSAGE_BUTTON = [[UIButton alloc] init];
+    [MESSAGE_BUTTON setBackgroundImage:[UIImage imageNamed:@"iMessage.png"] forState:UIControlStateNormal];
+    [MESSAGE_BUTTON addTarget:self action:@selector(shareToMessage) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *MAIL_BUTTON = [[UIButton alloc] init];
     [MAIL_BUTTON setBackgroundImage:[UIImage imageNamed:@"Mail.png"] forState:UIControlStateNormal];
     [MAIL_BUTTON addTarget:self action:@selector(shareToMail) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *MESSAGE_BUTTON = [[UIButton alloc] init];
-    [MESSAGE_BUTTON setBackgroundImage:[UIImage imageNamed:@"iMessage.png"] forState:UIControlStateNormal];
-    [MESSAGE_BUTTON addTarget:self action:@selector(shareToMessage) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *WHATSAPP_BUTTON = [[UIButton alloc] init];
+    [WHATSAPP_BUTTON setBackgroundImage:[UIImage imageNamed:@"whatsapp.png"] forState:UIControlStateNormal];
+    [WHATSAPP_BUTTON addTarget:self action:@selector(shareToWhatsapp) forControlEvents:UIControlEventTouchUpInside];
 
     UIButton *TWITTER_BUTTON = [[UIButton alloc] init];
     [TWITTER_BUTTON setBackgroundImage:[UIImage imageNamed:@"twitter.png"] forState:UIControlStateNormal];
     [TWITTER_BUTTON addTarget:self action:@selector(shareToTwitter) forControlEvents:UIControlEventTouchUpInside];
 
-    return @[FACEBOOK_BUTTON, INSTAGRAM_BUTTON, WHATSAPP_BUTTON, MAIL_BUTTON, MESSAGE_BUTTON, TWITTER_BUTTON];
+    return @[FACEBOOK_BUTTON, INSTAGRAM_BUTTON, MESSAGE_BUTTON, MAIL_BUTTON, WHATSAPP_BUTTON, TWITTER_BUTTON];
 }
 
 -(void)viewDidLoad
