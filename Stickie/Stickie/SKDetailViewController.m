@@ -12,6 +12,8 @@
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 #import <QuartzCore/QuartzCore.h>
+#import "SKAssetURLTagsMap.h"
+#import "SKImageTag.h"
 
 @interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate> {
     UIImageView *imageView;
@@ -248,7 +250,16 @@
         _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
         _docFile.delegate=self;
         _docFile.UTI = @"com.instagram.exclusivegram";
-        _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:@"  #stickie #stickiepic",@"InstagramCaption", nil];
+    
+        // Setting up hashtags.
+        NSMutableString *hashtags = [NSMutableString stringWithString:@"  @stickiepic | #stickiepic"];
+        NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:[_assets[imageIndex] valueForProperty:ALAssetPropertyAssetURL]]];
+        for (int i = 0; i < [tags count]; i++) {
+            [hashtags appendString:@" #"];
+            [hashtags appendString:[((SKImageTag*)tags[i]) tagName]];
+        }
+        
+        _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:hashtags,@"InstagramCaption", nil];
         [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
     }
     else {
@@ -357,7 +368,7 @@
     else {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Mail Not Setup"
-                              message: @"Please set up mail on your device."
+                              message: @"Set up mail on your device to continue."
                               delegate: self
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil];
