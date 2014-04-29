@@ -34,10 +34,12 @@
     [INSTAGRAM_BUTTON addTarget:self action:@selector(shareToInsta) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *WHATSAPP_BUTTON = [[UIButton alloc] init];
-    [WHATSAPP_BUTTON setBackgroundImage:[UIImage imageNamed:@"instagram.png"] forState:UIControlStateNormal];
+    [WHATSAPP_BUTTON setBackgroundImage:[UIImage imageNamed:@"whatsapp.png"] forState:UIControlStateNormal];
+    [WHATSAPP_BUTTON addTarget:self action:@selector(shareToWhatsapp) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *MAIL_BUTTON = [[UIButton alloc] init];
     [MAIL_BUTTON setBackgroundImage:[UIImage imageNamed:@"Mail.png"] forState:UIControlStateNormal];
+    [MAIL_BUTTON addTarget:self action:@selector(shareToMail) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *TWITTER_BUTTON = [[UIButton alloc] init];
     [TWITTER_BUTTON setBackgroundImage:[UIImage imageNamed:@"instagram.png"] forState:UIControlStateNormal];
@@ -226,7 +228,8 @@
     }
 }
 
-- (IBAction)shareToInsta:(id)sender {
+- (void)shareToInsta
+{
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
         //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
@@ -295,7 +298,7 @@
 	return newimg;
 }
 
-- (IBAction)shareToWhatsapp:(id)sender {
+- (void)shareToWhatsapp {
     NSURL *whatsURL = [NSURL URLWithString:@"whatsapp://"];
     if ([[UIApplication sharedApplication] canOpenURL:whatsURL]) {
         //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
@@ -322,27 +325,39 @@
     }
 }
 
-- (void)shareToMail:(id)sender {
-    NSString *messageBody = @"Sent via <a href=\"https://itunes.apple.com/gb/app/stickie/id853858851?mt=8\">Stickie</a>!" ;
-    
-    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
-    mc.mailComposeDelegate = self;
-//    [mc setSubject:emailTitle];
-    [mc setMessageBody:messageBody isHTML:YES];
-    
-    UIImage* instaImage = self.image; //Top half of image Full Resolution.
-    NSString* imagePath = [NSString stringWithFormat:@"%@/image.png", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
-    [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
-    [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
-    
-
-    NSData *fileData = [NSData dataWithContentsOfFile:imagePath];
-    NSString *mimeType = @"image/png";
-
-    [mc addAttachmentData:fileData mimeType:mimeType fileName:@"image"];
-    
-    // Present mail view controller on screen
-    [self presentViewController:mc animated:YES completion:NULL];
+- (void)shareToMail
+{
+    if ([MFMailComposeViewController canSendMail]) {
+        NSString *messageBody = @"<br><br>Sent via <a href=\"https://itunes.apple.com/gb/app/stickie/id853858851?mt=8\">Stickie</a>." ;
+        
+        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+        mc.mailComposeDelegate = self;
+        [mc setMessageBody:messageBody isHTML:YES];
+        
+        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
+        NSString* imagePath = [NSString stringWithFormat:@"%@/image.png", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+        [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
+        
+        
+        NSData *fileData = [NSData dataWithContentsOfFile:imagePath];
+        NSString *mimeType = @"image/png";
+        
+        [mc addAttachmentData:fileData mimeType:mimeType fileName:@"image"];
+        
+        // Present mail view controller on screen
+        [self presentViewController:mc animated:YES completion:NULL];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Mail Not Setup"
+                              message: @"Please set up mail on your device."
+                              delegate: self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        
+        [alert show];
+    }
     
 }
 
@@ -384,7 +399,6 @@
                                       withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
         [_scrollView zoomToRect:zoomRect animated:YES];
     }
-    
 }
 
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
