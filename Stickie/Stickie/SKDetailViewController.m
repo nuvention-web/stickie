@@ -406,11 +406,6 @@
 {
     MFMessageComposeViewController* composeVC = [[MFMessageComposeViewController alloc] init];
     composeVC.messageComposeDelegate = self;
-//    [composeVC addAttachmentData:UIImageJPEGRepresentation( image, 0.7 /*
-//                                                                        quality factor */ )
-//                  typeIdentifier:(NSString*)kUTTypeJPEG
-//                        filename:@"image.jpg"];
-//    
     UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
     NSString *type = @"image/png";
 
@@ -428,7 +423,14 @@
 {
     SLComposeViewController *composeController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
     
-    [composeController setInitialText:@"#stickie @stickiepics"];
+    NSMutableString *hashtags = [NSMutableString stringWithString:@"  @stickiepics | #stickiepic"];
+    NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:[_assets[imageIndex] valueForProperty:ALAssetPropertyAssetURL]]];
+    for (int i = 0; i < [tags count]; i++) {
+        [hashtags appendString:@" #"];
+        [hashtags appendString:[((SKImageTag*)tags[i]) tagName]];
+    }
+    
+    [composeController setInitialText:hashtags];
     [composeController addImage:imageView.image];
     [composeController addURL: [NSURL URLWithString:
                                 @"https://itunes.apple.com/gb/app/stickie/id853858851"]];
