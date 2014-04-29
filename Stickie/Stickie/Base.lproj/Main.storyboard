@@ -416,7 +416,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Un1-zK-b0f">
-                                <rect key="frame" x="-1" y="64" width="321" height="420"/>
+                                <rect key="frame" x="0.0" y="64" width="321" height="420"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fNw-SH-ikB">
@@ -465,6 +465,7 @@
                     <navigationItem key="navigationItem" id="a0Q-AW-JRL"/>
                     <connections>
                         <outlet property="scrollView" destination="Un1-zK-b0f" id="brJ-3N-4C9"/>
+                        <outlet property="shareScrollView" destination="Onp-m4-atL" id="FeY-Tc-u9Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XaU-nU-OUK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -553,7 +554,6 @@
         <image name="GreenCircle.png" width="504" height="504"/>
         <image name="GreenCorner.png" width="501" height="501"/>
         <image name="Half circle new.png" width="619" height="185"/>
-        <image name="Mail.png" width="128" height="128"/>
         <image name="OrangeCircle.png" width="504" height="504"/>
         <image name="OrangeCorner.png" width="501" height="501"/>
         <image name="RedCircle.png" width="504" height="504"/>
