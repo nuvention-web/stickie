@@ -522,9 +522,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jXM-pU-fwu" userLabel="Close">
-                                <rect key="frame" x="295" y="0.0" width="30" height="25"/>
+                                <rect key="frame" x="290" y="0.0" width="30" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="x">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
