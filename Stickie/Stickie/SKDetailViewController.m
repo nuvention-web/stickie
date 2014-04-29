@@ -9,12 +9,13 @@
 #import "SKDetailViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 #import <QuartzCore/QuartzCore.h>
 #import "SKAssetURLTagsMap.h"
 #import "SKImageTag.h"
 
-@interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate, MFMailComposeViewControllerDelegate> {
+@interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate> {
     UIImageView *imageView;
 }
 
@@ -43,6 +44,10 @@
     [MAIL_BUTTON setBackgroundImage:[UIImage imageNamed:@"Mail.png"] forState:UIControlStateNormal];
     [MAIL_BUTTON addTarget:self action:@selector(shareToMail) forControlEvents:UIControlEventTouchUpInside];
     
+    UIButton *MESSAGE_BUTTON = [[UIButton alloc] init];
+    [MESSAGE_BUTTON setBackgroundImage:[UIImage imageNamed:@"iMessage.png"] forState:UIControlStateNormal];
+    [MESSAGE_BUTTON addTarget:self action:@selector(shareToMessage) forControlEvents:UIControlEventTouchUpInside];
+
     UIButton *TWITTER_BUTTON = [[UIButton alloc] init];
     [TWITTER_BUTTON setBackgroundImage:[UIImage imageNamed:@"instagram.png"] forState:UIControlStateNormal];
     
