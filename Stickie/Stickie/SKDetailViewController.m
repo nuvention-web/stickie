@@ -9,10 +9,11 @@
 #import "SKDetailViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate, MFMailComposeViewControllerDelegate> {
+@interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate> {
     UIImageView *imageView;
 }
 
@@ -41,10 +42,15 @@
     [MAIL_BUTTON setBackgroundImage:[UIImage imageNamed:@"Mail.png"] forState:UIControlStateNormal];
     [MAIL_BUTTON addTarget:self action:@selector(shareToMail) forControlEvents:UIControlEventTouchUpInside];
     
+    UIButton *MESSAGE_BUTTON = [[UIButton alloc] init];
+    [MESSAGE_BUTTON setBackgroundImage:[UIImage imageNamed:@"iMessage.png"] forState:UIControlStateNormal];
+    [MESSAGE_BUTTON addTarget:self action:@selector(shareToMessage) forControlEvents:UIControlEventTouchUpInside];
+
     UIButton *TWITTER_BUTTON = [[UIButton alloc] init];
-    [TWITTER_BUTTON setBackgroundImage:[UIImage imageNamed:@"instagram.png"] forState:UIControlStateNormal];
-    
-    return @[FACEBOOK_BUTTON, INSTAGRAM_BUTTON, WHATSAPP_BUTTON, MAIL_BUTTON, TWITTER_BUTTON];
+    [TWITTER_BUTTON setBackgroundImage:[UIImage imageNamed:@"twitter.png"] forState:UIControlStateNormal];
+    [TWITTER_BUTTON addTarget:self action:@selector(shareToTwitter) forControlEvents:UIControlEventTouchUpInside];
+
+    return @[FACEBOOK_BUTTON, INSTAGRAM_BUTTON, WHATSAPP_BUTTON, MAIL_BUTTON, MESSAGE_BUTTON, TWITTER_BUTTON];
 }
 
 -(void)viewDidLoad
@@ -385,6 +391,55 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (void)shareToMessage
+{
+    MFMessageComposeViewController* composeVC = [[MFMessageComposeViewController alloc] init];
+    composeVC.messageComposeDelegate = self;
+//    [composeVC addAttachmentData:UIImageJPEGRepresentation( image, 0.7 /*
+//                                                                        quality factor */ )
+//                  typeIdentifier:(NSString*)kUTTypeJPEG
+//                        filename:@"image.jpg"];
+//    
+    UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
+    NSString *type = @"image/png";
+
+    [composeVC addAttachmentData:UIImagePNGRepresentation(instaImage) typeIdentifier:type filename:@"image.png"];
+    [self presentViewController:composeVC animated:YES completion:NULL];
+
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+
+}
+
+- (void)shareToTwitter
+{
+    SLComposeViewController *composeController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    
+    [composeController setInitialText:@"#stickie @stickiepics"];
+    [composeController addImage:imageView.image];
+    [composeController addURL: [NSURL URLWithString:
+                                @"https://itunes.apple.com/gb/app/stickie/id853858851"]];
+    
+    [self presentViewController:composeController
+                       animated:YES completion:nil];
+    
+    SLComposeViewControllerCompletionHandler myBlock = ^(SLComposeViewControllerResult result){
+        if (result == SLComposeViewControllerResultCancelled) {
+            
+            NSLog(@"delete");
+            
+        } else
+            
+        {
+            NSLog(@"post");
+        }
+        
+        [composeController dismissViewControllerAnimated:YES completion:Nil];
+    };
+    composeController.completionHandler =myBlock;
+}
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
     
     float newScale = [_scrollView zoomScale] * 4.0;
