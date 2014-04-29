@@ -36,6 +36,8 @@
     [imageView setFrame: aRect];
     [self.scrollView addSubview:imageView];
     
+    [self createScrollMenuWithButtons:nil];
+    
     /* Necessary for pinch-to-zoom. */
     self.scrollView.delegate = self;
     self.scrollView.showsVerticalScrollIndicator = NO;
@@ -57,6 +59,26 @@
     
     [imageView addGestureRecognizer:leftSwipe];
     [imageView addGestureRecognizer:rightSwipe];
+}
+
+- (void)createScrollMenuWithButtons:(NSArray *)buttons
+{
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 484, self.view.frame.size.width, 84)];
+    
+    int x = 0;
+    for (int i = 0; i < 8; i++) {
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, 100, 100)];
+        [button setTitle:[NSString stringWithFormat:@"Button %d", i] forState:UIControlStateNormal];
+        
+        [scrollView addSubview:button];
+        
+        x += button.frame.size.width;
+    }
+    
+    scrollView.contentSize = CGSizeMake(x, scrollView.frame.size.height);
+    scrollView.backgroundColor = [UIColor redColor];
+    
+    [self.view addSubview:scrollView];
 }
 
 - (void)setNavBarTitleWithIndex: (int)index
