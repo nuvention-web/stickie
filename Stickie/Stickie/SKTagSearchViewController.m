@@ -226,7 +226,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         }
         
         if ([buttonPressed isEqualToString:_topLeftButton.titleLabel.text]){
-            topLeftButtonImage = [UIImage imageNamed:@"BlueWithRetrieval.png"];
+            topLeftButtonImage = [UIImage imageNamed:@"RetrievalBlue.png"];
             TLButtonFrame.size = CGSizeMake(69, 69);
             TLButtonFrame.origin = CGPointMake(10,TOP_ALIGN - 2);
             _topLeftButton.frame = TLButtonFrame;
@@ -235,7 +235,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             topLeftClicked = YES;
         }
         else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text]){
-            topRightButtonImage = [UIImage imageNamed:@"GreenWithRetrieval.png"];
+            topRightButtonImage = [UIImage imageNamed:@"RetrievalGreen.png"];
             TRButtonFrame.size = CGSizeMake(69, 69);
             TRButtonFrame.origin = CGPointMake(87,TOP_ALIGN - 2);
             _topRightButton.frame = TRButtonFrame;
@@ -244,7 +244,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             topRightClicked = YES;
         }
         else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text]){
-            botLeftButtonImage = [UIImage imageNamed:@"RedWithRetrieval.png"];
+            botLeftButtonImage = [UIImage imageNamed:@"RetrievalRed.png"];
             BLButtonFrame.size = CGSizeMake(69, 69);
             BLButtonFrame.origin = CGPointMake(165,TOP_ALIGN - 2);
             _botLeftButton.frame = BLButtonFrame;
@@ -253,7 +253,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             botLeftClicked = YES;
         }
         else if ([buttonPressed isEqualToString:_botRightButton.titleLabel.text]){
-            botRightButtonImage = [UIImage imageNamed:@"OrangeWithRetrieval.png"];
+            botRightButtonImage = [UIImage imageNamed:@"RetrievalOrange.png"];
             BRButtonFrame.size = CGSizeMake(69, 69);
             BRButtonFrame.origin = CGPointMake(242,TOP_ALIGN - 2);
             _botRightButton.frame = BRButtonFrame;

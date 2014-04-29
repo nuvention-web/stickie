@@ -233,7 +233,7 @@
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
         //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
-        UIImage* instaImage = self.image; //Top half of image Full Resolution.
+        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
         
         NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
         [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
@@ -242,7 +242,7 @@
         _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
         _docFile.delegate=self;
         _docFile.UTI = @"com.instagram.exclusivegram";
-        _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:@"#stickie #stickiepic",@"InstagramCaption", nil];
+        _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:@"  #stickie #stickiepic",@"InstagramCaption", nil];
         [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
     }
     else {
@@ -302,7 +302,7 @@
     NSURL *whatsURL = [NSURL URLWithString:@"whatsapp://"];
     if ([[UIApplication sharedApplication] canOpenURL:whatsURL]) {
         //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
-        UIImage* instaImage = self.image; //Top half of image Full Resolution.
+        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
         
         NSString* imagePath = [NSString stringWithFormat:@"%@/image.wai", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
         [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];

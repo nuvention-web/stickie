@@ -13,7 +13,7 @@
 
 @protocol SKTagAssignViewControllerDelegate <NSObject>
 - (void)tagAssignViewControllerDidCancel:(SKTagAssignViewController *)controller;
-- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag: (NSString *)tag forLocation: (SKCornerLocation) cornerLocation andDelete: (BOOL) delete;
+- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag: (NSString *)tag forLocation: (SKCornerLocation) cornerLocation andDelete: (BOOL) delete andDidTagImageURL:(NSURL *)assetURL;
 @end
 
 @interface SKTagAssignViewController : UITableViewController <UIAlertViewDelegate>
@@ -21,6 +21,7 @@
 @property (nonatomic) SKCornerLocation location;
 @property (nonatomic) NSString *preLabel;
 @property (nonatomic) BOOL createTag;
+@property (nonatomic) NSURL *tagImageURL;
 @property (nonatomic, weak) id <SKTagAssignViewControllerDelegate> delegate;
 - (IBAction)cancel:(id)sender;
 - (IBAction)done:(id)sender;
