@@ -423,7 +423,7 @@
 {
     SLComposeViewController *composeController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
     
-    NSMutableString *hashtags = [NSMutableString stringWithString:@"  @stickiepics | #stickiepic"];
+    NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepics (#stickie): "];
     NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:[_assets[imageIndex] valueForProperty:ALAssetPropertyAssetURL]]];
     for (int i = 0; i < [tags count]; i++) {
         [hashtags appendString:@" #"];

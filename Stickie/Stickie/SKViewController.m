@@ -409,16 +409,17 @@
 #pragma mark Edit Tag
 - (void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer{
     CGPoint point = [gestureRecognizer locationInView:self.view];
+    int FRAME_HEIGHT = self.view.frame.size.height;
     if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
         [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
     
     else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128)
        [self performSegueWithIdentifier:@"topRightTagEdit" sender:self];
     
-    else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568)
+    else if (point.x >= 0 && point.x <= 65 && point.y >= FRAME_HEIGHT - 65  && point.y <= FRAME_HEIGHT)
         [self performSegueWithIdentifier:@"botLeftTagEdit" sender:self];
     
-    else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
+    else if (point.x >= 255 && point.x <= 320 && point.y >= FRAME_HEIGHT - 65  && point.y <= FRAME_HEIGHT)
         [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
 }
 
