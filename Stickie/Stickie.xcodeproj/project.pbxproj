@@ -63,12 +63,12 @@
 		93E82088189828F100877D38 /* SKTagCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82082189828F100877D38 /* SKTagCollection.m */; };
 		93E82089189828F100877D38 /* SKTagData.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82084189828F100877D38 /* SKTagData.m */; };
 		93E8208C189829A400877D38 /* SKAssetURLTagMapTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */; };
-		EC6D06921914350A00F04708 /* smfacebook.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D068C1914350A00F04708 /* smfacebook.png */; };
-		EC6D06931914350A00F04708 /* sminstagram.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D068D1914350A00F04708 /* sminstagram.png */; };
-		EC6D06941914350A00F04708 /* smmail.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D068E1914350A00F04708 /* smmail.png */; };
-		EC6D06951914350A00F04708 /* smtext.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D068F1914350A00F04708 /* smtext.png */; };
-		EC6D06961914350A00F04708 /* smtwitter.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D06901914350A00F04708 /* smtwitter.png */; };
-		EC6D06971914350A00F04708 /* smwhatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D06911914350A00F04708 /* smwhatsapp.png */; };
+		EC6D06AA19143E9D00F04708 /* smfacebook.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D06A419143E9D00F04708 /* smfacebook.png */; };
+		EC6D06AB19143E9D00F04708 /* sminstagram.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D06A519143E9D00F04708 /* sminstagram.png */; };
+		EC6D06AC19143E9D00F04708 /* smmail.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D06A619143E9D00F04708 /* smmail.png */; };
+		EC6D06AD19143E9D00F04708 /* smtext.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D06A719143E9D00F04708 /* smtext.png */; };
+		EC6D06AE19143E9D00F04708 /* smtwitter.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D06A819143E9D00F04708 /* smtwitter.png */; };
+		EC6D06AF19143E9D00F04708 /* smwhatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D06A919143E9D00F04708 /* smwhatsapp.png */; };
 		EC99068D19071FF80053DAC8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC99068C19071FF80053DAC8 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -160,12 +160,12 @@
 		93E82083189828F100877D38 /* SKTagData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagData.h; sourceTree = "<group>"; };
 		93E82084189828F100877D38 /* SKTagData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagData.m; sourceTree = "<group>"; };
 		93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagMapTest.m; sourceTree = "<group>"; };
-		EC6D068C1914350A00F04708 /* smfacebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smfacebook.png; sourceTree = "<group>"; };
-		EC6D068D1914350A00F04708 /* sminstagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sminstagram.png; sourceTree = "<group>"; };
-		EC6D068E1914350A00F04708 /* smmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smmail.png; sourceTree = "<group>"; };
-		EC6D068F1914350A00F04708 /* smtext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smtext.png; sourceTree = "<group>"; };
-		EC6D06901914350A00F04708 /* smtwitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smtwitter.png; sourceTree = "<group>"; };
-		EC6D06911914350A00F04708 /* smwhatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smwhatsapp.png; sourceTree = "<group>"; };
+		EC6D06A419143E9D00F04708 /* smfacebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smfacebook.png; sourceTree = "<group>"; };
+		EC6D06A519143E9D00F04708 /* sminstagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sminstagram.png; sourceTree = "<group>"; };
+		EC6D06A619143E9D00F04708 /* smmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smmail.png; sourceTree = "<group>"; };
+		EC6D06A719143E9D00F04708 /* smtext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smtext.png; sourceTree = "<group>"; };
+		EC6D06A819143E9D00F04708 /* smtwitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smtwitter.png; sourceTree = "<group>"; };
+		EC6D06A919143E9D00F04708 /* smwhatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smwhatsapp.png; sourceTree = "<group>"; };
 		EC99068C19071FF80053DAC8 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -353,13 +353,13 @@
 				14A38A5019037661002AF61B /* tutButton.png */,
 				149E0353190096DC00AE444C /* Cloud.png */,
 				14A30C0D18D4055B008212CD /* Half circle new.png */,
-				EC6D068C1914350A00F04708 /* smfacebook.png */,
-				EC6D068D1914350A00F04708 /* sminstagram.png */,
-				EC6D068E1914350A00F04708 /* smmail.png */,
-				EC6D068F1914350A00F04708 /* smtext.png */,
-				EC6D06901914350A00F04708 /* smtwitter.png */,
-				EC6D06911914350A00F04708 /* smwhatsapp.png */,
 				14A497BF18CD31A000AD43FC /* BlueCircle.png */,
+				EC6D06A419143E9D00F04708 /* smfacebook.png */,
+				EC6D06A519143E9D00F04708 /* sminstagram.png */,
+				EC6D06A619143E9D00F04708 /* smmail.png */,
+				EC6D06A719143E9D00F04708 /* smtext.png */,
+				EC6D06A819143E9D00F04708 /* smtwitter.png */,
+				EC6D06A919143E9D00F04708 /* smwhatsapp.png */,
 				14A497BD18CD311D00AD43FC /* SearchStickie_222x222.png */,
 				9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */,
 				9385097318CD2EA1001AE7DC /* BlueCorner.png */,
@@ -454,12 +454,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9385098218CD2EA1001AE7DC /* RedCorner.png in Resources */,
-				EC6D06931914350A00F04708 /* sminstagram.png in Resources */,
+				EC6D06AB19143E9D00F04708 /* sminstagram.png in Resources */,
 				149FB2AF1890845B00D44DB2 /* Images.xcassets in Resources */,
-				EC6D06961914350A00F04708 /* smtwitter.png in Resources */,
+				EC6D06AE19143E9D00F04708 /* smtwitter.png in Resources */,
 				9385098118CD2EA1001AE7DC /* RedCircle.png in Resources */,
 				9385097F18CD2EA1001AE7DC /* OrangeCircle.png in Resources */,
-				EC6D06971914350A00F04708 /* smwhatsapp.png in Resources */,
+				EC6D06AF19143E9D00F04708 /* smwhatsapp.png in Resources */,
 				149FD0931904778200189B18 /* page4.png in Resources */,
 				9385098018CD2EA1001AE7DC /* OrangeCorner.png in Resources */,
 				9385097A18CD2EA1001AE7DC /* App - camera icon (3-8-2014).png in Resources */,
@@ -467,11 +467,11 @@
 				1493FA871910673500364B8F /* RetrievalRed.png in Resources */,
 				14A38A5619037661002AF61B /* tutButton.png in Resources */,
 				149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */,
-				EC6D06941914350A00F04708 /* smmail.png in Resources */,
+				EC6D06AC19143E9D00F04708 /* smmail.png in Resources */,
 				9385097E18CD2EA1001AE7DC /* GreenCorner.png in Resources */,
 				1493FA851910673500364B8F /* RetrievalGreen.png in Resources */,
-				EC6D06921914350A00F04708 /* smfacebook.png in Resources */,
-				EC6D06951914350A00F04708 /* smtext.png in Resources */,
+				EC6D06AA19143E9D00F04708 /* smfacebook.png in Resources */,
+				EC6D06AD19143E9D00F04708 /* smtext.png in Resources */,
 				1493FA861910673500364B8F /* RetrievalOrange.png in Resources */,
 				14A38A5519037661002AF61B /* page5.png in Resources */,
 				14A30C0E18D4055B008212CD /* Half circle new.png in Resources */,
