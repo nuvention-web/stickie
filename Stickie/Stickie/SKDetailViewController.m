@@ -252,12 +252,13 @@
         _docFile.UTI = @"com.instagram.exclusivegram";
     
         // Setting up hashtags.
-        NSMutableString *hashtags = [NSMutableString stringWithString:@"  @stickiepic | #stickiepic"];
+        NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | #stickiepic"];
         NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:[_assets[imageIndex] valueForProperty:ALAssetPropertyAssetURL]]];
         for (int i = 0; i < [tags count]; i++) {
             [hashtags appendString:@" #"];
             [hashtags appendString:[((SKImageTag*)tags[i]) tagName]];
         }
+        [hashtags appendString:@" ••  "];
         
         _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:hashtags,@"InstagramCaption", nil];
         [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
