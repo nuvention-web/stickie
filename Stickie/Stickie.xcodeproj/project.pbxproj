@@ -10,7 +10,6 @@
 		1402253718FDB8100058F68C /* SKTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1402253618FDB8100058F68C /* SKTutorialViewController.m */; };
 		14540B8618C3FDA5004185F7 /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14540B8418C3FDA5004185F7 /* libAdIdAccess.a */; };
 		14540B8718C3FDA5004185F7 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14540B8518C3FDA5004185F7 /* libGoogleAnalyticsServices.a */; };
-		1493FA781910613000364B8F /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 1493FA761910613000364B8F /* twitter.png */; };
 		1493FA841910673500364B8F /* RetrievalBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 1493FA801910673500364B8F /* RetrievalBlue.png */; };
 		1493FA851910673500364B8F /* RetrievalGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 1493FA811910673500364B8F /* RetrievalGreen.png */; };
 		1493FA861910673500364B8F /* RetrievalOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 1493FA821910673500364B8F /* RetrievalOrange.png */; };
@@ -39,7 +38,6 @@
 		149FD0921904778200189B18 /* page3.png in Resources */ = {isa = PBXBuildFile; fileRef = 149FD08E1904778200189B18 /* page3.png */; };
 		149FD0931904778200189B18 /* page4.png in Resources */ = {isa = PBXBuildFile; fileRef = 149FD08F1904778200189B18 /* page4.png */; };
 		14A18CDF1909906700AB7BE7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A18CDE1909906700AB7BE7 /* MessageUI.framework */; };
-		14A18CE11909A08900AB7BE7 /* whatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A18CE01909A08900AB7BE7 /* whatsapp.png */; };
 		14A2A3E418C3BAA5006D3FFC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E318C3BAA5006D3FFC /* AdSupport.framework */; };
 		14A2A3E618C3BAB1006D3FFC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E518C3BAB1006D3FFC /* CoreData.framework */; };
 		14A2A3E818C3BABF006D3FFC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */; };
@@ -66,10 +64,12 @@
 		93E82089189828F100877D38 /* SKTagData.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82084189828F100877D38 /* SKTagData.m */; };
 		93E8208C189829A400877D38 /* SKAssetURLTagMapTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */; };
 		EC99068D19071FF80053DAC8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC99068C19071FF80053DAC8 /* FacebookSDK.framework */; };
-		EC99068F190721E30053DAC8 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = EC99068E190721E30053DAC8 /* facebook.png */; };
-		EC990691190723120053DAC8 /* instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = EC990690190723120053DAC8 /* instagram.png */; };
-		EC990694190724E70053DAC8 /* iMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = EC990692190724E70053DAC8 /* iMessage.png */; };
-		EC990695190724E70053DAC8 /* Mail.png in Resources */ = {isa = PBXBuildFile; fileRef = EC990693190724E70053DAC8 /* Mail.png */; };
+		ECF0BCB41914096B002558E6 /* smfacebook.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF0BCAE1914096B002558E6 /* smfacebook.png */; };
+		ECF0BCB51914096B002558E6 /* sminstagram.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF0BCAF1914096B002558E6 /* sminstagram.png */; };
+		ECF0BCB61914096B002558E6 /* smmail.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF0BCB01914096B002558E6 /* smmail.png */; };
+		ECF0BCB71914096B002558E6 /* smtext.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF0BCB11914096B002558E6 /* smtext.png */; };
+		ECF0BCB81914096B002558E6 /* smtwitter.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF0BCB21914096B002558E6 /* smtwitter.png */; };
+		ECF0BCB91914096B002558E6 /* smwhatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF0BCB31914096B002558E6 /* smwhatsapp.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,7 +93,6 @@
 		14540B8318C3FDA5004185F7 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		14540B8418C3FDA5004185F7 /* libAdIdAccess.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdIdAccess.a; sourceTree = "<group>"; };
 		14540B8518C3FDA5004185F7 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
-		1493FA761910613000364B8F /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
 		1493FA801910673500364B8F /* RetrievalBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RetrievalBlue.png; sourceTree = "<group>"; };
 		1493FA811910673500364B8F /* RetrievalGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RetrievalGreen.png; sourceTree = "<group>"; };
 		1493FA821910673500364B8F /* RetrievalOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RetrievalOrange.png; sourceTree = "<group>"; };
@@ -130,7 +129,6 @@
 		149FD08E1904778200189B18 /* page3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page3.png; sourceTree = "<group>"; };
 		149FD08F1904778200189B18 /* page4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page4.png; sourceTree = "<group>"; };
 		14A18CDE1909906700AB7BE7 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		14A18CE01909A08900AB7BE7 /* whatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whatsapp.png; sourceTree = "<group>"; };
 		14A2A3E318C3BAA5006D3FFC /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		14A2A3E518C3BAB1006D3FFC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		14A2A3E718C3BABF006D3FFC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -163,10 +161,12 @@
 		93E82084189828F100877D38 /* SKTagData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagData.m; sourceTree = "<group>"; };
 		93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagMapTest.m; sourceTree = "<group>"; };
 		EC99068C19071FF80053DAC8 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
-		EC99068E190721E30053DAC8 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
-		EC990690190723120053DAC8 /* instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instagram.png; sourceTree = "<group>"; };
-		EC990692190724E70053DAC8 /* iMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iMessage.png; sourceTree = "<group>"; };
-		EC990693190724E70053DAC8 /* Mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mail.png; sourceTree = "<group>"; };
+		ECF0BCAE1914096B002558E6 /* smfacebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smfacebook.png; sourceTree = "<group>"; };
+		ECF0BCAF1914096B002558E6 /* sminstagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sminstagram.png; sourceTree = "<group>"; };
+		ECF0BCB01914096B002558E6 /* smmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smmail.png; sourceTree = "<group>"; };
+		ECF0BCB11914096B002558E6 /* smtext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smtext.png; sourceTree = "<group>"; };
+		ECF0BCB21914096B002558E6 /* smtwitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smtwitter.png; sourceTree = "<group>"; };
+		ECF0BCB31914096B002558E6 /* smwhatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smwhatsapp.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,25 +345,25 @@
 				1493FA811910673500364B8F /* RetrievalGreen.png */,
 				1493FA821910673500364B8F /* RetrievalOrange.png */,
 				1493FA831910673500364B8F /* RetrievalRed.png */,
-				1493FA761910613000364B8F /* twitter.png */,
-				14A18CE01909A08900AB7BE7 /* whatsapp.png */,
 				149FD08C1904778200189B18 /* page1.png */,
 				149FD08D1904778200189B18 /* page2.png */,
 				149FD08E1904778200189B18 /* page3.png */,
 				149FD08F1904778200189B18 /* page4.png */,
+				ECF0BCAE1914096B002558E6 /* smfacebook.png */,
+				ECF0BCAF1914096B002558E6 /* sminstagram.png */,
+				ECF0BCB01914096B002558E6 /* smmail.png */,
+				ECF0BCB11914096B002558E6 /* smtext.png */,
+				ECF0BCB21914096B002558E6 /* smtwitter.png */,
+				ECF0BCB31914096B002558E6 /* smwhatsapp.png */,
 				14A38A4F19037661002AF61B /* page5.png */,
 				14A38A5019037661002AF61B /* tutButton.png */,
-				EC990690190723120053DAC8 /* instagram.png */,
 				149E0353190096DC00AE444C /* Cloud.png */,
-				EC99068E190721E30053DAC8 /* facebook.png */,
 				14A30C0D18D4055B008212CD /* Half circle new.png */,
 				14A497BF18CD31A000AD43FC /* BlueCircle.png */,
 				14A497BD18CD311D00AD43FC /* SearchStickie_222x222.png */,
 				9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */,
 				9385097318CD2EA1001AE7DC /* BlueCorner.png */,
 				9385097418CD2EA1001AE7DC /* GreenCircle.png */,
-				EC990692190724E70053DAC8 /* iMessage.png */,
-				EC990693190724E70053DAC8 /* Mail.png */,
 				9385097518CD2EA1001AE7DC /* GreenCorner.png */,
 				9385097618CD2EA1001AE7DC /* OrangeCircle.png */,
 				9385097718CD2EA1001AE7DC /* OrangeCorner.png */,
@@ -454,22 +454,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				9385098218CD2EA1001AE7DC /* RedCorner.png in Resources */,
+				ECF0BCB51914096B002558E6 /* sminstagram.png in Resources */,
 				149FB2AF1890845B00D44DB2 /* Images.xcassets in Resources */,
+				ECF0BCB81914096B002558E6 /* smtwitter.png in Resources */,
 				9385098118CD2EA1001AE7DC /* RedCircle.png in Resources */,
 				9385097F18CD2EA1001AE7DC /* OrangeCircle.png in Resources */,
+				ECF0BCB91914096B002558E6 /* smwhatsapp.png in Resources */,
 				149FD0931904778200189B18 /* page4.png in Resources */,
 				9385098018CD2EA1001AE7DC /* OrangeCorner.png in Resources */,
 				9385097A18CD2EA1001AE7DC /* App - camera icon (3-8-2014).png in Resources */,
-				14A18CE11909A08900AB7BE7 /* whatsapp.png in Resources */,
-				EC990694190724E70053DAC8 /* iMessage.png in Resources */,
 				9385097C18CD2EA1001AE7DC /* BlueCorner.png in Resources */,
-				1493FA781910613000364B8F /* twitter.png in Resources */,
 				1493FA871910673500364B8F /* RetrievalRed.png in Resources */,
 				14A38A5619037661002AF61B /* tutButton.png in Resources */,
 				149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */,
-				EC990695190724E70053DAC8 /* Mail.png in Resources */,
+				ECF0BCB61914096B002558E6 /* smmail.png in Resources */,
 				9385097E18CD2EA1001AE7DC /* GreenCorner.png in Resources */,
 				1493FA851910673500364B8F /* RetrievalGreen.png in Resources */,
+				ECF0BCB41914096B002558E6 /* smfacebook.png in Resources */,
+				ECF0BCB71914096B002558E6 /* smtext.png in Resources */,
 				1493FA861910673500364B8F /* RetrievalOrange.png in Resources */,
 				14A38A5519037661002AF61B /* page5.png in Resources */,
 				14A30C0E18D4055B008212CD /* Half circle new.png in Resources */,
@@ -478,10 +480,8 @@
 				149FD0911904778200189B18 /* page2.png in Resources */,
 				149FB2AA1890845B00D44DB2 /* Main.storyboard in Resources */,
 				1493FA841910673500364B8F /* RetrievalBlue.png in Resources */,
-				EC990691190723120053DAC8 /* instagram.png in Resources */,
 				149FD0921904778200189B18 /* page3.png in Resources */,
 				9385097D18CD2EA1001AE7DC /* GreenCircle.png in Resources */,
-				EC99068F190721E30053DAC8 /* facebook.png in Resources */,
 				14A497BE18CD311D00AD43FC /* SearchStickie_222x222.png in Resources */,
 				149E0354190096DC00AE444C /* Cloud.png in Resources */,
 			);
