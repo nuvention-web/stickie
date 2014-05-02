@@ -466,7 +466,7 @@
     }
 //    /* Share Feature */
 //    else if (point.x >= 135 && point.x <= 185 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
-//        tag = [[SKImageTag alloc] initWithName:_topRightLabel.text location:SKCornerLocationTopRight andColor:nil];
+//
 //    }
 
     
