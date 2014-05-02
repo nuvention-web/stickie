@@ -64,6 +64,12 @@
 		93E82089189828F100877D38 /* SKTagData.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82084189828F100877D38 /* SKTagData.m */; };
 		93E8208C189829A400877D38 /* SKAssetURLTagMapTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */; };
 		EC99068D19071FF80053DAC8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC99068C19071FF80053DAC8 /* FacebookSDK.framework */; };
+		ECAD8C8B19141A4300126BB5 /* smfacebook_white.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAD8C8A19141A4300126BB5 /* smfacebook_white.png */; };
+		ECAD8C9119141B0B00126BB5 /* smwhatsapp_white.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAD8C8C19141B0B00126BB5 /* smwhatsapp_white.png */; };
+		ECAD8C9219141B0B00126BB5 /* smtwitter_white.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAD8C8D19141B0B00126BB5 /* smtwitter_white.png */; };
+		ECAD8C9319141B0B00126BB5 /* sminstagram_white.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAD8C8E19141B0B00126BB5 /* sminstagram_white.png */; };
+		ECAD8C9419141B0B00126BB5 /* smmail_white.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAD8C8F19141B0B00126BB5 /* smmail_white.png */; };
+		ECAD8C9519141B0B00126BB5 /* smtext_white.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAD8C9019141B0B00126BB5 /* smtext_white.png */; };
 		ECF0BCB41914096B002558E6 /* smfacebook.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF0BCAE1914096B002558E6 /* smfacebook.png */; };
 		ECF0BCB51914096B002558E6 /* sminstagram.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF0BCAF1914096B002558E6 /* sminstagram.png */; };
 		ECF0BCB61914096B002558E6 /* smmail.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF0BCB01914096B002558E6 /* smmail.png */; };
@@ -161,6 +167,12 @@
 		93E82084189828F100877D38 /* SKTagData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagData.m; sourceTree = "<group>"; };
 		93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagMapTest.m; sourceTree = "<group>"; };
 		EC99068C19071FF80053DAC8 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		ECAD8C8A19141A4300126BB5 /* smfacebook_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smfacebook_white.png; sourceTree = "<group>"; };
+		ECAD8C8C19141B0B00126BB5 /* smwhatsapp_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smwhatsapp_white.png; sourceTree = "<group>"; };
+		ECAD8C8D19141B0B00126BB5 /* smtwitter_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smtwitter_white.png; sourceTree = "<group>"; };
+		ECAD8C8E19141B0B00126BB5 /* sminstagram_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sminstagram_white.png; sourceTree = "<group>"; };
+		ECAD8C8F19141B0B00126BB5 /* smmail_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smmail_white.png; sourceTree = "<group>"; };
+		ECAD8C9019141B0B00126BB5 /* smtext_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smtext_white.png; sourceTree = "<group>"; };
 		ECF0BCAE1914096B002558E6 /* smfacebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smfacebook.png; sourceTree = "<group>"; };
 		ECF0BCAF1914096B002558E6 /* sminstagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sminstagram.png; sourceTree = "<group>"; };
 		ECF0BCB01914096B002558E6 /* smmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smmail.png; sourceTree = "<group>"; };
@@ -347,11 +359,17 @@
 				1493FA831910673500364B8F /* RetrievalRed.png */,
 				149FD08C1904778200189B18 /* page1.png */,
 				149FD08D1904778200189B18 /* page2.png */,
+				ECAD8C8A19141A4300126BB5 /* smfacebook_white.png */,
 				149FD08E1904778200189B18 /* page3.png */,
 				149FD08F1904778200189B18 /* page4.png */,
 				ECF0BCAE1914096B002558E6 /* smfacebook.png */,
 				ECF0BCAF1914096B002558E6 /* sminstagram.png */,
 				ECF0BCB01914096B002558E6 /* smmail.png */,
+				ECAD8C8C19141B0B00126BB5 /* smwhatsapp_white.png */,
+				ECAD8C8D19141B0B00126BB5 /* smtwitter_white.png */,
+				ECAD8C8E19141B0B00126BB5 /* sminstagram_white.png */,
+				ECAD8C8F19141B0B00126BB5 /* smmail_white.png */,
+				ECAD8C9019141B0B00126BB5 /* smtext_white.png */,
 				ECF0BCB11914096B002558E6 /* smtext.png */,
 				ECF0BCB21914096B002558E6 /* smtwitter.png */,
 				ECF0BCB31914096B002558E6 /* smwhatsapp.png */,
@@ -454,6 +472,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9385098218CD2EA1001AE7DC /* RedCorner.png in Resources */,
+				ECAD8C9519141B0B00126BB5 /* smtext_white.png in Resources */,
+				ECAD8C8B19141A4300126BB5 /* smfacebook_white.png in Resources */,
 				ECF0BCB51914096B002558E6 /* sminstagram.png in Resources */,
 				149FB2AF1890845B00D44DB2 /* Images.xcassets in Resources */,
 				ECF0BCB81914096B002558E6 /* smtwitter.png in Resources */,
@@ -469,6 +489,7 @@
 				149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */,
 				ECF0BCB61914096B002558E6 /* smmail.png in Resources */,
 				9385097E18CD2EA1001AE7DC /* GreenCorner.png in Resources */,
+				ECAD8C9219141B0B00126BB5 /* smtwitter_white.png in Resources */,
 				1493FA851910673500364B8F /* RetrievalGreen.png in Resources */,
 				ECF0BCB41914096B002558E6 /* smfacebook.png in Resources */,
 				ECF0BCB71914096B002558E6 /* smtext.png in Resources */,
@@ -481,6 +502,9 @@
 				149FB2AA1890845B00D44DB2 /* Main.storyboard in Resources */,
 				1493FA841910673500364B8F /* RetrievalBlue.png in Resources */,
 				149FD0921904778200189B18 /* page3.png in Resources */,
+				ECAD8C9419141B0B00126BB5 /* smmail_white.png in Resources */,
+				ECAD8C9119141B0B00126BB5 /* smwhatsapp_white.png in Resources */,
+				ECAD8C9319141B0B00126BB5 /* sminstagram_white.png in Resources */,
 				9385097D18CD2EA1001AE7DC /* GreenCircle.png in Resources */,
 				14A497BE18CD311D00AD43FC /* SearchStickie_222x222.png in Resources */,
 				149E0354190096DC00AE444C /* Cloud.png in Resources */,
