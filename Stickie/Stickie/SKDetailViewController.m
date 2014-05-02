@@ -98,7 +98,7 @@
 {
     int x = 10;
     for (UIButton* button in buttons) {
-        button.frame = CGRectMake(x, 8.75, 65, 65);
+        button.frame = CGRectMake(x, 9.5, 65, 65);
         [_shareScrollView addSubview:button];
         x += button.frame.size.width + 10;
     }
