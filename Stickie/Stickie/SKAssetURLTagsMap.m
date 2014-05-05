@@ -72,6 +72,20 @@
         [assetURLToTagsMap setObject: tags forKey: imageURL];
     }
 }
+
+- (void) addTags: (SKImageTag *) tag forMultipleAssetURLs: (NSArray *) imageURLs
+{
+    NSMutableArray *tags;
+    for (NSURL* url in imageURLs) {
+        tags = [assetURLToTagsMap objectForKey:url];
+        if (!tags) tags = [[NSMutableArray alloc] init];
+        if (![tags containsObject:tag]) {
+            [tags addObject:tag];
+            [assetURLToTagsMap setObject:tags forKey:url];
+        }
+    }
+}
+
 - (void) transferURLSFrom: (SKImageTag *) oldTag to: (SKImageTag *) newTag
 {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
@@ -129,6 +143,18 @@
     else {
         [tags removeObject:tag];
         [assetURLToTagsMap setObject:tags forKey:imageURL];
+    }
+}
+
+- (void) removeTag: (SKImageTag *) tag forMultipleAssetURLs: (NSArray *) imageURLs
+{
+    NSMutableArray *tags;
+    for (NSURL* url in imageURLs){
+        tags = [assetURLToTagsMap objectForKey:url];
+        if (tags) {
+            [tags removeObject:tag];
+            [assetURLToTagsMap setObject:tags forKey:url];
+        }
     }
 }
 

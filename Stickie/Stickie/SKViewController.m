@@ -17,6 +17,8 @@
 #import "SKTagSearchViewController.h"
 #import "SKTagAssignViewController.h"
 #import "SKLongPressButton.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 
 @interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
@@ -27,6 +29,7 @@
     CGPoint defaultPoint;
     BOOL retainScroll;
     BOOL close;
+    NSURL *currentURL;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
@@ -61,6 +64,7 @@
     }
     else {
         close = NO;
+        self.screenName = @"Home Screen";                   // For Google Analytics.
         [[self navigationController] setNavigationBarHidden:NO animated:YES];
         [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
@@ -405,16 +409,17 @@
 #pragma mark Edit Tag
 - (void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer{
     CGPoint point = [gestureRecognizer locationInView:self.view];
+    int FRAME_HEIGHT = self.view.frame.size.height;
     if (point.x >= 0 && point.x <= 65 && point.y >= 63 && point.y <= 128)
         [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
     
     else if (point.x >= 255 && point.x <= 320 && point.y >= 63 && point.y <= 128)
        [self performSegueWithIdentifier:@"topRightTagEdit" sender:self];
     
-    else if (point.x >= 0 && point.x <= 65 && point.y >= 503 && point.y <= 568)
+    else if (point.x >= 0 && point.x <= 65 && point.y >= FRAME_HEIGHT - 65  && point.y <= FRAME_HEIGHT)
         [self performSegueWithIdentifier:@"botLeftTagEdit" sender:self];
     
-    else if (point.x >= 255 && point.x <= 320 && point.y >= 503 && point.y <= 568)
+    else if (point.x >= 255 && point.x <= 320 && point.y >= FRAME_HEIGHT - 65  && point.y <= FRAME_HEIGHT)
         [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
 }
 
@@ -425,47 +430,52 @@
     int TAG_SENSITIVITY_X = dImage.size.width/5.0;
     int TAG_SENSITITVITY_Y = dImage.size.height/5.0;
     int FRAME_HEIGHT = self.view.frame.size.height;
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
     SKImageTag *tag;
     UIButton *button;
-    
-    UIAlertView *alertEmptyTag = [[UIAlertView alloc] initWithTitle:@"The tag is unlabeled."
-                                                          message:@"Tap on the corner to create tag."
-                                                         delegate:nil
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
+    NSInteger currentTag;
+
     
     /* Tag event occurs in top-left corner */
     if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X * 1.5 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
         tag = [[SKImageTag alloc] initWithName:_topLeftLabel.text location:SKCornerLocationTopLeft andColor:nil];
         button = _topLeftCorner;
+        currentTag = 1;
     }
     /* Tag event occurs in top-right corner */
     else if (point.x >= 255 - TAG_SENSITIVITY_X * 1.5 && point.x <= 320 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
         tag = [[SKImageTag alloc] initWithName:_topRightLabel.text location:SKCornerLocationTopRight andColor:nil];
         button = _topRightCorner;
+        currentTag = 2;
     }
     /* Tag event occurs in bot-left corner */
     else if (point.x >= 0 && point.x <= 65 + TAG_SENSITIVITY_X && point.y >= FRAME_HEIGHT - 65 - TAG_SENSITITVITY_Y && point.y <= FRAME_HEIGHT) {
         tag = [[SKImageTag alloc] initWithName:_botLeftLabel.text location:SKCornerLocationBottomLeft andColor:nil];
         button = _botLeftCorner;
+        currentTag = 3;
+        
     }
     /* Tag event occurs in bot-right corner */
     else if (point.x >= 255 - TAG_SENSITIVITY_X && point.x <= 320 && point.y >= FRAME_HEIGHT - 65 - TAG_SENSITITVITY_Y && point.y <= FRAME_HEIGHT) {
         tag = [[SKImageTag alloc] initWithName:_botRightLabel.text location:SKCornerLocationBottomRight andColor:nil];
         button = _botRightCorner;
+        currentTag = 4;
     }
-    /* Share Feature */
-    else if (point.x >= 135 && point.x <= 185 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
-        tag = [[SKImageTag alloc] initWithName:_topRightLabel.text location:SKCornerLocationTopRight andColor:nil];
-        button = _topRightCorner;
-    }
+//    /* Share Feature */
+//    else if (point.x >= 135 && point.x <= 185 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
+//
+//    }
 
     
     if (![tag.tagName isEqualToString:@""]) {
         if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"image_tag"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             [UIView animateWithDuration:0.1 animations:^{
                 button.alpha = 0.0;
             } completion:^(BOOL finished) {
@@ -481,6 +491,10 @@
             [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
         }
         else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"image_untag"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             [UIView animateWithDuration:0.1 animations:^{
                 button.alpha = 0.0;
             } completion:^(BOOL finished) {
@@ -498,11 +512,27 @@
         [_collectionView reloadData];
     }
     else {
-        [alertEmptyTag show];
+        currentURL = assetURL;
+        switch (currentTag) {
+            case 1:
+                [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
+                break;
+            case 2:
+                [self performSegueWithIdentifier:@"topRightTagEdit" sender:self];
+                break;
+            case 3:
+                [self performSegueWithIdentifier:@"botLeftTagEdit" sender:self];
+                break;
+            case 4:
+                [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
+                break;
+            default:
+                break;
+        }
     }
 }
 
-#pragma make Camera Methods
+#pragma mark Camera Methods
 /* Take photo. */
 - (IBAction)takePhotoButtonTapped:(id)sender {
     [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.3];
@@ -645,7 +675,14 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_topLeftLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
+            if (currentURL) {
+                tagAssignViewController.tagImageURL = currentURL;
+            }
+            else {
+                tagAssignViewController.tagImageURL = nil;
+            }
         }
+        currentURL = nil;
         tagAssignViewController.location = SKCornerLocationTopLeft;
         tagAssignViewController.delegate = self;
         tagAssignViewController.preLabel = _topLeftLabel.text;
@@ -656,7 +693,14 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_topRightLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
+            if (currentURL) {
+                tagAssignViewController.tagImageURL = currentURL;
+            }
+            else {
+                tagAssignViewController.tagImageURL = nil;
+            }
         }
+        currentURL = nil;
         tagAssignViewController.location = SKCornerLocationTopRight;
         tagAssignViewController.delegate = self;
         tagAssignViewController.preLabel = _topRightLabel.text;
@@ -668,7 +712,14 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_botLeftLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
+            if (currentURL) {
+                tagAssignViewController.tagImageURL = currentURL;
+            }
+            else {
+                tagAssignViewController.tagImageURL = nil;
+            }
         }
+        currentURL = nil;
         tagAssignViewController.location = SKCornerLocationBottomLeft;
         tagAssignViewController.delegate = self;
         tagAssignViewController.preLabel = _botLeftLabel.text;
@@ -679,7 +730,14 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_botRightLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
+            if (currentURL) {
+                tagAssignViewController.tagImageURL = currentURL;
+            }
+            else {
+                tagAssignViewController.tagImageURL = nil;
+            }
         }
+        currentURL = nil;
         tagAssignViewController.location = SKCornerLocationBottomRight;
         tagAssignViewController.delegate = self;
         tagAssignViewController.preLabel = _botRightLabel.text;
@@ -703,13 +761,13 @@ finishedSavingWithError:(NSError *)error
 }
 
 /* Edit or delete tags from SKTagAssignViewController. */
-- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR forLocation:(SKCornerLocation) cornerLocation andDelete:(BOOL)delete
+- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR forLocation:(SKCornerLocation) cornerLocation andDelete:(BOOL)delete andDidTagImageURL:(NSURL *)assetURL
 {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKImageTag *tag = [[SKImageTag alloc] initWithName:tagSTR location:cornerLocation andColor:nil];
     SKImageTag *oldTag =[SKImageTag alloc];
     SKAssetURLTagsMap *urlTagsMap = [SKAssetURLTagsMap sharedInstance];
-    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     if (![tagCollection isTagInCollection:tag]) {
         if (![tag.tagName isEqualToString:@""]){
             [tagCollection addTagToCollection:tag];
@@ -749,6 +807,28 @@ finishedSavingWithError:(NSError *)error
             [urlTagsMap removeAllMappingsToTag:oldTag];
             [tagCollection removeTag:oldTag];
             _botRightLabel.text = tagSTR;
+        }
+        if (assetURL && ![tag.tagName isEqualToString:@""]) {
+            if (tag && ![urlTagsMap doesURL:assetURL haveTag:tag]) {
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                      action:@"image_tag"  // Event action (required)
+                                                                       label:nil         // Event label
+                                                                       value:nil] build]];    // Event value
+                /* Logic for tagging a new image - it is necessary to update both urlToTagMap and tagCollection. */
+                [urlTagsMap addTag: tag forAssetURL:assetURL];
+                [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
+            }
+            else if (tag && [urlTagsMap doesURL:assetURL haveTag:tag]) {
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                      action:@"image_untag"  // Event action (required)
+                                                                       label:nil         // Event label
+                                                                       value:nil] build]];    // Event value
+                /* Logic for removing a tag from a new image - it is necessary to update both urlToTagMap and tagCollection. */
+                [urlTagsMap removeTag:tag forAssetURL:assetURL];
+                [tagCollection removeImageURL:assetURL forTag:tag];
+            }
+            //            [_collectionView reloadItemsAtIndexPaths: [[NSArray alloc] initWithObjects:path, nil]]; // DOES NOT WORK FOR FIRST TAG (APPLE BUG?).
+            [_collectionView reloadData];
         }
     }
     else {

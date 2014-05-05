@@ -23,6 +23,9 @@
 /* Associates a tag with a given asset URL. Throws an exception if the tag is already associated with URL. */
 - (void) addTag: (SKImageTag *) tag forAssetURL: (NSURL *) imageURL;
 
+/* Add multiple tags for a given asset URL. No exceptions thrown. */
+- (void) addTags: (SKImageTag *) tag forMultipleAssetURLs: (NSArray *) imageURLs;
+
 /* Associates all assetURLs from one tag object with another tag object; removes old mapping. */
 - (void) transferURLSFrom: (SKImageTag *) oldTag to: (SKImageTag *) newTag;
 
@@ -37,6 +40,9 @@
  * Throws an exception if the URL is not found in the mapping.
  */
 - (void) removeTag: (SKImageTag *) tag forAssetURL: (NSURL *) imageURL;
+
+/* Removes the association of a tag with multiple asset URLs. No exceptions thrown. */
+- (void) removeTag: (SKImageTag *) tag forMultipleAssetURLs: (NSArray *) imageURLs;
 
 /* For every assetURL in collection, removes mappings to tag. */
 - (void) removeAllMappingsToTag: (SKImageTag *) tag;

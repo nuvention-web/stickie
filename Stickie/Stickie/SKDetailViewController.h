@@ -17,5 +17,8 @@
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSURL *imageURL;
 @property (nonatomic, strong) NSArray *assets;
+@property (nonatomic,retain) UIDocumentInteractionController *docFile;
+@property (weak, nonatomic) IBOutlet UIImageView *drawingImageView;
+@property (weak, nonatomic) IBOutlet UIView *drawingView;
 
 @end
