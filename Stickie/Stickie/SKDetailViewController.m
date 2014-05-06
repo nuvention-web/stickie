@@ -51,8 +51,12 @@
     UIButton *TWITTER_BUTTON = [[UIButton alloc] init];
     [TWITTER_BUTTON setBackgroundImage:[UIImage imageNamed:@"smtwitter.png"] forState:UIControlStateNormal];
     [TWITTER_BUTTON addTarget:self action:@selector(shareToTwitter) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *INSTA2_BUTTON = [[UIButton alloc] init];
+    [INSTA2_BUTTON setBackgroundImage:[UIImage imageNamed:@"CircleOrange.png"] forState:UIControlStateNormal];
+    [INSTA2_BUTTON addTarget:self action:@selector(shareToInsta2) forControlEvents:UIControlEventTouchUpInside];
 
-    return @[FACEBOOK_BUTTON, INSTAGRAM_BUTTON, MESSAGE_BUTTON, MAIL_BUTTON, WHATSAPP_BUTTON, TWITTER_BUTTON];
+    return @[FACEBOOK_BUTTON, INSTAGRAM_BUTTON, MESSAGE_BUTTON, MAIL_BUTTON, WHATSAPP_BUTTON, TWITTER_BUTTON, INSTA2_BUTTON];
 }
 
 -(void)viewDidLoad
@@ -274,6 +278,11 @@
         [alert show];
         
     }
+}
+
+- (void)shareToInsta2
+{
+    [self performSegueWithIdentifier:@"instaShare" sender:self];
 }
 
 -(UIImage*)thumbnailFromView:(UIView*)_myView{
