@@ -12,6 +12,7 @@
 #import "SKAssetURLTagsMap.h"
 #import "GAI.h"
 #import "SKViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @implementation SKAppDelegate
 
@@ -134,6 +135,19 @@
     NSString *file = [documentsDirectory stringByAppendingString:@"/"];
     file = [file stringByAppendingString:nameOfFile];
     return file;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    BOOL urlWasHandled = [FBAppCall handleOpenURL:url
+                                sourceApplication:sourceApplication
+                                  fallbackHandler:^(FBAppCall *call) {
+                                      NSLog(@"Unhandled deep link: %@", url);
+                                      // Here goes the code to handle the links
+                                      // Use the links to show a relevant view of your app to the user
+                                  }];
+    
+    return urlWasHandled;
 }
 
 @end
