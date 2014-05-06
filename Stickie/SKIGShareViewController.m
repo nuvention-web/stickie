@@ -7,10 +7,32 @@
 //
 
 #import "SKIGShareViewController.h"
+#import "SKAssetURLTagsMap.h"
 
-@interface SKIGShareViewController ()
+//@interface InstaAction : NSObject
+//    @property NSString *tags;
+//    @property NSString *actionName;
+//@end
+//
+//@implementation InstaAction
+//
+//- (InstaAction *)initWithTags: (NSString *)tagStr andActionName: (NSString*)name
+//{
+//    _tags = tagStr;
+//    _actionName = name;
+//    return self;
+//}
+//@end
+
+@interface SKIGShareViewController () <UIDocumentInteractionControllerDelegate>
+
+@property (nonatomic, strong) NSArray *categories;
 
 @end
+
+typedef enum {
+    BASIC, FITNESS, NATURE, POPULAR, SELFIES, SUNSETS, CUSTOM
+} Category;
 
 @implementation SKIGShareViewController
 
@@ -18,6 +40,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _categories = @[@"insta_basic.png", @"insta_fitness.png", @"insta_nature.png", @"insta_popular.png", @"insta_selfies.png", @"insta_sunsets.png", @"insta_custom.png"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -28,21 +52,93 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 45;
+    return [_categories count];
 }
 
 /* Load images into cells. */
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = (UICollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"instaCell" forIndexPath:indexPath];
-    
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, cell.frame.size.width, cell.frame.size.height)];
-    
-    imageView.image = [UIImage imageNamed:@"CircleOrange.png"];
-    
+    imageView.image = [UIImage imageNamed:[_categories objectAtIndex:[indexPath row]]];
     [cell addSubview:imageView];
-    
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    switch ([indexPath row]) {
+        case BASIC:
+            [self shareToInstaWith:@""];
+            break;
+            
+        case FITNESS:
+            [self shareToInstaWith:@"SWOLE TRAIN"];
+            break;
+            
+        case NATURE:
+            [self shareToInstaWith:@"TREES"];
+            break;
+            
+        case POPULAR:
+            [self shareToInstaWith:@"I GOT FRIENDS"];
+            break;
+            
+        case SELFIES:
+            [self shareToInstaWith:@"#20likes #amazing #bestoftheday #f4f #follow #follow4follow #followme #girl #hot #instacool #instacool #instadaily #instafollow #instafollow #instago #instalike #l4l #like4like #likeall #likethis #love #photooftheday #picoftheday #smile"];
+            break;
+            
+        case SUNSETS:
+            [self shareToInstaWith:@"OH SO PRETTY"];
+            break;
+            
+        case CUSTOM:
+            [self shareToInstaWith:@"INSERT SEGUE HERE"];
+            break;
+            
+        default:
+            [self shareToInstaWith:@"LOLS"];
+            break;
+    }
+}
+- (void)shareToInstaWith: (NSString *)str
+{
+    NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
+    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+        //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
+        UIImage* instaImage = _imageView.image; //Top half of image Full Resolution.
+        
+        NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+        [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
+        //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
+        _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
+        _docFile.delegate=self;
+        _docFile.UTI = @"com.instagram.exclusivegram";
+        
+        // Setting up hashtags
+        NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | #stickiepic"];
+        NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:_url]];
+        for (int i = 0; i < [tags count]; i++) {
+            [hashtags appendString:@" #"];
+            [hashtags appendString:[((SKImageTag*)tags[i]) tagName]];
+        }
+        [hashtags appendString:@" ••  "];
+        [hashtags appendString:str];
+        
+        _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:hashtags,@"InstagramCaption", nil];
+        [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Instagram Not Installed"
+                              message: @"Please install Instagram for iOS to share your photos!"
+                              delegate: self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:@"Download", nil];
+        
+        [alert show];
+        
+    }
 }
 
 /*

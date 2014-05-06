@@ -14,6 +14,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SKAssetURLTagsMap.h"
 #import "SKImageTag.h"
+#import "SKIGShareViewController.h"
 
 @interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate> {
     UIImageView *imageView;
@@ -52,11 +53,8 @@
     [TWITTER_BUTTON setBackgroundImage:[UIImage imageNamed:@"smtwitter.png"] forState:UIControlStateNormal];
     [TWITTER_BUTTON addTarget:self action:@selector(shareToTwitter) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *INSTA2_BUTTON = [[UIButton alloc] init];
-    [INSTA2_BUTTON setBackgroundImage:[UIImage imageNamed:@"CircleOrange.png"] forState:UIControlStateNormal];
-    [INSTA2_BUTTON addTarget:self action:@selector(shareToInsta2) forControlEvents:UIControlEventTouchUpInside];
 
-    return @[FACEBOOK_BUTTON, INSTAGRAM_BUTTON, MESSAGE_BUTTON, MAIL_BUTTON, WHATSAPP_BUTTON, TWITTER_BUTTON, INSTA2_BUTTON];
+    return @[FACEBOOK_BUTTON, INSTAGRAM_BUTTON, MESSAGE_BUTTON, MAIL_BUTTON, WHATSAPP_BUTTON, TWITTER_BUTTON];
 }
 
 -(void)viewDidLoad
@@ -240,32 +238,12 @@
     }
 }
 
+
 - (void)shareToInsta
 {
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-        //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
-        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
-        
-        NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
-        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
-        [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
-        //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
-        _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
-        _docFile.delegate=self;
-        _docFile.UTI = @"com.instagram.exclusivegram";
-    
-        // Setting up hashtags.
-        NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | #stickiepic"];
-        NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:[_assets[imageIndex] valueForProperty:ALAssetPropertyAssetURL]]];
-        for (int i = 0; i < [tags count]; i++) {
-            [hashtags appendString:@" #"];
-            [hashtags appendString:[((SKImageTag*)tags[i]) tagName]];
-        }
-        [hashtags appendString:@" ••  "];
-        
-        _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:hashtags,@"InstagramCaption", nil];
-        [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
+        [self performSegueWithIdentifier:@"instaShare" sender:self];
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc]
@@ -276,13 +254,7 @@
                               otherButtonTitles:@"Download", nil];
         
         [alert show];
-        
     }
-}
-
-- (void)shareToInsta2
-{
-    [self performSegueWithIdentifier:@"instaShare" sender:self];
 }
 
 -(UIImage*)thumbnailFromView:(UIView*)_myView{
@@ -501,6 +473,17 @@
 
 - (IBAction)backMain:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    /* Enlarge Image. */
+    if ([[segue identifier] isEqualToString:@"instaShare"])
+    {
+       SKIGShareViewController *instaController = [segue destinationViewController];
+        instaController.imageView = imageView;
+        instaController.url = _assets[imageIndex];
+    }
 }
 
 @end
