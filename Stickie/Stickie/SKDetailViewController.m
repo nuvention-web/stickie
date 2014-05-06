@@ -159,6 +159,7 @@
     ALAsset *asset = _assets[imageIndex];
     ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
     UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+    _imageURL = asset.defaultRepresentation.url; // Update imageURL property
     
     /* Prepare new image to be displayed in view. */
     UIImageView *newImageView = [[UIImageView alloc] init];
@@ -482,7 +483,7 @@
     {
        SKIGShareViewController *instaController = [segue destinationViewController];
         instaController.imageView = imageView;
-        instaController.url = _assets[imageIndex];
+        instaController.url = _imageURL;
     }
 }
 
