@@ -9,21 +9,6 @@
 #import "SKIGShareViewController.h"
 #import "SKAssetURLTagsMap.h"
 
-//@interface InstaAction : NSObject
-//    @property NSString *tags;
-//    @property NSString *actionName;
-//@end
-//
-//@implementation InstaAction
-//
-//- (InstaAction *)initWithTags: (NSString *)tagStr andActionName: (NSString*)name
-//{
-//    _tags = tagStr;
-//    _actionName = name;
-//    return self;
-//}
-//@end
-
 @interface SKIGShareViewController () <UIDocumentInteractionControllerDelegate>
 
 @property (nonatomic, strong) NSArray *categories;
@@ -34,7 +19,9 @@ typedef enum {
     BASIC, FITNESS, NATURE, POPULAR, SELFIES, SUNSETS, CUSTOM
 } Category;
 
-@implementation SKIGShareViewController
+@implementation SKIGShareViewController {
+    BOOL autoSquare;
+}
 
 - (void)viewDidLoad
 {
@@ -105,8 +92,28 @@ typedef enum {
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
         //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
-        UIImage* instaImage = _imageView.image; //Top half of image Full Resolution.
+        UIImage* instaImage;
+        if (autoSquare) {
+            int size;
+            
+            if (_imageView.image.size.height > _imageView.image.size.width){
+                size = _imageView.image.size.height;
+            }
+            else {
+                size = _imageView.image.size.width;
+            }
+            
+            UIGraphicsBeginImageContext(CGSizeMake(size, size));
+            [_imageView.image drawInRect:CGRectMake(size/2-_imageView.image.size.width/2,size/2-_imageView.image.size.height/2,_imageView.image.size.width,_imageView.image.size.height)];
+            instaImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+        }
+        else {
+            instaImage = _imageView.image; //Top half of image Full Resolution.
+        }
         
+        
+
         NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
         [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
         [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
@@ -122,10 +129,11 @@ typedef enum {
             [hashtags appendString:@" #"];
             [hashtags appendString:[((SKImageTag*)tags[i]) tagName]];
         }
-        [hashtags appendString:@" ••  "];
-        [hashtags appendString:str];
+        [hashtags appendString:@" ••"];
+        NSString *newString = [NSString stringWithFormat:@"%@\r%@", hashtags,str];
+//        [hashtags appendString:str];
         
-        _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:hashtags,@"InstagramCaption", nil];
+        _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:newString,@"InstagramCaption", nil];
         [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
     }
     else {
