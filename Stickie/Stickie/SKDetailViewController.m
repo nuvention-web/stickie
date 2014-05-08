@@ -387,13 +387,25 @@
 
 - (void)shareToMessage
 {
-    MFMessageComposeViewController* composeVC = [[MFMessageComposeViewController alloc] init];
-    composeVC.messageComposeDelegate = self;
-    UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
-    NSString *type = @"image/png";
+    if ([MFMessageComposeViewController canSendText]) {
+        MFMessageComposeViewController* composeVC = [[MFMessageComposeViewController alloc] init];
+        composeVC.messageComposeDelegate = self;
+        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
+        NSString *type = @"image/png";
 
-    [composeVC addAttachmentData:UIImagePNGRepresentation(instaImage) typeIdentifier:type filename:@"image.png"];
-    [self presentViewController:composeVC animated:YES completion:NULL];
+        [composeVC addAttachmentData:UIImagePNGRepresentation(instaImage) typeIdentifier:type filename:@"image.png"];
+        [self presentViewController:composeVC animated:YES completion:NULL];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Messaging Not Setup"
+                              message: @"Set up messaging on your device to continue."
+                              delegate: self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        
+        [alert show];
+    }
 
 }
 
