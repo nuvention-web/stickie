@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SKIGShareViewController : UICollectionViewController
+@interface SKIGShareViewController : UIViewController
 
 @property (nonatomic,retain) UIDocumentInteractionController *docFile;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) NSURL *url;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @end
