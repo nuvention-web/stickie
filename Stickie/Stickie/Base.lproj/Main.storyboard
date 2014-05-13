@@ -81,7 +81,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nzz-3R-C1g" customClass="SKLongPressButton">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="topRightCorner" image="GreenCorner.png" backgroundImage="CornerGreen.png">
+                                        <state key="normal" title="topRightCorner" image="CornerGreen.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -89,7 +89,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aHt-Lw-nUa">
-                                        <rect key="frame" x="5" y="13" width="60" height="21"/>
+                                        <rect key="frame" x="5" y="10" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -586,7 +586,6 @@
         <image name="CornerGreen.png" width="128" height="128"/>
         <image name="CornerOrange.png" width="128" height="128"/>
         <image name="CornerRed.png" width="128" height="128"/>
-        <image name="GreenCorner.png" width="501" height="501"/>
         <image name="Half circle new.png" width="619" height="185"/>
         <image name="SearchStickie_222x222.png" width="222" height="222"/>
         <image name="tutButton.png" width="419" height="203"/>
