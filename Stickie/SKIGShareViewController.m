@@ -12,6 +12,7 @@
 @interface SKIGShareViewController () <UIDocumentInteractionControllerDelegate,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) NSArray *categories;
+@property (weak, nonatomic) IBOutlet UILabel *chooseLabel;
 
 @end
 
@@ -32,9 +33,17 @@ typedef enum {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 125, self.view.bounds.size.width, 1)];
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 127, self.view.bounds.size.width, 0.5)];
+    lineView.backgroundColor = [UIColor colorWithRed:179.0/255.0 green:179.0/255.0 blue:179.0/255.0 alpha:1.0];
+    [self.view addSubview:lineView];
+    lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 128, self.view.bounds.size.width, 43)];
     lineView.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:244.0/255.0 blue:244.0/255.0 alpha:1.0];
     [self.view addSubview:lineView];
+    lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 170, self.view.bounds.size.width, 0.5)];
+    lineView.backgroundColor = [UIColor colorWithRed:179.0/255.0 green:179.0/255.0 blue:179.0/255.0 alpha:1.0];
+    [self.view addSubview:lineView];
+    [_chooseLabel setTextColor:[UIColor colorWithRed:77.0/255.0 green:77.0/255.0 blue:77.0/255.0 alpha:1.0]];
+    [self.view addSubview:_chooseLabel];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Skip  "
                                                                     style:UIBarButtonItemStyleDone target:self action:@selector(shareSkip)];
     self.navigationItem.rightBarButtonItem = rightButton;

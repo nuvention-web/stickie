@@ -29,13 +29,13 @@
 
 - (NSArray *)loadButtons
 {
-    UIButton *FACEBOOK_BUTTON = [[UIButton alloc] init];
-    [FACEBOOK_BUTTON setBackgroundImage:[UIImage imageNamed:@"smfacebook.png"] forState:UIControlStateNormal];
-    [FACEBOOK_BUTTON addTarget:self action:@selector(shareToFacebook) forControlEvents:UIControlEventTouchUpInside];
-    
     UIButton *INSTAGRAM_BUTTON = [[UIButton alloc] init];
     [INSTAGRAM_BUTTON setBackgroundImage:[UIImage imageNamed:@"sminstagram.png"] forState:UIControlStateNormal];
     [INSTAGRAM_BUTTON addTarget:self action:@selector(shareToInsta) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *FACEBOOK_BUTTON = [[UIButton alloc] init];
+    [FACEBOOK_BUTTON setBackgroundImage:[UIImage imageNamed:@"smfacebook.png"] forState:UIControlStateNormal];
+    [FACEBOOK_BUTTON addTarget:self action:@selector(shareToFacebook) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *MESSAGE_BUTTON = [[UIButton alloc] init];
     [MESSAGE_BUTTON setBackgroundImage:[UIImage imageNamed:@"smtext.png"] forState:UIControlStateNormal];
@@ -53,8 +53,7 @@
     [TWITTER_BUTTON setBackgroundImage:[UIImage imageNamed:@"smtwitter.png"] forState:UIControlStateNormal];
     [TWITTER_BUTTON addTarget:self action:@selector(shareToTwitter) forControlEvents:UIControlEventTouchUpInside];
     
-
-    return @[FACEBOOK_BUTTON, INSTAGRAM_BUTTON, MESSAGE_BUTTON, MAIL_BUTTON, WHATSAPP_BUTTON, TWITTER_BUTTON];
+    return @[INSTAGRAM_BUTTON, FACEBOOK_BUTTON, MESSAGE_BUTTON, MAIL_BUTTON, WHATSAPP_BUTTON, TWITTER_BUTTON];
 }
 
 -(void)viewDidLoad
