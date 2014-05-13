@@ -160,6 +160,7 @@
     ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
     UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
     _imageURL = asset.defaultRepresentation.url; // Update imageURL property
+    _image = image;
     
     /* Prepare new image to be displayed in view. */
     UIImageView *newImageView = [[UIImageView alloc] init];
