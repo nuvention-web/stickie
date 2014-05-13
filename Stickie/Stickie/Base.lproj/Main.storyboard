@@ -430,48 +430,76 @@
                     <connections>
                         <outlet property="scrollView" destination="Un1-zK-b0f" id="brJ-3N-4C9"/>
                         <outlet property="shareScrollView" destination="Onp-m4-atL" id="FeY-Tc-u9Y"/>
-                        <segue destination="i72-U0-yho" kind="push" identifier="instaShare" id="FqB-xc-h7M"/>
+                        <segue destination="m1p-oF-qu3" kind="push" identifier="instaShare" id="hJH-3L-KTp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XaU-nU-OUK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1385" y="198"/>
         </scene>
-        <!--IG Share View Controller-->
-        <scene sceneID="f8t-Fd-ODu">
+        <!--Share View Controller-->
+        <scene sceneID="Q5s-h0-Jux">
             <objects>
-                <collectionViewController autoresizesArchivedViewToFullSize="NO" title="IG Share View Controller" id="i72-U0-yho" userLabel="IG Share View Controller" customClass="SKIGShareViewController" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="B0m-7j-Pn7">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="m1p-oF-qu3" customClass="SKIGShareViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZYq-b5-M21">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="12" minimumInteritemSpacing="12" id="SED-Sa-mrF">
-                            <size key="itemSize" width="65" height="65"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="12" minY="12" maxX="12" maxY="12"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="instaCell" id="eiz-xw-Ydj">
-                                <rect key="frame" x="12" y="12" width="65" height="65"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="i72-U0-yho" id="9Ik-YV-gUW"/>
-                            <outlet property="delegate" destination="i72-U0-yho" id="YG0-mL-io7"/>
-                        </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" title="Stickie4Likes" id="L6j-Hm-S5E"/>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="U2A-Yh-IiG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="IEM-aB-RvZ">
+                                <rect key="frame" x="0.0" y="137" width="320" height="450"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="12" minimumInteritemSpacing="12" id="lbe-3d-3RJ">
+                                    <size key="itemSize" width="65" height="65"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="12" minY="0.0" maxX="12" maxY="12"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="instaCell" id="dwb-dJ-OOv">
+                                        <rect key="frame" x="12" y="0.0" width="65" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="m1p-oF-qu3" id="T1F-xV-7zQ"/>
+                                    <outlet property="delegate" destination="m1p-oF-qu3" id="pza-8Z-sba"/>
+                                </connections>
+                            </collectionView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="F92-sB-hVN">
+                                <rect key="frame" x="251" y="81" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="adjustAutoSquare:" destination="m1p-oF-qu3" eventType="valueChanged" id="T1h-jn-zrV"/>
+                                </connections>
+                            </switch>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AutoSquare.png" id="0y5-ff-WWS">
+                                <rect key="frame" x="20" y="77" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Square" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eb9-gq-HxC">
+                                <rect key="frame" x="32" y="74" width="175" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="VH5-GA-fqK"/>
+                    <connections>
+                        <outlet property="collectionView" destination="IEM-aB-RvZ" id="OgD-lj-esf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4RD-e0-I9G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1919" y="198"/>
+            <point key="canvasLocation" x="1929" y="201"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oZl-0N-xV6">
@@ -550,6 +578,7 @@
     </scenes>
     <resources>
         <image name="App - camera icon (3-8-2014).png" width="795" height="639"/>
+        <image name="AutoSquare.png" width="128" height="128"/>
         <image name="CircleBlue.png" width="128" height="128"/>
         <image name="CircleGreen.png" width="128" height="128"/>
         <image name="CircleRed.png" width="128" height="128"/>

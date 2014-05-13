@@ -9,28 +9,42 @@
 #import "SKIGShareViewController.h"
 #import "SKAssetURLTagsMap.h"
 
-@interface SKIGShareViewController () <UIDocumentInteractionControllerDelegate>
+@interface SKIGShareViewController () <UIDocumentInteractionControllerDelegate,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) NSArray *categories;
 
 @end
 
 typedef enum {
-    BASIC, FITNESS, NATURE, POPULAR, SELFIES, SUNSETS, CUSTOM
+    CUSTOM, BASIC, MORELIKES, POPULAR, FASHION, FITNESS, FOOD, FRIENDS, LOVE, MAKEUP, MEMES,  NATURE, PARTYING, PETS,  SELFIES, SUNSETS,
 } Category;
 
 @implementation SKIGShareViewController {
     BOOL autoSquare;
 }
-
+- (IBAction)adjustAutoSquare:(id)sender {
+    if([sender isOn]){
+        autoSquare = YES;
+    } else{
+        autoSquare = NO;
+    }
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 125, self.view.bounds.size.width, 1)];
+    lineView.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:244.0/255.0 blue:244.0/255.0 alpha:1.0];
+    [self.view addSubview:lineView];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Skip  "
+                                                                    style:UIBarButtonItemStyleDone target:self action:@selector(shareSkip)];
+    self.navigationItem.rightBarButtonItem = rightButton;
     
-    _categories = @[@"insta_basic.png", @"insta_fitness.png", @"insta_nature.png", @"insta_popular.png", @"insta_selfies.png", @"insta_sunsets.png", @"insta_custom.png"];
+    // Do any additional setup after loading the view.
+    _categories = @[@"insta_custom.png", @"insta_basic.png", @"insta_morelikes.png", @"insta_popular.png", @"insta_fashion.png", @"insta_fitness.png", @"insta_food.png", @"insta_friends.png",@"insta_love.png", @"insta_makeup.png", @"insta_memes.png",  @"insta_nature.png", @"insta_partying.png",@"insta_pets.png", @"insta_selfies.png", @"insta_sunsets.png"];
 }
-
+- (void)shareSkip{
+    [self shareToInstaWith:@""];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
