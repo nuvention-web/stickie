@@ -63,6 +63,14 @@
 		93E82088189828F100877D38 /* SKTagCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82082189828F100877D38 /* SKTagCollection.m */; };
 		93E82089189828F100877D38 /* SKTagData.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82084189828F100877D38 /* SKTagData.m */; };
 		93E8208C189829A400877D38 /* SKAssetURLTagMapTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */; };
+		EC540543191995C7009771E0 /* insta_basic.png in Resources */ = {isa = PBXBuildFile; fileRef = EC54053C191995C7009771E0 /* insta_basic.png */; };
+		EC540544191995C7009771E0 /* insta_custom.png in Resources */ = {isa = PBXBuildFile; fileRef = EC54053D191995C7009771E0 /* insta_custom.png */; };
+		EC540545191995C7009771E0 /* insta_fitness.png in Resources */ = {isa = PBXBuildFile; fileRef = EC54053E191995C7009771E0 /* insta_fitness.png */; };
+		EC540546191995C7009771E0 /* insta_nature.png in Resources */ = {isa = PBXBuildFile; fileRef = EC54053F191995C7009771E0 /* insta_nature.png */; };
+		EC540547191995C7009771E0 /* insta_popular.png in Resources */ = {isa = PBXBuildFile; fileRef = EC540540191995C7009771E0 /* insta_popular.png */; };
+		EC540548191995C7009771E0 /* insta_selfies.png in Resources */ = {isa = PBXBuildFile; fileRef = EC540541191995C7009771E0 /* insta_selfies.png */; };
+		EC540549191995C7009771E0 /* insta_sunsets.png in Resources */ = {isa = PBXBuildFile; fileRef = EC540542191995C7009771E0 /* insta_sunsets.png */; };
+		EC6945C119197BD00078168E /* SKIGShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6945C019197BD00078168E /* SKIGShareViewController.m */; };
 		EC6D06AA19143E9D00F04708 /* smfacebook.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D06A419143E9D00F04708 /* smfacebook.png */; };
 		EC6D06AB19143E9D00F04708 /* sminstagram.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D06A519143E9D00F04708 /* sminstagram.png */; };
 		EC6D06AC19143E9D00F04708 /* smmail.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D06A619143E9D00F04708 /* smmail.png */; };
@@ -160,6 +168,15 @@
 		93E82083189828F100877D38 /* SKTagData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagData.h; sourceTree = "<group>"; };
 		93E82084189828F100877D38 /* SKTagData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagData.m; sourceTree = "<group>"; };
 		93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagMapTest.m; sourceTree = "<group>"; };
+		EC54053C191995C7009771E0 /* insta_basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = insta_basic.png; sourceTree = "<group>"; };
+		EC54053D191995C7009771E0 /* insta_custom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = insta_custom.png; sourceTree = "<group>"; };
+		EC54053E191995C7009771E0 /* insta_fitness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = insta_fitness.png; sourceTree = "<group>"; };
+		EC54053F191995C7009771E0 /* insta_nature.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = insta_nature.png; sourceTree = "<group>"; };
+		EC540540191995C7009771E0 /* insta_popular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = insta_popular.png; sourceTree = "<group>"; };
+		EC540541191995C7009771E0 /* insta_selfies.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = insta_selfies.png; sourceTree = "<group>"; };
+		EC540542191995C7009771E0 /* insta_sunsets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = insta_sunsets.png; sourceTree = "<group>"; };
+		EC6945BF19197BD00078168E /* SKIGShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKIGShareViewController.h; path = ../SKIGShareViewController.h; sourceTree = "<group>"; };
+		EC6945C019197BD00078168E /* SKIGShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKIGShareViewController.m; path = ../SKIGShareViewController.m; sourceTree = "<group>"; };
 		EC6D06A419143E9D00F04708 /* smfacebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smfacebook.png; sourceTree = "<group>"; };
 		EC6D06A519143E9D00F04708 /* sminstagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sminstagram.png; sourceTree = "<group>"; };
 		EC6D06A619143E9D00F04708 /* smmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smmail.png; sourceTree = "<group>"; };
@@ -290,6 +307,8 @@
 				1402253618FDB8100058F68C /* SKTutorialViewController.m */,
 				14985C641890F037004B3ECB /* SKDetailViewController.h */,
 				14985C651890F037004B3ECB /* SKDetailViewController.m */,
+				EC6945BF19197BD00078168E /* SKIGShareViewController.h */,
+				EC6945C019197BD00078168E /* SKIGShareViewController.m */,
 				9385098318CD3044001AE7DC /* SKLongPressButton.h */,
 				9385098418CD3044001AE7DC /* SKLongPressButton.m */,
 				149FB2EC18909D3500D44DB2 /* SKPhotoCell.h */,
@@ -348,6 +367,13 @@
 				149EEAEE191975FC0057385F /* CircleBlue.png */,
 				149EEAEF191975FC0057385F /* CircleGreen.png */,
 				149EEAF0191975FC0057385F /* CircleOrange.png */,
+				EC54053C191995C7009771E0 /* insta_basic.png */,
+				EC54053D191995C7009771E0 /* insta_custom.png */,
+				EC54053E191995C7009771E0 /* insta_fitness.png */,
+				EC54053F191995C7009771E0 /* insta_nature.png */,
+				EC540540191995C7009771E0 /* insta_popular.png */,
+				EC540541191995C7009771E0 /* insta_selfies.png */,
+				EC540542191995C7009771E0 /* insta_sunsets.png */,
 				149EEAF1191975FC0057385F /* CircleRed.png */,
 				1493FA801910673500364B8F /* RetrievalBlue.png */,
 				1493FA811910673500364B8F /* RetrievalGreen.png */,
@@ -458,10 +484,12 @@
 				149FB2AF1890845B00D44DB2 /* Images.xcassets in Resources */,
 				EC6D06AE19143E9D00F04708 /* smtwitter.png in Resources */,
 				149EEAF4191975FC0057385F /* CircleOrange.png in Resources */,
+				EC540549191995C7009771E0 /* insta_sunsets.png in Resources */,
 				149EEAFA191976160057385F /* CornerBlue.png in Resources */,
 				EC6D06AF19143E9D00F04708 /* smwhatsapp.png in Resources */,
 				149FD0931904778200189B18 /* page4.png in Resources */,
 				9385097A18CD2EA1001AE7DC /* App - camera icon (3-8-2014).png in Resources */,
+				EC540547191995C7009771E0 /* insta_popular.png in Resources */,
 				149EEAF3191975FC0057385F /* CircleGreen.png in Resources */,
 				1493FA871910673500364B8F /* RetrievalRed.png in Resources */,
 				14A38A5619037661002AF61B /* tutButton.png in Resources */,
@@ -471,7 +499,9 @@
 				1493FA851910673500364B8F /* RetrievalGreen.png in Resources */,
 				EC6D06AA19143E9D00F04708 /* smfacebook.png in Resources */,
 				EC6D06AD19143E9D00F04708 /* smtext.png in Resources */,
+				EC540544191995C7009771E0 /* insta_custom.png in Resources */,
 				149EEAFB191976160057385F /* CornerGreen.png in Resources */,
+				EC540545191995C7009771E0 /* insta_fitness.png in Resources */,
 				1493FA861910673500364B8F /* RetrievalOrange.png in Resources */,
 				14A38A5519037661002AF61B /* page5.png in Resources */,
 				14A30C0E18D4055B008212CD /* Half circle new.png in Resources */,
@@ -480,9 +510,12 @@
 				149FD0911904778200189B18 /* page2.png in Resources */,
 				149FB2AA1890845B00D44DB2 /* Main.storyboard in Resources */,
 				1493FA841910673500364B8F /* RetrievalBlue.png in Resources */,
+				EC540546191995C7009771E0 /* insta_nature.png in Resources */,
 				149EEAF2191975FC0057385F /* CircleBlue.png in Resources */,
 				149FD0921904778200189B18 /* page3.png in Resources */,
 				14A497BE18CD311D00AD43FC /* SearchStickie_222x222.png in Resources */,
+				EC540548191995C7009771E0 /* insta_selfies.png in Resources */,
+				EC540543191995C7009771E0 /* insta_basic.png in Resources */,
 				149E0354190096DC00AE444C /* Cloud.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,6 +541,7 @@
 				149FB2EE18909D3500D44DB2 /* SKPhotoCell.m in Sources */,
 				149FB2A71890845B00D44DB2 /* SKAppDelegate.m in Sources */,
 				93E82087189828F100877D38 /* SKImageTag.m in Sources */,
+				EC6945C119197BD00078168E /* SKIGShareViewController.m in Sources */,
 				14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */,
 				93E82088189828F100877D38 /* SKTagCollection.m in Sources */,
 				149FB2AD1890845B00D44DB2 /* SKViewController.m in Sources */,

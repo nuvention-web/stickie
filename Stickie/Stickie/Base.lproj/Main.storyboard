@@ -430,11 +430,48 @@
                     <connections>
                         <outlet property="scrollView" destination="Un1-zK-b0f" id="brJ-3N-4C9"/>
                         <outlet property="shareScrollView" destination="Onp-m4-atL" id="FeY-Tc-u9Y"/>
+                        <segue destination="i72-U0-yho" kind="push" identifier="instaShare" id="FqB-xc-h7M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XaU-nU-OUK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1385" y="198"/>
+        </scene>
+        <!--IG Share View Controller-->
+        <scene sceneID="f8t-Fd-ODu">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" title="IG Share View Controller" id="i72-U0-yho" userLabel="IG Share View Controller" customClass="SKIGShareViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="B0m-7j-Pn7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="12" minimumInteritemSpacing="12" id="SED-Sa-mrF">
+                            <size key="itemSize" width="65" height="65"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="12" minY="12" maxX="12" maxY="12"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="instaCell" id="eiz-xw-Ydj">
+                                <rect key="frame" x="12" y="12" width="65" height="65"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="i72-U0-yho" id="9Ik-YV-gUW"/>
+                            <outlet property="delegate" destination="i72-U0-yho" id="YG0-mL-io7"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Stickie4Likes" id="L6j-Hm-S5E"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U2A-Yh-IiG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1919" y="198"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oZl-0N-xV6">
