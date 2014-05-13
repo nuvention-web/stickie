@@ -36,10 +36,10 @@ typedef enum {
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 127, self.view.bounds.size.width, 0.5)];
     lineView.backgroundColor = [UIColor colorWithRed:179.0/255.0 green:179.0/255.0 blue:179.0/255.0 alpha:1.0];
     [self.view addSubview:lineView];
-    lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 128, self.view.bounds.size.width, 43)];
+    lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 128, self.view.bounds.size.width, 42.5)];
     lineView.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:244.0/255.0 blue:244.0/255.0 alpha:1.0];
     [self.view addSubview:lineView];
-    lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 170, self.view.bounds.size.width, 0.5)];
+    lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 169.5, self.view.bounds.size.width, 0.5)];
     lineView.backgroundColor = [UIColor colorWithRed:179.0/255.0 green:179.0/255.0 blue:179.0/255.0 alpha:1.0];
     [self.view addSubview:lineView];
     [_chooseLabel setTextColor:[UIColor colorWithRed:77.0/255.0 green:77.0/255.0 blue:77.0/255.0 alpha:1.0]];
