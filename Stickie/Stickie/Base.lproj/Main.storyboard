@@ -502,6 +502,7 @@
                     <connections>
                         <outlet property="chooseLabel" destination="bfh-do-STR" id="j3d-wK-I1R"/>
                         <outlet property="collectionView" destination="IEM-aB-RvZ" id="OgD-lj-esf"/>
+                        <segue destination="bHI-bA-ovC" kind="modal" identifier="customInsta" id="K7q-uR-Zh4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4RD-e0-I9G" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -581,6 +582,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r5I-MR-4Q0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="777" y="948"/>
+        </scene>
+        <!--CustomIG View Controller - custom tags-->
+        <scene sceneID="sF9-YK-G1U">
+            <objects>
+                <viewController id="y1J-pJ-liB" customClass="SKCustomIGViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vpa-1Y-qoj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag Count" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LHE-Dy-8EC">
+                                <rect key="frame" x="10" y="70" width="201" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Yo tags here" id="Aqd-uj-yQm">
+                                <rect key="frame" x="10" y="106" width="300" height="208"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="custom tags" id="rrE-gO-Z6P">
+                        <barButtonItem key="leftBarButtonItem" title="Done" id="06Y-JJ-boi">
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="y1J-pJ-liB" id="1UX-3T-XHI"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Submit" id="FFh-aJ-sAk">
+                            <connections>
+                                <action selector="submitButtonTapped:" destination="y1J-pJ-liB" id="6OR-Ou-Lpf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tagCountLabel" destination="LHE-Dy-8EC" id="OUc-F6-NDO"/>
+                        <outlet property="textView" destination="Aqd-uj-yQm" id="elA-eC-bcv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Kd-DV-jdD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3063" y="198"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vzn-RZ-PDh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bHI-bA-ovC" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="v3o-CZ-V65">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="y1J-pJ-liB" kind="relationship" relationship="rootViewController" id="Oda-2p-jlg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Hq-Bv-P6k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2477" y="198"/>
         </scene>
     </scenes>
     <resources>

@@ -8,16 +8,18 @@
 
 #import "SKIGShareViewController.h"
 #import "SKAssetURLTagsMap.h"
+#import "SKCustomIGViewController.h"
 
 @interface SKIGShareViewController () <UIDocumentInteractionControllerDelegate,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) NSArray *categories;
 @property (weak, nonatomic) IBOutlet UILabel *chooseLabel;
+@property (nonatomic, strong) NSString *customChoice;
 
 @end
 
 typedef enum {
-    CUSTOM, BASIC, MORELIKES, POPULAR, FASHION, FITNESS, FOOD, FRIENDS, LOVE, MAKEUP, MEMES,  NATURE, PARTYING, PETS,  SELFIES, SUNSETS,
+    CUSTOM1, CUSTOM2, GET_MORE_LIKES, GET_MORE_FOLLOWS, FASHION, FITNESS, FOOD, FRIENDS, LOVE, MAKEUP, MEMES, NATURE, PARTYING, PETS, PHOTOGRAPHY, SELFIES
 } Category;
 
 @implementation SKIGShareViewController {
@@ -30,6 +32,7 @@ typedef enum {
         autoSquare = NO;
     }
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -51,11 +54,15 @@ typedef enum {
     self.navigationItem.rightBarButtonItem = rightButton;
     
     // Do any additional setup after loading the view.
-    _categories = @[@"insta_custom.png", @"insta_basic.png", @"insta_morelikes.png", @"insta_popular.png", @"insta_fashion.png", @"insta_fitness.png", @"insta_food.png", @"insta_friends.png",@"insta_love.png", @"insta_makeup.png", @"insta_memes.png",  @"insta_nature.png", @"insta_partying.png",@"insta_pets.png", @"insta_selfies.png", @"insta_sunsets.png"];
+    _categories = @[@"insta_custom1.png", @"insta_custom2.png", @"insta_getmorelikes.png", @"insta_getmorefollows.png", @"insta_fashion.png", @"insta_fitness.png", @"insta_food.png", @"insta_friends.png", @"insta_love.png", @"insta_makeup.png", @"insta_memes.png", @"insta_nature.png", @"insta_partying.png", @"insta_pets.png", @"insta_photography.png",
+                    @"insta_selfies.png"];
+    _customChoice = [[NSString alloc] init];
 }
 - (void)shareSkip{
-    [self shareToInstaWith:@""];
+    [self shareToInstaWith:@"" noBS:NO];
 }
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -78,41 +85,81 @@ typedef enum {
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    // Reading tag data from JSON file.
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"stickie_likes" ofType:@"json"];
+    NSString *jsonString = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    NSDictionary *dictResults = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
+    
     switch ([indexPath row]) {
-        case BASIC:
-            [self shareToInstaWith:@""];
+        case CUSTOM1:
+            _customChoice = @"custom1";
+            [self performSegueWithIdentifier:@"customInsta" sender:self];
+            break;
+            
+        case CUSTOM2:
+            _customChoice = @"custom2";
+            [self performSegueWithIdentifier:@"customInsta" sender:self];
+            break;
+            
+        case GET_MORE_LIKES:
+            [self shareToInstaWith:[dictResults objectForKey:@"get_more_likes"] noBS:YES];
+            break;
+            
+        case GET_MORE_FOLLOWS:
+            [self shareToInstaWith:[dictResults objectForKey:@"get_more_follows"] noBS:YES];
+            break;
+            
+        case FASHION:
+            [self shareToInstaWith:[dictResults objectForKey:@"fashion"] noBS:YES];
             break;
             
         case FITNESS:
-            [self shareToInstaWith:@"SWOLE TRAIN"];
+            [self shareToInstaWith:[dictResults objectForKey:@"fitness"] noBS:YES];
+            break;
+            
+        case FOOD:
+            [self shareToInstaWith:[dictResults objectForKey:@"food"] noBS:YES];
+            break;
+            
+        case FRIENDS:
+            [self shareToInstaWith:[dictResults objectForKey:@"friends"] noBS:YES];
+            break;
+            
+        case LOVE:
+            [self shareToInstaWith:[dictResults objectForKey:@"love"] noBS:YES];
+            break;
+            
+        case MAKEUP:
+            [self shareToInstaWith:[dictResults objectForKey:@"makeup"] noBS:YES];
+            break;
+            
+        case MEMES:
+            [self shareToInstaWith:[dictResults objectForKey:@"memes"] noBS:YES];
             break;
             
         case NATURE:
-            [self shareToInstaWith:@"TREES"];
+            [self shareToInstaWith:[dictResults objectForKey:@"nature"] noBS:YES];
             break;
             
-        case POPULAR:
-            [self shareToInstaWith:@"I GOT FRIENDS"];
+        case PARTYING:
+            [self shareToInstaWith:[dictResults objectForKey:@"partying"] noBS:YES];
+            break;
+            
+        case PETS:
+            [self shareToInstaWith:[dictResults objectForKey:@"pets"] noBS:YES];
+            break;
+            
+        case PHOTOGRAPHY:
+            [self shareToInstaWith:[dictResults objectForKey:@"photography"] noBS:YES];
             break;
             
         case SELFIES:
-            [self shareToInstaWith:@"#20likes #amazing #bestoftheday #f4f #follow #follow4follow #followme #girl #hot #instacool #instacool #instadaily #instafollow #instafollow #instago #instalike #l4l #like4like #likeall #likethis #love #photooftheday #picoftheday #smile"];
-            break;
-            
-        case SUNSETS:
-            [self shareToInstaWith:@"OH SO PRETTY"];
-            break;
-            
-        case CUSTOM:
-            [self shareToInstaWith:@"INSERT SEGUE HERE"];
-            break;
-            
-        default:
-            [self shareToInstaWith:@"LOLS"];
+            [self shareToInstaWith:[dictResults objectForKey:@"selfies"] noBS:YES];
             break;
     }
 }
-- (void)shareToInstaWith: (NSString *)str
+
+- (void)shareToInstaWith: (NSString *)str noBS: (BOOL) noBS
 {
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
@@ -137,8 +184,6 @@ typedef enum {
             instaImage = _imageView.image; //Top half of image Full Resolution.
         }
         
-        
-
         NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
         [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
         [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
@@ -147,8 +192,20 @@ typedef enum {
         _docFile.delegate=self;
         _docFile.UTI = @"com.instagram.exclusivegram";
         
+//        // Setting up hashtags
+//        NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | #stickiepic"];
+//        NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:_url]];
+//        for (int i = 0; i < [tags count]; i++) {
+//            [hashtags appendString:@" #"];
+//            [hashtags appendString:[((SKImageTag*)tags[i]) tagName]];
+//        }
+//        [hashtags appendString:@" ••"];
+//        NSString *newString = [NSString stringWithFormat:@"%@\r%@", hashtags,str];
+////        [hashtags appendString:str];
+//
         // Setting up hashtags
-        NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | #stickiepic"];
+        NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | "];
+        [hashtags appendString: (noBS ? @"The No-BS Get More Likes App" : @"#stickiepic")];
         NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:_url]];
         for (int i = 0; i < [tags count]; i++) {
             [hashtags appendString:@" #"];
@@ -156,10 +213,11 @@ typedef enum {
         }
         [hashtags appendString:@" ••"];
         NSString *newString = [NSString stringWithFormat:@"%@\r%@", hashtags,str];
-//        [hashtags appendString:str];
-        
+
         _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:newString,@"InstagramCaption", nil];
         [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
+        
+        
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc]
@@ -174,15 +232,19 @@ typedef enum {
     }
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"customInsta"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        SKCustomIGViewController *customIGViewController = navController.childViewControllers[0];
+        customIGViewController.customChoice = _customChoice;
+        customIGViewController.imageView = _imageView;
+        customIGViewController.url = _url;
+    }
 }
-*/
+
 
 @end
