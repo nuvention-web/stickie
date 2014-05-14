@@ -192,17 +192,6 @@ typedef enum {
         _docFile.delegate=self;
         _docFile.UTI = @"com.instagram.exclusivegram";
         
-//        // Setting up hashtags
-//        NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | #stickiepic"];
-//        NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:_url]];
-//        for (int i = 0; i < [tags count]; i++) {
-//            [hashtags appendString:@" #"];
-//            [hashtags appendString:[((SKImageTag*)tags[i]) tagName]];
-//        }
-//        [hashtags appendString:@" ••"];
-//        NSString *newString = [NSString stringWithFormat:@"%@\r%@", hashtags,str];
-////        [hashtags appendString:str];
-//
         // Setting up hashtags
         NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | "];
         [hashtags appendString: (noBS ? @"The No-BS Get More Likes App" : @"#stickiepic")];
