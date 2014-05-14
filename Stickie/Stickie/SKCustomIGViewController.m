@@ -26,27 +26,32 @@ typedef void (^ButtonCompletionBlock)(BOOL finished);
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [_textView setKeyboardType:UIKeyboardTypeTwitter];
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(5, 102, self.view.bounds.size.width-10, 0.5)];
+    lineView.backgroundColor = [UIColor colorWithRed:179.0/255.0 green:179.0/255.0 blue:179.0/255.0 alpha:1.0];
+    [self.view addSubview:lineView];
+
     NSData *currentData =[[NSUserDefaults standardUserDefaults] objectForKey:_customChoice];
     NSString *currentHashtags = [NSKeyedUnarchiver unarchiveObjectWithData:currentData];
     if (!currentHashtags) currentHashtags = @"";
     _textView.text = currentHashtags;
     
     //To make the border look very close to a UITextField
-    [_textView.layer setBorderColor:[[[UIColor grayColor] colorWithAlphaComponent:0.5] CGColor]];
-    [_textView.layer setBorderWidth:2.0];
+//    [_textView.layer setBorderColor:[[[UIColor grayColor] colorWithAlphaComponent:0.5] CGColor]];
+//    [_textView.layer setBorderWidth:2.0];
     
-    //The rounded corner part, where you specify your view's corner radius:
-    _textView.layer.cornerRadius = 5;
-    _textView.clipsToBounds = YES;
+//    //The rounded corner part, where you specify your view's corner radius:
+//    _textView.layer.cornerRadius = 5;
+//    _textView.clipsToBounds = YES;
     
     hash_count = (int)[[_textView.text componentsSeparatedByString:@"#"] count]-1;
-    _tagCountLabel.text = [NSString stringWithFormat:@"TAGS: %d of 26", hash_count];
+    _tagCountLabel.text = [NSString stringWithFormat:@"TAGS: %d of 25", hash_count];
     
     _textView.delegate = self;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if (hash_count > 25 && [text isEqualToString:@"#"]) {
+    if (hash_count > 24 && [text isEqualToString:@"#"]) {
         [self animateNoMoreHashtagsForTime:0.35 completion:^(BOOL done) {}];
         return NO;
     } else {
@@ -57,10 +62,10 @@ typedef void (^ButtonCompletionBlock)(BOOL finished);
 - (void)animateNoMoreHashtagsForTime:(NSTimeInterval)time completion:(ButtonCompletionBlock)block
 {
     [UIView animateWithDuration:(time/2.0) animations:^{
-        [_textView setBackgroundColor:[[UIColor redColor] colorWithAlphaComponent:0.3]];
+        [self.view setBackgroundColor:[[UIColor redColor] colorWithAlphaComponent:0.9]];
     } completion:^(BOOL finished){
         [UIView animateWithDuration:(time/2.0) animations:^{
-            [_textView setBackgroundColor:[UIColor whiteColor]];
+            [self.view setBackgroundColor:[UIColor whiteColor]];
             block(YES);
         }];
     }];
@@ -73,7 +78,7 @@ typedef void (^ButtonCompletionBlock)(BOOL finished);
 
 - (void)textViewDidChange:(UITextView *)textView {
     hash_count = (int)[[_textView.text componentsSeparatedByString:@"#"] count]-1;
-    _tagCountLabel.text = [NSString stringWithFormat:@"TAGS: %d of 26", hash_count];
+    _tagCountLabel.text = [NSString stringWithFormat:@"TAGS: %d of 25", hash_count];
 }
 
 - (void)didReceiveMemoryWarning
