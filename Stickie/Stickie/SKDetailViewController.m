@@ -32,27 +32,33 @@
     UIButton *INSTAGRAM_BUTTON = [[UIButton alloc] init];
     [INSTAGRAM_BUTTON setBackgroundImage:[UIImage imageNamed:@"sminstagram.png"] forState:UIControlStateNormal];
     [INSTAGRAM_BUTTON addTarget:self action:@selector(shareToInsta) forControlEvents:UIControlEventTouchUpInside];
+    INSTAGRAM_BUTTON.showsTouchWhenHighlighted = YES;
     
     UIButton *FACEBOOK_BUTTON = [[UIButton alloc] init];
     [FACEBOOK_BUTTON setBackgroundImage:[UIImage imageNamed:@"smfacebook.png"] forState:UIControlStateNormal];
     [FACEBOOK_BUTTON addTarget:self action:@selector(shareToFacebook) forControlEvents:UIControlEventTouchUpInside];
-    
+    FACEBOOK_BUTTON.showsTouchWhenHighlighted = YES;
+
     UIButton *MESSAGE_BUTTON = [[UIButton alloc] init];
     [MESSAGE_BUTTON setBackgroundImage:[UIImage imageNamed:@"smtext.png"] forState:UIControlStateNormal];
     [MESSAGE_BUTTON addTarget:self action:@selector(shareToMessage) forControlEvents:UIControlEventTouchUpInside];
-    
+    MESSAGE_BUTTON.showsTouchWhenHighlighted = YES;
+
     UIButton *MAIL_BUTTON = [[UIButton alloc] init];
     [MAIL_BUTTON setBackgroundImage:[UIImage imageNamed:@"smmail.png"] forState:UIControlStateNormal];
     [MAIL_BUTTON addTarget:self action:@selector(shareToMail) forControlEvents:UIControlEventTouchUpInside];
-    
+    MAIL_BUTTON.showsTouchWhenHighlighted = YES;
+
     UIButton *WHATSAPP_BUTTON = [[UIButton alloc] init];
     [WHATSAPP_BUTTON setBackgroundImage:[UIImage imageNamed:@"smwhatsapp.png"] forState:UIControlStateNormal];
     [WHATSAPP_BUTTON addTarget:self action:@selector(shareToWhatsapp) forControlEvents:UIControlEventTouchUpInside];
+    WHATSAPP_BUTTON.showsTouchWhenHighlighted = YES;
 
     UIButton *TWITTER_BUTTON = [[UIButton alloc] init];
     [TWITTER_BUTTON setBackgroundImage:[UIImage imageNamed:@"smtwitter.png"] forState:UIControlStateNormal];
     [TWITTER_BUTTON addTarget:self action:@selector(shareToTwitter) forControlEvents:UIControlEventTouchUpInside];
-    
+    TWITTER_BUTTON.showsTouchWhenHighlighted = YES;
+
     return @[INSTAGRAM_BUTTON, FACEBOOK_BUTTON, MESSAGE_BUTTON, MAIL_BUTTON, WHATSAPP_BUTTON, TWITTER_BUTTON];
 }
 
