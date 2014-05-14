@@ -583,7 +583,7 @@
             </objects>
             <point key="canvasLocation" x="777" y="948"/>
         </scene>
-        <!--CustomIG View Controller - custom tags-->
+        <!--CustomIG View Controller - custom-->
         <scene sceneID="sF9-YK-G1U">
             <objects>
                 <viewController id="y1J-pJ-liB" customClass="SKCustomIGViewController" sceneMemberID="viewController">
@@ -592,13 +592,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag Count" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LHE-Dy-8EC">
-                                <rect key="frame" x="10" y="70" width="201" height="33"/>
+                                <rect key="frame" x="4" y="70" width="201" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Yo tags here" id="Aqd-uj-yQm">
-                                <rect key="frame" x="10" y="106" width="300" height="208"/>
+                                <rect key="frame" x="0.0" y="106" width="320" height="208"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -607,13 +607,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="custom tags" id="rrE-gO-Z6P">
-                        <barButtonItem key="leftBarButtonItem" title="Done" id="06Y-JJ-boi">
+                    <navigationItem key="navigationItem" title="custom" id="rrE-gO-Z6P">
+                        <barButtonItem key="leftBarButtonItem" title="Save" id="06Y-JJ-boi">
                             <connections>
                                 <action selector="doneButtonTapped:" destination="y1J-pJ-liB" id="1UX-3T-XHI"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Submit" id="FFh-aJ-sAk">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="FFh-aJ-sAk">
                             <connections>
                                 <action selector="submitButtonTapped:" destination="y1J-pJ-liB" id="6OR-Ou-Lpf"/>
                             </connections>

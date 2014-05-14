@@ -31,33 +31,27 @@
 {
     UIButton *INSTAGRAM_BUTTON = [[UIButton alloc] init];
     [INSTAGRAM_BUTTON setBackgroundImage:[UIImage imageNamed:@"sminstagram.png"] forState:UIControlStateNormal];
-    [INSTAGRAM_BUTTON addTarget:self action:@selector(shareToInsta) forControlEvents:UIControlEventTouchUpInside];
-    INSTAGRAM_BUTTON.showsTouchWhenHighlighted = YES;
+    [INSTAGRAM_BUTTON addTarget:self action:@selector(shareToInsta:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *FACEBOOK_BUTTON = [[UIButton alloc] init];
     [FACEBOOK_BUTTON setBackgroundImage:[UIImage imageNamed:@"smfacebook.png"] forState:UIControlStateNormal];
-    [FACEBOOK_BUTTON addTarget:self action:@selector(shareToFacebook) forControlEvents:UIControlEventTouchUpInside];
-    FACEBOOK_BUTTON.showsTouchWhenHighlighted = YES;
+    [FACEBOOK_BUTTON addTarget:self action:@selector(shareToFacebook:) forControlEvents:UIControlEventTouchUpInside];
 
     UIButton *MESSAGE_BUTTON = [[UIButton alloc] init];
     [MESSAGE_BUTTON setBackgroundImage:[UIImage imageNamed:@"smtext.png"] forState:UIControlStateNormal];
-    [MESSAGE_BUTTON addTarget:self action:@selector(shareToMessage) forControlEvents:UIControlEventTouchUpInside];
-    MESSAGE_BUTTON.showsTouchWhenHighlighted = YES;
+    [MESSAGE_BUTTON addTarget:self action:@selector(shareToMessage:) forControlEvents:UIControlEventTouchUpInside];
 
     UIButton *MAIL_BUTTON = [[UIButton alloc] init];
     [MAIL_BUTTON setBackgroundImage:[UIImage imageNamed:@"smmail.png"] forState:UIControlStateNormal];
-    [MAIL_BUTTON addTarget:self action:@selector(shareToMail) forControlEvents:UIControlEventTouchUpInside];
-    MAIL_BUTTON.showsTouchWhenHighlighted = YES;
+    [MAIL_BUTTON addTarget:self action:@selector(shareToMail:) forControlEvents:UIControlEventTouchUpInside];
 
     UIButton *WHATSAPP_BUTTON = [[UIButton alloc] init];
     [WHATSAPP_BUTTON setBackgroundImage:[UIImage imageNamed:@"smwhatsapp.png"] forState:UIControlStateNormal];
-    [WHATSAPP_BUTTON addTarget:self action:@selector(shareToWhatsapp) forControlEvents:UIControlEventTouchUpInside];
-    WHATSAPP_BUTTON.showsTouchWhenHighlighted = YES;
+    [WHATSAPP_BUTTON addTarget:self action:@selector(shareToWhatsapp:) forControlEvents:UIControlEventTouchUpInside];
 
     UIButton *TWITTER_BUTTON = [[UIButton alloc] init];
     [TWITTER_BUTTON setBackgroundImage:[UIImage imageNamed:@"smtwitter.png"] forState:UIControlStateNormal];
-    [TWITTER_BUTTON addTarget:self action:@selector(shareToTwitter) forControlEvents:UIControlEventTouchUpInside];
-    TWITTER_BUTTON.showsTouchWhenHighlighted = YES;
+    [TWITTER_BUTTON addTarget:self action:@selector(shareToTwitter:) forControlEvents:UIControlEventTouchUpInside];
 
     return @[INSTAGRAM_BUTTON, FACEBOOK_BUTTON, MESSAGE_BUTTON, MAIL_BUTTON, WHATSAPP_BUTTON, TWITTER_BUTTON];
 }
@@ -108,6 +102,7 @@
         button.frame = CGRectMake(x, 9.5, 65, 65);
         [_shareScrollView addSubview:button];
         x += button.frame.size.width + 10;
+        button.showsTouchWhenHighlighted = YES;
     }
     
     _shareScrollView.contentSize = CGSizeMake(x, _shareScrollView.frame.size.height);
@@ -194,7 +189,7 @@
 
 }
 
-- (void)shareToFacebook {
+- (void)shareToFacebook:(id)sender {
     // If the Facebook app is installed and we can present the share dialog
     if([FBDialogs canPresentShareDialogWithPhotos]) {
         FBShareDialogPhotoParams *params = [[FBShareDialogPhotoParams alloc] init];
@@ -228,7 +223,6 @@
         
         [alert show];
     }
-    
 }
 
 - (void) alertView:(UIAlertView *) alertView clickedButtonAtIndex:(NSInteger) index {
@@ -246,7 +240,7 @@
 }
 
 
-- (void)shareToInsta
+- (void)shareToInsta:(id)sender
 {
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
@@ -304,7 +298,7 @@
 	return newimg;
 }
 
-- (void)shareToWhatsapp {
+- (void)shareToWhatsapp:(id)sender {
     NSURL *whatsURL = [NSURL URLWithString:@"whatsapp://"];
     if ([[UIApplication sharedApplication] canOpenURL:whatsURL]) {
         //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
@@ -331,7 +325,7 @@
     }
 }
 
-- (void)shareToMail
+- (void)shareToMail:(id)sender
 {
     if ([MFMailComposeViewController canSendMail]) {
         NSString *messageBody = @"<br><br>Sent via <a href=\"https://itunes.apple.com/gb/app/stickie/id853858851?mt=8\">Stickie</a>." ;
@@ -364,7 +358,6 @@
         
         [alert show];
     }
-    
 }
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
@@ -391,7 +384,7 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void)shareToMessage
+- (void)shareToMessage:(id)sender
 {
     if ([MFMessageComposeViewController canSendText]) {
         MFMessageComposeViewController* composeVC = [[MFMessageComposeViewController alloc] init];
@@ -420,7 +413,7 @@
 
 }
 
-- (void)shareToTwitter
+- (void)shareToTwitter:(id)sender
 {
     SLComposeViewController *composeController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
     

@@ -52,6 +52,7 @@ typedef enum {
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Skip  "
                                                                     style:UIBarButtonItemStyleDone target:self action:@selector(shareSkip)];
     self.navigationItem.rightBarButtonItem = rightButton;
+    self.navigationItem.title = @"likes+";
     
     // Do any additional setup after loading the view.
     _categories = @[@"insta_custom1.png", @"insta_custom2.png", @"insta_getmorelikes.png", @"insta_getmorefollows.png", @"insta_fashion.png", @"insta_fitness.png", @"insta_food.png", @"insta_friends.png", @"insta_love.png", @"insta_makeup.png", @"insta_memes.png", @"insta_nature.png", @"insta_partying.png", @"insta_pets.png", @"insta_photography.png",
