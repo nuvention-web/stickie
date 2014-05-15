@@ -242,6 +242,7 @@
 
 - (void)shareToInsta:(id)sender
 {
+    [sender setSelected: YES];
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
         [self performSegueWithIdentifier:@"instaShare" sender:self];
@@ -386,6 +387,7 @@
 
 - (void)shareToMessage:(id)sender
 {
+    [sender setSelected: YES];
     if ([MFMessageComposeViewController canSendText]) {
         MFMessageComposeViewController* composeVC = [[MFMessageComposeViewController alloc] init];
         composeVC.messageComposeDelegate = self;
