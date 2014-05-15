@@ -14,8 +14,10 @@
 
 @interface SKIGShareViewController () <UIDocumentInteractionControllerDelegate,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
-    BOOL imageCreate;
+    UIImage* instaImage;
+
 }
+
 
 @property (nonatomic, strong) NSArray *categories;
 @property (weak, nonatomic) IBOutlet UILabel *chooseLabel;
@@ -32,9 +34,23 @@ typedef enum {
 }
 - (IBAction)adjustAutoSquare:(id)sender {
     if([sender isOn]){
-        autoSquare = YES;
+        int size;
+        
+        if (_imageView.image.size.height > _imageView.image.size.width){
+            size = _imageView.image.size.height;
+        }
+        else {
+            size = _imageView.image.size.width;
+        }
+        
+        UIGraphicsBeginImageContext(CGSizeMake(size, size));
+        [_imageView.image drawInRect:CGRectMake(size/2-_imageView.image.size.width/2,size/2-_imageView.image.size.height/2,_imageView.image.size.width,_imageView.image.size.height)];
+        instaImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        [self loadImage];
     } else{
-        autoSquare = NO;
+        instaImage = _imageView.image; //Top half of image Full Resolution.
+        [self loadImage];
     }
 }
 
@@ -64,13 +80,17 @@ typedef enum {
                     @"insta_selfies.png"];
     
     _customChoice = [[NSString alloc] init];
+    instaImage = _imageView.image; //Top half of image Full Resolution.
+    [self loadImage];
+}
+- (void)loadImage{
     
-    NSArray *gestureRecognizers =  [_collectionView gestureRecognizers];
-    NSLog(@"%d", (int)[gestureRecognizers count]);
-    for (UIGestureRecognizer *recognizer in gestureRecognizers) {
-        [_collectionView removeGestureRecognizer:recognizer];
-    }
-    NSLog(@"%d", (int)[gestureRecognizers count]);
+    NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+    [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+    [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
+    //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
+    _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
+    
 }
 - (void)shareSkip{
     [self shareToInstaWith:@"" noBS:NO];
@@ -258,37 +278,6 @@ typedef enum {
 {
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-        if (!imageCreate){
-            //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
-            UIImage* instaImage;
-            if (autoSquare) {
-                int size;
-                
-                if (_imageView.image.size.height > _imageView.image.size.width){
-                    size = _imageView.image.size.height;
-                }
-                else {
-                    size = _imageView.image.size.width;
-                }
-                
-                UIGraphicsBeginImageContext(CGSizeMake(size, size));
-                [_imageView.image drawInRect:CGRectMake(size/2-_imageView.image.size.width/2,size/2-_imageView.image.size.height/2,_imageView.image.size.width,_imageView.image.size.height)];
-                instaImage = UIGraphicsGetImageFromCurrentImageContext();
-                UIGraphicsEndImageContext();
-            }
-            else {
-                instaImage = _imageView.image; //Top half of image Full Resolution.
-            }
-            
-            NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
-            [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
-            [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
-            //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
-            _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
-            _docFile.delegate=self;
-            _docFile.UTI = @"com.instagram.exclusivegram";
-            imageCreate = YES;
-        }
         // Setting up hashtags
         NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | "];
         [hashtags appendString: (noBS ? @"The No-BS Get More Likes App ••" : @"#stickiepic ••")];
@@ -301,11 +290,10 @@ typedef enum {
         }
         [customtags appendString:str];
         NSString *newString = [NSString stringWithFormat:@"%@\r%@", hashtags,customtags];
-
+        _docFile.delegate=self;
+        _docFile.UTI = @"com.instagram.exclusivegram";
         _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:newString,@"InstagramCaption", nil];
         [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
-        
-        
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc]
