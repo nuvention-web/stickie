@@ -15,6 +15,7 @@
 @interface SKIGShareViewController () <UIDocumentInteractionControllerDelegate,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
     UIImage* instaImage;
+    dispatch_queue_t loadImageToShare;
 
 }
 
@@ -81,16 +82,18 @@ typedef enum {
     
     _customChoice = [[NSString alloc] init];
     instaImage = _imageView.image; //Top half of image Full Resolution.
+    loadImageToShare = dispatch_queue_create("Load Image", NULL);
     [self loadImage];
 }
-- (void)loadImage{
-    
-    NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
-    [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
-    [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
-    //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
-    _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
-    
+- (void)loadImage
+{
+    dispatch_async(loadImageToShare, ^{
+        NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+        [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
+        //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
+        _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
+    });
 }
 - (void)shareSkip{
     [self shareToInstaWith:@"" noBS:NO];
@@ -321,6 +324,5 @@ typedef enum {
         customIGViewController.url = _url;
     }
 }
-
 
 @end
