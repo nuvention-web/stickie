@@ -57,7 +57,15 @@ typedef enum {
     // Do any additional setup after loading the view.
     _categories = @[@"insta_custom1.png", @"insta_custom2.png", @"insta_getmorelikes.png", @"insta_getmorefollows.png", @"insta_fashion.png", @"insta_fitness.png", @"insta_food.png", @"insta_friends.png", @"insta_love.png", @"insta_makeup.png", @"insta_memes.png", @"insta_nature.png", @"insta_partying.png", @"insta_pets.png", @"insta_photography.png",
                     @"insta_selfies.png"];
+    
     _customChoice = [[NSString alloc] init];
+    
+    NSArray *gestureRecognizers =  [_collectionView gestureRecognizers];
+    NSLog(@"%d", (int)[gestureRecognizers count]);
+    for (UIGestureRecognizer *recognizer in gestureRecognizers) {
+        [_collectionView removeGestureRecognizer:recognizer];
+    }
+    NSLog(@"%d", (int)[gestureRecognizers count]);
 }
 - (void)shareSkip{
     [self shareToInstaWith:@"" noBS:NO];
@@ -85,8 +93,24 @@ typedef enum {
     return cell;
 }
 
+-(void)animateWithBoop:(UIView*)item forTime:(NSTimeInterval)time
+{
+    CGRect currentFrame = item.frame;
+    [UIView animateWithDuration:time/2.0 animations:^(void){
+        item.frame = CGRectMake(currentFrame.origin.x, currentFrame.origin.y-10, currentFrame.size.width, currentFrame.size.height);
+    }completion:^(BOOL finished){
+        [UIView animateWithDuration:time/2.0 animations:^(void){
+            item.frame = currentFrame;
+        }];
+    }];
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     // Reading tag data from JSON file.
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];;
+    [self animateWithBoop:cell forTime:0.35];
+//    cell.backgroundColor = [UIColor redColor];
+    
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"stickie_likes" ofType:@"json"];
     NSString *jsonString = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     NSDictionary *dictResults = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];

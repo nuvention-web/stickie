@@ -445,7 +445,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="IEM-aB-RvZ">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" delaysContentTouches="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="IEM-aB-RvZ">
                                 <rect key="frame" x="0.0" y="172" width="320" height="450"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -501,7 +501,7 @@
                     <navigationItem key="navigationItem" id="VH5-GA-fqK"/>
                     <connections>
                         <outlet property="chooseLabel" destination="bfh-do-STR" id="j3d-wK-I1R"/>
-                        <outlet property="collectionView" destination="IEM-aB-RvZ" id="OgD-lj-esf"/>
+                        <outlet property="collectionView" destination="IEM-aB-RvZ" id="1Bo-5G-rhZ"/>
                         <segue destination="bHI-bA-ovC" kind="modal" identifier="customInsta" id="K7q-uR-Zh4"/>
                     </connections>
                 </viewController>
