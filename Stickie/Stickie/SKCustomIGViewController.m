@@ -112,18 +112,7 @@ typedef void (^ButtonCompletionBlock)(BOOL finished);
     _docFile.delegate=self;
     _docFile.UTI = @"com.instagram.exclusivegram";
     
-    // Setting up hashtags
-    NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | "];
-    [hashtags appendString: (noBS ? @"The No-BS Get More Likes App ••" : @"#stickiepic ••")];
-    NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:_url]];
-    for (int i = 0; i < [tags count]; i++) {
-        [hashtags appendString:@" #"];
-        [hashtags appendString:[((SKImageTag*)tags[i]) tagName]];
-    }
-    [hashtags appendString:@" "];
-    [hashtags appendString:str];
-    
-    _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:hashtags,@"InstagramCaption", nil];
+    _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:str,@"InstagramCaption", nil];
     [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
 }
 

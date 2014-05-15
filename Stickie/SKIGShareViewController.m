@@ -9,6 +9,8 @@
 #import "SKIGShareViewController.h"
 #import "SKAssetURLTagsMap.h"
 #import "SKCustomIGViewController.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface SKIGShareViewController () <UIDocumentInteractionControllerDelegate,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
@@ -114,72 +116,137 @@ typedef enum {
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"stickie_likes" ofType:@"json"];
     NSString *jsonString = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     NSDictionary *dictResults = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
-    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     switch ([indexPath row]) {
         case CUSTOM1:
             _customChoice = @"custom1";
             [self performSegueWithIdentifier:@"customInsta" sender:self];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_custom1"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
             
         case CUSTOM2:
             _customChoice = @"custom2";
             [self performSegueWithIdentifier:@"customInsta" sender:self];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_custom2"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
             
         case GET_MORE_LIKES:
             [self shareToInstaWith:[dictResults objectForKey:@"get_more_likes"] noBS:YES];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_get_more_likes"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
             
         case GET_MORE_FOLLOWS:
             [self shareToInstaWith:[dictResults objectForKey:@"get_more_follows"] noBS:YES];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_get_more_follows"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
             
         case FASHION:
             [self shareToInstaWith:[dictResults objectForKey:@"fashion"] noBS:YES];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_fashion"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
             
         case FITNESS:
             [self shareToInstaWith:[dictResults objectForKey:@"fitness"] noBS:YES];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_fitness"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
             
         case FOOD:
             [self shareToInstaWith:[dictResults objectForKey:@"food"] noBS:YES];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_food"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
             
         case FRIENDS:
             [self shareToInstaWith:[dictResults objectForKey:@"friends"] noBS:YES];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_friends"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
+
             break;
             
         case LOVE:
             [self shareToInstaWith:[dictResults objectForKey:@"love"] noBS:YES];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_love"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
             
         case MAKEUP:
             [self shareToInstaWith:[dictResults objectForKey:@"makeup"] noBS:YES];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_makeup"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
             
         case MEMES:
             [self shareToInstaWith:[dictResults objectForKey:@"memes"] noBS:YES];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_memes"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
             
         case NATURE:
             [self shareToInstaWith:[dictResults objectForKey:@"nature"] noBS:YES];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_nature"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
             
         case PARTYING:
             [self shareToInstaWith:[dictResults objectForKey:@"partying"] noBS:YES];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_partying"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
             
         case PETS:
             [self shareToInstaWith:[dictResults objectForKey:@"pets"] noBS:YES];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_pets"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
             
         case PHOTOGRAPHY:
             [self shareToInstaWith:[dictResults objectForKey:@"photography"] noBS:YES];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_photography"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
             
         case SELFIES:
             [self shareToInstaWith:[dictResults objectForKey:@"selfies"] noBS:YES];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                  action:@"insta_selfies"  // Event action (required)
+                                                                   label:nil         // Event label
+                                                                   value:nil] build]];    // Event value
             break;
     }
 }
@@ -219,14 +286,16 @@ typedef enum {
         
         // Setting up hashtags
         NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | "];
-        [hashtags appendString: (noBS ? @"The No-BS Get More Likes App" : @"#stickiepic")];
+        [hashtags appendString: (noBS ? @"The No-BS Get More Likes App ••" : @"#stickiepic ••")];
         NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:_url]];
+        NSMutableString *customtags = [NSMutableString stringWithString:@""];
         for (int i = 0; i < [tags count]; i++) {
-            [hashtags appendString:@" #"];
-            [hashtags appendString:[((SKImageTag*)tags[i]) tagName]];
+            [customtags appendString:@"#"];
+            [customtags appendString:[((SKImageTag*)tags[i]) tagName]];
+            [customtags appendString:@" "];
         }
-        [hashtags appendString:@" ••"];
-        NSString *newString = [NSString stringWithFormat:@"%@\r%@", hashtags,str];
+        [customtags appendString:str];
+        NSString *newString = [NSString stringWithFormat:@"%@\r%@", hashtags,customtags];
 
         _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:newString,@"InstagramCaption", nil];
         [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
