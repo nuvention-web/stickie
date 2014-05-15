@@ -13,6 +13,9 @@
 #import "GAIDictionaryBuilder.h"
 
 @interface SKIGShareViewController () <UIDocumentInteractionControllerDelegate,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+{
+    BOOL imageCreate;
+}
 
 @property (nonatomic, strong) NSArray *categories;
 @property (weak, nonatomic) IBOutlet UILabel *chooseLabel;
@@ -231,35 +234,37 @@ typedef enum {
 {
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-        //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
-        UIImage* instaImage;
-        if (autoSquare) {
-            int size;
-            
-            if (_imageView.image.size.height > _imageView.image.size.width){
-                size = _imageView.image.size.height;
+        if (!imageCreate){
+            //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
+            UIImage* instaImage;
+            if (autoSquare) {
+                int size;
+                
+                if (_imageView.image.size.height > _imageView.image.size.width){
+                    size = _imageView.image.size.height;
+                }
+                else {
+                    size = _imageView.image.size.width;
+                }
+                
+                UIGraphicsBeginImageContext(CGSizeMake(size, size));
+                [_imageView.image drawInRect:CGRectMake(size/2-_imageView.image.size.width/2,size/2-_imageView.image.size.height/2,_imageView.image.size.width,_imageView.image.size.height)];
+                instaImage = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
             }
             else {
-                size = _imageView.image.size.width;
+                instaImage = _imageView.image; //Top half of image Full Resolution.
             }
             
-            UIGraphicsBeginImageContext(CGSizeMake(size, size));
-            [_imageView.image drawInRect:CGRectMake(size/2-_imageView.image.size.width/2,size/2-_imageView.image.size.height/2,_imageView.image.size.width,_imageView.image.size.height)];
-            instaImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
+            NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+            [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+            [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
+            //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
+            _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
+            _docFile.delegate=self;
+            _docFile.UTI = @"com.instagram.exclusivegram";
+            imageCreate = YES;
         }
-        else {
-            instaImage = _imageView.image; //Top half of image Full Resolution.
-        }
-        
-        NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
-        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
-        [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
-        //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
-        _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
-        _docFile.delegate=self;
-        _docFile.UTI = @"com.instagram.exclusivegram";
-        
         // Setting up hashtags
         NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | "];
         [hashtags appendString: (noBS ? @"The No-BS Get More Likes App ••" : @"#stickiepic ••")];
