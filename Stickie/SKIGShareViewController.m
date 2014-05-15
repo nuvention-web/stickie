@@ -262,14 +262,16 @@ typedef enum {
         
         // Setting up hashtags
         NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | "];
-        [hashtags appendString: (noBS ? @"The No-BS Get More Likes App" : @"#stickiepic")];
+        [hashtags appendString: (noBS ? @"The No-BS Get More Likes App ••" : @"#stickiepic ••")];
         NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:_url]];
+        NSMutableString *customtags = [NSMutableString stringWithString:@""];
         for (int i = 0; i < [tags count]; i++) {
-            [hashtags appendString:@" #"];
-            [hashtags appendString:[((SKImageTag*)tags[i]) tagName]];
+            [customtags appendString:@"#"];
+            [customtags appendString:[((SKImageTag*)tags[i]) tagName]];
+            [customtags appendString:@" "];
         }
-        [hashtags appendString:@" ••"];
-        NSString *newString = [NSString stringWithFormat:@"%@\r%@", hashtags,str];
+        [customtags appendString:str];
+        NSString *newString = [NSString stringWithFormat:@"%@\r%@", hashtags,customtags];
 
         _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:newString,@"InstagramCaption", nil];
         [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
