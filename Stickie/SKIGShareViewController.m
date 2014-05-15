@@ -296,7 +296,9 @@ typedef enum {
         _docFile.delegate=self;
         _docFile.UTI = @"com.instagram.exclusivegram";
         _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:newString,@"InstagramCaption", nil];
-        [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
+        dispatch_sync(loadImageToShare, ^(void){
+            [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
+        });
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc]
