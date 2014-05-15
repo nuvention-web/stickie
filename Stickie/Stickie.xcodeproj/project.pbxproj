@@ -75,6 +75,7 @@
 		14AC7882191C3DE3009112DF /* AutoSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 14AC7881191C3DE3009112DF /* AutoSquare.png */; };
 		14B0C7A018A2EFA4008B65C3 /* SKTagCollectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */; };
 		14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */; };
+		6C815DD75AA447519BA9F424 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA93ED52B2B416FA2B2E4EF /* libPods.a */; };
 		9385097A18CD2EA1001AE7DC /* App - camera icon (3-8-2014).png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */; };
 		9385098518CD3044001AE7DC /* SKLongPressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385098418CD3044001AE7DC /* SKLongPressButton.m */; };
 		938D27D01925659D004893E9 /* SKButtonScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 938D27CF1925659D004893E9 /* SKButtonScrollView.m */; };
@@ -203,6 +204,8 @@
 		93E82083189828F100877D38 /* SKTagData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagData.h; sourceTree = "<group>"; };
 		93E82084189828F100877D38 /* SKTagData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagData.m; sourceTree = "<group>"; };
 		93E8208B189829A400877D38 /* SKAssetURLTagMapTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagMapTest.m; sourceTree = "<group>"; };
+		9FA93ED52B2B416FA2B2E4EF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC46AF9DC1124D028D65629C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		EC6945BF19197BD00078168E /* SKIGShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKIGShareViewController.h; path = ../SKIGShareViewController.h; sourceTree = "<group>"; };
 		EC6945C019197BD00078168E /* SKIGShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKIGShareViewController.m; path = ../SKIGShareViewController.m; sourceTree = "<group>"; };
 		EC6D06A419143E9D00F04708 /* smfacebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smfacebook.png; sourceTree = "<group>"; };
@@ -232,6 +235,7 @@
 				EC99068D19071FF80053DAC8 /* FacebookSDK.framework in Frameworks */,
 				149FB29B1890845B00D44DB2 /* UIKit.framework in Frameworks */,
 				149FB2971890845B00D44DB2 /* Foundation.framework in Frameworks */,
+				6C815DD75AA447519BA9F424 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +290,7 @@
 				149FB2BB1890845C00D44DB2 /* StickieTests */,
 				149FB2951890845B00D44DB2 /* Frameworks */,
 				149FB2941890845B00D44DB2 /* Products */,
+				BC46AF9DC1124D028D65629C /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -313,6 +318,7 @@
 				149FB2981890845B00D44DB2 /* CoreGraphics.framework */,
 				149FB29A1890845B00D44DB2 /* UIKit.framework */,
 				149FB2B51890845B00D44DB2 /* XCTest.framework */,
+				9FA93ED52B2B416FA2B2E4EF /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -449,9 +455,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 149FB2C51890845C00D44DB2 /* Build configuration list for PBXNativeTarget "Stickie" */;
 			buildPhases = (
+				291E853B30904D1CB14CBEA9 /* Check Pods Manifest.lock */,
 				149FB28F1890845B00D44DB2 /* Sources */,
 				149FB2901890845B00D44DB2 /* Frameworks */,
 				149FB2911890845B00D44DB2 /* Resources */,
+				DAEDA27F1EB2421EABEE0FEE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -583,6 +591,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		291E853B30904D1CB14CBEA9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DAEDA27F1EB2421EABEE0FEE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		149FB28F1890845B00D44DB2 /* Sources */ = {
@@ -733,6 +774,7 @@
 		};
 		149FB2C61890845C00D44DB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC46AF9DC1124D028D65629C /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -754,7 +796,7 @@
 					"$(inherited)",
 					./GoogleAnalyticsServicesiOS_3.03c,
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "367C16BE-F1C9-4DB9-AAD6-C911ECCFF097";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -764,6 +806,7 @@
 		};
 		149FB2C71890845C00D44DB2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC46AF9DC1124D028D65629C /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -784,7 +827,7 @@
 					"$(inherited)",
 					./GoogleAnalyticsServicesiOS_3.03c,
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "367C16BE-F1C9-4DB9-AAD6-C911ECCFF097";
 				TARGETED_DEVICE_FAMILY = 1;
