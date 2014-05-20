@@ -30,10 +30,10 @@
     NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
     
     UIImage *backgroundImage = [UIImage imageWithCGImage:[asset thumbnail]];
-    UIImage *topLeftWatermarkImage = [UIImage imageNamed:@"BlueCorner.png"];
-    UIImage *topRightWatermarkImage = [UIImage imageNamed:@"GreenCorner.png"];
-    UIImage *botLeftWatermarkImage = [UIImage imageNamed:@"RedCorner.png"];
-    UIImage *botRightWatermarkImage = [UIImage imageNamed:@"OrangeCorner.png"];
+    UIImage *topLeftWatermarkImage = [UIImage imageNamed:@"CornerBlue.png"];
+    UIImage *topRightWatermarkImage = [UIImage imageNamed:@"CornerGreen.png"];
+    UIImage *botLeftWatermarkImage = [UIImage imageNamed:@"CornerRed.png"];
+    UIImage *botRightWatermarkImage = [UIImage imageNamed:@"CornerOrange.png"];
     
     UIGraphicsBeginImageContext(backgroundImage.size);
     [backgroundImage drawInRect:CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height)];
