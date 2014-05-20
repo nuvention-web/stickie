@@ -146,10 +146,10 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 {
     int const  TOP_ALIGN = 85;
     /* Reset view. */
-    UIImage *topLeftButtonImage = [UIImage imageNamed:@"BlueCircle.png"];
-    UIImage *topRightButtonImage = [UIImage imageNamed:@"GreenCircle.png"];
-    UIImage *botLeftButtonImage = [UIImage imageNamed:@"RedCircle.png"];
-    UIImage *botRightButtonImage = [UIImage imageNamed:@"OrangeCircle.png"];
+    UIImage *topLeftButtonImage = [UIImage imageNamed:@"CircleBlue.png"];
+    UIImage *topRightButtonImage = [UIImage imageNamed:@"CircleGreen.png"];
+    UIImage *botLeftButtonImage = [UIImage imageNamed:@"CircleRed.png"];
+    UIImage *botRightButtonImage = [UIImage imageNamed:@"CircleOrange.png"];
     [_topLeftButton setBackgroundImage:topLeftButtonImage forState:UIControlStateNormal];
     [self.view addSubview:_topLeftButton];
     [_topRightButton setBackgroundImage:topRightButtonImage forState:UIControlStateNormal];
@@ -233,6 +233,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [_topLeftButton setBackgroundImage:topLeftButtonImage forState:UIControlStateNormal];
             [self.view addSubview:_topLeftButton];
             topLeftClicked = YES;
+            _callButtonOnLoad = _topLeftButton.titleLabel.text;
         }
         else if ([buttonPressed isEqualToString:_topRightButton.titleLabel.text]){
             topRightButtonImage = [UIImage imageNamed:@"RetrievalGreen.png"];
@@ -242,6 +243,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [_topRightButton setBackgroundImage:topRightButtonImage forState:UIControlStateNormal];
             [self.view addSubview:_topRightButton];
             topRightClicked = YES;
+            _callButtonOnLoad = _topRightButton.titleLabel.text;
         }
         else if ([buttonPressed isEqualToString:_botLeftButton.titleLabel.text]){
             botLeftButtonImage = [UIImage imageNamed:@"RetrievalRed.png"];
@@ -251,6 +253,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [_botLeftButton setBackgroundImage:botLeftButtonImage forState:UIControlStateNormal];
             [self.view addSubview:_botLeftButton];
             botLeftClicked = YES;
+            _callButtonOnLoad = _botLeftButton.titleLabel.text;
         }
         else if ([buttonPressed isEqualToString:_botRightButton.titleLabel.text]){
             botRightButtonImage = [UIImage imageNamed:@"RetrievalOrange.png"];
@@ -260,6 +263,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [_botRightButton setBackgroundImage:botRightButtonImage forState:UIControlStateNormal];
             [self.view addSubview:_botRightButton];
             botRightClicked = YES;
+            _callButtonOnLoad = _topRightButton.titleLabel.text;
         }
     }
 }
