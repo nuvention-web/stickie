@@ -96,7 +96,7 @@ typedef enum {
     });
 }
 - (void)shareSkip{
-    [self shareToInstaWith:@"" noBS:NO];
+    [self shareToInstaWith:@""];
 }
 
 
@@ -163,7 +163,7 @@ typedef enum {
             break;
             
         case GET_MORE_LIKES:
-            [self shareToInstaWith:[dictResults objectForKey:@"get_more_likes"] noBS:YES];
+            [self shareToInstaWith:[dictResults objectForKey:@"get_more_likes"]];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                   action:@"insta_get_more_likes"  // Event action (required)
                                                                    label:nil         // Event label
@@ -171,7 +171,7 @@ typedef enum {
             break;
             
         case GET_MORE_FOLLOWS:
-            [self shareToInstaWith:[dictResults objectForKey:@"get_more_follows"] noBS:YES];
+            [self shareToInstaWith:[dictResults objectForKey:@"get_more_follows"]];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                   action:@"insta_get_more_follows"  // Event action (required)
                                                                    label:nil         // Event label
@@ -179,7 +179,7 @@ typedef enum {
             break;
             
         case FASHION:
-            [self shareToInstaWith:[dictResults objectForKey:@"fashion"] noBS:YES];
+            [self shareToInstaWith:[dictResults objectForKey:@"fashion"]];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                   action:@"insta_fashion"  // Event action (required)
                                                                    label:nil         // Event label
@@ -187,7 +187,7 @@ typedef enum {
             break;
             
         case FITNESS:
-            [self shareToInstaWith:[dictResults objectForKey:@"fitness"] noBS:YES];
+            [self shareToInstaWith:[dictResults objectForKey:@"fitness"]];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                   action:@"insta_fitness"  // Event action (required)
                                                                    label:nil         // Event label
@@ -195,7 +195,7 @@ typedef enum {
             break;
             
         case FOOD:
-            [self shareToInstaWith:[dictResults objectForKey:@"food"] noBS:YES];
+            [self shareToInstaWith:[dictResults objectForKey:@"food"]];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                   action:@"insta_food"  // Event action (required)
                                                                    label:nil         // Event label
@@ -203,7 +203,7 @@ typedef enum {
             break;
             
         case FRIENDS:
-            [self shareToInstaWith:[dictResults objectForKey:@"friends"] noBS:YES];
+            [self shareToInstaWith:[dictResults objectForKey:@"friends"]];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                   action:@"insta_friends"  // Event action (required)
                                                                    label:nil         // Event label
@@ -212,7 +212,7 @@ typedef enum {
             break;
             
         case LOVE:
-            [self shareToInstaWith:[dictResults objectForKey:@"love"] noBS:YES];
+            [self shareToInstaWith:[dictResults objectForKey:@"love"]];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                   action:@"insta_love"  // Event action (required)
                                                                    label:nil         // Event label
@@ -220,7 +220,7 @@ typedef enum {
             break;
             
         case MAKEUP:
-            [self shareToInstaWith:[dictResults objectForKey:@"makeup"] noBS:YES];
+            [self shareToInstaWith:[dictResults objectForKey:@"makeup"]];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                   action:@"insta_makeup"  // Event action (required)
                                                                    label:nil         // Event label
@@ -228,7 +228,7 @@ typedef enum {
             break;
             
         case MEMES:
-            [self shareToInstaWith:[dictResults objectForKey:@"memes"] noBS:YES];
+            [self shareToInstaWith:[dictResults objectForKey:@"memes"]];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                   action:@"insta_memes"  // Event action (required)
                                                                    label:nil         // Event label
@@ -236,7 +236,7 @@ typedef enum {
             break;
             
         case NATURE:
-            [self shareToInstaWith:[dictResults objectForKey:@"nature"] noBS:YES];
+            [self shareToInstaWith:[dictResults objectForKey:@"nature"]];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                   action:@"insta_nature"  // Event action (required)
                                                                    label:nil         // Event label
@@ -244,7 +244,7 @@ typedef enum {
             break;
             
         case PARTYING:
-            [self shareToInstaWith:[dictResults objectForKey:@"partying"] noBS:YES];
+            [self shareToInstaWith:[dictResults objectForKey:@"partying"]];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                   action:@"insta_partying"  // Event action (required)
                                                                    label:nil         // Event label
@@ -252,7 +252,7 @@ typedef enum {
             break;
             
         case PETS:
-            [self shareToInstaWith:[dictResults objectForKey:@"pets"] noBS:YES];
+            [self shareToInstaWith:[dictResults objectForKey:@"pets"]];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                   action:@"insta_pets"  // Event action (required)
                                                                    label:nil         // Event label
@@ -260,7 +260,7 @@ typedef enum {
             break;
             
         case PHOTOGRAPHY:
-            [self shareToInstaWith:[dictResults objectForKey:@"photography"] noBS:YES];
+            [self shareToInstaWith:[dictResults objectForKey:@"photography"]];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                   action:@"insta_photography"  // Event action (required)
                                                                    label:nil         // Event label
@@ -268,7 +268,7 @@ typedef enum {
             break;
             
         case SELFIES:
-            [self shareToInstaWith:[dictResults objectForKey:@"selfies"] noBS:YES];
+            [self shareToInstaWith:[dictResults objectForKey:@"selfies"]];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                   action:@"insta_selfies"  // Event action (required)
                                                                    label:nil         // Event label
@@ -277,13 +277,12 @@ typedef enum {
     }
 }
 
-- (void)shareToInstaWith: (NSString *)str noBS: (BOOL) noBS
+- (void)shareToInstaWith: (NSString *)str
 {
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
         // Setting up hashtags
-        NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | "];
-        [hashtags appendString: (noBS ? @"The No-BS Get More Likes App ••" : @"#stickiepic ••")];
+        NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickieapp | #stickiepic ••"];
         NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:_url]];
         NSMutableString *customtags = [NSMutableString stringWithString:@""];
         for (int i = 0; i < [tags count]; i++) {
