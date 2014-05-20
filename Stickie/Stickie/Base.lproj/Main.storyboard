@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="SJT-Fy-lx7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4Uo-rV-OxX">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -155,17 +155,7 @@
                         <gestureRecognizers/>
                     </view>
                     <navigationItem key="navigationItem" title="stickie" id="uyL-ej-GPD">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="0Ma-hi-8nK">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ga5-JI-haJ">
-                                <rect key="frame" x="16" y="4" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="17"/>
-                                <state key="normal" title="Search" image="SearchStickie_222x222.png"/>
-                                <connections>
-                                    <action selector="tutorialButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="FEz-am-4lx"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="gpf-XU-gqa"/>
                         <barButtonItem key="rightBarButtonItem" id="rED-uW-Iah">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="53N-NE-0rf">
                                 <rect key="frame" x="267" y="7" width="37" height="30"/>
@@ -180,6 +170,7 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="botLeftCorner" destination="y0n-mJ-YeQ" id="h7R-nD-Sv1"/>
                         <outlet property="botLeftLabel" destination="Da7-GR-7sd" id="3eO-aj-Ek2"/>
@@ -187,6 +178,7 @@
                         <outlet property="botRightLabel" destination="IGM-6F-hVZ" id="jxz-Wq-o12"/>
                         <outlet property="collectionView" destination="InS-wl-dcP" id="CrP-He-TVc"/>
                         <outlet property="dNewImageView" destination="owN-vc-Jt0" id="1cr-pa-KFG"/>
+                        <outlet property="revealButtonItem" destination="gpf-XU-gqa" id="Amf-Fa-ql0"/>
                         <outlet property="topLeftCorner" destination="ida-78-yow" id="fSk-5O-RwC"/>
                         <outlet property="topLeftLabel" destination="d0k-6x-Qhh" id="Z1P-67-vJ0"/>
                         <outlet property="topRightCorner" destination="nzz-3R-C1g" id="9c5-DS-NQS"/>
@@ -509,6 +501,24 @@
             </objects>
             <point key="canvasLocation" x="1929" y="201"/>
         </scene>
+        <!--Reveal View Controller-->
+        <scene sceneID="vib-n7-tnV">
+            <objects>
+                <viewController id="4Uo-rV-OxX" customClass="SWRevealViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BPf-m7-fhe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="SJT-Fy-lx7" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegue" id="8Q2-6s-UrM"/>
+                        <segue destination="xx9-6a-kcM" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegue" id="NqU-RN-wcH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zdq-WI-eDb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-286" y="201"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="oZl-0N-xV6">
             <objects>
@@ -526,6 +536,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7sc-pC-NOz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="251" y="198"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="od4-5b-e0j">
+            <objects>
+                <tableViewController id="xx9-6a-kcM" customClass="SKSettingsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="pxI-Ro-3Eh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="64b-Uc-AXT">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="64b-Uc-AXT" id="aF1-Cr-AtG">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="xx9-6a-kcM" id="6r2-Kc-GER"/>
+                            <outlet property="delegate" destination="xx9-6a-kcM" id="QTF-iv-mUY"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dJN-nQ-we5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-286" y="948"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="SJV-bQ-VD2">
@@ -658,7 +696,6 @@
         <image name="CornerOrange.png" width="128" height="128"/>
         <image name="CornerRed.png" width="128" height="128"/>
         <image name="Half circle new.png" width="619" height="185"/>
-        <image name="SearchStickie_222x222.png" width="222" height="222"/>
         <image name="tutButton.png" width="419" height="203"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

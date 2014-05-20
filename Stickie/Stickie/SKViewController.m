@@ -19,6 +19,7 @@
 #import "SKLongPressButton.h"
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
+#import "SWRevealViewController.h"
 
 
 @interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
@@ -36,6 +37,7 @@
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *assets;
 @property BOOL newMedia;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;
 
 @end
 
@@ -91,6 +93,10 @@
                                                    object:nil];
         
         /* Note, the notification center is intentially left unremoved from this view in viewWillDisappear - for the cases that a photo is deleted when the user is outside this application */
+        
+        [_revealButtonItem setTarget: self.revealViewController];
+        [_revealButtonItem setAction: @selector( revealToggle: )];
+        [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];
     }
 }
 
@@ -178,9 +184,12 @@
     [self.view addSubview:_pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
 }
-- (IBAction)tutorialButton:(id)sender {
-    [self loadTutorial];
+
+
+- (IBAction)settingsButton:(id)sender {
+    
 }
+
 #pragma mark - Main Screen
 /* Sets name of tags based on serialized tag information. */
 - (void)loadTags
