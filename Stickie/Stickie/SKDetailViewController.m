@@ -17,6 +17,7 @@
 #import "SKIGShareViewController.h"
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
+#import "SWRevealViewController.h"
 
 @interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate> {
     UIImageView *imageView;

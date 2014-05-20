@@ -155,7 +155,17 @@
                         <gestureRecognizers/>
                     </view>
                     <navigationItem key="navigationItem" title="stickie" id="uyL-ej-GPD">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="gpf-XU-gqa"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="0Ma-hi-8nK">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ga5-JI-haJ">
+                                <rect key="frame" x="16" y="4" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="17"/>
+                                <state key="normal" title="Search" image="SearchStickie_222x222.png"/>
+                                <connections>
+                                    <action selector="tapForTutorial:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ET2-Kt-jbc"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="rED-uW-Iah">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="53N-NE-0rf">
                                 <rect key="frame" x="267" y="7" width="37" height="30"/>
@@ -178,7 +188,7 @@
                         <outlet property="botRightLabel" destination="IGM-6F-hVZ" id="jxz-Wq-o12"/>
                         <outlet property="collectionView" destination="InS-wl-dcP" id="CrP-He-TVc"/>
                         <outlet property="dNewImageView" destination="owN-vc-Jt0" id="1cr-pa-KFG"/>
-                        <outlet property="revealButtonItem" destination="gpf-XU-gqa" id="Amf-Fa-ql0"/>
+                        <outlet property="revealButtonItem" destination="ga5-JI-haJ" id="cOy-mu-zwk"/>
                         <outlet property="topLeftCorner" destination="ida-78-yow" id="fSk-5O-RwC"/>
                         <outlet property="topLeftLabel" destination="d0k-6x-Qhh" id="Z1P-67-vJ0"/>
                         <outlet property="topRightCorner" destination="nzz-3R-C1g" id="9c5-DS-NQS"/>
@@ -537,10 +547,10 @@
             </objects>
             <point key="canvasLocation" x="251" y="198"/>
         </scene>
-        <!--Settings View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="od4-5b-e0j">
             <objects>
-                <tableViewController id="xx9-6a-kcM" customClass="SKSettingsViewController" sceneMemberID="viewController">
+                <tableViewController id="xx9-6a-kcM" customClass="SKMenuViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="pxI-Ro-3Eh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -696,6 +706,7 @@
         <image name="CornerOrange.png" width="128" height="128"/>
         <image name="CornerRed.png" width="128" height="128"/>
         <image name="Half circle new.png" width="619" height="185"/>
+        <image name="SearchStickie_222x222.png" width="222" height="222"/>
         <image name="tutButton.png" width="419" height="203"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -704,8 +715,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="T3g-bY-jZf"/>
         <segue reference="w2s-Lq-cI3"/>
-        <segue reference="L4W-cC-CoX"/>
         <segue reference="gwP-KI-MWf"/>
         <segue reference="kNa-3S-pJo"/>
     </inferredMetricsTieBreakers>

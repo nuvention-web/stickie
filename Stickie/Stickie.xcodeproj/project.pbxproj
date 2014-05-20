@@ -77,7 +77,7 @@
 		14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */; };
 		6C815DD75AA447519BA9F424 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA93ED52B2B416FA2B2E4EF /* libPods.a */; };
 		9361EE57192BEB750070F688 /* reveal-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9361EE56192BEB750070F688 /* reveal-icon.png */; };
-		9361EE5A192BED3C0070F688 /* SKSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9361EE59192BED3C0070F688 /* SKSettingsViewController.m */; };
+		9361EE5A192BED3C0070F688 /* SKMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9361EE59192BED3C0070F688 /* SKMenuViewController.m */; };
 		9385097A18CD2EA1001AE7DC /* App - camera icon (3-8-2014).png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */; };
 		9385098518CD3044001AE7DC /* SKLongPressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385098418CD3044001AE7DC /* SKLongPressButton.m */; };
 		938D27D01925659D004893E9 /* SKButtonScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 938D27CF1925659D004893E9 /* SKButtonScrollView.m */; };
@@ -193,8 +193,8 @@
 		14B0C7A618A30B43008B65C3 /* SKTagSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagSearchViewController.h; sourceTree = "<group>"; };
 		14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagSearchViewController.m; sourceTree = "<group>"; };
 		9361EE56192BEB750070F688 /* reveal-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon.png"; sourceTree = "<group>"; };
-		9361EE58192BED3C0070F688 /* SKSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSettingsViewController.h; sourceTree = "<group>"; };
-		9361EE59192BED3C0070F688 /* SKSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSettingsViewController.m; sourceTree = "<group>"; };
+		9361EE58192BED3C0070F688 /* SKMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMenuViewController.h; sourceTree = "<group>"; };
+		9361EE59192BED3C0070F688 /* SKMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMenuViewController.m; sourceTree = "<group>"; };
 		9385097118CD2EA1001AE7DC /* App - camera icon (3-8-2014).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "App - camera icon (3-8-2014).png"; sourceTree = "<group>"; };
 		9385098318CD3044001AE7DC /* SKLongPressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLongPressButton.h; sourceTree = "<group>"; };
 		9385098418CD3044001AE7DC /* SKLongPressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLongPressButton.m; sourceTree = "<group>"; };
@@ -394,8 +394,8 @@
 				EC6945C019197BD00078168E /* SKIGShareViewController.m */,
 				14A1FB41192416DF00CE33A6 /* SKCustomIGViewController.h */,
 				14A1FB42192416DF00CE33A6 /* SKCustomIGViewController.m */,
-				9361EE58192BED3C0070F688 /* SKSettingsViewController.h */,
-				9361EE59192BED3C0070F688 /* SKSettingsViewController.m */,
+				9361EE58192BED3C0070F688 /* SKMenuViewController.h */,
+				9361EE59192BED3C0070F688 /* SKMenuViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -667,7 +667,7 @@
 				93E82089189828F100877D38 /* SKTagData.m in Sources */,
 				14985C661890F037004B3ECB /* SKDetailViewController.m in Sources */,
 				14A1FB43192416DF00CE33A6 /* SKCustomIGViewController.m in Sources */,
-				9361EE5A192BED3C0070F688 /* SKSettingsViewController.m in Sources */,
+				9361EE5A192BED3C0070F688 /* SKMenuViewController.m in Sources */,
 				938D27D01925659D004893E9 /* SKButtonScrollView.m in Sources */,
 				1499CDC618BEE3CB00D0C0EA /* SKTagAssignViewController.m in Sources */,
 				149FB2EE18909D3500D44DB2 /* SKPhotoCell.m in Sources */,

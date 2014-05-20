@@ -1,5 +1,5 @@
 //
-//  SKSettingsViewController.h
+//  SKMenuViewController.h
 //  Stickie
 //
 //  Created by Grant on 5/20/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SKSettingsViewController : UITableViewController
+@interface SKMenuViewController : UITableViewController
 
 @end

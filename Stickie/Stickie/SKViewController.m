@@ -94,11 +94,8 @@
         
         /* Note, the notification center is intentially left unremoved from this view in viewWillDisappear - for the cases that a photo is deleted when the user is outside this application */
         
-        // Necessary for SWRevealViewController - Settings Menu.
-        [_revealButtonItem setTarget: self.revealViewController];
-        [_revealButtonItem setAction: @selector( revealToggle: )];
-        [self.revealViewController panGestureRecognizer];
-        [self.revealViewController tapGestureRecognizer];
+        // Necessary for SWRevealViewController - Menu View.
+        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
 }
 
@@ -187,10 +184,10 @@
     [self.pageViewController didMoveToParentViewController:self];
 }
 
-
-- (IBAction)settingsButton:(id)sender {
-    
+- (IBAction)tapForTutorial:(id)sender {
+    [self loadTutorial];
 }
+
 
 #pragma mark - Main Screen
 /* Sets name of tags based on serialized tag information. */
@@ -853,5 +850,6 @@ finishedSavingWithError:(NSError *)error
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 @end
