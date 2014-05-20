@@ -31,6 +31,8 @@
     BOOL retainScroll;
     BOOL close;
     NSURL *currentURL;
+    BOOL multi;
+    NSMutableArray *selected;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
@@ -74,7 +76,7 @@
         
         [self loadTags];
         [self loadImageAssets];
-        
+        selected = [[NSMutableArray alloc] init];
         /* Setting up long-press gesture recognizer and adding it to collectionView and corner buttons */
         UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
         longGestureRecognizer.minimumPressDuration = 0.15;
@@ -184,11 +186,6 @@
     [self.pageViewController didMoveToParentViewController:self];
 }
 
-- (IBAction)tapForTutorial:(id)sender {
-    [self loadTutorial];
-}
-
-
 #pragma mark - Main Screen
 /* Sets name of tags based on serialized tag information. */
 - (void)loadTags
@@ -290,6 +287,8 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    multi = NO;
+    [selected removeAllObjects];
     /* Automatically scrolls to bottom of collection view so user will see most recent photos. */
     if (!retainScroll) {
         NSInteger section = 0;
@@ -325,9 +324,8 @@
     SKPhotoCell *cell = (SKPhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     
     ALAsset *asset = self.assets[indexPath.row];
-
     cell.asset = asset;
-    
+    cell.selectedAsset = selected;
     cell.topLeftCorner = _topLeftLabel.text;
     cell.topRightCorner = _topRightLabel.text;
     cell.botLeftCorner = _botLeftLabel.text;
@@ -413,7 +411,31 @@
             break;
     }
 }
+#pragma mark - Multi Select
 
+- (IBAction)multiToggle:(id)sender {
+    if (multi) {
+        multi = NO;
+        [selected removeAllObjects];
+    }
+    else {
+        multi = YES;
+    }
+    [_collectionView reloadData];
+}
+
+- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (multi) {
+        ALAsset *asset = self.assets[indexPath.row];
+        if ([selected containsObject:asset]) {
+            [selected removeObject:asset];
+        }
+        else {
+            [selected addObject:asset];
+        }
+        [_collectionView reloadData];
+    }
+}
 #pragma mark Edit Tag
 - (void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer{
     CGPoint point = [gestureRecognizer locationInView:self.view];
@@ -493,10 +515,15 @@
                     // Cleanup stuff.
                 }];
             }];
-            
+            if (multi){
+                [urlToTagMap addTag:tag forMultipleAssets:selected];
+                [tagCollection updateCollectionWithTag:tag forMultipleAssets:selected];
+            }
+            else {
             /* Logic for tagging a new image - it is necessary to update both urlToTagMap and tagCollection. */
-            [urlToTagMap addTag: tag forAssetURL:assetURL];
-            [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
+                [urlToTagMap addTag: tag forAssetURL:assetURL];
+                [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
+            }
         }
         else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
@@ -512,9 +539,15 @@
                     // Cleanup stuff.
                 }];
             }];
-            /* Logic for removing a tag from a new image - it is necessary to update both urlToTagMap and tagCollection. */
-            [urlToTagMap removeTag:tag forAssetURL:assetURL];
-            [tagCollection removeImageURL:assetURL forTag:tag];
+            if (multi){
+                [urlToTagMap removeTag:tag forMultipleAssets:selected];
+                [tagCollection removeMultipleAssets:selected forTag:tag];
+            }
+            else {
+                /* Logic for removing a tag from a new image - it is necessary to update both urlToTagMap and tagCollection. */
+                [urlToTagMap removeTag:tag forAssetURL:assetURL];
+                [tagCollection removeImageURL:assetURL forTag:tag];
+            }
         }
 //            [_collectionView reloadItemsAtIndexPaths: [[NSArray alloc] initWithObjects:path, nil]]; // DOES NOT WORK FOR FIRST TAG (APPLE BUG?).
         [_collectionView reloadData];
@@ -610,6 +643,9 @@ finishedSavingWithError:(NSError *)error
 
 #pragma mark Segue Handling
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if ([identifier isEqualToString:@"showDetail"] && multi){
+        return NO;
+    }
     if ([_topLeftLabel.text isEqualToString:@""] && [identifier isEqualToString:@"topLeftTag"]) {
         [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
         return NO;

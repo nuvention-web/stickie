@@ -162,7 +162,7 @@
                                 <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="17"/>
                                 <state key="normal" title="Search" image="SearchStickie_222x222.png"/>
                                 <connections>
-                                    <action selector="tapForTutorial:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ET2-Kt-jbc"/>
+                                    <action selector="multiToggle:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="egS-Dy-vOE"/>
                                 </connections>
                             </button>
                         </barButtonItem>
