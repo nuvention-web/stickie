@@ -94,9 +94,11 @@
         
         /* Note, the notification center is intentially left unremoved from this view in viewWillDisappear - for the cases that a photo is deleted when the user is outside this application */
         
+        // Necessary for SWRevealViewController - Settings Menu.
         [_revealButtonItem setTarget: self.revealViewController];
         [_revealButtonItem setAction: @selector( revealToggle: )];
-        [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];
+        [self.revealViewController panGestureRecognizer];
+        [self.revealViewController tapGestureRecognizer];
     }
 }
 
