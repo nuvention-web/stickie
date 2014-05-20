@@ -322,8 +322,7 @@ typedef enum {
         UINavigationController *navController = segue.destinationViewController;
         SKCustomIGViewController *customIGViewController = navController.childViewControllers[0];
         customIGViewController.customChoice = _customChoice;
-        customIGViewController.imageView = _imageView;
-        customIGViewController.url = _url;
+        customIGViewController.docFile = _docFile;
     }
 }
 

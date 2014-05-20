@@ -11,8 +11,6 @@
 @interface SKCustomIGViewController : UIViewController <UITextViewDelegate>
 
 @property (nonatomic, strong) NSString *customChoice;
-@property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic,retain) UIDocumentInteractionController *docFile;
-@property (nonatomic, strong) NSURL *url;
 
 @end
