@@ -13,6 +13,10 @@
 
 @end
 
+typedef enum {
+    SKMenuSectionSettings = 0, SKMenuSectionOptions = 1, SKMenuSectionFeedback = 2
+} SKMenuSection;
+
 @implementation SKMenuViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -39,28 +43,87 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    switch (section) {
+        case SKMenuSectionSettings:
+            return 2;
+            break;
+        case SKMenuSectionOptions:
+            return 3;
+            break;
+        case SKMenuSectionFeedback:
+            return 2;
+            break;
+        default:
+            return 0;
+    }
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell;
+    UISwitch *theSwitch;
     
-    // Configure the cell...
+    switch ([indexPath section]) {
+        case SKMenuSectionSettings:
+            cell = [tableView dequeueReusableCellWithIdentifier:@"ToggleCell"];
+            theSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(cell.frame.size.width - 125.0, 10.0, 0.0, 0.0)];
+            theSwitch.transform = CGAffineTransformMakeScale(0.85, 0.85);
+            [cell.contentView addSubview:theSwitch];
+            if ([indexPath row] == 0) {
+                cell.textLabel.text = @"Photostream Media";
+            }
+            else if ([indexPath row] == 1) {
+                cell.textLabel.text = @"InstaLikes+";
+            }
+            break;
+        case SKMenuSectionOptions:
+            cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
+            if ([indexPath row] == 0) {
+                cell.textLabel.text = @"Show Tutorial";
+            }
+            else if ([indexPath row] ==1) {
+                cell.textLabel.text = @"Show Commerical";
+            }
+            else {
+                cell.textLabel.text = @"FAQ";
+            }
+            break;
+        case SKMenuSectionFeedback:
+            cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
+            if ([indexPath row] == 0) {
+                cell.textLabel.text = @"Leave Feedback";
+            }
+            else {
+                cell.textLabel.text = @"Rate Us!";
+            }
+            break;
+    }
     
     return cell;
 }
-*/
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case SKMenuSectionSettings:
+            return @"Settings";
+            break;
+        case SKMenuSectionOptions:
+            return @"Options";
+            break;
+        case SKMenuSectionFeedback:
+            return @"Feedback";
+            break;
+        default:
+            return nil;
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.
