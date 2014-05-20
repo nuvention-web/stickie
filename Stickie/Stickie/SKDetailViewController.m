@@ -14,6 +14,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SKAssetURLTagsMap.h"
 #import "SKImageTag.h"
+#import "SKIGShareViewController.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate> {
     UIImageView *imageView;
@@ -28,38 +31,38 @@
 
 - (NSArray *)loadButtons
 {
-    UIButton *FACEBOOK_BUTTON = [[UIButton alloc] init];
-    [FACEBOOK_BUTTON setBackgroundImage:[UIImage imageNamed:@"smfacebook.png"] forState:UIControlStateNormal];
-    [FACEBOOK_BUTTON addTarget:self action:@selector(shareToFacebook) forControlEvents:UIControlEventTouchUpInside];
-    
     UIButton *INSTAGRAM_BUTTON = [[UIButton alloc] init];
     [INSTAGRAM_BUTTON setBackgroundImage:[UIImage imageNamed:@"sminstagram.png"] forState:UIControlStateNormal];
-    [INSTAGRAM_BUTTON addTarget:self action:@selector(shareToInsta) forControlEvents:UIControlEventTouchUpInside];
+    [INSTAGRAM_BUTTON addTarget:self action:@selector(shareToInsta:) forControlEvents:UIControlEventTouchUpInside];
     
+    UIButton *FACEBOOK_BUTTON = [[UIButton alloc] init];
+    [FACEBOOK_BUTTON setBackgroundImage:[UIImage imageNamed:@"smfacebook.png"] forState:UIControlStateNormal];
+    [FACEBOOK_BUTTON addTarget:self action:@selector(shareToFacebook:) forControlEvents:UIControlEventTouchUpInside];
+
     UIButton *MESSAGE_BUTTON = [[UIButton alloc] init];
     [MESSAGE_BUTTON setBackgroundImage:[UIImage imageNamed:@"smtext.png"] forState:UIControlStateNormal];
-    [MESSAGE_BUTTON addTarget:self action:@selector(shareToMessage) forControlEvents:UIControlEventTouchUpInside];
-    
+    [MESSAGE_BUTTON addTarget:self action:@selector(shareToMessage:) forControlEvents:UIControlEventTouchUpInside];
+
     UIButton *MAIL_BUTTON = [[UIButton alloc] init];
     [MAIL_BUTTON setBackgroundImage:[UIImage imageNamed:@"smmail.png"] forState:UIControlStateNormal];
-    [MAIL_BUTTON addTarget:self action:@selector(shareToMail) forControlEvents:UIControlEventTouchUpInside];
-    
+    [MAIL_BUTTON addTarget:self action:@selector(shareToMail:) forControlEvents:UIControlEventTouchUpInside];
+
     UIButton *WHATSAPP_BUTTON = [[UIButton alloc] init];
     [WHATSAPP_BUTTON setBackgroundImage:[UIImage imageNamed:@"smwhatsapp.png"] forState:UIControlStateNormal];
-    [WHATSAPP_BUTTON addTarget:self action:@selector(shareToWhatsapp) forControlEvents:UIControlEventTouchUpInside];
+    [WHATSAPP_BUTTON addTarget:self action:@selector(shareToWhatsapp:) forControlEvents:UIControlEventTouchUpInside];
 
     UIButton *TWITTER_BUTTON = [[UIButton alloc] init];
     [TWITTER_BUTTON setBackgroundImage:[UIImage imageNamed:@"smtwitter.png"] forState:UIControlStateNormal];
-    [TWITTER_BUTTON addTarget:self action:@selector(shareToTwitter) forControlEvents:UIControlEventTouchUpInside];
+    [TWITTER_BUTTON addTarget:self action:@selector(shareToTwitter:) forControlEvents:UIControlEventTouchUpInside];
 
-    return @[FACEBOOK_BUTTON, INSTAGRAM_BUTTON, MESSAGE_BUTTON, MAIL_BUTTON, WHATSAPP_BUTTON, TWITTER_BUTTON];
+    return @[INSTAGRAM_BUTTON, FACEBOOK_BUTTON, MESSAGE_BUTTON, MAIL_BUTTON, WHATSAPP_BUTTON, TWITTER_BUTTON];
 }
 
 -(void)viewDidLoad
 {
     /* So UIImageView is centered properly. */
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+
     /* Set inital navigation bar title. */
     [self setNavBarTitleWithIndex:imageIndex+1];
     
@@ -101,6 +104,7 @@
         button.frame = CGRectMake(x, 9.5, 65, 65);
         [_shareScrollView addSubview:button];
         x += button.frame.size.width + 10;
+        button.showsTouchWhenHighlighted = YES;
     }
     
     _shareScrollView.contentSize = CGSizeMake(x, _shareScrollView.frame.size.height);
@@ -109,7 +113,7 @@
     
     CALayer *BottomBorder = [CALayer layer];
     BottomBorder.frame = CGRectMake(0.0f, 484.0f, self.view.frame.size.width, 0.5f);
-    BottomBorder.backgroundColor = [UIColor grayColor].CGColor;
+    BottomBorder.backgroundColor = [UIColor colorWithRed:179.0/255.0 green:179.0/255.0 blue:179.0/255.0 alpha:1.0].CGColor;
     [self.view.layer addSublayer:BottomBorder];
     
     [self.view addSubview:_scrollView];
@@ -157,6 +161,8 @@
     ALAsset *asset = _assets[imageIndex];
     ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
     UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+    _imageURL = asset.defaultRepresentation.url; // Update imageURL property
+    _image = image;
     
     /* Prepare new image to be displayed in view. */
     UIImageView *newImageView = [[UIImageView alloc] init];
@@ -185,7 +191,12 @@
 
 }
 
-- (void)shareToFacebook {
+- (void)shareToFacebook:(id)sender {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                          action:@"share_facebook"  // Event action (required)
+                                                           label:nil         // Event label
+                                                           value:nil] build]];    // Event value
     // If the Facebook app is installed and we can present the share dialog
     if([FBDialogs canPresentShareDialogWithPhotos]) {
         FBShareDialogPhotoParams *params = [[FBShareDialogPhotoParams alloc] init];
@@ -219,7 +230,6 @@
         
         [alert show];
     }
-    
 }
 
 - (void) alertView:(UIAlertView *) alertView clickedButtonAtIndex:(NSInteger) index {
@@ -236,32 +246,17 @@
     }
 }
 
-- (void)shareToInsta
+
+- (void)shareToInsta:(id)sender
 {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                          action:@"share_instagram"  // Event action (required)
+                                                           label:nil         // Event label
+                                                           value:nil] build]];    // Event value
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-        //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
-        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
-        
-        NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
-        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
-        [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
-        //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
-        _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
-        _docFile.delegate=self;
-        _docFile.UTI = @"com.instagram.exclusivegram";
-    
-        // Setting up hashtags.
-        NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepic | #stickiepic"];
-        NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:[_assets[imageIndex] valueForProperty:ALAssetPropertyAssetURL]]];
-        for (int i = 0; i < [tags count]; i++) {
-            [hashtags appendString:@" #"];
-            [hashtags appendString:[((SKImageTag*)tags[i]) tagName]];
-        }
-        [hashtags appendString:@" ••  "];
-        
-        _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:hashtags,@"InstagramCaption", nil];
-        [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
+        [self performSegueWithIdentifier:@"instaShare" sender:self];
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc]
@@ -272,7 +267,6 @@
                               otherButtonTitles:@"Download", nil];
         
         [alert show];
-        
     }
 }
 
@@ -316,7 +310,12 @@
 	return newimg;
 }
 
-- (void)shareToWhatsapp {
+- (void)shareToWhatsapp:(id)sender {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                          action:@"share_whatsapp"  // Event action (required)
+                                                           label:nil         // Event label
+                                                           value:nil] build]];    // Event value
     NSURL *whatsURL = [NSURL URLWithString:@"whatsapp://"];
     if ([[UIApplication sharedApplication] canOpenURL:whatsURL]) {
         //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
@@ -343,8 +342,13 @@
     }
 }
 
-- (void)shareToMail
+- (void)shareToMail:(id)sender
 {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                          action:@"share_mail"  // Event action (required)
+                                                           label:nil         // Event label
+                                                           value:nil] build]];    // Event value
     if ([MFMailComposeViewController canSendMail]) {
         NSString *messageBody = @"<br><br>Sent via <a href=\"https://itunes.apple.com/gb/app/stickie/id853858851?mt=8\">Stickie</a>." ;
         
@@ -376,7 +380,6 @@
         
         [alert show];
     }
-    
 }
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
@@ -403,15 +406,32 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void)shareToMessage
+- (void)shareToMessage:(id)sender
 {
-    MFMessageComposeViewController* composeVC = [[MFMessageComposeViewController alloc] init];
-    composeVC.messageComposeDelegate = self;
-    UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
-    NSString *type = @"image/png";
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                          action:@"share_message"  // Event action (required)
+                                                           label:nil         // Event label
+                                                           value:nil] build]];    // Event value
+    if ([MFMessageComposeViewController canSendText]) {
+        MFMessageComposeViewController* composeVC = [[MFMessageComposeViewController alloc] init];
+        composeVC.messageComposeDelegate = self;
+        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
+        NSString *type = @"image/png";
 
-    [composeVC addAttachmentData:UIImagePNGRepresentation(instaImage) typeIdentifier:type filename:@"image.png"];
-    [self presentViewController:composeVC animated:YES completion:NULL];
+        [composeVC addAttachmentData:UIImagePNGRepresentation(instaImage) typeIdentifier:type filename:@"image.png"];
+        [self presentViewController:composeVC animated:YES completion:NULL];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Messaging Not Setup"
+                              message: @"Set up messaging on your device to continue."
+                              delegate: self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        
+        [alert show];
+    }
 
 }
 
@@ -420,8 +440,14 @@
 
 }
 
-- (void)shareToTwitter
+- (void)shareToTwitter:(id)sender
 {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                          action:@"share_twitter"  // Event action (required)
+                                                           label:nil         // Event label
+                                                           value:nil] build]];    // Event value
+    
     SLComposeViewController *composeController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
     
     NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepics (#stickie):"];
@@ -492,6 +518,17 @@
 
 - (IBAction)backMain:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    /* Enlarge Image. */
+    if ([[segue identifier] isEqualToString:@"instaShare"])
+    {
+       SKIGShareViewController *instaController = [segue destinationViewController];
+        instaController.imageView = imageView;
+        instaController.url = _imageURL;
+    }
 }
 
 @end
