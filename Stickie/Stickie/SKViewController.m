@@ -494,10 +494,6 @@
         button = _botRightCorner;
         currentTag = 4;
     }
-//    /* Share Feature */
-//    else if (point.x >= 135 && point.x <= 185 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
-//
-//    }
 
     
     if (![tag.tagName isEqualToString:@""]) {
@@ -518,6 +514,9 @@
             if (multi){
                 [urlToTagMap addTag:tag forMultipleAssets:selected];
                 [tagCollection updateCollectionWithTag:tag forMultipleAssets:selected];
+                multi = NO;
+                [selected removeAllObjects];
+
             }
             else {
             /* Logic for tagging a new image - it is necessary to update both urlToTagMap and tagCollection. */
@@ -542,6 +541,9 @@
             if (multi){
                 [urlToTagMap removeTag:tag forMultipleAssets:selected];
                 [tagCollection removeMultipleAssets:selected forTag:tag];
+                multi = NO;
+                [selected removeAllObjects];
+
             }
             else {
                 /* Logic for removing a tag from a new image - it is necessary to update both urlToTagMap and tagCollection. */
