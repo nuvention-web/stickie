@@ -99,6 +99,7 @@
         
         // Necessary for SWRevealViewController - Menu View.
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+        [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];
         
         
         UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"hamburger.png"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
