@@ -96,17 +96,19 @@
                                                    object:nil];
         
         /* Note, the notification center is intentially left unremoved from this view in viewWillDisappear - for the cases that a photo is deleted when the user is outside this application */
-        
-        // Necessary for SWRevealViewController - Menu View.
-        [self.navigationController.navigationBar addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-        
-        
+
         UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"hamburger.png"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
         UIBarButtonItem *multitagButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Stickielogo.png"] style:UIBarButtonItemStylePlain target:self action:@selector(multiToggle:)];
         UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(useCamera)];
         [self.navigationItem setLeftBarButtonItem:menuButton];
         [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:multitagButton, cameraButton, nil]];
     }
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    // Necessary for SWRevealViewController - Menu View.
+    [self.navigationController.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
 }
 
 - (void) applicationWillEnterForeground:(NSNotification *) notification
@@ -929,6 +931,11 @@ finishedSavingWithError:(NSError *)error
         [alert show];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController.view removeGestureRecognizer:self.revealViewController.panGestureRecognizer];
 }
 
 
