@@ -155,32 +155,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                     </view>
-                    <navigationItem key="navigationItem" title="stickie" id="uyL-ej-GPD">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="0Ma-hi-8nK">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ga5-JI-haJ">
-                                <rect key="frame" x="16" y="4" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="17"/>
-                                <state key="normal" title="Search" image="SearchStickie_222x222.png"/>
-                                <connections>
-                                    <action selector="tapForTutorial:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ET2-Kt-jbc"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" id="rED-uW-Iah">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="53N-NE-0rf">
-                                <rect key="frame" x="267" y="7" width="37" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="Button" image="App - camera icon (3-8-2014).png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="takePhotoButtonTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="UFq-mg-4AJ"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="uyL-ej-GPD"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="botLeftCorner" destination="y0n-mJ-YeQ" id="h7R-nD-Sv1"/>
@@ -189,7 +164,6 @@
                         <outlet property="botRightLabel" destination="IGM-6F-hVZ" id="jxz-Wq-o12"/>
                         <outlet property="collectionView" destination="InS-wl-dcP" id="CrP-He-TVc"/>
                         <outlet property="dNewImageView" destination="owN-vc-Jt0" id="1cr-pa-KFG"/>
-                        <outlet property="revealButtonItem" destination="ga5-JI-haJ" id="cOy-mu-zwk"/>
                         <outlet property="topLeftCorner" destination="ida-78-yow" id="fSk-5O-RwC"/>
                         <outlet property="topLeftLabel" destination="d0k-6x-Qhh" id="Z1P-67-vJ0"/>
                         <outlet property="topRightCorner" destination="nzz-3R-C1g" id="9c5-DS-NQS"/>
@@ -574,7 +548,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TapCell" textLabel="iph-X4-KDL" rowHeight="50" style="IBUITableViewCellStyleDefault" id="Z4P-0a-hMt">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TapCell" textLabel="iph-X4-KDL" rowHeight="50" style="IBUITableViewCellStyleDefault" id="Z4P-0a-hMt" customClass="SKTableViewImageCell">
                                 <rect key="frame" x="0.0" y="72" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z4P-0a-hMt" id="407-Ys-Bf5">
@@ -723,7 +697,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="App - camera icon (3-8-2014).png" width="795" height="639"/>
         <image name="AutoSquare.png" width="128" height="128"/>
         <image name="CircleBlue.png" width="128" height="128"/>
         <image name="CircleGreen.png" width="128" height="128"/>
@@ -733,7 +706,6 @@
         <image name="CornerOrange.png" width="128" height="128"/>
         <image name="CornerRed.png" width="128" height="128"/>
         <image name="Half circle new.png" width="619" height="185"/>
-        <image name="SearchStickie_222x222.png" width="222" height="222"/>
         <image name="tutButton.png" width="419" height="203"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

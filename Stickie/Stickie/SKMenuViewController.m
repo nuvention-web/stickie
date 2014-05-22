@@ -31,6 +31,7 @@ typedef enum {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    [self.tableView setSeparatorInset:UIEdgeInsetsZero]; // Stupid iOS7 - Necessary for imageView in tableviewcells.
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,10 +52,10 @@ typedef enum {
 {
     switch (section) {
         case SKMenuSectionSettings:
-            return 3;
+            return 2;
             break;
         case SKMenuSectionOptions:
-            return 4;
+            return 3;
             break;
         case SKMenuSectionFeedback:
             return 2;
@@ -68,6 +69,7 @@ typedef enum {
 {
     UITableViewCell *cell;
     UISwitch *theSwitch;
+
     
     switch ([indexPath section]) {
         case SKMenuSectionSettings:
@@ -76,25 +78,19 @@ typedef enum {
             theSwitch.transform = CGAffineTransformMakeScale(0.85, 0.85);
             [cell.contentView addSubview:theSwitch];
             if ([indexPath row] == 0) {
-                cell.textLabel.text = @"Photostream Media";
+                cell.textLabel.text = @"Sync Photo Stream";
             }
             else if ([indexPath row] == 1) {
                 cell.textLabel.text = @"InstaLikes+";
             }
-            else if ([indexPath row] ==2) {
-                cell.textLabel.text = @"Quick MultiTag";
-            }
             break;
         case SKMenuSectionOptions:
             cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
-            if ([indexPath row] == 0) {
-                cell.textLabel.text = @"MultiTag";
-            }
-            else if ([indexPath row] == 1) {
-                cell.textLabel.text = @"Show Tutorial";
+            if ([indexPath row] == 1) {
+                cell.textLabel.text = @"Tutorial";
             }
             else if ([indexPath row] == 2) {
-                cell.textLabel.text = @"About Stickie";
+                cell.textLabel.text = @"About Us";
             }
             else if ([indexPath row] == 3) {
                 cell.textLabel.text = @"FAQ";
@@ -103,7 +99,7 @@ typedef enum {
         case SKMenuSectionFeedback:
             cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
             if ([indexPath row] == 0) {
-                cell.textLabel.text = @"Tell Us How We're Doing!";
+                cell.textLabel.text = @"Email CEO";
             }
             else {
                 cell.textLabel.text = @"Rate Stickie";

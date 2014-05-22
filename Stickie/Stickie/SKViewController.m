@@ -22,7 +22,7 @@
 #import "SWRevealViewController.h"
 
 
-@interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
+@interface SKViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
 {
     SKPhotoCell *dCell;
     NSIndexPath *dIndexPath;
@@ -96,6 +96,12 @@
         
         // Necessary for SWRevealViewController - Menu View.
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+        
+//        UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Reveal-icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
+//        UIBarButtonItem *multitagButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Stickielogo.png"] style:UIBarButtonItemStylePlain target:self action:nil];
+//        UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(useCamera)];
+//        [self.navigationItem setLeftBarButtonItem:menuButton];
+//        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:multitagButton, cameraButton, nil]];
     }
 }
 
@@ -103,6 +109,11 @@
 {
     /* Reload view so user changes are recognized */
     [self loadImageAssets];
+}
+
+- (void)toggleMenu
+{
+    [self.revealViewController revealToggleAnimated:YES];
 }
 
 #pragma mark - Tutorial Page View Controller Data Source
@@ -542,9 +553,9 @@
 
 #pragma mark Camera Methods
 /* Take photo. */
-- (IBAction)takePhotoButtonTapped:(id)sender {
-    [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.3];
-}
+//- (IBAction)takePhotoButtonTapped:(id)sender {
+//    [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.3];
+//}
 
 /* Setup for image picker. */
 - (void)useCamera{
