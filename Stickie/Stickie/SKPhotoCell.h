@@ -16,6 +16,7 @@
 @property (nonatomic) NSString* topRightCorner;
 @property (nonatomic) NSString* botLeftCorner;
 @property (nonatomic) NSString* botRightCorner;
+@property (nonatomic) NSMutableArray* selectedAsset;
 
 
 @end

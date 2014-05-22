@@ -7,7 +7,6 @@
 //
 
 #import "SKTagCollection.h"
-
 @interface SKTagCollection () {
     
     NSMutableArray *allUserTags;
@@ -83,7 +82,7 @@
     }
 }
 
--(void) updateCollectionWithTag:(SKImageTag *)tag forImageURL: (NSURL *) url
+- (void) updateCollectionWithTag:(SKImageTag *)tag forImageURL: (NSURL *) url
 {
     if ([allUserTags containsObject:tag]) {
         SKTagData *currentData = [tagDataMap objectForKey:tag];
@@ -94,6 +93,24 @@
         else {
             [NSException raise:@"Repeated asset URL" format:@"URL %@ is already associated with tag %@.",
                 [url absoluteString], tag.tagName];
+        }
+    }
+    else {
+        [NSException raise:@"Missing tag." format:@"Tag %@ is not yet in collection.", tag.tagName];
+    }
+}
+
+- (void) updateCollectionWithTag:(SKImageTag *)tag forMultipleAssets: (NSArray *) urls
+{
+    SKTagData *currentData;
+    if ([allUserTags containsObject:tag]) {
+        for (ALAsset* asset in urls) {
+            NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
+            currentData = [tagDataMap objectForKey:tag];
+            if (![currentData.imageURLs containsObject:url]) {
+                currentData.tagFrequencyInPhotos++;
+                [currentData.imageURLs addObject:url];
+            }
         }
     }
     else {
@@ -133,6 +150,19 @@
     }
     else {
         [NSException raise:@"URL Not Found." format:@"URL %@ is not associated with tag %@.", [url absoluteString], tag.tagName];
+    }
+}
+
+- (void) removeMultipleAssets: (NSArray *) urls forTag: (SKImageTag *) tag
+{
+    SKTagData *tagData = [tagDataMap objectForKey:tag];
+    for (ALAsset* asset in urls) {
+        NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
+        if ([tagData.imageURLs containsObject:url]) {
+            [tagData.imageURLs removeObject:url];
+            tagData.tagFrequencyInPhotos--;
+            [tagDataMap setObject:tagData forKey:tag];
+        }
     }
 }
 
