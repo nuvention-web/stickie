@@ -71,7 +71,6 @@
 		14A30C0E18D4055B008212CD /* Half circle new.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A30C0D18D4055B008212CD /* Half circle new.png */; };
 		14A38A5519037661002AF61B /* page5.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A38A4F19037661002AF61B /* page5.png */; };
 		14A38A5619037661002AF61B /* tutButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A38A5019037661002AF61B /* tutButton.png */; };
-		14A497BE18CD311D00AD43FC /* SearchStickie_222x222.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A497BD18CD311D00AD43FC /* SearchStickie_222x222.png */; };
 		14AC7882191C3DE3009112DF /* AutoSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 14AC7881191C3DE3009112DF /* AutoSquare.png */; };
 		14B0C7A018A2EFA4008B65C3 /* SKTagCollectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */; };
 		14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */; };
@@ -190,7 +189,6 @@
 		14A30C0D18D4055B008212CD /* Half circle new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Half circle new.png"; sourceTree = "<group>"; };
 		14A38A4F19037661002AF61B /* page5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page5.png; sourceTree = "<group>"; };
 		14A38A5019037661002AF61B /* tutButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutButton.png; sourceTree = "<group>"; };
-		14A497BD18CD311D00AD43FC /* SearchStickie_222x222.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchStickie_222x222.png; sourceTree = "<group>"; };
 		14AC7881191C3DE3009112DF /* AutoSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AutoSquare.png; sourceTree = "<group>"; };
 		14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagCollectionTest.m; sourceTree = "<group>"; };
 		14B0C7A618A30B43008B65C3 /* SKTagSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagSearchViewController.h; sourceTree = "<group>"; };
@@ -480,7 +478,6 @@
 				1493FA811910673500364B8F /* RetrievalGreen.png */,
 				1493FA821910673500364B8F /* RetrievalOrange.png */,
 				1493FA831910673500364B8F /* RetrievalRed.png */,
-				14A497BD18CD311D00AD43FC /* SearchStickie_222x222.png */,
 				EC6D06A419143E9D00F04708 /* smfacebook.png */,
 				EC6D06A519143E9D00F04708 /* sminstagram.png */,
 				EC6D06A619143E9D00F04708 /* smmail.png */,
@@ -622,7 +619,6 @@
 				1493FA841910673500364B8F /* RetrievalBlue.png in Resources */,
 				149EEAF2191975FC0057385F /* CircleBlue.png in Resources */,
 				149FD0921904778200189B18 /* page3.png in Resources */,
-				14A497BE18CD311D00AD43FC /* SearchStickie_222x222.png in Resources */,
 				14A1FB5E19241AF600CE33A6 /* insta_love.png in Resources */,
 				14A1FB5819241AF600CE33A6 /* insta_fashion.png in Resources */,
 				149E0354190096DC00AE444C /* Cloud.png in Resources */,
