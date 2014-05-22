@@ -45,10 +45,10 @@
 - (IBAction)done:(id)sender
 {
     if ([_tagTextField.text isEqualToString:@""]) {
-        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text forLocation:_location andDelete:YES andDidTagImageURL:nil];
+        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text forLocation:_location andDelete:YES andDidTagImageURL:nil forAssets:nil];
     }
     else {
-        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text forLocation:_location andDelete:NO andDidTagImageURL:_tagImageURL];
+        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text forLocation:_location andDelete:NO andDidTagImageURL:_tagImageURL forAssets:_assets];
     }
 }
 
@@ -79,7 +79,7 @@
                                                               action:@"delete_tag"  // Event action (required)
                                                                label:nil         // Event label
                                                                value:nil] build]];    // Event value
-        [self.delegate tagAssignViewController:self didAddTag:@"" forLocation:_location andDelete:YES andDidTagImageURL:nil];
+        [self.delegate tagAssignViewController:self didAddTag:@"" forLocation:_location andDelete:YES andDidTagImageURL:nil forAssets:nil];
     }
 }
 @end

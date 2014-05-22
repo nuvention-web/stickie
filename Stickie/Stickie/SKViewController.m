@@ -65,6 +65,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"wasLaunchedBefore"];
         close = YES;
         [self loadTutorial];
+        [self viewDidAppear:NO];
     }
     else {
         close = NO;
@@ -353,7 +354,7 @@
 - (void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
     int DISTANCE_ABOVE_FINGER = 30;
     int BORDER_SIZE = 1.0;
-    int CORNER_RADIUS = 3.0;
+    int CORNER_RADIUS = 157.0/3.0;
     UIColor *borderColor = [UIColor colorWithRed:166.0/255.0 green:169.0/255.0 blue:172.0/255.0 alpha:1.0];
     
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
@@ -367,9 +368,49 @@
             }
             /* Loading data into draggable thumbnail image. */
             else {
-                dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
-                dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
-                [dCell.asset valueForProperty:ALAssetPropertyURLs];
+                if (multi && [selected count] > 1){
+                    CGImageRef leftRef;
+                    CGImageRef rightRef;
+                    CGImageRef topRightRef;
+                    CGImageRef botRightRef;
+                    CGImageRef topLeftRef;
+                    CGImageRef botLeftRef;
+                    switch ([selected count]) {
+                        case 2:
+                            UIGraphicsBeginImageContext(_dNewImageView.frame.size);
+                            leftRef = CGImageCreateWithImageInRect([selected[0] thumbnail], CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height));
+                            rightRef = CGImageCreateWithImageInRect([selected[1] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height));
+                            [[UIImage imageWithCGImage:leftRef] drawInRect:CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height)];
+                            [[UIImage imageWithCGImage:rightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height)];
+                            break;
+                        case 3:
+                            UIGraphicsBeginImageContext(_dNewImageView.frame.size);
+                            leftRef = CGImageCreateWithImageInRect([selected[0] thumbnail], CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height));
+                            topRightRef = CGImageCreateWithImageInRect([selected[1] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            botRightRef = CGImageCreateWithImageInRect([selected[2] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            [[UIImage imageWithCGImage:leftRef] drawInRect:CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height)];
+                            [[UIImage imageWithCGImage:topRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:botRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            break;
+                        default:
+                            UIGraphicsBeginImageContext(_dNewImageView.frame.size);
+                            topLeftRef = CGImageCreateWithImageInRect([selected[0] thumbnail], CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            topRightRef = CGImageCreateWithImageInRect([selected[1] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            botLeftRef = CGImageCreateWithImageInRect([selected[2] thumbnail], CGRectMake(0,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            botRightRef = CGImageCreateWithImageInRect([selected[3] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            [[UIImage imageWithCGImage:topLeftRef] drawInRect:CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:topRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:botLeftRef] drawInRect:CGRectMake(0,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:botRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            break;
+                    }
+                    dImage = UIGraphicsGetImageFromCurrentImageContext();
+                    UIGraphicsEndImageContext();
+                }
+                else {
+                    dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
+                    dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
+                }
                 anotherPoint.y -= DISTANCE_ABOVE_FINGER;
                 [_dNewImageView setCenter:anotherPoint];
                 [_dNewImageView setHidden:NO];
@@ -378,7 +419,7 @@
                 [_dNewImageView addGestureRecognizer:gestureRecognizer];
                 [_dNewImageView.layer setBorderColor: [borderColor CGColor]];
                 [_dNewImageView.layer setBorderWidth: BORDER_SIZE];
-                _dNewImageView.layer.cornerRadius = dImage.size.width / CORNER_RADIUS;
+                _dNewImageView.layer.cornerRadius = CORNER_RADIUS;
                 _dNewImageView.layer.masksToBounds = YES;
             }
             break;
@@ -720,13 +761,9 @@ finishedSavingWithError:(NSError *)error
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_topLeftLabel.text isEqualToString:@""]) {
-            tagAssignViewController.createTag = YES;
-            if (currentURL) {
+                tagAssignViewController.createTag = YES;
                 tagAssignViewController.tagImageURL = currentURL;
-            }
-            else {
-                tagAssignViewController.tagImageURL = nil;
-            }
+                tagAssignViewController.assets = selected;
         }
         currentURL = nil;
         tagAssignViewController.location = SKCornerLocationTopLeft;
@@ -739,12 +776,8 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_topRightLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
-            if (currentURL) {
-                tagAssignViewController.tagImageURL = currentURL;
-            }
-            else {
-                tagAssignViewController.tagImageURL = nil;
-            }
+            tagAssignViewController.tagImageURL = currentURL;
+            tagAssignViewController.assets = selected;
         }
         currentURL = nil;
         tagAssignViewController.location = SKCornerLocationTopRight;
@@ -758,12 +791,8 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_botLeftLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
-            if (currentURL) {
-                tagAssignViewController.tagImageURL = currentURL;
-            }
-            else {
-                tagAssignViewController.tagImageURL = nil;
-            }
+            tagAssignViewController.tagImageURL = currentURL;
+            tagAssignViewController.assets = selected;
         }
         currentURL = nil;
         tagAssignViewController.location = SKCornerLocationBottomLeft;
@@ -776,12 +805,8 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_botRightLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
-            if (currentURL) {
-                tagAssignViewController.tagImageURL = currentURL;
-            }
-            else {
-                tagAssignViewController.tagImageURL = nil;
-            }
+            tagAssignViewController.tagImageURL = currentURL;
+            tagAssignViewController.assets = selected;
         }
         currentURL = nil;
         tagAssignViewController.location = SKCornerLocationBottomRight;
@@ -807,7 +832,7 @@ finishedSavingWithError:(NSError *)error
 }
 
 /* Edit or delete tags from SKTagAssignViewController. */
-- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR forLocation:(SKCornerLocation) cornerLocation andDelete:(BOOL)delete andDidTagImageURL:(NSURL *)assetURL
+- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR forLocation:(SKCornerLocation) cornerLocation andDelete:(BOOL)delete andDidTagImageURL:(NSURL *)assetURL forAssets:(NSArray *)assets
 {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKImageTag *tag = [[SKImageTag alloc] initWithName:tagSTR location:cornerLocation andColor:nil];
@@ -854,7 +879,12 @@ finishedSavingWithError:(NSError *)error
             [tagCollection removeTag:oldTag];
             _botRightLabel.text = tagSTR;
         }
-        if (assetURL && ![tag.tagName isEqualToString:@""]) {
+        if ([assets count] > 0 && ![tag.tagName isEqualToString:@""]) {
+            [urlTagsMap addTag:tag forMultipleAssets:assets];
+            [tagCollection updateCollectionWithTag:tag forMultipleAssets:assets];
+            [_collectionView reloadData];
+        }
+        else if (assetURL && ![tag.tagName isEqualToString:@""]) {
             if (tag && ![urlTagsMap doesURL:assetURL haveTag:tag]) {
                 [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                       action:@"image_tag"  // Event action (required)

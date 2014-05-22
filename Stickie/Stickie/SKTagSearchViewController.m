@@ -285,7 +285,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             else {
                 dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
                 dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
-                [dCell.asset valueForProperty:ALAssetPropertyURLs];
                 anotherPoint.y -= DISTANCE_ABOVE_FINGER;
                 [_dNewImageView setCenter:anotherPoint];
                 [_dNewImageView setHidden:NO];
