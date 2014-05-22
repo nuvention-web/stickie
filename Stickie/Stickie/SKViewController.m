@@ -97,11 +97,12 @@
         // Necessary for SWRevealViewController - Menu View.
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
         
-//        UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Reveal-icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
-//        UIBarButtonItem *multitagButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Stickielogo.png"] style:UIBarButtonItemStylePlain target:self action:nil];
-//        UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(useCamera)];
-//        [self.navigationItem setLeftBarButtonItem:menuButton];
-//        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:multitagButton, cameraButton, nil]];
+        
+        UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"hamburger.png"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
+        UIBarButtonItem *multitagButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Stickielogo.png"] style:UIBarButtonItemStylePlain target:self action:nil];
+        UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(useCamera)];
+        [self.navigationItem setLeftBarButtonItem:menuButton];
+        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:multitagButton, cameraButton, nil]];
     }
 }
 
