@@ -51,10 +51,10 @@ typedef enum {
 {
     switch (section) {
         case SKMenuSectionSettings:
-            return 2;
+            return 3;
             break;
         case SKMenuSectionOptions:
-            return 3;
+            return 4;
             break;
         case SKMenuSectionFeedback:
             return 2;
@@ -81,26 +81,32 @@ typedef enum {
             else if ([indexPath row] == 1) {
                 cell.textLabel.text = @"InstaLikes+";
             }
+            else if ([indexPath row] ==2) {
+                cell.textLabel.text = @"Quick MultiTag";
+            }
             break;
         case SKMenuSectionOptions:
             cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
             if ([indexPath row] == 0) {
+                cell.textLabel.text = @"MultiTag";
+            }
+            else if ([indexPath row] == 1) {
                 cell.textLabel.text = @"Show Tutorial";
             }
-            else if ([indexPath row] ==1) {
-                cell.textLabel.text = @"Show Commerical";
+            else if ([indexPath row] == 2) {
+                cell.textLabel.text = @"About Stickie";
             }
-            else {
+            else if ([indexPath row] == 3) {
                 cell.textLabel.text = @"FAQ";
             }
             break;
         case SKMenuSectionFeedback:
             cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
             if ([indexPath row] == 0) {
-                cell.textLabel.text = @"Leave Feedback";
+                cell.textLabel.text = @"Tell Us How We're Doing!";
             }
             else {
-                cell.textLabel.text = @"Rate Us!";
+                cell.textLabel.text = @"Rate Stickie";
             }
             break;
     }
