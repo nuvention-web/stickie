@@ -102,7 +102,7 @@
         
         
         UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"hamburger.png"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
-        UIBarButtonItem *multitagButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Stickielogo.png"] style:UIBarButtonItemStylePlain target:self action:nil];
+        UIBarButtonItem *multitagButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Stickielogo.png"] style:UIBarButtonItemStylePlain target:self action:@selector(multiToggle:)];
         UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(useCamera)];
         [self.navigationItem setLeftBarButtonItem:menuButton];
         [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:multitagButton, cameraButton, nil]];
@@ -466,7 +466,7 @@
 }
 #pragma mark - Multi Select
 
-- (IBAction)multiToggle:(id)sender {
+- (void)multiToggle:(id)sender {
     if (multi) {
         multi = NO;
         [selected removeAllObjects];
