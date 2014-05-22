@@ -121,6 +121,12 @@
     }
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    // Necessary for SWRevealViewController - Menu View.
+    [self.navigationController.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+}
+
 - (void) applicationWillEnterForeground:(NSNotification *) notification
 {
     /* Reload view so user changes are recognized */
@@ -941,6 +947,11 @@ finishedSavingWithError:(NSError *)error
         [alert show];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController.view removeGestureRecognizer:self.revealViewController.panGestureRecognizer];
 }
 
 

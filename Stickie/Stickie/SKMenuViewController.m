@@ -86,13 +86,13 @@ typedef enum {
             break;
         case SKMenuSectionOptions:
             cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
-            if ([indexPath row] == 1) {
+            if ([indexPath row] == 0) {
                 cell.textLabel.text = @"Tutorial";
             }
-            else if ([indexPath row] == 2) {
+            else if ([indexPath row] == 1) {
                 cell.textLabel.text = @"About Us";
             }
-            else if ([indexPath row] == 3) {
+            else if ([indexPath row] == 2) {
                 cell.textLabel.text = @"FAQ";
             }
             break;
