@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1402253718FDB8100058F68C /* SKTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1402253618FDB8100058F68C /* SKTutorialViewController.m */; };
+		143C8691192EC5640022B1E1 /* stickie.png in Resources */ = {isa = PBXBuildFile; fileRef = 143C8690192EC5640022B1E1 /* stickie.png */; };
+		143C8693192EC8010022B1E1 /* stickieon.png in Resources */ = {isa = PBXBuildFile; fileRef = 143C8692192EC8010022B1E1 /* stickieon.png */; };
 		14540B8618C3FDA5004185F7 /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14540B8418C3FDA5004185F7 /* libAdIdAccess.a */; };
 		14540B8718C3FDA5004185F7 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14540B8518C3FDA5004185F7 /* libGoogleAnalyticsServices.a */; };
 		1493FA841910673500364B8F /* RetrievalBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 1493FA801910673500364B8F /* RetrievalBlue.png */; };
@@ -82,7 +84,6 @@
 		938F1EE1192EAB31000D6ABE /* SKTableViewImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 938F1EE0192EAB31000D6ABE /* SKTableViewImageCell.m */; };
 		938F1EE3192EAED3000D6ABE /* hamburger.png in Resources */ = {isa = PBXBuildFile; fileRef = 938F1EE2192EAED3000D6ABE /* hamburger.png */; };
 		938F1EE5192EAF41000D6ABE /* Home icon 120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 938F1EE4192EAF41000D6ABE /* Home icon 120x120.png */; };
-		938F1EE7192EB812000D6ABE /* Stickielogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 938F1EE6192EB812000D6ABE /* Stickielogo.png */; };
 		93E82086189828F100877D38 /* SKAssetURLTagsMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E8207E189828F100877D38 /* SKAssetURLTagsMap.m */; };
 		93E82087189828F100877D38 /* SKImageTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82080189828F100877D38 /* SKImageTag.m */; };
 		93E82088189828F100877D38 /* SKTagCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E82082189828F100877D38 /* SKTagCollection.m */; };
@@ -111,6 +112,8 @@
 /* Begin PBXFileReference section */
 		1402253518FDB8100058F68C /* SKTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTutorialViewController.h; sourceTree = "<group>"; };
 		1402253618FDB8100058F68C /* SKTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTutorialViewController.m; sourceTree = "<group>"; };
+		143C8690192EC5640022B1E1 /* stickie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stickie.png; sourceTree = "<group>"; };
+		143C8692192EC8010022B1E1 /* stickieon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stickieon.png; sourceTree = "<group>"; };
 		14540B7E18C3FDA5004185F7 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		14540B7F18C3FDA5004185F7 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
 		14540B8018C3FDA5004185F7 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
@@ -204,7 +207,6 @@
 		938F1EE0192EAB31000D6ABE /* SKTableViewImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKTableViewImageCell.m; path = ../Images/SKTableViewImageCell.m; sourceTree = "<group>"; };
 		938F1EE2192EAED3000D6ABE /* hamburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburger.png; sourceTree = "<group>"; };
 		938F1EE4192EAF41000D6ABE /* Home icon 120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Home icon 120x120.png"; sourceTree = "<group>"; };
-		938F1EE6192EB812000D6ABE /* Stickielogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stickielogo.png; sourceTree = "<group>"; };
 		93E8207D189828F100877D38 /* SKAssetURLTagsMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKAssetURLTagsMap.h; sourceTree = "<group>"; };
 		93E8207E189828F100877D38 /* SKAssetURLTagsMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKAssetURLTagsMap.m; sourceTree = "<group>"; };
 		93E8207F189828F100877D38 /* SKImageTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKImageTag.h; sourceTree = "<group>"; };
@@ -438,11 +440,26 @@
 		9385097018CD2EA1001AE7DC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				143C8692192EC8010022B1E1 /* stickieon.png */,
+				143C8690192EC5640022B1E1 /* stickie.png */,
+				14AC7881191C3DE3009112DF /* AutoSquare.png */,
+				9385097118CD2EA1001AE7DC /* camera.png */,
+				149EEAEE191975FC0057385F /* CircleBlue.png */,
+				149EEAEF191975FC0057385F /* CircleGreen.png */,
+				149EEAF0191975FC0057385F /* CircleOrange.png */,
+				149EEAF1191975FC0057385F /* CircleRed.png */,
+				149E0353190096DC00AE444C /* Cloud.png */,
+				149EEAF6191976160057385F /* CornerBlue.png */,
+				149EEAF7191976160057385F /* CornerGreen.png */,
+				149EEAF8191976160057385F /* CornerOrange.png */,
+				149EEAF9191976160057385F /* CornerRed.png */,
+				14A30C0D18D4055B008212CD /* Half circle new.png */,
+				938F1EE2192EAED3000D6ABE /* hamburger.png */,
+				938F1EE4192EAF41000D6ABE /* Home icon 120x120.png */,
 				14A1FB4619241AF600CE33A6 /* insta_custom1.png */,
 				14A1FB4719241AF600CE33A6 /* insta_custom2.png */,
 				14A1FB4819241AF600CE33A6 /* insta_fashion.png */,
 				14A1FB4919241AF600CE33A6 /* insta_fitness.png */,
-				938F1EE4192EAF41000D6ABE /* Home icon 120x120.png */,
 				14A1FB4A19241AF600CE33A6 /* insta_food.png */,
 				14A1FB4B19241AF600CE33A6 /* insta_friends.png */,
 				14A1FB4C19241AF600CE33A6 /* insta_getmorefollows.png */,
@@ -455,20 +472,6 @@
 				14A1FB5319241AF600CE33A6 /* insta_pets.png */,
 				14A1FB5419241AF600CE33A6 /* insta_photography.png */,
 				14A1FB5519241AF600CE33A6 /* insta_selfies.png */,
-				9385097118CD2EA1001AE7DC /* camera.png */,
-				14AC7881191C3DE3009112DF /* AutoSquare.png */,
-				149EEAEE191975FC0057385F /* CircleBlue.png */,
-				149EEAEF191975FC0057385F /* CircleGreen.png */,
-				149EEAF0191975FC0057385F /* CircleOrange.png */,
-				149EEAF1191975FC0057385F /* CircleRed.png */,
-				938F1EE2192EAED3000D6ABE /* hamburger.png */,
-				149E0353190096DC00AE444C /* Cloud.png */,
-				149EEAF6191976160057385F /* CornerBlue.png */,
-				938F1EE6192EB812000D6ABE /* Stickielogo.png */,
-				149EEAF7191976160057385F /* CornerGreen.png */,
-				149EEAF8191976160057385F /* CornerOrange.png */,
-				149EEAF9191976160057385F /* CornerRed.png */,
-				14A30C0D18D4055B008212CD /* Half circle new.png */,
 				149FD08C1904778200189B18 /* page1.png */,
 				149FD08D1904778200189B18 /* page2.png */,
 				149FD08E1904778200189B18 /* page3.png */,
@@ -572,6 +575,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC6D06AB19143E9D00F04708 /* sminstagram.png in Resources */,
+				143C8693192EC8010022B1E1 /* stickieon.png in Resources */,
 				938F1EE3192EAED3000D6ABE /* hamburger.png in Resources */,
 				938F1EE5192EAF41000D6ABE /* Home icon 120x120.png in Resources */,
 				149EEAFC191976160057385F /* CornerOrange.png in Resources */,
@@ -601,8 +605,8 @@
 				14A1FB6019241AF600CE33A6 /* insta_memes.png in Resources */,
 				14A1FB5F19241AF600CE33A6 /* insta_makeup.png in Resources */,
 				14A1FB6419241AF600CE33A6 /* insta_photography.png in Resources */,
+				143C8691192EC5640022B1E1 /* stickie.png in Resources */,
 				149EEAFB191976160057385F /* CornerGreen.png in Resources */,
-				938F1EE7192EB812000D6ABE /* Stickielogo.png in Resources */,
 				14AC7882191C3DE3009112DF /* AutoSquare.png in Resources */,
 				14A1FB6319241AF600CE33A6 /* insta_pets.png in Resources */,
 				14A1FB5A19241AF600CE33A6 /* insta_food.png in Resources */,
