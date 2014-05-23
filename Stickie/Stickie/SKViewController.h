@@ -11,8 +11,9 @@
 #import "GAITrackedViewController.h"
 #import "SKLongPressButton.h"
 #import "SKTutorialViewController.h"
+#import "SKMenuViewController.h"
 
-@interface SKViewController : GAITrackedViewController <UIPageViewControllerDataSource, SKTagAssignViewControllerDelegate>
+@interface SKViewController : GAITrackedViewController <UIPageViewControllerDataSource, SKTagAssignViewControllerDelegate, SKMenuViewControllerDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (strong, nonatomic) NSArray *pageImages;

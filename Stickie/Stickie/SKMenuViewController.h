@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@class  SKMenuViewController;
+
+@protocol SKMenuViewControllerDelegate <NSObject>
+- (void)loadExtTutorial:(SKMenuViewController*)controller;
+@end
 
 @interface SKMenuViewController : UITableViewController
+@property (nonatomic, weak) id <SKMenuViewControllerDelegate> delegate;
 
 @end

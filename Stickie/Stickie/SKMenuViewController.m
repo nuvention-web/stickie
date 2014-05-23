@@ -10,7 +10,8 @@
 #import "SWRevealViewController.h"
 #import "SKViewController.h"
 
-@interface SKMenuViewController ()
+
+@interface SKMenuViewController () <MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) UISwitch* photostreamSwitch;
 @property (nonatomic, strong) UISwitch* instalikesSwitch;
@@ -58,7 +59,7 @@ typedef enum {
             return 2;
             break;
         case SKMenuSectionOptions:
-            return 3;
+            return 2;
             break;
         case SKMenuSectionFeedback:
             return 2;
@@ -97,9 +98,9 @@ typedef enum {
             else if ([indexPath row] == 1) {
                 cell.textLabel.text = @"About Us";
             }
-            else if ([indexPath row] == 2) {
-                cell.textLabel.text = @"FAQ";
-            }
+//            else if ([indexPath row] == 2) {
+//                cell.textLabel.text = @"FAQ";
+//            }
             break;
         case SKMenuSectionFeedback:
             cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
@@ -113,6 +114,76 @@ typedef enum {
     }
     
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell;
+    switch ([indexPath section]) {
+        case SKMenuSectionOptions:
+            cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
+            if ([indexPath row] == 0) {
+                [self.delegate loadExtTutorial:self];
+                NSLog(@"TUT");
+            }
+            else if ([indexPath row] == 1) {
+                cell.textLabel.text = @"About Us";
+            }
+//            else if ([indexPath row] == 2) {
+//                cell.textLabel.text = @"FAQ";
+//            }
+            break;
+        case SKMenuSectionFeedback:
+            cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
+            if ([indexPath row] == 0) {
+                if ([MFMailComposeViewController canSendMail]) {
+                    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+                    mc.mailComposeDelegate = self;
+                    [mc setSubject:@"Stickie Feedback"];
+                    [mc setToRecipients:[NSArray arrayWithObject:@"info@stickiepic.com"]];
+
+                    [self presentViewController:mc animated:YES completion:NULL];
+                    
+                }
+                else {
+                    UIAlertView *alert = [[UIAlertView alloc]
+                                          initWithTitle: @"Mail Not Setup"
+                                          message: @"Set up mail on your device to continue."
+                                          delegate: self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+                    
+                    [alert show];
+                }
+
+            }
+            else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/stickiepic/id853858851?mt=8"]];
+            }
+            break;
+    }
+    
+}
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
