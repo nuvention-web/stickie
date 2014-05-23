@@ -20,6 +20,7 @@
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
 #import "SWRevealViewController.h"
+#import "SKMenuViewController.h"
 
 
 @interface SKViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
@@ -885,10 +886,17 @@ finishedSavingWithError:(NSError *)error
 }
 
 #pragma mark Tag Assign Delegate Methods
+-(void)loadExtTutorial:(SKMenuViewController*)controller
+{
+    NSLog(@"tutut");
+    //    [self loadTutorial];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 - (void)tagAssignViewControllerDidCancel:(SKTagAssignViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 /* Edit or delete tags from SKTagAssignViewController. */
 - (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR forLocation:(SKCornerLocation) cornerLocation andDelete:(BOOL)delete andDidTagImageURL:(NSURL *)assetURL forAssets:(NSArray *)assets
@@ -982,6 +990,7 @@ finishedSavingWithError:(NSError *)error
 {
     [self.navigationController.view removeGestureRecognizer:self.revealViewController.panGestureRecognizer];
 }
+
 
 
 @end
