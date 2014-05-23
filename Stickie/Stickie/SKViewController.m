@@ -33,6 +33,10 @@
     NSURL *currentURL;
     BOOL multi;
     NSMutableArray *selected;
+    UIBarButtonItem *cameraButton;
+    UIBarButtonItem *multitagButton;
+    UIImage *multiOn;
+    UIImage *multiOff;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
@@ -75,6 +79,9 @@
         [[self navigationController] setNavigationBarHidden:NO animated:YES];
         [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
+        multiOn = [UIImage imageNamed:@"stickieon.png"];        
+        multiOff = [UIImage imageNamed:@"stickie.png"];
+        
         defaultPoint = CGPointMake(50.0, 0.0);              // Sets default point for draggable ghost image.
         
         [self loadTags];
@@ -98,12 +105,28 @@
                                                    object:nil];
         
         /* Note, the notification center is intentially left unremoved from this view in viewWillDisappear - for the cases that a photo is deleted when the user is outside this application */
-
+        
+        // Necessary for SWRevealViewController - Menu View.
+        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+        [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];
+        
+        UIButton *multitagView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [multitagView addTarget:self action:@selector(multiToggle:) forControlEvents:UIControlEventTouchUpInside];
+        [multitagView setBackgroundImage:[UIImage imageNamed:@"stickie.png"]
+ forState:UIControlStateNormal];
+        multitagButton = [[UIBarButtonItem alloc] initWithCustomView:multitagView];
+        
+        UIButton *cameraView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 34, 28)];
+        [cameraView addTarget:self action:@selector(useCamera) forControlEvents:UIControlEventTouchUpInside];
+        [cameraView setBackgroundImage:[UIImage imageNamed:@"camera.png"]
+                                forState:UIControlStateNormal];
+        cameraButton = [[UIBarButtonItem alloc] initWithCustomView:cameraView];
+        
         UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"hamburger.png"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
-        UIBarButtonItem *multitagButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Stickielogo.png"] style:UIBarButtonItemStylePlain target:self action:@selector(multiToggle:)];
-        UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(useCamera)];
+//        UIBarButtonItem *multitagButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Stickielogo.png"] style:UIBarButtonItemStylePlain target:self action:@selector(multiToggle:)];
+//        UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(useCamera)];
         [self.navigationItem setLeftBarButtonItem:menuButton];
-        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:multitagButton, cameraButton, nil]];
+        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:cameraButton, multitagButton,  nil]];
     }
 }
 
@@ -306,6 +329,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     multi = NO;
     [selected removeAllObjects];
+    [self toggleMultiImage];
     /* Automatically scrolls to bottom of collection view so user will see most recent photos. */
     if (!retainScroll) {
         NSInteger section = 0;
@@ -474,9 +498,11 @@
     if (multi) {
         multi = NO;
         [selected removeAllObjects];
+        [self toggleMultiImage];
     }
     else {
         multi = YES;
+        [self toggleMultiImage];
     }
     [_collectionView reloadData];
 }
@@ -490,8 +516,25 @@
         else {
             [selected addObject:asset];
         }
+       
         [_collectionView reloadData];
     }
+}
+
+- (void) toggleMultiImage {
+    UIButton *multitagView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [multitagView addTarget:self action:@selector(multiToggle:) forControlEvents:UIControlEventTouchUpInside];
+    if (multi){
+        [multitagView setBackgroundImage:multiOn
+                                forState:UIControlStateNormal];
+    }
+    else {
+        [multitagView setBackgroundImage:multiOff
+                                forState:UIControlStateNormal];
+    }
+    multitagButton = [[UIBarButtonItem alloc] initWithCustomView:multitagView];
+    
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:cameraButton, multitagButton,  nil]];
 }
 #pragma mark Edit Tag
 - (void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer{
@@ -573,7 +616,7 @@
                 [tagCollection updateCollectionWithTag:tag forMultipleAssets:selected];
                 multi = NO;
                 [selected removeAllObjects];
-
+                [self toggleMultiImage];
             }
             else {
             /* Logic for tagging a new image - it is necessary to update both urlToTagMap and tagCollection. */
@@ -600,7 +643,7 @@
                 [tagCollection removeMultipleAssets:selected forTag:tag];
                 multi = NO;
                 [selected removeAllObjects];
-
+                [self toggleMultiImage];
             }
             else {
                 /* Logic for removing a tag from a new image - it is necessary to update both urlToTagMap and tagCollection. */
