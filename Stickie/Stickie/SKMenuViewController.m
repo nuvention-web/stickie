@@ -8,7 +8,7 @@
 
 #import "SKMenuViewController.h"
 #import "SWRevealViewController.h"
-#import "SKViewController.h"
+#import <MessageUI/MessageUI.h>
 
 
 @interface SKMenuViewController () <MFMailComposeViewControllerDelegate>
@@ -59,7 +59,7 @@ typedef enum {
             return 2;
             break;
         case SKMenuSectionOptions:
-            return 2;
+            return 3;
             break;
         case SKMenuSectionFeedback:
             return 2;
@@ -98,9 +98,9 @@ typedef enum {
             else if ([indexPath row] == 1) {
                 cell.textLabel.text = @"About Us";
             }
-//            else if ([indexPath row] == 2) {
-//                cell.textLabel.text = @"FAQ";
-//            }
+            else if ([indexPath row] == 2) {
+                cell.textLabel.text = @"FAQ";
+            }
             break;
         case SKMenuSectionFeedback:
             cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
@@ -117,19 +117,24 @@ typedef enum {
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
+    UIAlertView *comingSoonAlert = [[UIAlertView alloc] initWithTitle:@"Coming Soon!" message:@"This menu item will be coming soon. Look out for updates!" delegate:nil cancelButtonTitle:@"Got it" otherButtonTitles:nil, nil];
+    
     switch ([indexPath section]) {
         case SKMenuSectionOptions:
             cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
             if ([indexPath row] == 0) {
-                [self.delegate loadExtTutorial:self];
-                NSLog(@"TUT");
+                NSLog(@"Tutorial");
+                [comingSoonAlert show];
+//                [self.delegate loadExtTutorial:self];
             }
             else if ([indexPath row] == 1) {
                 cell.textLabel.text = @"About Us";
+                [comingSoonAlert show];
             }
-//            else if ([indexPath row] == 2) {
-//                cell.textLabel.text = @"FAQ";
-//            }
+            else if ([indexPath row] == 2) {
+                cell.textLabel.text = @"FAQ";
+                [comingSoonAlert show];
+            }
             break;
         case SKMenuSectionFeedback:
             cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
