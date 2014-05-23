@@ -11,6 +11,9 @@
 
 @interface SKMenuViewController ()
 
+@property (nonatomic, strong) UISwitch* photostreamSwitch;
+@property (nonatomic, strong) UISwitch* instalikesSwitch;
+
 @end
 
 typedef enum {
@@ -19,19 +22,18 @@ typedef enum {
 
 @implementation SKMenuViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self.tableView setSeparatorInset:UIEdgeInsetsZero]; // Stupid iOS7 - Necessary for imageView in tableviewcells.
+    _photostreamSwitch = [[UISwitch alloc] init];
+    _instalikesSwitch = [[UISwitch alloc] init];
+    
+    [_photostreamSwitch addTarget:self action:@selector(photostreamToggle:) forControlEvents:UIControlEventValueChanged];
+    
+    [_instalikesSwitch addTarget:self action:@selector(instalikesToggle:) forControlEvents:UIControlEventValueChanged];
+    
+    _instalikesSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"instalikesOn"];
+    _photostreamSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"photostreamOn"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,20 +70,25 @@ typedef enum {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    UISwitch *theSwitch;
-
+    
     
     switch ([indexPath section]) {
         case SKMenuSectionSettings:
             cell = [tableView dequeueReusableCellWithIdentifier:@"ToggleCell"];
-            theSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(cell.frame.size.width - 125.0, 10.0, 0.0, 0.0)];
-            theSwitch.transform = CGAffineTransformMakeScale(0.85, 0.85);
-            [cell.contentView addSubview:theSwitch];
+//            theSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(cell.frame.size.width - 125.0, 10.0, 0.0, 0.0)];
+//            theSwitch.transform = CGAffineTransformMakeScale(0.85, 0.85);
+//            [cell.contentView addSubview:theSwitch];
             if ([indexPath row] == 0) {
                 cell.textLabel.text = @"Sync Photo Stream";
+                _photostreamSwitch.frame = CGRectMake(cell.frame.size.width - 125.0, 10.0, 0.0, 0.0);
+                _photostreamSwitch.transform = CGAffineTransformMakeScale(0.85, 0.85);
+                [cell.contentView addSubview:_photostreamSwitch];
             }
             else if ([indexPath row] == 1) {
                 cell.textLabel.text = @"InstaLikes+";
+                _instalikesSwitch.frame = CGRectMake(cell.frame.size.width - 125.0, 10.0, 0.0, 0.0);
+                _instalikesSwitch.transform = CGAffineTransformMakeScale(0.85, 0.85);
+                [cell.contentView addSubview:_instalikesSwitch];
             }
             break;
         case SKMenuSectionOptions:
@@ -125,6 +132,16 @@ typedef enum {
         default:
             return nil;
     }
+}
+
+- (void)photostreamToggle:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] setBool:[sender isOn] forKey:@"photostreamOn"];
+}
+
+- (void)instalikesToggle:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] setBool:[sender isOn] forKey:@"instalikesOn"];
 }
 
 /*

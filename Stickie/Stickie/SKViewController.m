@@ -66,6 +66,8 @@
         close = YES;
         [self loadTutorial];
         [self viewDidAppear:NO];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"instalikesOn"]; // DEFAULT SETTINGS
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"photostreamOn"];
     }
     else {
         close = NO;

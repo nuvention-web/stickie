@@ -62,7 +62,14 @@
     }
     
     [self checkAndHandleDeletedPhotos];
-        
+    
+    // DEFAULT SWITCH SETTINGS
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"firstSwitch"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstSwitch"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"instalikesOn"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"photostreamOn"];
+    }
+    
     return YES;
 }
 							
