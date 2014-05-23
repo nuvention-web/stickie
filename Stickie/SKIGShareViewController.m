@@ -95,6 +95,7 @@ typedef enum {
         _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
     });
 }
+
 - (void)shareSkip{
     [self shareToInstaWith:@""];
 }

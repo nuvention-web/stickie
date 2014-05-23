@@ -311,7 +311,9 @@
     
     ALAssetsLibrary *assetsLibrary = [SKViewController defaultAssetsLibrary];
     
-    [assetsLibrary enumerateGroupsWithTypes:(ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary)usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+    ALAssetsGroupType group = [[NSUserDefaults standardUserDefaults] boolForKey:@"photostreamOn"] ? (ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary | ALAssetsGroupPhotoStream) : (ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary) ;
+    
+    [assetsLibrary enumerateGroupsWithTypes:group usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if(result) {
                 [tmpAssets addObject:result];

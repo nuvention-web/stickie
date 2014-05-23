@@ -8,6 +8,7 @@
 
 #import "SKMenuViewController.h"
 #import "SWRevealViewController.h"
+#import "SKViewController.h"
 
 @interface SKMenuViewController ()
 
@@ -75,9 +76,6 @@ typedef enum {
     switch ([indexPath section]) {
         case SKMenuSectionSettings:
             cell = [tableView dequeueReusableCellWithIdentifier:@"ToggleCell"];
-//            theSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(cell.frame.size.width - 125.0, 10.0, 0.0, 0.0)];
-//            theSwitch.transform = CGAffineTransformMakeScale(0.85, 0.85);
-//            [cell.contentView addSubview:theSwitch];
             if ([indexPath row] == 0) {
                 cell.textLabel.text = @"Sync Photo Stream";
                 _photostreamSwitch.frame = CGRectMake(cell.frame.size.width - 125.0, 10.0, 0.0, 0.0);
