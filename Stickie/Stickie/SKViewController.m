@@ -145,6 +145,8 @@
     [self loadImageAssets];
 }
 
+#pragma mark - Reveal View Controller Methods
+
 - (void)toggleMenu
 {
     [self.revealViewController revealToggleAnimated:YES];
@@ -154,6 +156,10 @@
 {
     if(position == FrontViewPositionLeft) {
         self.view.userInteractionEnabled = YES;
+        if (_showTutorial) {
+            [self loadTutorial];
+            _showTutorial = NO;
+        }
     } else {
         self.view.userInteractionEnabled = NO;
     }
@@ -366,7 +372,6 @@
     else {
        [self loadImageAssets]; 
     }
-
 }
 
 - (void)didReceiveMemoryWarning

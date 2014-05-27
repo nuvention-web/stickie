@@ -28,6 +28,8 @@
 @property (strong, nonatomic) IBOutlet SKLongPressButton *botLeftCorner;
 @property (strong, nonatomic) IBOutlet SKLongPressButton *botRightCorner;
 
+@property BOOL showTutorial;
+
 -(void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer;
 
 @end
