@@ -17,9 +17,11 @@
 #import "SKIGShareViewController.h"
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
+#import "SWRevealViewController.h"
 
 @interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate> {
     UIImageView *imageView;
+    dispatch_queue_t loadImageToShare;
 }
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -95,6 +97,20 @@
     
     [imageView addGestureRecognizer:leftSwipe];
     [imageView addGestureRecognizer:rightSwipe];
+    
+    loadImageToShare = dispatch_queue_create("Load Image", NULL);
+    [self loadImage];
+}
+
+- (void)loadImage
+{
+    dispatch_async(loadImageToShare, ^{
+        NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+        [UIImagePNGRepresentation(_image) writeToFile:imagePath atomically:YES];
+        //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
+        _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
+    });
 }
 
 - (void)setupScrollMenuWithButtons:(NSArray *)buttons
@@ -256,7 +272,13 @@
                                                            value:nil] build]];    // Event value
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-        [self performSegueWithIdentifier:@"instaShare" sender:self];
+        // Does user want to use instalikes?
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"instalikesOn"]) {
+            [self performSegueWithIdentifier:@"instaShare" sender:self];
+        }
+        else {
+            [self shareToInstaWith:@""];
+        }
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc]
@@ -268,6 +290,27 @@
         
         [alert show];
     }
+}
+
+- (void)shareToInstaWith: (NSString *)str
+{
+    // Setting up hashtags
+    NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @StickieApp | #stickiepic ••"];
+    NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:_imageURL]];
+    NSMutableString *customtags = [NSMutableString stringWithString:@""];
+    for (int i = 0; i < [tags count]; i++) {
+        [customtags appendString:@"#"];
+        [customtags appendString:[((SKImageTag*)tags[i]) tagName]];
+        [customtags appendString:@" "];
+    }
+    [customtags appendString:str];
+    NSString *newString = [NSString stringWithFormat:@"%@\r%@", hashtags,customtags];
+    _docFile.delegate=self;
+    _docFile.UTI = @"com.instagram.exclusivegram";
+    _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:newString,@"InstagramCaption", nil];
+    dispatch_sync(loadImageToShare, ^(void){
+        [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
+    });
 }
 
 -(UIImage*)thumbnailFromView:(UIView*)_myView{
@@ -319,16 +362,18 @@
     NSURL *whatsURL = [NSURL URLWithString:@"whatsapp://"];
     if ([[UIApplication sharedApplication] canOpenURL:whatsURL]) {
         //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
-        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
-        
-        NSString* imagePath = [NSString stringWithFormat:@"%@/image.wai", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
-        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
-        [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
+//        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
+//        
+//        NSString* imagePath = [NSString stringWithFormat:@"%@/image.wai", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+//        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+//        [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
         //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
-        _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
+//        _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
         _docFile.delegate=self;
         _docFile.UTI = @"net.whatsapp.image";
-        [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
+        dispatch_sync(loadImageToShare, ^(void){
+            [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
+        });
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc]
@@ -356,10 +401,9 @@
         mc.mailComposeDelegate = self;
         [mc setMessageBody:messageBody isHTML:YES];
         
-        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
         NSString* imagePath = [NSString stringWithFormat:@"%@/image.png", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
         [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
-        [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
+        [UIImagePNGRepresentation(_image) writeToFile:imagePath atomically:YES];
         
         
         NSData *fileData = [NSData dataWithContentsOfFile:imagePath];
@@ -416,10 +460,9 @@
     if ([MFMessageComposeViewController canSendText]) {
         MFMessageComposeViewController* composeVC = [[MFMessageComposeViewController alloc] init];
         composeVC.messageComposeDelegate = self;
-        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
         NSString *type = @"image/png";
 
-        [composeVC addAttachmentData:UIImagePNGRepresentation(instaImage) typeIdentifier:type filename:@"image.png"];
+        [composeVC addAttachmentData:UIImagePNGRepresentation(_image) typeIdentifier:type filename:@"image.png"];
         [self presentViewController:composeVC animated:YES completion:NULL];
     }
     else {

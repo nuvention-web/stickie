@@ -73,10 +73,11 @@
     }
 }
 
-- (void) addTags: (SKImageTag *) tag forMultipleAssetURLs: (NSArray *) imageURLs
+- (void) addTag: (SKImageTag *) tag forMultipleAssets: (NSArray *) imageURLs
 {
     NSMutableArray *tags;
-    for (NSURL* url in imageURLs) {
+    for (ALAsset* asset in imageURLs) {
+        NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
         tags = [assetURLToTagsMap objectForKey:url];
         if (!tags) tags = [[NSMutableArray alloc] init];
         if (![tags containsObject:tag]) {
@@ -146,10 +147,11 @@
     }
 }
 
-- (void) removeTag: (SKImageTag *) tag forMultipleAssetURLs: (NSArray *) imageURLs
+- (void) removeTag: (SKImageTag *) tag forMultipleAssets: (NSArray *) imageURLs
 {
     NSMutableArray *tags;
-    for (NSURL* url in imageURLs){
+    for (ALAsset* asset in imageURLs){
+        NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
         tags = [assetURLToTagsMap objectForKey:url];
         if (tags) {
             [tags removeObject:tag];

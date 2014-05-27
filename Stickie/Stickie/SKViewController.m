@@ -19,9 +19,11 @@
 #import "SKLongPressButton.h"
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
+#import "SWRevealViewController.h"
+#import "SKMenuViewController.h"
 
 
-@interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
+@interface SKViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, SWRevealViewControllerDelegate>
 {
     SKPhotoCell *dCell;
     NSIndexPath *dIndexPath;
@@ -30,12 +32,19 @@
     BOOL retainScroll;
     BOOL close;
     NSURL *currentURL;
+    BOOL multi;
+    NSMutableArray *selected;
+    UIBarButtonItem *cameraButton;
+    UIBarButtonItem *multitagButton;
+    UIImage *multiOn;
+    UIImage *multiOff;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *assets;
 @property BOOL newMedia;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;
 
 @end
 
@@ -61,6 +70,9 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"wasLaunchedBefore"];
         close = YES;
         [self loadTutorial];
+        [self viewDidAppear:NO];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"instalikesOn"]; // DEFAULT SETTINGS
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"photostreamOn"];
     }
     else {
         close = NO;
@@ -68,11 +80,14 @@
         [[self navigationController] setNavigationBarHidden:NO animated:YES];
         [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
+        multiOn = [UIImage imageNamed:@"stickieon.png"];        
+        multiOff = [UIImage imageNamed:@"stickie.png"];
+        
         defaultPoint = CGPointMake(50.0, 0.0);              // Sets default point for draggable ghost image.
         
         [self loadTags];
         [self loadImageAssets];
-        
+        selected = [[NSMutableArray alloc] init];
         /* Setting up long-press gesture recognizer and adding it to collectionView and corner buttons */
         UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
         longGestureRecognizer.minimumPressDuration = 0.15;
@@ -91,13 +106,66 @@
                                                    object:nil];
         
         /* Note, the notification center is intentially left unremoved from this view in viewWillDisappear - for the cases that a photo is deleted when the user is outside this application */
+        
+        // Necessary for SWRevealViewController - Menu View.
+        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+        [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];
+    
+        self.revealViewController.delegate = self;
+        
+        
+        
+        UIButton *multitagView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [multitagView addTarget:self action:@selector(multiToggle:) forControlEvents:UIControlEventTouchUpInside];
+        [multitagView setBackgroundImage:[UIImage imageNamed:@"stickie.png"]
+ forState:UIControlStateNormal];
+        multitagButton = [[UIBarButtonItem alloc] initWithCustomView:multitagView];
+        
+        UIButton *cameraView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 34, 28)];
+        [cameraView addTarget:self action:@selector(useCamera) forControlEvents:UIControlEventTouchUpInside];
+        [cameraView setBackgroundImage:[UIImage imageNamed:@"camera.png"]
+                                forState:UIControlStateNormal];
+        cameraButton = [[UIBarButtonItem alloc] initWithCustomView:cameraView];
+        
+        UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"hamburger.png"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
+        [self.navigationItem setLeftBarButtonItem:menuButton];
+        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:cameraButton, multitagButton,  nil]];
     }
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    // Necessary for SWRevealViewController - Menu View.
+    [self.navigationController.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
 }
 
 - (void) applicationWillEnterForeground:(NSNotification *) notification
 {
     /* Reload view so user changes are recognized */
     [self loadImageAssets];
+}
+
+- (void)toggleMenu
+{
+    [self.revealViewController revealToggleAnimated:YES];
+}
+
+- (void)revealController:(SWRevealViewController *)revealController willMoveToPosition:(FrontViewPosition)position
+{
+    if(position == FrontViewPositionLeft) {
+        self.view.userInteractionEnabled = YES;
+    } else {
+        self.view.userInteractionEnabled = NO;
+    }
+}
+
+- (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position
+{
+    if(position == FrontViewPositionLeft) {
+        self.view.userInteractionEnabled = YES;
+    } else {
+        self.view.userInteractionEnabled = NO;
+    }
 }
 
 #pragma mark - Tutorial Page View Controller Data Source
@@ -178,9 +246,7 @@
     [self.view addSubview:_pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
 }
-- (IBAction)tutorialButton:(id)sender {
-    [self loadTutorial];
-}
+
 #pragma mark - Main Screen
 /* Sets name of tags based on serialized tag information. */
 - (void)loadTags
@@ -266,7 +332,9 @@
     
     ALAssetsLibrary *assetsLibrary = [SKViewController defaultAssetsLibrary];
     
-    [assetsLibrary enumerateGroupsWithTypes:(ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary)usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+    ALAssetsGroupType group = [[NSUserDefaults standardUserDefaults] boolForKey:@"photostreamOn"] ? (ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary | ALAssetsGroupPhotoStream) : (ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary) ;
+    
+    [assetsLibrary enumerateGroupsWithTypes:group usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if(result) {
                 [tmpAssets addObject:result];
@@ -282,6 +350,9 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    multi = NO;
+    [selected removeAllObjects];
+    [self toggleMultiImage];
     /* Automatically scrolls to bottom of collection view so user will see most recent photos. */
     if (!retainScroll) {
         NSInteger section = 0;
@@ -317,9 +388,8 @@
     SKPhotoCell *cell = (SKPhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     
     ALAsset *asset = self.assets[indexPath.row];
-
     cell.asset = asset;
-    
+    cell.selectedAsset = selected;
     cell.topLeftCorner = _topLeftLabel.text;
     cell.topRightCorner = _topRightLabel.text;
     cell.botLeftCorner = _botLeftLabel.text;
@@ -347,7 +417,7 @@
 - (void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
     int DISTANCE_ABOVE_FINGER = 30;
     int BORDER_SIZE = 1.0;
-    int CORNER_RADIUS = 3.0;
+    int CORNER_RADIUS = 157.0/3.0;
     UIColor *borderColor = [UIColor colorWithRed:166.0/255.0 green:169.0/255.0 blue:172.0/255.0 alpha:1.0];
     
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
@@ -361,9 +431,49 @@
             }
             /* Loading data into draggable thumbnail image. */
             else {
-                dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
-                dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
-                [dCell.asset valueForProperty:ALAssetPropertyURLs];
+                if (multi && [selected count] > 1){
+                    CGImageRef leftRef;
+                    CGImageRef rightRef;
+                    CGImageRef topRightRef;
+                    CGImageRef botRightRef;
+                    CGImageRef topLeftRef;
+                    CGImageRef botLeftRef;
+                    switch ([selected count]) {
+                        case 2:
+                            UIGraphicsBeginImageContext(_dNewImageView.frame.size);
+                            leftRef = CGImageCreateWithImageInRect([selected[0] thumbnail], CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height));
+                            rightRef = CGImageCreateWithImageInRect([selected[1] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height));
+                            [[UIImage imageWithCGImage:leftRef] drawInRect:CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height)];
+                            [[UIImage imageWithCGImage:rightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height)];
+                            break;
+                        case 3:
+                            UIGraphicsBeginImageContext(_dNewImageView.frame.size);
+                            leftRef = CGImageCreateWithImageInRect([selected[0] thumbnail], CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height));
+                            topRightRef = CGImageCreateWithImageInRect([selected[1] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            botRightRef = CGImageCreateWithImageInRect([selected[2] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            [[UIImage imageWithCGImage:leftRef] drawInRect:CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height)];
+                            [[UIImage imageWithCGImage:topRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:botRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            break;
+                        default:
+                            UIGraphicsBeginImageContext(_dNewImageView.frame.size);
+                            topLeftRef = CGImageCreateWithImageInRect([selected[0] thumbnail], CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            topRightRef = CGImageCreateWithImageInRect([selected[1] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            botLeftRef = CGImageCreateWithImageInRect([selected[2] thumbnail], CGRectMake(0,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            botRightRef = CGImageCreateWithImageInRect([selected[3] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            [[UIImage imageWithCGImage:topLeftRef] drawInRect:CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:topRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:botLeftRef] drawInRect:CGRectMake(0,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:botRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            break;
+                    }
+                    dImage = UIGraphicsGetImageFromCurrentImageContext();
+                    UIGraphicsEndImageContext();
+                }
+                else {
+                    dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
+                    dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
+                }
                 anotherPoint.y -= DISTANCE_ABOVE_FINGER;
                 [_dNewImageView setCenter:anotherPoint];
                 [_dNewImageView setHidden:NO];
@@ -372,7 +482,7 @@
                 [_dNewImageView addGestureRecognizer:gestureRecognizer];
                 [_dNewImageView.layer setBorderColor: [borderColor CGColor]];
                 [_dNewImageView.layer setBorderWidth: BORDER_SIZE];
-                _dNewImageView.layer.cornerRadius = dImage.size.width / CORNER_RADIUS;
+                _dNewImageView.layer.cornerRadius = CORNER_RADIUS;
                 _dNewImageView.layer.masksToBounds = YES;
             }
             break;
@@ -405,7 +515,50 @@
             break;
     }
 }
+#pragma mark - Multi Select
 
+- (void)multiToggle:(id)sender {
+    if (multi) {
+        multi = NO;
+        [selected removeAllObjects];
+        [self toggleMultiImage];
+    }
+    else {
+        multi = YES;
+        [self toggleMultiImage];
+    }
+    [_collectionView reloadData];
+}
+
+- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (multi) {
+        ALAsset *asset = self.assets[indexPath.row];
+        if ([selected containsObject:asset]) {
+            [selected removeObject:asset];
+        }
+        else {
+            [selected addObject:asset];
+        }
+       
+        [_collectionView reloadData];
+    }
+}
+
+- (void) toggleMultiImage {
+    UIButton *multitagView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [multitagView addTarget:self action:@selector(multiToggle:) forControlEvents:UIControlEventTouchUpInside];
+    if (multi){
+        [multitagView setBackgroundImage:multiOn
+                                forState:UIControlStateNormal];
+    }
+    else {
+        [multitagView setBackgroundImage:multiOff
+                                forState:UIControlStateNormal];
+    }
+    multitagButton = [[UIBarButtonItem alloc] initWithCustomView:multitagView];
+    
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:cameraButton, multitagButton,  nil]];
+}
 #pragma mark Edit Tag
 - (void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer{
     CGPoint point = [gestureRecognizer locationInView:self.view];
@@ -464,10 +617,6 @@
         button = _botRightCorner;
         currentTag = 4;
     }
-//    /* Share Feature */
-//    else if (point.x >= 135 && point.x <= 185 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
-//
-//    }
 
     
     if (![tag.tagName isEqualToString:@""]) {
@@ -485,10 +634,18 @@
                     // Cleanup stuff.
                 }];
             }];
-            
+            if (multi){
+                [urlToTagMap addTag:tag forMultipleAssets:selected];
+                [tagCollection updateCollectionWithTag:tag forMultipleAssets:selected];
+                multi = NO;
+                [selected removeAllObjects];
+                [self toggleMultiImage];
+            }
+            else {
             /* Logic for tagging a new image - it is necessary to update both urlToTagMap and tagCollection. */
-            [urlToTagMap addTag: tag forAssetURL:assetURL];
-            [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
+                [urlToTagMap addTag: tag forAssetURL:assetURL];
+                [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
+            }
         }
         else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
@@ -504,9 +661,18 @@
                     // Cleanup stuff.
                 }];
             }];
-            /* Logic for removing a tag from a new image - it is necessary to update both urlToTagMap and tagCollection. */
-            [urlToTagMap removeTag:tag forAssetURL:assetURL];
-            [tagCollection removeImageURL:assetURL forTag:tag];
+            if (multi){
+                [urlToTagMap removeTag:tag forMultipleAssets:selected];
+                [tagCollection removeMultipleAssets:selected forTag:tag];
+                multi = NO;
+                [selected removeAllObjects];
+                [self toggleMultiImage];
+            }
+            else {
+                /* Logic for removing a tag from a new image - it is necessary to update both urlToTagMap and tagCollection. */
+                [urlToTagMap removeTag:tag forAssetURL:assetURL];
+                [tagCollection removeImageURL:assetURL forTag:tag];
+            }
         }
 //            [_collectionView reloadItemsAtIndexPaths: [[NSArray alloc] initWithObjects:path, nil]]; // DOES NOT WORK FOR FIRST TAG (APPLE BUG?).
         [_collectionView reloadData];
@@ -534,9 +700,9 @@
 
 #pragma mark Camera Methods
 /* Take photo. */
-- (IBAction)takePhotoButtonTapped:(id)sender {
-    [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.3];
-}
+//- (IBAction)takePhotoButtonTapped:(id)sender {
+//    [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.3];
+//}
 
 /* Setup for image picker. */
 - (void)useCamera{
@@ -602,6 +768,9 @@ finishedSavingWithError:(NSError *)error
 
 #pragma mark Segue Handling
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if ([identifier isEqualToString:@"showDetail"] && multi){
+        return NO;
+    }
     if ([_topLeftLabel.text isEqualToString:@""] && [identifier isEqualToString:@"topLeftTag"]) {
         [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
         return NO;
@@ -674,13 +843,9 @@ finishedSavingWithError:(NSError *)error
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_topLeftLabel.text isEqualToString:@""]) {
-            tagAssignViewController.createTag = YES;
-            if (currentURL) {
+                tagAssignViewController.createTag = YES;
                 tagAssignViewController.tagImageURL = currentURL;
-            }
-            else {
-                tagAssignViewController.tagImageURL = nil;
-            }
+                tagAssignViewController.assets = selected;
         }
         currentURL = nil;
         tagAssignViewController.location = SKCornerLocationTopLeft;
@@ -693,12 +858,8 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_topRightLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
-            if (currentURL) {
-                tagAssignViewController.tagImageURL = currentURL;
-            }
-            else {
-                tagAssignViewController.tagImageURL = nil;
-            }
+            tagAssignViewController.tagImageURL = currentURL;
+            tagAssignViewController.assets = selected;
         }
         currentURL = nil;
         tagAssignViewController.location = SKCornerLocationTopRight;
@@ -712,12 +873,8 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_botLeftLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
-            if (currentURL) {
-                tagAssignViewController.tagImageURL = currentURL;
-            }
-            else {
-                tagAssignViewController.tagImageURL = nil;
-            }
+            tagAssignViewController.tagImageURL = currentURL;
+            tagAssignViewController.assets = selected;
         }
         currentURL = nil;
         tagAssignViewController.location = SKCornerLocationBottomLeft;
@@ -730,12 +887,8 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_botRightLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
-            if (currentURL) {
-                tagAssignViewController.tagImageURL = currentURL;
-            }
-            else {
-                tagAssignViewController.tagImageURL = nil;
-            }
+            tagAssignViewController.tagImageURL = currentURL;
+            tagAssignViewController.assets = selected;
         }
         currentURL = nil;
         tagAssignViewController.location = SKCornerLocationBottomRight;
@@ -755,13 +908,20 @@ finishedSavingWithError:(NSError *)error
 }
 
 #pragma mark Tag Assign Delegate Methods
+-(void)loadExtTutorial:(SKMenuViewController*)controller
+{
+    NSLog(@"tutut");
+    //    [self loadTutorial];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 - (void)tagAssignViewControllerDidCancel:(SKTagAssignViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
 /* Edit or delete tags from SKTagAssignViewController. */
-- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR forLocation:(SKCornerLocation) cornerLocation andDelete:(BOOL)delete andDidTagImageURL:(NSURL *)assetURL
+- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR forLocation:(SKCornerLocation) cornerLocation andDelete:(BOOL)delete andDidTagImageURL:(NSURL *)assetURL forAssets:(NSArray *)assets
 {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKImageTag *tag = [[SKImageTag alloc] initWithName:tagSTR location:cornerLocation andColor:nil];
@@ -808,7 +968,12 @@ finishedSavingWithError:(NSError *)error
             [tagCollection removeTag:oldTag];
             _botRightLabel.text = tagSTR;
         }
-        if (assetURL && ![tag.tagName isEqualToString:@""]) {
+        if ([assets count] > 0 && ![tag.tagName isEqualToString:@""]) {
+            [urlTagsMap addTag:tag forMultipleAssets:assets];
+            [tagCollection updateCollectionWithTag:tag forMultipleAssets:assets];
+            [_collectionView reloadData];
+        }
+        else if (assetURL && ![tag.tagName isEqualToString:@""]) {
             if (tag && ![urlTagsMap doesURL:assetURL haveTag:tag]) {
                 [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                       action:@"image_tag"  // Event action (required)
@@ -842,5 +1007,12 @@ finishedSavingWithError:(NSError *)error
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController.view removeGestureRecognizer:self.revealViewController.panGestureRecognizer];
+}
+
+
 
 @end
