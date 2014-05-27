@@ -360,11 +360,14 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     if ([[segue identifier] isEqualToString:@"showTagDetail"])
     {
         NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
-        ALAsset *asset = self.assets[indexPath.row];
+        ALAsset *asset = self.assets[indexPath.row];        
         NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
         ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
         UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
         SKDetailViewController *detailViewController = [segue destinationViewController];
+        if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+            detailViewController.video = YES;
+        }
         detailViewController.image = image;
         detailViewController.imageURL = url;
         detailViewController.assets = _assets;

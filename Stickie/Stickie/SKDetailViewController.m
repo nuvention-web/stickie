@@ -18,14 +18,19 @@
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
 #import "SWRevealViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @interface SKDetailViewController () <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate> {
     UIImageView *imageView;
     dispatch_queue_t loadImageToShare;
+    UISwipeGestureRecognizer *rightSwipe;
+    UISwipeGestureRecognizer *leftSwipe;
 }
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIScrollView *shareScrollView;
+@property (strong, nonatomic) MPMoviePlayerController *videoController;
 
 @end
 
@@ -64,10 +69,8 @@
 {
     /* So UIImageView is centered properly. */
     self.automaticallyAdjustsScrollViewInsets = NO;
-
     /* Set inital navigation bar title. */
     [self setNavBarTitleWithIndex:imageIndex+1];
-    
     /* Allocates memory for and initializes new subview to house initial image. */
     imageView = [[UIImageView alloc] init];
     CGRect aRect = CGRectMake(0.0, 0.0, self.scrollView.frame.size.width,self.scrollView.frame.size.height);
@@ -85,10 +88,10 @@
     
     /* Add swiping gesture recognizers to image. */
     imageView.userInteractionEnabled = YES;
-    UISwipeGestureRecognizer *rightSwipe=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    rightSwipe=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     rightSwipe.direction=UISwipeGestureRecognizerDirectionRight;
     
-    UISwipeGestureRecognizer *leftSwipe=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    leftSwipe=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     leftSwipe.direction=UISwipeGestureRecognizerDirectionLeft;
     
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
@@ -97,9 +100,19 @@
     
     [imageView addGestureRecognizer:leftSwipe];
     [imageView addGestureRecognizer:rightSwipe];
+    self.videoController = [[MPMoviePlayerController alloc] init];
+    [self.videoController.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 84)];
+    [self.videoController setShouldAutoplay:NO];
+    [self.videoController prepareToPlay];
     
     loadImageToShare = dispatch_queue_create("Load Image", NULL);
-    [self loadImage];
+    if (_video){
+        [self.videoController setContentURL:_imageURL];
+        [self.view addSubview:self.videoController.view];
+    }
+    else {
+        [self loadImage];
+    }
 }
 
 - (void)loadImage
@@ -180,30 +193,58 @@
     _imageURL = asset.defaultRepresentation.url; // Update imageURL property
     _image = image;
     
-    /* Prepare new image to be displayed in view. */
-    UIImageView *newImageView = [[UIImageView alloc] init];
-    [newImageView setFrame: CGRectMake(-width, 0.0, imageView.frame.size.width, imageView.frame.size.height)];;
-    [self.scrollView addSubview:newImageView];
-    newImageView.image = image;
-    newImageView.contentMode =  UIViewContentModeScaleAspectFit;
-    
-    /* Animate Swipe */
-    [UIView animateWithDuration:0.15f
-                          delay:0.0f
-                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
-                     animations:^{
-                         [newImageView setFrame:imageView.frame];
-                         [imageView setFrame:CGRectMake(width, 0.0, imageView.frame.size.width, imageView.frame.size.height)];
-                     }
-                     completion:^(BOOL finished){
-                         /* Post-animation cleanup. */
-                         imageView.image = newImageView.image;
-                         [imageView setFrame:newImageView.frame];
-                         [newImageView removeFromSuperview];
-                         
-                         /* Update nav bar title. */
-                         [self setNavBarTitleWithIndex:imageIndex+1];
-                     }];
+    if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+        [self.videoController setContentURL:_imageURL];
+        if (![[self.view subviews] containsObject:self.videoController.view]){
+            [self.view addSubview:self.videoController.view];
+        }
+        [self.scrollView bringSubviewToFront:self.videoController.view];
+        [self setNavBarTitleWithIndex:imageIndex+1];
+        if  (![[self.videoController.view gestureRecognizers] containsObject:leftSwipe]){
+            [self.videoController.view addGestureRecognizer:leftSwipe];
+            [imageView removeGestureRecognizer:leftSwipe];
+        }
+        if  (![[self.videoController.view gestureRecognizers] containsObject:rightSwipe]){
+            [self.videoController.view addGestureRecognizer:rightSwipe];
+            [imageView removeGestureRecognizer:rightSwipe];
+        }
+    }
+    else {
+        [self.videoController.view removeFromSuperview];
+        [self.scrollView bringSubviewToFront:imageView];
+        if  (![[imageView gestureRecognizers] containsObject:leftSwipe]){
+            [imageView addGestureRecognizer:leftSwipe];
+            [self.videoController.view  removeGestureRecognizer:leftSwipe];
+        }
+        if  (![[imageView gestureRecognizers] containsObject:rightSwipe]){
+            [imageView addGestureRecognizer:rightSwipe];
+            [self.videoController.view removeGestureRecognizer:rightSwipe];
+        }
+        /* Prepare new image to be displayed in view. */
+        UIImageView *newImageView = [[UIImageView alloc] init];
+        [newImageView setFrame: CGRectMake(-width, 0.0, imageView.frame.size.width, imageView.frame.size.height)];;
+        [self.scrollView addSubview:newImageView];
+        newImageView.image = image;
+        newImageView.contentMode =  UIViewContentModeScaleAspectFit;
+        
+        /* Animate Swipe */
+        [UIView animateWithDuration:0.15f
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
+                         animations:^{
+                             [newImageView setFrame:imageView.frame];
+                             [imageView setFrame:CGRectMake(width, 0.0, imageView.frame.size.width, imageView.frame.size.height)];
+                         }
+                         completion:^(BOOL finished){
+                             /* Post-animation cleanup. */
+                             imageView.image = newImageView.image;
+                             [imageView setFrame:newImageView.frame];
+                             [newImageView removeFromSuperview];
+                             
+                             /* Update nav bar title. */
+                             [self setNavBarTitleWithIndex:imageIndex+1];
+                         }];
+    }
 
 }
 

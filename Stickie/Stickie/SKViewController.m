@@ -808,10 +808,14 @@ finishedSavingWithError:(NSError *)error
         ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
         UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
         SKDetailViewController *detailViewController = [segue destinationViewController];
+        if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+            detailViewController.video = YES;
+        }
         detailViewController.image = image;
         detailViewController.imageURL = url;
         detailViewController.assets = _assets;
         detailViewController->imageIndex = (int) indexPath.row;
+        
     }
     
     /* Routes to tag search view. */
