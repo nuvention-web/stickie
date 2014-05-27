@@ -361,14 +361,14 @@
                                                            value:nil] build]];    // Event value
     NSURL *whatsURL = [NSURL URLWithString:@"whatsapp://"];
     if ([[UIApplication sharedApplication] canOpenURL:whatsURL]) {
-        //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
-//        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
-//        
-//        NSString* imagePath = [NSString stringWithFormat:@"%@/image.wai", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
-//        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
-//        [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
+//        UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
+        UIImage* instaImage = imageView.image; //Top half of image Full Resolution.
+        
+        NSString* imagePath = [NSString stringWithFormat:@"%@/image.wai", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+        [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
         //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
-//        _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
+        _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
         _docFile.delegate=self;
         _docFile.UTI = @"net.whatsapp.image";
         dispatch_sync(loadImageToShare, ^(void){
@@ -493,7 +493,7 @@
     
     SLComposeViewController *composeController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
     
-    NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @stickiepics (#stickie):"];
+    NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @StickieApp (#stickie):"];
     NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:[_assets[imageIndex] valueForProperty:ALAssetPropertyAssetURL]]];
     for (int i = 0; i < [tags count]; i++) {
         [hashtags appendString:@" #"];

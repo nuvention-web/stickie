@@ -34,7 +34,7 @@
     UIImage *topRightWatermarkImage = [UIImage imageNamed:@"CornerGreen.png"];
     UIImage *botLeftWatermarkImage = [UIImage imageNamed:@"CornerRed.png"];
     UIImage *botRightWatermarkImage = [UIImage imageNamed:@"CornerOrange.png"];
-    UIImage *selectedWatermarkImage = [UIImage imageNamed:@"SearchStickie_222x222.png"];
+    UIImage *selectedWatermarkImage = [UIImage imageNamed:@"stickie.png"];
     
     UIGraphicsBeginImageContext(backgroundImage.size);
     if ([_selectedAsset containsObject:asset]) {

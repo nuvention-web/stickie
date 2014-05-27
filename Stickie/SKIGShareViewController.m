@@ -283,7 +283,7 @@ typedef enum {
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
         // Setting up hashtags
-        NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @StickieApp | #stickiepic ••"];
+        NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @StickieApp ••"];
         NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:_url]];
         NSMutableString *customtags = [NSMutableString stringWithString:@""];
         for (int i = 0; i < [tags count]; i++) {
