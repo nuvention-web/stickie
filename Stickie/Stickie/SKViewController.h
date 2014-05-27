@@ -29,6 +29,7 @@
 @property (strong, nonatomic) IBOutlet SKLongPressButton *botRightCorner;
 
 @property BOOL showTutorial;
+@property BOOL shouldReloadCollectionView;
 
 -(void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer;
 

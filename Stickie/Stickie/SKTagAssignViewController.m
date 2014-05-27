@@ -21,14 +21,14 @@
     [super viewWillAppear:animated];
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     if (_createTag) {
-        self.navigationItem.title = @"create tag";
+        self.navigationItem.title = @"create";
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                               action:@"create_tag"  // Event action (required)
                                                                label:nil         // Event label
                                                                value:nil] build]];    // Event value
     }
     else {
-        self.navigationItem.title = @"edit tag";
+        self.navigationItem.title = @"edit";
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                               action:@"edit_tag"  // Event action (required)
                                                                label:nil         // Event label

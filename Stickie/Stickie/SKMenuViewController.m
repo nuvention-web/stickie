@@ -37,12 +37,22 @@ typedef enum {
     
     _instalikesSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"instalikesOn"];
     _photostreamSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"photostreamOn"];
+    
+    [_photostreamSwitch addTarget:self action:@selector(setState:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setState:(id)sender
+{
+    UINavigationController *mainNavView = (UINavigationController*)self.revealViewController.frontViewController;
+    NSArray *chillun = mainNavView.childViewControllers;
+    SKViewController *mainView = (SKViewController*)mainNavView.childViewControllers[[chillun count]-1];
+    mainView.shouldReloadCollectionView = YES;
 }
 
 #pragma mark - Table view data source
@@ -118,13 +128,11 @@ typedef enum {
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
-    UIAlertView *comingSoonAlert = [[UIAlertView alloc] initWithTitle:@"Coming Soon!" message:@"This menu item will be coming soon. Look out for updates!" delegate:nil cancelButtonTitle:@"Got it" otherButtonTitles:nil, nil];
     
     switch ([indexPath section]) {
         case SKMenuSectionOptions:
             cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
             if ([indexPath row] == 0) {
-                NSLog(@"Tutorial");
                 UINavigationController *mainNavView = (UINavigationController*)self.revealViewController.frontViewController;
                 NSArray *chillun = mainNavView.childViewControllers;
                 SKViewController *mainView = (SKViewController*)mainNavView.childViewControllers[[chillun count]-1];
@@ -133,11 +141,11 @@ typedef enum {
             }
             else if ([indexPath row] == 1) {
                 cell.textLabel.text = @"About Us";
-                [comingSoonAlert show];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:STICKIE_ABOUT_URL]];
             }
             else if ([indexPath row] == 2) {
                 cell.textLabel.text = @"FAQ";
-                [comingSoonAlert show];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:STICKIE_FAQ_URL]];
             }
             break;
         case SKMenuSectionFeedback:

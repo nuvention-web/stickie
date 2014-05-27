@@ -305,7 +305,7 @@
             </objects>
             <point key="canvasLocation" x="1385" y="922"/>
         </scene>
-        <!--Tag Assign View Controller - create tag-->
+        <!--Tag Assign View Controller - create-->
         <scene sceneID="z6b-I1-ufu">
             <objects>
                 <tableViewController id="YEi-U5-gnl" customClass="SKTagAssignViewController" sceneMemberID="viewController">
@@ -348,7 +348,7 @@
                             </tableViewSection>
                         </sections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="create tag" id="fzv-2b-c1m">
+                    <navigationItem key="navigationItem" title="create" id="fzv-2b-c1m">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="1rQ-Ha-2Eh">
                             <connections>
                                 <action selector="cancel:" destination="YEi-U5-gnl" id="edk-eK-ccD"/>

@@ -113,8 +113,6 @@
     
         self.revealViewController.delegate = self;
         
-        
-        
         UIButton *multitagView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         [multitagView addTarget:self action:@selector(multiToggle:) forControlEvents:UIControlEventTouchUpInside];
         [multitagView setBackgroundImage:[UIImage imageNamed:@"stickie.png"]
@@ -130,6 +128,8 @@
         UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"hamburger.png"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
         [self.navigationItem setLeftBarButtonItem:menuButton];
         [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:cameraButton, multitagButton,  nil]];
+
+        self.navigationItem.title = @"stickie";
     }
 }
 
@@ -169,6 +169,22 @@
 {
     if(position == FrontViewPositionLeft) {
         self.view.userInteractionEnabled = YES;
+        if (_shouldReloadCollectionView) {
+            dispatch_queue_t reloadQueue = dispatch_queue_create("Reload Queue", NULL);
+            dispatch_async(reloadQueue, ^{ // Reloads collection view data for photostream.
+                [self reloadCollectionView];
+            });
+            dispatch_sync(reloadQueue, ^{ // Scrolls down to bottom of collection view.
+                NSInteger section = 0;
+                NSInteger item = [self collectionView:_collectionView numberOfItemsInSection:section] - 1;
+                NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+                retainScroll = YES;
+                if (item > -1) {
+                    [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+                }
+            });
+            
+        }
     } else {
         self.view.userInteractionEnabled = NO;
     }

@@ -96,6 +96,9 @@
 		EC6D06AD19143E9D00F04708 /* smtext.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D06A719143E9D00F04708 /* smtext.png */; };
 		EC6D06AE19143E9D00F04708 /* smtwitter.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D06A819143E9D00F04708 /* smtwitter.png */; };
 		EC6D06AF19143E9D00F04708 /* smwhatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = EC6D06A919143E9D00F04708 /* smwhatsapp.png */; };
+		EC89B8D519353E3300F3D346 /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC89B8D419353D2E00F3D346 /* Raleway-Regular.ttf */; };
+		EC89B8D819353F1000F3D346 /* Raleway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC89B8D719353F0C00F3D346 /* Raleway-Bold.ttf */; };
+		EC89B8DA1935489000F3D346 /* Raleway-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC89B8D91935488C00F3D346 /* Raleway-Medium.ttf */; };
 		EC99068D19071FF80053DAC8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC99068C19071FF80053DAC8 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -226,6 +229,9 @@
 		EC6D06A719143E9D00F04708 /* smtext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smtext.png; sourceTree = "<group>"; };
 		EC6D06A819143E9D00F04708 /* smtwitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smtwitter.png; sourceTree = "<group>"; };
 		EC6D06A919143E9D00F04708 /* smwhatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smwhatsapp.png; sourceTree = "<group>"; };
+		EC89B8D419353D2E00F3D346 /* Raleway-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Regular.ttf"; sourceTree = "<group>"; };
+		EC89B8D719353F0C00F3D346 /* Raleway-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Bold.ttf"; sourceTree = "<group>"; };
+		EC89B8D91935488C00F3D346 /* Raleway-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Medium.ttf"; sourceTree = "<group>"; };
 		EC99068C19071FF80053DAC8 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -299,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				149FB29C1890845B00D44DB2 /* Stickie */,
+				EC89B8DB193548AF00F3D346 /* Fonts */,
 				9385097018CD2EA1001AE7DC /* Images */,
 				14540B7B18C3FDA5004185F7 /* GoogleAnalyticsServicesiOS_3.03c */,
 				149FB29D1890845B00D44DB2 /* Supporting Files */,
@@ -492,6 +499,17 @@
 			path = Images;
 			sourceTree = SOURCE_ROOT;
 		};
+		EC89B8DB193548AF00F3D346 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				EC89B8D719353F0C00F3D346 /* Raleway-Bold.ttf */,
+				EC89B8D91935488C00F3D346 /* Raleway-Medium.ttf */,
+				EC89B8D419353D2E00F3D346 /* Raleway-Regular.ttf */,
+			);
+			name = Fonts;
+			path = Stickie;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -593,6 +611,7 @@
 				149EEAF3191975FC0057385F /* CircleGreen.png in Resources */,
 				1493FA871910673500364B8F /* RetrievalRed.png in Resources */,
 				14A38A5619037661002AF61B /* tutButton.png in Resources */,
+				EC89B8D819353F1000F3D346 /* Raleway-Bold.ttf in Resources */,
 				149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */,
 				14A1FB5B19241AF600CE33A6 /* insta_friends.png in Resources */,
 				14A1FB5619241AF600CE33A6 /* insta_custom1.png in Resources */,
@@ -613,6 +632,7 @@
 				1493FA861910673500364B8F /* RetrievalOrange.png in Resources */,
 				14A1FB5919241AF600CE33A6 /* insta_fitness.png in Resources */,
 				14A1FB6519241AF600CE33A6 /* insta_selfies.png in Resources */,
+				EC89B8D519353E3300F3D346 /* Raleway-Regular.ttf in Resources */,
 				14A38A5519037661002AF61B /* page5.png in Resources */,
 				14A30C0E18D4055B008212CD /* Half circle new.png in Resources */,
 				149FD0901904778200189B18 /* page1.png in Resources */,
@@ -624,6 +644,7 @@
 				149EEAF2191975FC0057385F /* CircleBlue.png in Resources */,
 				149FD0921904778200189B18 /* page3.png in Resources */,
 				14A1FB5E19241AF600CE33A6 /* insta_love.png in Resources */,
+				EC89B8DA1935489000F3D346 /* Raleway-Medium.ttf in Resources */,
 				14A1FB5819241AF600CE33A6 /* insta_fashion.png in Resources */,
 				149E0354190096DC00AE444C /* Cloud.png in Resources */,
 			);

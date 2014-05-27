@@ -7,6 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#ifndef STICKIE_ABOUT_URL
+#define STICKIE_ABOUT_URL @"http://www.stickiepic.com/blog/about/"
+#endif
+
+#ifndef STICKIE_FAQ_URL
+#define STICKIE_FAQ_URL @"http://www.stickiepic.com/blog/faqs/"
+#endif
+
 @class  SKMenuViewController;
 
 @protocol SKMenuViewControllerDelegate <NSObject>
