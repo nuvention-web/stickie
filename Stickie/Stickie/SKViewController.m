@@ -130,6 +130,8 @@
         UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"hamburger.png"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
         [self.navigationItem setLeftBarButtonItem:menuButton];
         [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:cameraButton, multitagButton,  nil]];
+        
+        _showTutorial = NO;
     }
 }
 
@@ -154,6 +156,10 @@
 {
     if(position == FrontViewPositionLeft) {
         self.view.userInteractionEnabled = YES;
+        if (_showTutorial) {
+            [self loadTutorial];
+            _showTutorial = NO;
+        }
     } else {
         self.view.userInteractionEnabled = NO;
     }
@@ -366,7 +372,6 @@
     else {
        [self loadImageAssets]; 
     }
-
 }
 
 - (void)didReceiveMemoryWarning
