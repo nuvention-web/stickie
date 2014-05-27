@@ -130,8 +130,6 @@
         UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"hamburger.png"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
         [self.navigationItem setLeftBarButtonItem:menuButton];
         [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:cameraButton, multitagButton,  nil]];
-        
-        _showTutorial = NO;
     }
 }
 
@@ -146,6 +144,8 @@
     /* Reload view so user changes are recognized */
     [self loadImageAssets];
 }
+
+#pragma mark - Reveal View Controller Methods
 
 - (void)toggleMenu
 {

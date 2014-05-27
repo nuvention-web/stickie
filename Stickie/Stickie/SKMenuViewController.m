@@ -125,9 +125,9 @@ typedef enum {
             cell = [tableView dequeueReusableCellWithIdentifier:@"TapCell"];
             if ([indexPath row] == 0) {
                 NSLog(@"Tutorial");
-//                [comingSoonAlert show];
                 UINavigationController *mainNavView = (UINavigationController*)self.revealViewController.frontViewController;
-                SKViewController *mainView = (SKViewController*)mainNavView.childViewControllers[0];
+                NSArray *chillun = mainNavView.childViewControllers;
+                SKViewController *mainView = (SKViewController*)mainNavView.childViewControllers[[chillun count]-1];
                 mainView.showTutorial = YES;
                 [self.revealViewController revealToggle:self];
             }
