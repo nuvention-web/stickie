@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GAITrackedViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface SKDetailViewController : GAITrackedViewController {
     @public
@@ -20,5 +21,6 @@
 @property (nonatomic,retain) UIDocumentInteractionController *docFile;
 @property (weak, nonatomic) IBOutlet UIImageView *drawingImageView;
 @property (weak, nonatomic) IBOutlet UIView *drawingView;
+@property BOOL video;
 
 @end
