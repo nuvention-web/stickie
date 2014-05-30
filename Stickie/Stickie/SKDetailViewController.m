@@ -109,6 +109,10 @@
     if (_video){
         [self.videoController setContentURL:_imageURL];
         [self.view addSubview:self.videoController.view];
+        [self.videoController.view addGestureRecognizer:leftSwipe];
+        [imageView removeGestureRecognizer:leftSwipe];
+        [self.videoController.view addGestureRecognizer:rightSwipe];
+        [imageView removeGestureRecognizer:rightSwipe];
     }
     else {
         [self loadImage];
