@@ -51,6 +51,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *shareScrollView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) NSThread *indicatorThread;
 
 @end
 
@@ -83,15 +85,15 @@
 {
     UIButton *FACEBOOK_BUTTON = [[UIButton alloc] init];
     [FACEBOOK_BUTTON setBackgroundImage:[UIImage imageNamed:@"smfacebook.png"] forState:UIControlStateNormal];
-    [FACEBOOK_BUTTON addTarget:self action:@selector(shareToFacebook:) forControlEvents:UIControlEventTouchUpInside];
+    [FACEBOOK_BUTTON addTarget:self action:@selector(shareMultipleToFacebook:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *MESSAGE_BUTTON = [[UIButton alloc] init];
     [MESSAGE_BUTTON setBackgroundImage:[UIImage imageNamed:@"smtext.png"] forState:UIControlStateNormal];
-    [MESSAGE_BUTTON addTarget:self action:@selector(shareToMessage:) forControlEvents:UIControlEventTouchUpInside];
+    [MESSAGE_BUTTON addTarget:self action:@selector(shareMultipleToMessage:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *MAIL_BUTTON = [[UIButton alloc] init];
     [MAIL_BUTTON setBackgroundImage:[UIImage imageNamed:@"smmail.png"] forState:UIControlStateNormal];
-    [MAIL_BUTTON addTarget:self action:@selector(shareToMail:) forControlEvents:UIControlEventTouchUpInside];
+    [MAIL_BUTTON addTarget:self action:@selector(shareMultipleToMail:) forControlEvents:UIControlEventTouchUpInside];
 
     UIButton *CLOSE_BUTTON = [[UIButton alloc] init];
     [CLOSE_BUTTON setTitle:@"x" forState:UIControlStateNormal];
@@ -119,7 +121,6 @@
     _shareScrollView.contentSize = CGSizeMake(x, _shareScrollView.frame.size.height);
     _shareScrollView.backgroundColor = [UIColor colorWithRed:243.0/255.0 green:243.0/255.0 blue:243.0/255.0 alpha:1.0];
     [_shareScrollView setShowsHorizontalScrollIndicator:NO];
-    NSLog(@"%f",(self.view.frame.size.height - 483.5));
     lineView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, (self.view.frame.size.height-84.5), self.view.frame.size.width, 0.5f)];
     lineView.backgroundColor = [UIColor colorWithRed:179.0/255.0 green:179.0/255.0 blue:179.0/255.0 alpha:1.0];
     [self.view addSubview:lineView];
@@ -153,6 +154,7 @@
         
         [self.shareButton setHidden:YES];
         [self.shareButton setCenter:CGPointMake(self.view.frame.size.width/2,self.view.frame.size.height-23)];
+        [self.view sendSubviewToBack:self.shareButton];
         [self.view sendSubviewToBack:self.shareScrollView];
 
         defaultPoint = CGPointMake(50.0, 0.0);              // Sets default point for draggable ghost image.
