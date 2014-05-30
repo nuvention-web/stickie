@@ -20,7 +20,6 @@
 		14985C661890F037004B3ECB /* SKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14985C651890F037004B3ECB /* SKDetailViewController.m */; };
 		1499CDC618BEE3CB00D0C0EA /* SKTagAssignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499CDC518BEE3CB00D0C0EA /* SKTagAssignViewController.m */; };
 		149DCE43193913F9009EC65E /* Sharing64.png in Resources */ = {isa = PBXBuildFile; fileRef = 149DCE42193913F9009EC65E /* Sharing64.png */; };
-		149E0354190096DC00AE444C /* Cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 149E0353190096DC00AE444C /* Cloud.png */; };
 		149EEAF2191975FC0057385F /* CircleBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 149EEAEE191975FC0057385F /* CircleBlue.png */; };
 		149EEAF3191975FC0057385F /* CircleGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 149EEAEF191975FC0057385F /* CircleGreen.png */; };
 		149EEAF4191975FC0057385F /* CircleOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 149EEAF0191975FC0057385F /* CircleOrange.png */; };
@@ -137,7 +136,6 @@
 		1499CDC418BEE3CB00D0C0EA /* SKTagAssignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagAssignViewController.h; sourceTree = "<group>"; };
 		1499CDC518BEE3CB00D0C0EA /* SKTagAssignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagAssignViewController.m; sourceTree = "<group>"; };
 		149DCE42193913F9009EC65E /* Sharing64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sharing64.png; sourceTree = "<group>"; };
-		149E0353190096DC00AE444C /* Cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cloud.png; sourceTree = "<group>"; };
 		149EEAEE191975FC0057385F /* CircleBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CircleBlue.png; sourceTree = "<group>"; };
 		149EEAEF191975FC0057385F /* CircleGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CircleGreen.png; sourceTree = "<group>"; };
 		149EEAF0191975FC0057385F /* CircleOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CircleOrange.png; sourceTree = "<group>"; };
@@ -462,7 +460,6 @@
 				149EEAEF191975FC0057385F /* CircleGreen.png */,
 				149EEAF0191975FC0057385F /* CircleOrange.png */,
 				149EEAF1191975FC0057385F /* CircleRed.png */,
-				149E0353190096DC00AE444C /* Cloud.png */,
 				149EEAF6191976160057385F /* CornerBlue.png */,
 				149EEAF7191976160057385F /* CornerGreen.png */,
 				149EEAF8191976160057385F /* CornerOrange.png */,
@@ -654,7 +651,6 @@
 				14A1FB5E19241AF600CE33A6 /* insta_love.png in Resources */,
 				EC89B8DA1935489000F3D346 /* Raleway-Medium.ttf in Resources */,
 				14A1FB5819241AF600CE33A6 /* insta_fashion.png in Resources */,
-				149E0354190096DC00AE444C /* Cloud.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
