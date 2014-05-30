@@ -161,7 +161,7 @@
                                     <action selector="shareMulti:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="H9r-fc-rrX"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="a8x-mT-iwF">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" id="a8x-mT-iwF">
                                 <rect key="frame" x="0.0" y="484" width="321" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </scrollView>
