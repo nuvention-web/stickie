@@ -145,7 +145,7 @@
     [_shareScrollView setShowsHorizontalScrollIndicator:NO];
     
     CALayer *BottomBorder = [CALayer layer];
-    BottomBorder.frame = CGRectMake(0.0f, 484.0f, self.view.frame.size.width, 0.5f);
+    BottomBorder.frame = CGRectMake(0.0f, (self.view.frame.size.height-84.0), self.view.frame.size.width, 0.5f);
     BottomBorder.backgroundColor = [UIColor colorWithRed:179.0/255.0 green:179.0/255.0 blue:179.0/255.0 alpha:1.0].CGColor;
     [self.view.layer addSublayer:BottomBorder];
     
@@ -505,9 +505,9 @@
     if ([MFMessageComposeViewController canSendText]) {
         MFMessageComposeViewController* composeVC = [[MFMessageComposeViewController alloc] init];
         composeVC.messageComposeDelegate = self;
-        NSString *type = @"image/png";
+        NSString *type = @"image/jpeg";
 
-        [composeVC addAttachmentData:UIImagePNGRepresentation(_image) typeIdentifier:type filename:@"image.png"];
+        [composeVC addAttachmentData:UIImagePNGRepresentation(_image) typeIdentifier:type filename:@"image.jpeg"];
         [self presentViewController:composeVC animated:YES completion:NULL];
     }
     else {

@@ -38,6 +38,8 @@
     UIBarButtonItem *multitagButton;
     UIImage *multiOn;
     UIImage *multiOff;
+    UIImage *share;
+    UIView *lineView;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
@@ -45,6 +47,8 @@
 @property (nonatomic, strong) NSArray *assets;
 @property BOOL newMedia;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIScrollView *shareScrollView;
 
 @end
 
@@ -59,6 +63,68 @@
         library = [ALAssetsLibrary new];
     });
     return library;
+}
+
+- (IBAction)shareMulti:(id)sender {
+    if(multi){
+        [self setupScrollMenuWithButtons:[self loadButtons]];
+    }
+}
+
+- (void)closeShareScrollView{
+    [self.view sendSubviewToBack:self.shareScrollView];
+    [self.shareScrollView setHidden:YES];
+    [lineView removeFromSuperview];
+}
+
+- (NSArray *)loadButtons
+{
+    UIButton *FACEBOOK_BUTTON = [[UIButton alloc] init];
+    [FACEBOOK_BUTTON setBackgroundImage:[UIImage imageNamed:@"smfacebook.png"] forState:UIControlStateNormal];
+    [FACEBOOK_BUTTON addTarget:self action:@selector(shareToFacebook:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *MESSAGE_BUTTON = [[UIButton alloc] init];
+    [MESSAGE_BUTTON setBackgroundImage:[UIImage imageNamed:@"smtext.png"] forState:UIControlStateNormal];
+    [MESSAGE_BUTTON addTarget:self action:@selector(shareToMessage:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *MAIL_BUTTON = [[UIButton alloc] init];
+    [MAIL_BUTTON setBackgroundImage:[UIImage imageNamed:@"smmail.png"] forState:UIControlStateNormal];
+    [MAIL_BUTTON addTarget:self action:@selector(shareToMail:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *CLOSE_BUTTON = [[UIButton alloc] init];
+    [CLOSE_BUTTON setTitle:@"x" forState:UIControlStateNormal];
+    [CLOSE_BUTTON setTitleColor:[UIColor colorWithRed:51.0/255.0 green:153.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [CLOSE_BUTTON addTarget:self action:@selector(closeShareScrollView) forControlEvents:UIControlEventTouchUpInside];
+    
+    return @[FACEBOOK_BUTTON, MESSAGE_BUTTON, MAIL_BUTTON, CLOSE_BUTTON];
+}
+
+- (void)setupScrollMenuWithButtons:(NSArray *)buttons
+{
+    int x = self.view.frame.size.width/6;
+    for (UIButton* button in buttons) {
+        if ([button.titleLabel.text isEqual:@"x"]) {
+            button.frame = CGRectMake(x, -20, 65, 65);
+        }
+        else{
+            button.frame = CGRectMake(x, 9.5, 65, 65);
+        }
+        [_shareScrollView addSubview:button];
+        x += button.frame.size.width + 10;
+        button.showsTouchWhenHighlighted = YES;
+    }
+    
+    _shareScrollView.contentSize = CGSizeMake(x, _shareScrollView.frame.size.height);
+    _shareScrollView.backgroundColor = [UIColor colorWithRed:243.0/255.0 green:243.0/255.0 blue:243.0/255.0 alpha:1.0];
+    [_shareScrollView setShowsHorizontalScrollIndicator:NO];
+    NSLog(@"%f",(self.view.frame.size.height - 483.5));
+    lineView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, (self.view.frame.size.height-84.5), self.view.frame.size.width, 0.5f)];
+    lineView.backgroundColor = [UIColor colorWithRed:179.0/255.0 green:179.0/255.0 blue:179.0/255.0 alpha:1.0];
+    [self.view addSubview:lineView];
+    [self.shareScrollView setHidden:NO];
+
+    [self.view bringSubviewToFront:_shareScrollView];
+    
 }
 
 /* Load images at app startup */
@@ -83,6 +149,10 @@
         multiOn = [UIImage imageNamed:@"stickieon.png"];        
         multiOff = [UIImage imageNamed:@"stickie.png"];
         
+        [self.shareButton setHidden:YES];
+        [self.shareButton setCenter:CGPointMake(self.view.frame.size.width/2,self.view.frame.size.height-23)];
+        [self.view sendSubviewToBack:self.shareScrollView];
+
         defaultPoint = CGPointMake(50.0, 0.0);              // Sets default point for draggable ghost image.
         
         [self loadTags];
@@ -542,6 +612,8 @@
 - (void)multiToggle:(id)sender {
     if (multi) {
         multi = NO;
+        [self closeShareScrollView];
+
         [selected removeAllObjects];
         [self toggleMultiImage];
     }
@@ -570,10 +642,12 @@
     UIButton *multitagView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     [multitagView addTarget:self action:@selector(multiToggle:) forControlEvents:UIControlEventTouchUpInside];
     if (multi){
+        [self.shareButton setHidden:NO];
         [multitagView setBackgroundImage:multiOn
                                 forState:UIControlStateNormal];
     }
     else {
+        [self.shareButton setHidden:YES];
         [multitagView setBackgroundImage:multiOff
                                 forState:UIControlStateNormal];
     }
@@ -605,6 +679,8 @@
     int TAG_SENSITIVITY_X = dImage.size.width/5.0;
     int TAG_SENSITITVITY_Y = dImage.size.height/5.0;
     int FRAME_HEIGHT = self.view.frame.size.height;
+    int FRAME_WIDTH = self.view.frame.size.width;
+
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
@@ -639,83 +715,87 @@
         button = _botRightCorner;
         currentTag = 4;
     }
-
-    
-    if (![tag.tagName isEqualToString:@""]) {
-        if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
-                                                                  action:@"image_tag"  // Event action (required)
-                                                                   label:nil         // Event label
-                                                                   value:nil] build]];    // Event value
-            [UIView animateWithDuration:0.1 animations:^{
-                button.alpha = 0.0;
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.9 animations:^{
-                    button.alpha = 1.0;
-                } completion:^(BOOL finished) {
-                    // Cleanup stuff.
-                }];
-            }];
-            if (multi){
-                [urlToTagMap addTag:tag forMultipleAssets:selected];
-                [tagCollection updateCollectionWithTag:tag forMultipleAssets:selected];
-                multi = NO;
-                [selected removeAllObjects];
-                [self toggleMultiImage];
-            }
-            else {
-            /* Logic for tagging a new image - it is necessary to update both urlToTagMap and tagCollection. */
-                [urlToTagMap addTag: tag forAssetURL:assetURL];
-                [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
-            }
-        }
-        else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
-                                                                  action:@"image_untag"  // Event action (required)
-                                                                   label:nil         // Event label
-                                                                   value:nil] build]];    // Event value
-            [UIView animateWithDuration:0.1 animations:^{
-                button.alpha = 0.0;
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.9 animations:^{
-                    button.alpha = 1.0;
-                } completion:^(BOOL finished) {
-                    // Cleanup stuff.
-                }];
-            }];
-            if (multi){
-                [urlToTagMap removeTag:tag forMultipleAssets:selected];
-                [tagCollection removeMultipleAssets:selected forTag:tag];
-                multi = NO;
-                [selected removeAllObjects];
-                [self toggleMultiImage];
-            }
-            else {
-                /* Logic for removing a tag from a new image - it is necessary to update both urlToTagMap and tagCollection. */
-                [urlToTagMap removeTag:tag forAssetURL:assetURL];
-                [tagCollection removeImageURL:assetURL forTag:tag];
-            }
-        }
-//            [_collectionView reloadItemsAtIndexPaths: [[NSArray alloc] initWithObjects:path, nil]]; // DOES NOT WORK FOR FIRST TAG (APPLE BUG?).
-        [_collectionView reloadData];
+    if (point.x >= FRAME_WIDTH/2 -20 && point.x <= FRAME_WIDTH/2+20 && point.y >= FRAME_HEIGHT - 40 && point.y <= FRAME_HEIGHT && multi){
+        [self setupScrollMenuWithButtons:[self loadButtons]];
     }
-    else {
-        currentURL = assetURL;
-        switch (currentTag) {
-            case 1:
-                [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
-                break;
-            case 2:
-                [self performSegueWithIdentifier:@"topRightTagEdit" sender:self];
-                break;
-            case 3:
-                [self performSegueWithIdentifier:@"botLeftTagEdit" sender:self];
-                break;
-            case 4:
-                [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
-                break;
-            default:
-                break;
+    else{
+    
+        if (![tag.tagName isEqualToString:@""]) {
+            if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                      action:@"image_tag"  // Event action (required)
+                                                                       label:nil         // Event label
+                                                                       value:nil] build]];    // Event value
+                [UIView animateWithDuration:0.1 animations:^{
+                    button.alpha = 0.0;
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:0.9 animations:^{
+                        button.alpha = 1.0;
+                    } completion:^(BOOL finished) {
+                        // Cleanup stuff.
+                    }];
+                }];
+                if (multi){
+                    [urlToTagMap addTag:tag forMultipleAssets:selected];
+                    [tagCollection updateCollectionWithTag:tag forMultipleAssets:selected];
+                    multi = NO;
+                    [selected removeAllObjects];
+                    [self toggleMultiImage];
+                }
+                else {
+                /* Logic for tagging a new image - it is necessary to update both urlToTagMap and tagCollection. */
+                    [urlToTagMap addTag: tag forAssetURL:assetURL];
+                    [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
+                }
+            }
+            else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                      action:@"image_untag"  // Event action (required)
+                                                                       label:nil         // Event label
+                                                                       value:nil] build]];    // Event value
+                [UIView animateWithDuration:0.1 animations:^{
+                    button.alpha = 0.0;
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:0.9 animations:^{
+                        button.alpha = 1.0;
+                    } completion:^(BOOL finished) {
+                        // Cleanup stuff.
+                    }];
+                }];
+                if (multi){
+                    [urlToTagMap removeTag:tag forMultipleAssets:selected];
+                    [tagCollection removeMultipleAssets:selected forTag:tag];
+                    multi = NO;
+                    [selected removeAllObjects];
+                    [self toggleMultiImage];
+                }
+                else {
+                    /* Logic for removing a tag from a new image - it is necessary to update both urlToTagMap and tagCollection. */
+                    [urlToTagMap removeTag:tag forAssetURL:assetURL];
+                    [tagCollection removeImageURL:assetURL forTag:tag];
+                }
+            }
+    //            [_collectionView reloadItemsAtIndexPaths: [[NSArray alloc] initWithObjects:path, nil]]; // DOES NOT WORK FOR FIRST TAG (APPLE BUG?).
+            [_collectionView reloadData];
+        }
+        else {
+            currentURL = assetURL;
+            switch (currentTag) {
+                case 1:
+                    [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
+                    break;
+                case 2:
+                    [self performSegueWithIdentifier:@"topRightTagEdit" sender:self];
+                    break;
+                case 3:
+                    [self performSegueWithIdentifier:@"botLeftTagEdit" sender:self];
+                    break;
+                case 4:
+                    [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

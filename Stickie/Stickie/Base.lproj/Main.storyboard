@@ -151,6 +151,20 @@
                                 <rect key="frame" x="124" y="68" width="105" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="waN-NN-s3K">
+                                <rect key="frame" x="144" y="522" width="48" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" backgroundImage="Sharing64.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareMulti:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="H9r-fc-rrX"/>
+                                </connections>
+                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="a8x-mT-iwF">
+                                <rect key="frame" x="0.0" y="484" width="321" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -164,6 +178,8 @@
                         <outlet property="botRightLabel" destination="IGM-6F-hVZ" id="jxz-Wq-o12"/>
                         <outlet property="collectionView" destination="InS-wl-dcP" id="CrP-He-TVc"/>
                         <outlet property="dNewImageView" destination="owN-vc-Jt0" id="1cr-pa-KFG"/>
+                        <outlet property="shareButton" destination="waN-NN-s3K" id="UCl-ld-b8M"/>
+                        <outlet property="shareScrollView" destination="a8x-mT-iwF" id="DAx-qg-Tf5"/>
                         <outlet property="topLeftCorner" destination="ida-78-yow" id="fSk-5O-RwC"/>
                         <outlet property="topLeftLabel" destination="d0k-6x-Qhh" id="Z1P-67-vJ0"/>
                         <outlet property="topRightCorner" destination="nzz-3R-C1g" id="9c5-DS-NQS"/>
@@ -598,16 +614,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MQ9-rN-d5c" userLabel="Start">
-                                <rect key="frame" x="55" y="399" width="210" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <state key="normal" image="tutButton.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="vXZ-lx-hvc" kind="push" identifier="start" id="L4W-cC-CoX"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jXM-pU-fwu" userLabel="Close">
                                 <rect key="frame" x="290" y="0.0" width="30" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -617,6 +623,16 @@
                                 </state>
                                 <connections>
                                     <segue destination="vXZ-lx-hvc" kind="push" id="mqa-Bc-Sl6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MQ9-rN-d5c" userLabel="Start">
+                                <rect key="frame" x="55" y="399" width="210" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" image="tutButton.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="vXZ-lx-hvc" kind="push" identifier="start" id="L4W-cC-CoX"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -706,6 +722,7 @@
         <image name="CornerOrange.png" width="128" height="128"/>
         <image name="CornerRed.png" width="128" height="128"/>
         <image name="Half circle new.png" width="619" height="185"/>
+        <image name="Sharing64.png" width="64" height="58"/>
         <image name="tutButton.png" width="419" height="203"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -714,9 +731,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="T3g-bY-jZf"/>
         <segue reference="kNa-3S-pJo"/>
-        <segue reference="gwP-KI-MWf"/>
+        <segue reference="mqa-Bc-Sl6"/>
         <segue reference="w2s-Lq-cI3"/>
+        <segue reference="gwP-KI-MWf"/>
     </inferredMetricsTieBreakers>
 </document>
