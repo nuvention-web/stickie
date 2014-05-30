@@ -431,8 +431,8 @@
     
     ALAssetsLibrary *assetsLibrary = [SKViewController defaultAssetsLibrary];
     
-    ALAssetsGroupType group = [[NSUserDefaults standardUserDefaults] boolForKey:@"photostreamOn"] ? (ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary | ALAssetsGroupPhotoStream) : (ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary) ;
-    
+    ALAssetsGroupType group = [[NSUserDefaults standardUserDefaults] boolForKey:@"photostreamOn"] ? (ALAssetsGroupPhotoStream |ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary) : (ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary);
+
     [assetsLibrary enumerateGroupsWithTypes:group usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if(result) {
