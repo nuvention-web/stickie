@@ -1141,12 +1141,14 @@ finishedSavingWithError:(NSError *)error
                 default:
                 {
                     NSLog(@"Cancelled.....");
+                    [self closeShareScrollView];
                     
                 }
                     break;
                 case SLComposeViewControllerResultDone:
                 {
                     NSLog(@"Posted....");
+                    [self closeShareScrollView];
                 }
                     break;
         }};
@@ -1222,9 +1224,10 @@ finishedSavingWithError:(NSError *)error
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    self.view.alpha = 1;
+    self.navigationController.view.alpha = 1;
     [_activityView stopAnimating];
     [_indicatorThread cancel];
+    [self closeShareScrollView];
     switch (result)
     {
         case MFMailComposeResultCancelled:
@@ -1284,16 +1287,17 @@ finishedSavingWithError:(NSError *)error
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
     [self dismissViewControllerAnimated:YES completion:NULL];
-    self.view.alpha = 1;
+        self.navigationController.view.alpha = 1;
     [_activityView stopAnimating];
     [_indicatorThread cancel];
+    [self closeShareScrollView];
 }
 
 // For showing the activity indicator.
 - (void)showIndicator
 {
     @autoreleasepool {
-        self.view.alpha = 0.5;
+        self.navigationController.view.alpha = 0.5;
         _activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         _activityView.center = self.view.center;
         [_activityView startAnimating];
