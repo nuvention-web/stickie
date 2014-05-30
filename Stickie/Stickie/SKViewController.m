@@ -21,9 +21,11 @@
 #import "GAIDictionaryBuilder.h"
 #import "SWRevealViewController.h"
 #import "SKMenuViewController.h"
+#import "Social/Social.h"
+#import <MessageUI/MessageUI.h>
 
 
-@interface SKViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, SWRevealViewControllerDelegate>
+@interface SKViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, SWRevealViewControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 {
     SKPhotoCell *dCell;
     NSIndexPath *dIndexPath;
@@ -207,6 +209,11 @@
 {
     // Necessary for SWRevealViewController - Menu View.
     [self.navigationController.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController.view removeGestureRecognizer:self.revealViewController.panGestureRecognizer];
 }
 
 - (void) applicationWillEnterForeground:(NSNotification *) notification
@@ -801,10 +808,6 @@
 }
 
 #pragma mark Camera Methods
-/* Take photo. */
-//- (IBAction)takePhotoButtonTapped:(id)sender {
-//    [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.3];
-//}
 
 /* Setup for image picker. */
 - (void)useCamera{
@@ -1114,11 +1117,183 @@ finishedSavingWithError:(NSError *)error
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)viewWillDisappear:(BOOL)animated
+#pragma mark Sharing Multiple
+
+- (void)shareMultipleToFacebook:(id)sender
 {
-    [self.navigationController.view removeGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    if (!multi) {
+        [NSException raise:@"Multi Not Selected" format:@"Cannot share photos while not in multi-select mode."];
+    }
+    
+    SLComposeViewController *fbController=[SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+    
+    
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+    {
+        SLComposeViewControllerCompletionHandler __block completionHandler=^(SLComposeViewControllerResult result){
+            
+            [fbController dismissViewControllerAnimated:YES completion:nil];
+            
+            switch(result){
+                case SLComposeViewControllerResultCancelled:
+                default:
+                {
+                    NSLog(@"Cancelled.....");
+                    
+                }
+                    break;
+                case SLComposeViewControllerResultDone:
+                {
+                    NSLog(@"Posted....");
+                }
+                    break;
+        }};
+        
+        // Add selected photos to fbController.
+        for (ALAsset* asset in selected) {
+            ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+            UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+            [fbController addImage:image];
+        }
+        
+        [fbController setInitialText:@"Get @StickieApp (#stickie):"];
+        [fbController setCompletionHandler:completionHandler];
+        [self presentViewController:fbController animated:YES completion:nil];
+        
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Facebook Not Setup"
+                              message: @"Please setup your Facebook Account in Settings to share multiple images."
+                              delegate: self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil, nil];
+        
+        [alert show];
+    }
 }
 
+- (void)shareMultipleToMail:(id)sender
+{
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                          action:@"share_mult_mail"  // Event action (required)
+                                                           label:nil         // Event label
+                                                           value:nil] build]];    // Event value
+    if ([MFMailComposeViewController canSendMail]) {
+        _indicatorThread = [[NSThread alloc]initWithTarget:self selector:@selector(showIndicator) object:nil];
+        [_indicatorThread start];
+        NSString *messageBody = @"<br><br>Sent via <a href=\"https://itunes.apple.com/gb/app/stickie/id853858851?mt=8\">Stickie</a>." ;
+        
+        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+        mc.mailComposeDelegate = self;
+        [mc setMessageBody:messageBody isHTML:YES];
+        
+        NSString* imagePath = [NSString stringWithFormat:@"%@/image.png", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+        
+        for (ALAsset *asset in selected) {
+            ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+            UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+            [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
+            
+            
+            NSData *fileData = [NSData dataWithContentsOfFile:imagePath];
+            NSString *mimeType = @"image/png";
+            
+            [mc addAttachmentData:fileData mimeType:mimeType fileName:@"image"];
+        }
+        
+        // Present mail view controller on screen
+        [self presentViewController:mc animated:YES completion:NULL];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Mail Not Setup"
+                              message: @"Set up mail on your device to continue."
+                              delegate: self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        
+        [alert show];
+    }
+}
 
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [_activityView stopAnimating];
+    [_indicatorThread cancel];
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)shareMultipleToMessage:(id)sender
+{
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                          action:@"share_mult_message"  // Event action (required)
+                                                           label:nil         // Event label
+                                                           value:nil] build]];    // Event value
+    if ([MFMessageComposeViewController canSendText]) {
+        _indicatorThread = [[NSThread alloc]initWithTarget:self selector:@selector(showIndicator) object:nil];
+        [_indicatorThread start];
+        
+        MFMessageComposeViewController* composeVC = [[MFMessageComposeViewController alloc] init];
+        composeVC.messageComposeDelegate = self;
+        NSString *type = @"image/jpg";
+        
+        for (ALAsset* asset in selected) {
+            ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+            UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+            [composeVC addAttachmentData:UIImagePNGRepresentation(image) typeIdentifier:type filename:@"image.png"];
+        }
+        [self presentViewController:composeVC animated:YES completion:NULL];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Messaging Not Setup"
+                              message: @"Set up messaging on your device to continue."
+                              delegate: self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        
+        [alert show];
+    }
+    
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    [_activityView stopAnimating];
+    [_indicatorThread cancel];
+}
+
+// For showing the activity indicator.
+- (void)showIndicator
+{
+    @autoreleasepool {
+        _activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        _activityView.center = self.view.center;
+        [_activityView startAnimating];
+        [self.view addSubview:_activityView];
+    }
+}
 
 @end

@@ -87,19 +87,18 @@ typedef enum {
 }
 - (void)loadImage
 {
-    dispatch_async(loadImageToShare, ^{
+    @autoreleasepool {
         NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
         [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
         [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
         //    NSLog(@"image size: %@", NSStringFromCGSize(instaImage.size));
         _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
-    });
+    }
 }
 
 - (void)shareSkip{
     [self shareToInstaWith:@""];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -280,10 +279,13 @@ typedef enum {
 
 - (void)shareToInstaWith: (NSString *)str
 {
+    // Wonderfully messy code follows.
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://"];
     if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
         // Setting up hashtags
-        NSMutableString *hashtags = [NSMutableString stringWithString:@"Get @StickieApp ••"];
+        NSString *emptyString = @"⠀⠀⠀";
+        NSString *otherString = @"☛ Get @StickieApp ••";
+        NSString *hashtags = [NSString stringWithFormat:@"%@\r%@", emptyString, otherString];
         NSArray *tags = [[NSArray alloc] initWithArray:[[SKAssetURLTagsMap sharedInstance] getTagsForAssetURL:_url]];
         NSMutableString *customtags = [NSMutableString stringWithString:@""];
         for (int i = 0; i < [tags count]; i++) {
