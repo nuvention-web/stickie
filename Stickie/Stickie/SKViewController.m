@@ -1218,9 +1218,4 @@ finishedSavingWithError:(NSError *)error
     }
 }
 
-- (IBAction)shareButton:(id)sender {
-    [self shareMultipleToMail:self];
-}
-
-
 @end
