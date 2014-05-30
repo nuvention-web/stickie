@@ -722,7 +722,7 @@
         button = _botRightCorner;
         currentTag = 4;
     }
-    if (point.x >= FRAME_WIDTH/2 -20 && point.x <= FRAME_WIDTH/2+20 && point.y >= FRAME_HEIGHT - 40 && point.y <= FRAME_HEIGHT && multi){
+    if (point.x >= FRAME_WIDTH/2 -40 && point.x <= FRAME_WIDTH/2+40 && point.y >= FRAME_HEIGHT - 40 && point.y <= FRAME_HEIGHT && multi){
         [self setupScrollMenuWithButtons:[self loadButtons]];
     }
     else{
