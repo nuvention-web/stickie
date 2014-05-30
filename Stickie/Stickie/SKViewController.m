@@ -1142,6 +1142,7 @@ finishedSavingWithError:(NSError *)error
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
+    self.view.alpha = 1;
     [_activityView stopAnimating];
     [_indicatorThread cancel];
     switch (result)
@@ -1203,6 +1204,7 @@ finishedSavingWithError:(NSError *)error
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
     [self dismissViewControllerAnimated:YES completion:NULL];
+    self.view.alpha = 1;
     [_activityView stopAnimating];
     [_indicatorThread cancel];
 }
@@ -1211,6 +1213,7 @@ finishedSavingWithError:(NSError *)error
 - (void)showIndicator
 {
     @autoreleasepool {
+        self.view.alpha = 0.5;
         _activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         _activityView.center = self.view.center;
         [_activityView startAnimating];
