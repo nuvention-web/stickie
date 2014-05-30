@@ -730,10 +730,6 @@
 }
 
 #pragma mark Camera Methods
-/* Take photo. */
-//- (IBAction)takePhotoButtonTapped:(id)sender {
-//    [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.3];
-//}
 
 /* Setup for image picker. */
 - (void)useCamera{
