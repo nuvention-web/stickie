@@ -77,6 +77,7 @@
 		14B0C7A018A2EFA4008B65C3 /* SKTagCollectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */; };
 		14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */; };
 		6C815DD75AA447519BA9F424 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA93ED52B2B416FA2B2E4EF /* libPods.a */; };
+		932F6CCF1938FF8B00D2210C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932F6CCE1938FF8B00D2210C /* Social.framework */; };
 		9361EE5A192BED3C0070F688 /* SKMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9361EE59192BED3C0070F688 /* SKMenuViewController.m */; };
 		9385097A18CD2EA1001AE7DC /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 9385097118CD2EA1001AE7DC /* camera.png */; };
 		9385098518CD3044001AE7DC /* SKLongPressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385098418CD3044001AE7DC /* SKLongPressButton.m */; };
@@ -199,6 +200,7 @@
 		14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagCollectionTest.m; sourceTree = "<group>"; };
 		14B0C7A618A30B43008B65C3 /* SKTagSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagSearchViewController.h; sourceTree = "<group>"; };
 		14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagSearchViewController.m; sourceTree = "<group>"; };
+		932F6CCE1938FF8B00D2210C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		9361EE58192BED3C0070F688 /* SKMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMenuViewController.h; sourceTree = "<group>"; };
 		9361EE59192BED3C0070F688 /* SKMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMenuViewController.m; sourceTree = "<group>"; };
 		9385097118CD2EA1001AE7DC /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				932F6CCF1938FF8B00D2210C /* Social.framework in Frameworks */,
 				1493FA891910697B00364B8F /* Twitter.framework in Frameworks */,
 				14A18CDF1909906700AB7BE7 /* MessageUI.framework in Frameworks */,
 				14A2A3EA18C3BAD4006D3FFC /* libz.dylib in Frameworks */,
@@ -328,6 +331,7 @@
 		149FB2951890845B00D44DB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				932F6CCE1938FF8B00D2210C /* Social.framework */,
 				1493FA881910697B00364B8F /* Twitter.framework */,
 				14A18CDE1909906700AB7BE7 /* MessageUI.framework */,
 				14A2A3E918C3BAD4006D3FFC /* libz.dylib */,
