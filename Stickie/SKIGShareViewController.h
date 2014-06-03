@@ -12,6 +12,7 @@
 
 @property (nonatomic,retain) UIDocumentInteractionController *docFile;
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSURL *url;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @end

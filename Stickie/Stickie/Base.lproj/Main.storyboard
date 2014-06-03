@@ -202,6 +202,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vqI-cj-Pz0">
+                                <rect key="frame" x="0.0" y="484" width="321" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" id="MJE-Ka-gKq">
                                 <rect key="frame" x="12" y="92" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -322,8 +326,10 @@
                         <outlet property="botRightButton" destination="pPm-qW-BA7" id="6cl-j7-UhU"/>
                         <outlet property="collectionView" destination="tMz-6e-eQE" id="Qd5-QW-JP7"/>
                         <outlet property="dNewImageView" destination="LF4-q9-nxJ" id="mTm-DX-Lna"/>
+                        <outlet property="shareScrollView" destination="vqI-cj-Pz0" id="qxq-7T-rfy"/>
                         <outlet property="topLeftButton" destination="MJE-Ka-gKq" id="aMV-xm-0kj"/>
                         <outlet property="topRightButton" destination="GqL-SY-fLM" id="0lW-ek-akc"/>
+                        <segue destination="m1p-oF-qu3" kind="push" identifier="instaShare" id="y3P-qM-4JH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rbs-Hz-1hR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -740,9 +746,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="w2s-Lq-cI3"/>
-        <segue reference="mqa-Bc-Sl6"/>
+        <segue reference="y3P-qM-4JH"/>
         <segue reference="gwP-KI-MWf"/>
+        <segue reference="mqa-Bc-Sl6"/>
+        <segue reference="w2s-Lq-cI3"/>
         <segue reference="XUF-iZ-BJj"/>
     </inferredMetricsTieBreakers>
 </document>

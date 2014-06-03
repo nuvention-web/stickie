@@ -132,6 +132,7 @@
 
 - (void)setupScrollMenuWithButtons:(NSArray *)buttons
 {
+    
     int x = 10;
     for (UIButton* button in buttons) {
         button.frame = CGRectMake(x, 9.5, 65, 65);

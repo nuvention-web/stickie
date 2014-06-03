@@ -81,7 +81,11 @@ typedef enum {
                     @"insta_selfies.png"];
     
     _customChoice = [[NSString alloc] init];
+    if (_image) {
+        _imageView = [[UIImageView alloc]initWithImage:_image];
+    }
     instaImage = _imageView.image; //Top half of image Full Resolution.
+    
     loadImageToShare = dispatch_queue_create("Load Image", NULL);
     [self loadImage];
 }

@@ -41,7 +41,6 @@
     UIBarButtonItem *multitagButton;
     UIImage *multiOn;
     UIImage *multiOff;
-    UIImage *share;
     UIView *lineView;
 }
 
@@ -731,7 +730,6 @@
         [self setupScrollMenuWithButtons:[self loadButtons]];
     }
     else{
-    
         if (![tag.tagName isEqualToString:@""]) {
             if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
                 [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
