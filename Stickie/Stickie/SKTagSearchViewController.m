@@ -339,7 +339,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     int DISTANCE_ABOVE_FINGER = 30;
     
     SKSimpleButton *currentButton = (SKSimpleButton*)gestureRecognizer.view;
-    UILabel *dImageLabel = [[UILabel alloc] initWithFrame:CGRectMake(25,35, 50, 20)];
+    UILabel *dImageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 50, 20)];
     [dImageLabel setText:currentButton.titleLabel.text];
     dImageLabel.textColor = [UIColor whiteColor];
     CGPoint anotherPoint = [gestureRecognizer locationInView:self.view];
@@ -360,6 +360,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [_dNewImageView setHidden:NO];
             [_dNewImageView setImage:dImage];
             [_dNewImageView addSubview:dImageLabel];
+            [dImageLabel setCenter:CGPointMake(105.0/2,105.0/2)];
             [self.view bringSubviewToFront:_dNewImageView];
             _dNewImageView.layer.masksToBounds = YES;
             break;
