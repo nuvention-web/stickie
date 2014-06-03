@@ -37,6 +37,7 @@
     BOOL multi;
     NSMutableArray *selected;
     UIBarButtonItem *cameraButton;
+    UIBarButtonItem *menuButton;
     UIBarButtonItem *multitagButton;
     UIImage *multiOn;
     UIImage *multiOff;
@@ -197,7 +198,11 @@
                                 forState:UIControlStateNormal];
         cameraButton = [[UIBarButtonItem alloc] initWithCustomView:cameraView];
         
-        UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"hamburger.png"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
+        UIButton *menuView = [[UIButton alloc] initWithFrame:CGRectMake(-5, 0, 33, 25)];
+        [menuView addTarget:self action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
+        [menuView setBackgroundImage:[UIImage imageNamed:@"hamburger.png"]
+                              forState:UIControlStateNormal];
+        menuButton = [[UIBarButtonItem alloc] initWithCustomView:menuView];
         [self.navigationItem setLeftBarButtonItem:menuButton];
         [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:cameraButton, multitagButton,  nil]];
 
@@ -1158,7 +1163,6 @@ finishedSavingWithError:(NSError *)error
             [fbController addImage:image];
         }
         
-        [fbController setInitialText:@"Get @StickieApp (#stickie):"];
         [fbController setCompletionHandler:completionHandler];
         [self presentViewController:fbController animated:YES completion:nil];
         

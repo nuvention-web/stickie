@@ -568,6 +568,7 @@
     };
     composeController.completionHandler =myBlock;
 }
+
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
     
     float newScale = [_scrollView zoomScale] * 4.0;

@@ -332,7 +332,28 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     SKImageTag *tag;
     
-    if (point.x >= 86 && point.x <= 234 && point.y >= FRAME_HEIGHT - 44 - TAG_SENSITIVITY && point.y <= FRAME_HEIGHT){
+    if (point.x >= 0 && point.x <= 65 && point.y >= FRAME_HEIGHT - 44 - TAG_SENSITIVITY && point.y <= FRAME_HEIGHT){
+        tag = [[SKImageTag alloc] initWithName:currentTag location:SKCornerLocationUndefined andColor:nil];
+        if (![tag.tagName isEqualToString:@""]) {
+            if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
+                [urlToTagMap removeTag:tag forAssetURL:assetURL];
+                [tagCollection removeImageURL:assetURL forTag:tag];
+                if ([currentTag isEqualToString:_topLeftButton.titleLabel.text]){
+                    [_topLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([currentTag isEqualToString:_topRightButton.titleLabel.text]){
+                    [_topRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([currentTag isEqualToString:_botLeftButton.titleLabel.text]){
+                    [_botLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([currentTag isEqualToString:_botRightButton.titleLabel.text]){
+                    [_botRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+            }
+        }
+    }
+    if (point.x >= 255 && point.x <= 320 && point.y >= FRAME_HEIGHT - 44 - TAG_SENSITIVITY && point.y <= FRAME_HEIGHT){
         tag = [[SKImageTag alloc] initWithName:currentTag location:SKCornerLocationUndefined andColor:nil];
         if (![tag.tagName isEqualToString:@""]) {
             if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
