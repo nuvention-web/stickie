@@ -45,9 +45,15 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     /* Sets titles of buttons. */
     [_topLeftButton setTitle:_topLeftText forState:UIControlStateNormal];
+    [_topRightButton setColor:SKSimpleButtonBlue];
     [_topRightButton setTitle:_topRightText forState:UIControlStateNormal];
+    [_topRightButton setColor:SKSimpleButtonGreen];
     [_botLeftButton setTitle:_botLeftText forState:UIControlStateNormal];
+    [_botLeftButton setColor:SKSimpleButtonRed];
     [_botRightButton setTitle:_botRightText forState:UIControlStateNormal];
+    [_botRightButton setColor:SKSimpleButtonOrange];
+    
+    NSArray *buttons = @[_topLeftButton, _topRightButton, _botLeftButton, _botRightButton];
     
     /* Initialization stuff. */
     topLeftClicked = NO, topRightClicked = NO, botLeftClicked = NO, botRightClicked = NO;
@@ -59,6 +65,11 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     longGestureRecognizer.delegate = self;
     _dNewImageView.userInteractionEnabled = YES;
     [self.collectionView addGestureRecognizer:longGestureRecognizer];
+    
+    for (UIButton* button in buttons) {
+        UILongPressGestureRecognizer *longButtonGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longButtonGestureRecognized:)];
+        [button addGestureRecognizer:longButtonGestureRecognizer];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWillEnterForeground:)
@@ -316,6 +327,54 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [self recordTags: anotherPoint forURL: url];
             [_dNewImageView removeGestureRecognizer:gestureRecognizer];     // Transferring recongizer back to collection view.
             [self.collectionView addGestureRecognizer:gestureRecognizer];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void)longButtonGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    int DISTANCE_ABOVE_FINGER = 30;
+    
+    SKSimpleButton *currentButton = (SKSimpleButton*)gestureRecognizer.view;
+    UILabel *dImageLabel = [[UILabel alloc] initWithFrame:CGRectMake(25,35, 50, 20)];
+    [dImageLabel setText:currentButton.titleLabel.text];
+    dImageLabel.textColor = [UIColor whiteColor];
+    CGPoint anotherPoint = [gestureRecognizer locationInView:self.view];
+    
+    switch (gestureRecognizer.state) {
+        case UIGestureRecognizerStateBegan: {
+            if (currentButton.color == SKSimpleButtonBlue) {
+                dImage = [UIImage imageNamed:@"CircleBlue.png"];
+            } else if (currentButton.color == SKSimpleButtonGreen) {
+                dImage = [UIImage imageNamed:@"CircleGreen.png"];
+            } else if (currentButton.color == SKSimpleButtonRed) {
+                dImage = [UIImage imageNamed:@"CircleRed.png"];
+            } else {
+                dImage = [UIImage imageNamed:@"CircleOrange.png"];
+            }
+            anotherPoint.y -= DISTANCE_ABOVE_FINGER;
+            [_dNewImageView setCenter:anotherPoint];
+            [_dNewImageView setHidden:NO];
+            [_dNewImageView setImage:dImage];
+            [_dNewImageView addSubview:dImageLabel];
+            [self.view bringSubviewToFront:_dNewImageView];
+            _dNewImageView.layer.masksToBounds = YES;
+            break;
+        }
+        case UIGestureRecognizerStateChanged: {
+            anotherPoint.y -= DISTANCE_ABOVE_FINGER;
+            [_dNewImageView setCenter:anotherPoint];
+            break;
+        }
+        case UIGestureRecognizerStateEnded: {
+            [_dNewImageView setHidden:YES];
+            [_dNewImageView setCenter:defaultPoint];
+            [dImageLabel removeFromSuperview];
+            NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
+            [self recordTags: anotherPoint forURL: url];
             break;
         }
         default:
