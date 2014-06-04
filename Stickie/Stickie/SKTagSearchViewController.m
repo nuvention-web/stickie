@@ -461,6 +461,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     }
 }
 
+// Good stuff right herr.
 - (void)createCenterLabelWithString:(NSString*)str font:(UIFont*)font andColor:(UIColor*)color inView:(UIView*)view
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
