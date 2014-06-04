@@ -643,6 +643,14 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                             forState:UIControlStateNormal];
     multitagButton = [[UIBarButtonItem alloc] initWithCustomView:multitagView];
     [self.navigationItem setRightBarButtonItem:multitagButton];
+    
+    for (UIButton* button in buttons) {
+        UILongPressGestureRecognizer *longButtonGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longButtonGestureRecognized:)];
+        longButtonGestureRecognizer.minimumPressDuration = 0.15;
+        
+        [button addGestureRecognizer:longButtonGestureRecognizer];
+    }
+    
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWillEnterForeground:)
@@ -932,6 +940,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     SKSimpleButton *currentButton = (SKSimpleButton*)gestureRecognizer.view;
     CGPoint anotherPoint = [gestureRecognizer locationInView:self.view];
+    [_dNewImageView.layer setBorderColor:(__bridge CGColorRef)([UIColor clearColor])];
     
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStateBegan: {
