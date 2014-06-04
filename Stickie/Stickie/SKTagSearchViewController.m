@@ -359,8 +359,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [_dNewImageView setCenter:anotherPoint];
             [_dNewImageView setHidden:NO];
             [_dNewImageView setImage:dImage];
-            [_dNewImageView addSubview:dImageLabel];
-            [dImageLabel setCenter:CGPointMake(105.0/2,105.0/2)];
+            [self createCenterLabelWithString:currentButton.titleLabel.text font:[UIFont systemFontOfSize:22.0] andColor:[UIColor whiteColor] inView:_dNewImageView];
             [self.view bringSubviewToFront:_dNewImageView];
             _dNewImageView.layer.masksToBounds = YES;
             break;
@@ -373,7 +372,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         case UIGestureRecognizerStateEnded: {
             [_dNewImageView setHidden:YES];
             [_dNewImageView setCenter:defaultPoint];
-            [dImageLabel removeFromSuperview];
+            
+            for (UIView* view in _dNewImageView.subviews) {     // This is stupid, probably better
+                if ([view isMemberOfClass:[UILabel class]]) {   // as a function, but oh well.
+                    [view removeFromSuperview];
+                }
+            }
+            
             NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
             [self recordTags: anotherPoint forURL: url];
             break;
@@ -454,6 +459,22 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         detailViewController.assets = _assets;
         detailViewController->imageIndex = (int) indexPath.row;
     }
+}
+
+- (void)createCenterLabelWithString:(NSString*)str font:(UIFont*)font andColor:(UIColor*)color inView:(UIView*)view
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.textColor = color;
+    label.font = font;
+    label.lineBreakMode = NSLineBreakByTruncatingTail;
+    label.text = str;
+    label.numberOfLines = 0;
+    [label sizeToFit];
+    if (label.frame.size.width > view.frame.size.width) {
+        label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y, view.frame.size.width * 0.95, label.frame.size.height);
+    }
+    [view addSubview:label];
+    label.center = CGPointMake(view.frame.size.width/2.0, view.frame.size.height/2.0);
 }
 
 -(void)viewWillDisappear:(BOOL)animated
