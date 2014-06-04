@@ -68,6 +68,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     for (UIButton* button in buttons) {
         UILongPressGestureRecognizer *longButtonGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longButtonGestureRecognized:)];
+        longButtonGestureRecognizer.minimumPressDuration = 0.15;
         [button addGestureRecognizer:longButtonGestureRecognizer];
     }
     
@@ -339,9 +340,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     int DISTANCE_ABOVE_FINGER = 30;
     
     SKSimpleButton *currentButton = (SKSimpleButton*)gestureRecognizer.view;
-    UILabel *dImageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 50, 20)];
-    [dImageLabel setText:currentButton.titleLabel.text];
-    dImageLabel.textColor = [UIColor whiteColor];
     CGPoint anotherPoint = [gestureRecognizer locationInView:self.view];
     
     switch (gestureRecognizer.state) {
