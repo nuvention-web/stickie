@@ -217,7 +217,7 @@
                                     <action selector="colorButton:" destination="lsA-Em-eke" eventType="touchUpInside" id="KvC-mA-8ac"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" id="GqL-SY-fLM">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" id="GqL-SY-fLM" customClass="SKSimpleButton">
                                 <rect key="frame" x="89" y="92" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
@@ -228,7 +228,7 @@
                                     <action selector="colorButton:" destination="lsA-Em-eke" eventType="touchUpInside" id="MOQ-2g-dwH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" id="d3b-qy-B1F">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" id="d3b-qy-B1F" customClass="SKSimpleButton">
                                 <rect key="frame" x="167" y="92" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
@@ -239,11 +239,11 @@
                                     <action selector="colorButton:" destination="lsA-Em-eke" eventType="touchUpInside" id="yC6-gq-wRr"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" id="pPm-qW-BA7">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" id="pPm-qW-BA7" customClass="SKSimpleButton">
                                 <rect key="frame" x="244" y="92" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <state key="normal" backgroundImage="CircleRed.png">
+                                <state key="normal" backgroundImage="CircleOrange.png">
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
@@ -731,6 +731,7 @@
         <image name="AutoSquare.png" width="128" height="128"/>
         <image name="CircleBlue.png" width="128" height="128"/>
         <image name="CircleGreen.png" width="128" height="128"/>
+        <image name="CircleOrange.png" width="128" height="128"/>
         <image name="CircleRed.png" width="128" height="128"/>
         <image name="CornerBlue.png" width="128" height="128"/>
         <image name="CornerGreen.png" width="128" height="128"/>
