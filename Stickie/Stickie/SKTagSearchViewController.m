@@ -18,6 +18,7 @@
 #import <MessageUI/MessageUI.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "SKIGShareViewController.h"
+#import "SKImageTag.h"
 
 @interface SKTagSearchViewController()<UIGestureRecognizerDelegate,MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate,UIDocumentInteractionControllerDelegate>
 {
@@ -41,6 +42,7 @@
     UIImage *simage;
     NSURL *imageURL;
     dispatch_queue_t loadImageToShare;
+    SKImageTag *currentAlertTag;
 }
 
 typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
@@ -433,6 +435,34 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         else if ([alertView.title isEqualToString:@"WhatsApp Not Installed"]) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/whatsapp-messenger/id310633997?mt=8"]];
         }
+        else if ([alertView.title isEqualToString:@"Delete Tags"]) {
+            if (currentAlertTag && ![currentAlertTag.tagName isEqualToString:@""]) {
+                SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+                SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
+                
+                NSMutableArray *urlArray = [tagCollection getTagInfo:currentAlertTag].imageURLs;
+                
+                int i; int end;
+                for (i=0, end = [urlArray count]; i < end; i++) {
+                    [urlToTagMap removeTag:currentAlertTag forAssetURL:urlArray[i]];
+                    [tagCollection removeImageURL:urlArray[i--] forTag:currentAlertTag];
+                    end--;
+                }
+                
+                if ([currentTag isEqualToString:_topLeftButton.titleLabel.text]){
+                    [_topLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([currentTag isEqualToString:_topRightButton.titleLabel.text]){
+                    [_topRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([currentTag isEqualToString:_botLeftButton.titleLabel.text]){
+                    [_botLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+                else if ([currentTag isEqualToString:_botRightButton.titleLabel.text]){
+                    [_botRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                }
+            }
+        }
     }
 }
 
@@ -650,7 +680,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         
         [button addGestureRecognizer:longButtonGestureRecognizer];
     }
-    
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWillEnterForeground:)
@@ -976,9 +1005,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                     [view removeFromSuperview];
                 }
             }
-            
-            NSURL *url = [dCell.asset valueForProperty:ALAssetPropertyAssetURL];
-            [self recordTags: anotherPoint forURL: url];
+            [self recordTags:anotherPoint forTagName:currentButton.titleLabel.text];
             break;
         }
         default:
@@ -1032,8 +1059,47 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [self setupScrollMenuWithButtons:[self loadButtons]];
 
     }
-
 }
+
+- (void)recordTags:(CGPoint)point forTagName:(NSString*)name
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Tags" message:[[NSString alloc] initWithFormat:@"Are you sure you want to delete all tags for %@.", name] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Okay", nil];
+    
+    int TAG_SENSITIVITY = 30;
+    int FRAME_HEIGHT = self.view.frame.size.height;
+    
+    SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+    NSMutableArray *urlArray = [tagCollection getTagInfo:[[SKImageTag alloc] initWithName:name location:SKCornerLocationUndefined andColor:nil]].imageURLs;
+    
+    //Untag
+    if (point.x >= 0 && point.x <= 65 && point.y >= FRAME_HEIGHT - 44 - TAG_SENSITIVITY && point.y <= FRAME_HEIGHT){
+        if ([urlArray count] > 0) {
+            [alert show]; // Look in alert method for implemenation - verrry messy code.
+        }
+        currentAlertTag = [[SKImageTag alloc] initWithName:name location:SKCornerLocationUndefined andColor:nil];
+    }
+    //Share
+    if (point.x >= 255 && point.x <= 320 && point.y >= FRAME_HEIGHT - 44 - TAG_SENSITIVITY && point.y <= FRAME_HEIGHT){
+        for (NSURL *url in urlArray) {
+            [selected removeAllObjects];
+            [library assetForURL:url resultBlock:^(ALAsset *myasset) {
+                /* Check if asset is still valid */
+                if (myasset) {
+                    [selected addObject:myasset];
+                    if ([urlArray indexOfObject:url] == [urlArray count]-1) {
+                    }
+                }
+                /* If not valid, update imageURLs - this may not be necessary. */
+            } failureBlock:^(NSError *myerror) {
+                NSLog(@"Cannot access Library Assets");
+            }];
+        }
+        multi = YES;
+        [self setupScrollMenuWithButtons:[self loadButtons]];
+        
+    }
+}
+
 #pragma mark Segue Handling
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([identifier isEqualToString:@"showTagDetail"] && multi){
@@ -1048,7 +1114,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     if ([[segue identifier] isEqualToString:@"showTagDetail"])
     {
         NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
-        ALAsset *asset = self.assets[indexPath.row];        
+        ALAsset *asset = self.assets[indexPath.row];
         NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
         ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
         UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
