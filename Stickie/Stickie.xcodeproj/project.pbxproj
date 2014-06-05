@@ -77,6 +77,7 @@
 		14B0C7A018A2EFA4008B65C3 /* SKTagCollectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */; };
 		14B0C7A818A30B43008B65C3 /* SKTagSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */; };
 		6C815DD75AA447519BA9F424 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA93ED52B2B416FA2B2E4EF /* libPods.a */; };
+		93064CC31940D43200A57FB6 /* ShareUntag.png in Resources */ = {isa = PBXBuildFile; fileRef = 93064CC21940D43200A57FB6 /* ShareUntag.png */; };
 		932F6CCF1938FF8B00D2210C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932F6CCE1938FF8B00D2210C /* Social.framework */; };
 		9361EE5A192BED3C0070F688 /* SKMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9361EE59192BED3C0070F688 /* SKMenuViewController.m */; };
 		9368D8D6193E70130028F5EB /* SKSimpleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9368D8D5193E70130028F5EB /* SKSimpleButton.m */; };
@@ -201,6 +202,7 @@
 		14B0C79F18A2EFA4008B65C3 /* SKTagCollectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagCollectionTest.m; sourceTree = "<group>"; };
 		14B0C7A618A30B43008B65C3 /* SKTagSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagSearchViewController.h; sourceTree = "<group>"; };
 		14B0C7A718A30B43008B65C3 /* SKTagSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagSearchViewController.m; sourceTree = "<group>"; };
+		93064CC21940D43200A57FB6 /* ShareUntag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShareUntag.png; path = Images/ShareUntag.png; sourceTree = SOURCE_ROOT; };
 		932F6CCE1938FF8B00D2210C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		9361EE58192BED3C0070F688 /* SKMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMenuViewController.h; sourceTree = "<group>"; };
 		9361EE59192BED3C0070F688 /* SKMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMenuViewController.m; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 				149DCE42193913F9009EC65E /* Sharing64.png */,
 				143C8692192EC8010022B1E1 /* stickieon.png */,
 				143C8690192EC5640022B1E1 /* stickie.png */,
+				93064CC21940D43200A57FB6 /* ShareUntag.png */,
 				14AC7881191C3DE3009112DF /* AutoSquare.png */,
 				9385097118CD2EA1001AE7DC /* camera.png */,
 				149EEAEE191975FC0057385F /* CircleBlue.png */,
@@ -620,6 +623,7 @@
 				149EEAF3191975FC0057385F /* CircleGreen.png in Resources */,
 				1493FA871910673500364B8F /* RetrievalRed.png in Resources */,
 				14A38A5619037661002AF61B /* tutButton.png in Resources */,
+				93064CC31940D43200A57FB6 /* ShareUntag.png in Resources */,
 				EC89B8D819353F1000F3D346 /* Raleway-Bold.ttf in Resources */,
 				149FB2A11890845B00D44DB2 /* InfoPlist.strings in Resources */,
 				14A1FB5B19241AF600CE33A6 /* insta_friends.png in Resources */,

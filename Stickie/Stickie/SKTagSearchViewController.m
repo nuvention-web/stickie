@@ -54,6 +54,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) NSThread *indicatorThread;
 @property (nonatomic,retain) UIDocumentInteractionController *docFile;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIButton *untagButton;
 
 @end
 
@@ -685,6 +687,10 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                                              selector:@selector(applicationWillEnterForeground:)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
+    
+    [self.view sendSubviewToBack:self.shareButton];
+    [self.view sendSubviewToBack:self.untagButton];
+    [self.view sendSubviewToBack:self.shareScrollView];
 }
 
 - (void)viewWillAppear: (BOOL) animation
@@ -896,7 +902,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 -(void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
     int DISTANCE_ABOVE_FINGER = 30;
     int BORDER_SIZE = 1.0;
-    int CORNER_RADIUS_CONSTANT = 3.0;
+    int CORNER_RADIUS = 157.0/3.0;
+
     UIColor *borderColor = [UIColor colorWithRed:166.0/255.0 green:169.0/255.0 blue:172.0/255.0 alpha:1.0];
     
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
@@ -908,7 +915,50 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                 NSLog(@"Couldn't find index path");
             }
             else {
-                dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
+                if (multi && [selected count] > 1){
+                    CGImageRef leftRef;
+                    CGImageRef rightRef;
+                    CGImageRef topRightRef;
+                    CGImageRef botRightRef;
+                    CGImageRef topLeftRef;
+                    CGImageRef botLeftRef;
+                    switch ([selected count]) {
+                        case 2:
+                            UIGraphicsBeginImageContext(_dNewImageView.frame.size);
+                            leftRef = CGImageCreateWithImageInRect([selected[0] thumbnail], CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height));
+                            rightRef = CGImageCreateWithImageInRect([selected[1] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height));
+                            [[UIImage imageWithCGImage:leftRef] drawInRect:CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height)];
+                            [[UIImage imageWithCGImage:rightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height)];
+                            break;
+                        case 3:
+                            UIGraphicsBeginImageContext(_dNewImageView.frame.size);
+                            leftRef = CGImageCreateWithImageInRect([selected[0] thumbnail], CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height));
+                            topRightRef = CGImageCreateWithImageInRect([selected[1] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            botRightRef = CGImageCreateWithImageInRect([selected[2] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            [[UIImage imageWithCGImage:leftRef] drawInRect:CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height)];
+                            [[UIImage imageWithCGImage:topRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:botRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            break;
+                        default:
+                            UIGraphicsBeginImageContext(_dNewImageView.frame.size);
+                            topLeftRef = CGImageCreateWithImageInRect([selected[0] thumbnail], CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            topRightRef = CGImageCreateWithImageInRect([selected[1] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            botLeftRef = CGImageCreateWithImageInRect([selected[2] thumbnail], CGRectMake(0,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            botRightRef = CGImageCreateWithImageInRect([selected[3] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            [[UIImage imageWithCGImage:topLeftRef] drawInRect:CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:topRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:botLeftRef] drawInRect:CGRectMake(0,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:botRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            break;
+                    }
+                    dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
+                    dImage = UIGraphicsGetImageFromCurrentImageContext();
+                    UIGraphicsEndImageContext();
+                }
+                else {
+                    dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
+                    dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
+                }
                 if (!multi) {
                     dispatch_async(loadImageToShare, ^{
 
@@ -924,7 +974,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                     _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
                     });
                 }
-                dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
                 anotherPoint.y -= DISTANCE_ABOVE_FINGER;
                 [_dNewImageView setCenter:anotherPoint];
                 [_dNewImageView setHidden:NO];
@@ -934,7 +983,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                 [_dNewImageView addGestureRecognizer:gestureRecognizer];
                 [_dNewImageView.layer setBorderColor: [borderColor CGColor]];
                 [_dNewImageView.layer setBorderWidth: BORDER_SIZE];
-                _dNewImageView.layer.cornerRadius = dImage.size.width / CORNER_RADIUS_CONSTANT;
+                _dNewImageView.layer.cornerRadius = CORNER_RADIUS;
                 _dNewImageView.layer.masksToBounds = YES;
             }
             break;
@@ -1151,6 +1200,38 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     }
     [view addSubview:label];
     label.center = CGPointMake(view.frame.size.width/2.0, view.frame.size.height/2.0);
+}
+- (IBAction)untagButton:(id)sender {
+    if (multi) {
+        SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
+        SKAssetURLTagsMap *urlToTagMap = [SKAssetURLTagsMap sharedInstance];
+        
+        SKImageTag *currentTagItem = [[SKImageTag alloc] initWithName:currentTag location:SKCornerLocationUndefined andColor:nil];
+
+        [urlToTagMap removeTag:currentTagItem forMultipleAssets:selected];
+        [tagCollection removeMultipleAssets:selected forTag:currentTagItem];
+        
+        if ([currentTag isEqualToString:_topLeftButton.titleLabel.text]){
+            [_topLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+        else if ([currentTag isEqualToString:_topRightButton.titleLabel.text]){
+            [_topRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+        else if ([currentTag isEqualToString:_botLeftButton.titleLabel.text]){
+            [_botLeftButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+        else if ([currentTag isEqualToString:_botRightButton.titleLabel.text]){
+            [_botRightButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+        
+        [self toggleMultiImage];
+    }
+}
+
+- (IBAction)shareButton:(id)sender {
+    if (multi) {
+        [self setupScrollMenuWithButtons:[self loadButtons]];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated

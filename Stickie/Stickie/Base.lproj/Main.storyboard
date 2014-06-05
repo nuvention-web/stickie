@@ -161,7 +161,7 @@
                                     <action selector="shareMulti:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="H9r-fc-rrX"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" id="a8x-mT-iwF">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="a8x-mT-iwF">
                                 <rect key="frame" x="0.0" y="484" width="321" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </scrollView>
@@ -202,10 +202,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vqI-cj-Pz0">
-                                <rect key="frame" x="0.0" y="484" width="321" height="84"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" id="MJE-Ka-gKq" customClass="SKSimpleButton">
                                 <rect key="frame" x="12" y="92" width="65" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -295,28 +291,44 @@
                                 <rect key="frame" x="14" y="11" width="105" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.94999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Half circle new.png" id="JF1-lX-dTc">
-                                <rect key="frame" x="0.0" y="524" width="81" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.94999998807907104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Half circle new.png" id="Vsy-Zk-084">
-                                <rect key="frame" x="244" y="524" width="81" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="untag" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XVv-cF-0xa">
-                                <rect key="frame" x="13" y="541" width="62" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zo4-qQ-sNB">
+                                <rect key="frame" x="0.0" y="520" width="78" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="23"/>
+                                <state key="normal" backgroundImage="ShareUntag.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="untagButton:" destination="lsA-Em-eke" eventType="touchUpInside" id="0M3-5q-RrK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aLV-1U-qM5">
+                                <rect key="frame" x="243" y="520" width="78" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="ShareUntag.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareButton:" destination="lsA-Em-eke" eventType="touchUpInside" id="y4u-QV-kbK"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="untag" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XVv-cF-0xa">
+                                <rect key="frame" x="14" y="536" width="62" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="20"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="share" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O4P-Fu-OQq">
-                                <rect key="frame" x="254" y="541" width="62" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="23"/>
+                                <rect key="frame" x="257" y="536" width="62" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="20"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vqI-cj-Pz0">
+                                <rect key="frame" x="0.0" y="484" width="321" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -326,9 +338,11 @@
                         <outlet property="botRightButton" destination="pPm-qW-BA7" id="6cl-j7-UhU"/>
                         <outlet property="collectionView" destination="tMz-6e-eQE" id="Qd5-QW-JP7"/>
                         <outlet property="dNewImageView" destination="LF4-q9-nxJ" id="mTm-DX-Lna"/>
+                        <outlet property="shareButton" destination="aLV-1U-qM5" id="fnH-bx-YyH"/>
                         <outlet property="shareScrollView" destination="vqI-cj-Pz0" id="qxq-7T-rfy"/>
                         <outlet property="topLeftButton" destination="MJE-Ka-gKq" id="aMV-xm-0kj"/>
                         <outlet property="topRightButton" destination="GqL-SY-fLM" id="0lW-ek-akc"/>
+                        <outlet property="untagButton" destination="zo4-qQ-sNB" id="T4K-OF-Mer"/>
                         <segue destination="m1p-oF-qu3" kind="push" identifier="instaShare" id="y3P-qM-4JH"/>
                     </connections>
                 </viewController>
@@ -737,7 +751,7 @@
         <image name="CornerGreen.png" width="128" height="128"/>
         <image name="CornerOrange.png" width="128" height="128"/>
         <image name="CornerRed.png" width="128" height="128"/>
-        <image name="Half circle new.png" width="619" height="185"/>
+        <image name="ShareUntag.png" width="96" height="65"/>
         <image name="Sharing64.png" width="64" height="58"/>
         <image name="tutButton.png" width="419" height="203"/>
     </resources>
@@ -747,10 +761,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="y3P-qM-4JH"/>
-        <segue reference="gwP-KI-MWf"/>
-        <segue reference="mqa-Bc-Sl6"/>
         <segue reference="w2s-Lq-cI3"/>
-        <segue reference="XUF-iZ-BJj"/>
+        <segue reference="mqa-Bc-Sl6"/>
+        <segue reference="kNa-3S-pJo"/>
+        <segue reference="gwP-KI-MWf"/>
+        <segue reference="y3P-qM-4JH"/>
     </inferredMetricsTieBreakers>
 </document>
