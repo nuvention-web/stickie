@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1C20E15B-50F9-443E-8286-4E204485D2D5</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Stickie</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>44D9237C-DF3C-4AB9-AD10-09EC5AEB2CFF</key>
+		<string>ssh://github.com/nuvention-web/stickie.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Stickie/Stickie.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>44D9237C-DF3C-4AB9-AD10-09EC5AEB2CFF</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/nuvention-web/stickie.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>44D9237C-DF3C-4AB9-AD10-09EC5AEB2CFF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>44D9237C-DF3C-4AB9-AD10-09EC5AEB2CFF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>stickie</string>
+		</dict>
+	</array>
+</dict>
+</plist>

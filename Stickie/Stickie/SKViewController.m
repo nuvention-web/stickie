@@ -19,9 +19,13 @@
 #import "SKLongPressButton.h"
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
+#import "SWRevealViewController.h"
+#import "SKMenuViewController.h"
+#import "Social/Social.h"
+#import <MessageUI/MessageUI.h>
 
 
-@interface SKViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate>
+@interface SKViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, SWRevealViewControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 {
     SKPhotoCell *dCell;
     NSIndexPath *dIndexPath;
@@ -30,12 +34,25 @@
     BOOL retainScroll;
     BOOL close;
     NSURL *currentURL;
+    BOOL multi;
+    NSMutableArray *selected;
+    UIBarButtonItem *cameraButton;
+    UIBarButtonItem *menuButton;
+    UIBarButtonItem *multitagButton;
+    UIImage *multiOn;
+    UIImage *multiOff;
+    UIView *lineView;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *dNewImageView;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *assets;
 @property BOOL newMedia;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIScrollView *shareScrollView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) NSThread *indicatorThread;
 
 @end
 
@@ -52,6 +69,65 @@
     return library;
 }
 
+- (IBAction)shareMulti:(id)sender {
+    if(multi){
+        [self setupScrollMenuWithButtons:[self loadButtons]];
+    }
+}
+
+- (void)closeShareScrollView{
+    [self.view sendSubviewToBack:self.shareScrollView];
+    [self.shareScrollView setHidden:YES];
+    [lineView removeFromSuperview];
+}
+
+- (NSArray *)loadButtons
+{
+    UIButton *FACEBOOK_BUTTON = [[UIButton alloc] init];
+    [FACEBOOK_BUTTON setBackgroundImage:[UIImage imageNamed:@"smfacebook.png"] forState:UIControlStateNormal];
+    [FACEBOOK_BUTTON addTarget:self action:@selector(shareMultipleToFacebook:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *MESSAGE_BUTTON = [[UIButton alloc] init];
+    [MESSAGE_BUTTON setBackgroundImage:[UIImage imageNamed:@"smtext.png"] forState:UIControlStateNormal];
+    [MESSAGE_BUTTON addTarget:self action:@selector(shareMultipleToMessage:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *MAIL_BUTTON = [[UIButton alloc] init];
+    [MAIL_BUTTON setBackgroundImage:[UIImage imageNamed:@"smmail.png"] forState:UIControlStateNormal];
+    [MAIL_BUTTON addTarget:self action:@selector(shareMultipleToMail:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *CLOSE_BUTTON = [[UIButton alloc] init];
+    [CLOSE_BUTTON setTitle:@"x" forState:UIControlStateNormal];
+    [CLOSE_BUTTON setTitleColor:[UIColor colorWithRed:51.0/255.0 green:153.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [CLOSE_BUTTON addTarget:self action:@selector(closeShareScrollView) forControlEvents:UIControlEventTouchUpInside];
+    
+    return @[FACEBOOK_BUTTON, MESSAGE_BUTTON, MAIL_BUTTON, CLOSE_BUTTON];
+}
+
+- (void)setupScrollMenuWithButtons:(NSArray *)buttons
+{
+    int x = self.view.frame.size.width/6;
+    for (UIButton* button in buttons) {
+        if ([button.titleLabel.text isEqual:@"x"]) {
+            button.frame = CGRectMake(x, -20, 65, 65);
+        }
+        else{
+            button.frame = CGRectMake(x, 9.5, 65, 65);
+        }
+        [_shareScrollView addSubview:button];
+        x += button.frame.size.width + 10;
+    }    
+    _shareScrollView.contentSize = CGSizeMake(x, _shareScrollView.frame.size.height);
+    _shareScrollView.backgroundColor = [UIColor colorWithRed:243.0/255.0 green:243.0/255.0 blue:243.0/255.0 alpha:1.0];
+    [_shareScrollView setShowsHorizontalScrollIndicator:NO];
+    lineView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, (self.view.frame.size.height-84.5), self.view.frame.size.width, 0.5f)];
+    lineView.backgroundColor = [UIColor colorWithRed:179.0/255.0 green:179.0/255.0 blue:179.0/255.0 alpha:1.0];
+    [self.view addSubview:lineView];
+    [self.shareScrollView setHidden:NO];
+
+    [self.view bringSubviewToFront:_shareScrollView];
+    
+}
+
 /* Load images at app startup */
 - (void)viewDidLoad
 {
@@ -61,6 +137,9 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"wasLaunchedBefore"];
         close = YES;
         [self loadTutorial];
+        [self viewDidAppear:NO];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"instalikesOn"]; // DEFAULT SETTINGS
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"photostreamOn"];
     }
     else {
         close = NO;
@@ -68,11 +147,19 @@
         [[self navigationController] setNavigationBarHidden:NO animated:YES];
         [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
+        multiOn = [UIImage imageNamed:@"stickieon.png"];        
+        multiOff = [UIImage imageNamed:@"stickie.png"];
+        
+        [self.shareButton setHidden:YES];
+        [self.shareButton setCenter:CGPointMake(self.view.frame.size.width/2,self.view.frame.size.height-23)];
+        [self.view sendSubviewToBack:self.shareButton];
+        [self.view sendSubviewToBack:self.shareScrollView];
+
         defaultPoint = CGPointMake(50.0, 0.0);              // Sets default point for draggable ghost image.
         
         [self loadTags];
         [self loadImageAssets];
-        
+        selected = [[NSMutableArray alloc] init];
         /* Setting up long-press gesture recognizer and adding it to collectionView and corner buttons */
         UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
         longGestureRecognizer.minimumPressDuration = 0.15;
@@ -91,13 +178,97 @@
                                                    object:nil];
         
         /* Note, the notification center is intentially left unremoved from this view in viewWillDisappear - for the cases that a photo is deleted when the user is outside this application */
+        
+        // Necessary for SWRevealViewController - Menu View.
+        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+        [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];
+    
+        self.revealViewController.delegate = self;
+        
+        UIButton *multitagView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [multitagView addTarget:self action:@selector(multiToggle:) forControlEvents:UIControlEventTouchUpInside];
+        [multitagView setBackgroundImage:[UIImage imageNamed:@"stickie.png"]
+ forState:UIControlStateNormal];
+        multitagButton = [[UIBarButtonItem alloc] initWithCustomView:multitagView];
+        
+        UIButton *cameraView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 34, 28)];
+        [cameraView addTarget:self action:@selector(useCamera) forControlEvents:UIControlEventTouchUpInside];
+        [cameraView setBackgroundImage:[UIImage imageNamed:@"camera.png"]
+                                forState:UIControlStateNormal];
+        cameraButton = [[UIBarButtonItem alloc] initWithCustomView:cameraView];
+        
+        UIButton *menuView = [[UIButton alloc] initWithFrame:CGRectMake(-5, 0, 33, 25)];
+        [menuView addTarget:self action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
+        [menuView setBackgroundImage:[UIImage imageNamed:@"hamburger.png"]
+                              forState:UIControlStateNormal];
+        menuButton = [[UIBarButtonItem alloc] initWithCustomView:menuView];
+        [self.navigationItem setLeftBarButtonItem:menuButton];
+        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:cameraButton, multitagButton,  nil]];
+
+        self.navigationItem.title = @"stickie";
     }
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    // Necessary for SWRevealViewController - Menu View.
+    [self.navigationController.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController.view removeGestureRecognizer:self.revealViewController.panGestureRecognizer];
 }
 
 - (void) applicationWillEnterForeground:(NSNotification *) notification
 {
     /* Reload view so user changes are recognized */
     [self loadImageAssets];
+}
+
+#pragma mark - Reveal View Controller Methods
+
+- (void)toggleMenu
+{
+    [self.revealViewController revealToggleAnimated:YES];
+}
+
+- (void)revealController:(SWRevealViewController *)revealController willMoveToPosition:(FrontViewPosition)position
+{
+    if(position == FrontViewPositionLeft) {
+        self.view.userInteractionEnabled = YES;
+        if (_showTutorial) {
+            [self loadTutorial];
+            _showTutorial = NO;
+        }
+    } else {
+        self.view.userInteractionEnabled = NO;
+    }
+}
+
+- (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position
+{
+    if(position == FrontViewPositionLeft) {
+        self.view.userInteractionEnabled = YES;
+        if (_shouldReloadCollectionView) {
+            dispatch_queue_t reloadQueue = dispatch_queue_create("Reload Queue", NULL);
+            dispatch_async(reloadQueue, ^{ // Reloads collection view data for photostream.
+                [self reloadCollectionView];
+            });
+            dispatch_sync(reloadQueue, ^{ // Scrolls down to bottom of collection view.
+                NSInteger section = 0;
+                NSInteger item = [self collectionView:_collectionView numberOfItemsInSection:section] - 1;
+                NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+                retainScroll = YES;
+                if (item > -1) {
+                    [_collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+                }
+            });
+            
+        }
+    } else {
+        self.view.userInteractionEnabled = NO;
+    }
 }
 
 #pragma mark - Tutorial Page View Controller Data Source
@@ -178,9 +349,7 @@
     [self.view addSubview:_pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
 }
-- (IBAction)tutorialButton:(id)sender {
-    [self loadTutorial];
-}
+
 #pragma mark - Main Screen
 /* Sets name of tags based on serialized tag information. */
 - (void)loadTags
@@ -266,7 +435,9 @@
     
     ALAssetsLibrary *assetsLibrary = [SKViewController defaultAssetsLibrary];
     
-    [assetsLibrary enumerateGroupsWithTypes:(ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary)usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+    ALAssetsGroupType group = [[NSUserDefaults standardUserDefaults] boolForKey:@"photostreamOn"] ? (ALAssetsGroupPhotoStream |ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary) : (ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupLibrary);
+
+    [assetsLibrary enumerateGroupsWithTypes:group usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if(result) {
                 [tmpAssets addObject:result];
@@ -282,6 +453,9 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    multi = NO;
+    [selected removeAllObjects];
+    [self toggleMultiImage];
     /* Automatically scrolls to bottom of collection view so user will see most recent photos. */
     if (!retainScroll) {
         NSInteger section = 0;
@@ -295,7 +469,6 @@
     else {
        [self loadImageAssets]; 
     }
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -317,9 +490,8 @@
     SKPhotoCell *cell = (SKPhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     
     ALAsset *asset = self.assets[indexPath.row];
-
     cell.asset = asset;
-    
+    cell.selectedAsset = selected;
     cell.topLeftCorner = _topLeftLabel.text;
     cell.topRightCorner = _topRightLabel.text;
     cell.botLeftCorner = _botLeftLabel.text;
@@ -347,7 +519,7 @@
 - (void)longGestureRecognized:(UILongPressGestureRecognizer *)gestureRecognizer{
     int DISTANCE_ABOVE_FINGER = 30;
     int BORDER_SIZE = 1.0;
-    int CORNER_RADIUS = 3.0;
+    int CORNER_RADIUS = 157.0/3.0;
     UIColor *borderColor = [UIColor colorWithRed:166.0/255.0 green:169.0/255.0 blue:172.0/255.0 alpha:1.0];
     
     CGPoint newPoint = [gestureRecognizer locationInView:self.collectionView];
@@ -361,9 +533,50 @@
             }
             /* Loading data into draggable thumbnail image. */
             else {
-                dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
-                dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
-                [dCell.asset valueForProperty:ALAssetPropertyURLs];
+                if (multi && [selected count] > 1){
+                    CGImageRef leftRef;
+                    CGImageRef rightRef;
+                    CGImageRef topRightRef;
+                    CGImageRef botRightRef;
+                    CGImageRef topLeftRef;
+                    CGImageRef botLeftRef;
+                    switch ([selected count]) {
+                        case 2:
+                            UIGraphicsBeginImageContext(_dNewImageView.frame.size);
+                            leftRef = CGImageCreateWithImageInRect([selected[0] thumbnail], CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height));
+                            rightRef = CGImageCreateWithImageInRect([selected[1] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height));
+                            [[UIImage imageWithCGImage:leftRef] drawInRect:CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height)];
+                            [[UIImage imageWithCGImage:rightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height)];
+                            break;
+                        case 3:
+                            UIGraphicsBeginImageContext(_dNewImageView.frame.size);
+                            leftRef = CGImageCreateWithImageInRect([selected[0] thumbnail], CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height));
+                            topRightRef = CGImageCreateWithImageInRect([selected[1] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            botRightRef = CGImageCreateWithImageInRect([selected[2] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            [[UIImage imageWithCGImage:leftRef] drawInRect:CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height)];
+                            [[UIImage imageWithCGImage:topRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:botRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            break;
+                        default:
+                            UIGraphicsBeginImageContext(_dNewImageView.frame.size);
+                            topLeftRef = CGImageCreateWithImageInRect([selected[0] thumbnail], CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            topRightRef = CGImageCreateWithImageInRect([selected[1] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            botLeftRef = CGImageCreateWithImageInRect([selected[2] thumbnail], CGRectMake(0,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            botRightRef = CGImageCreateWithImageInRect([selected[3] thumbnail], CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2));
+                            [[UIImage imageWithCGImage:topLeftRef] drawInRect:CGRectMake(0,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:topRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,0,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:botLeftRef] drawInRect:CGRectMake(0,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            [[UIImage imageWithCGImage:botRightRef] drawInRect:CGRectMake(_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2,_dNewImageView.frame.size.width/2,_dNewImageView.frame.size.height/2)];
+                            break;
+                    }
+                    dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
+                    dImage = UIGraphicsGetImageFromCurrentImageContext();
+                    UIGraphicsEndImageContext();
+                }
+                else {
+                    dCell = (SKPhotoCell *)[self.collectionView cellForItemAtIndexPath:dIndexPath];
+                    dImage = [UIImage imageWithCGImage:[dCell.asset thumbnail]];
+                }
                 anotherPoint.y -= DISTANCE_ABOVE_FINGER;
                 [_dNewImageView setCenter:anotherPoint];
                 [_dNewImageView setHidden:NO];
@@ -372,7 +585,7 @@
                 [_dNewImageView addGestureRecognizer:gestureRecognizer];
                 [_dNewImageView.layer setBorderColor: [borderColor CGColor]];
                 [_dNewImageView.layer setBorderWidth: BORDER_SIZE];
-                _dNewImageView.layer.cornerRadius = dImage.size.width / CORNER_RADIUS;
+                _dNewImageView.layer.cornerRadius = CORNER_RADIUS;
                 _dNewImageView.layer.masksToBounds = YES;
             }
             break;
@@ -405,7 +618,54 @@
             break;
     }
 }
+#pragma mark - Multi Select
 
+- (void)multiToggle:(id)sender {
+    if (multi) {
+        multi = NO;
+        [self closeShareScrollView];
+
+        [selected removeAllObjects];
+        [self toggleMultiImage];
+    }
+    else {
+        multi = YES;
+        [self toggleMultiImage];
+    }
+    [_collectionView reloadData];
+}
+
+- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (multi) {
+        ALAsset *asset = self.assets[indexPath.row];
+        if ([selected containsObject:asset]) {
+            [selected removeObject:asset];
+        }
+        else {
+            [selected addObject:asset];
+        }
+       
+        [_collectionView reloadData];
+    }
+}
+
+- (void) toggleMultiImage {
+    UIButton *multitagView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [multitagView addTarget:self action:@selector(multiToggle:) forControlEvents:UIControlEventTouchUpInside];
+    if (multi){
+        [self.shareButton setHidden:NO];
+        [multitagView setBackgroundImage:multiOn
+                                forState:UIControlStateNormal];
+    }
+    else {
+        [self.shareButton setHidden:YES];
+        [multitagView setBackgroundImage:multiOff
+                                forState:UIControlStateNormal];
+    }
+    multitagButton = [[UIBarButtonItem alloc] initWithCustomView:multitagView];
+    
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:cameraButton, multitagButton,  nil]];
+}
 #pragma mark Edit Tag
 - (void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer{
     CGPoint point = [gestureRecognizer locationInView:self.view];
@@ -430,6 +690,8 @@
     int TAG_SENSITIVITY_X = dImage.size.width/5.0;
     int TAG_SENSITITVITY_Y = dImage.size.height/5.0;
     int FRAME_HEIGHT = self.view.frame.size.height;
+    int FRAME_WIDTH = self.view.frame.size.width;
+
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
@@ -464,79 +726,91 @@
         button = _botRightCorner;
         currentTag = 4;
     }
-//    /* Share Feature */
-//    else if (point.x >= 135 && point.x <= 185 && point.y >= 63 && point.y <= 128 + TAG_SENSITITVITY_Y * 1.5) {
-//
-//    }
-
-    
-    if (![tag.tagName isEqualToString:@""]) {
-        if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
-                                                                  action:@"image_tag"  // Event action (required)
-                                                                   label:nil         // Event label
-                                                                   value:nil] build]];    // Event value
-            [UIView animateWithDuration:0.1 animations:^{
-                button.alpha = 0.0;
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.9 animations:^{
-                    button.alpha = 1.0;
-                } completion:^(BOOL finished) {
-                    // Cleanup stuff.
-                }];
-            }];
-            
-            /* Logic for tagging a new image - it is necessary to update both urlToTagMap and tagCollection. */
-            [urlToTagMap addTag: tag forAssetURL:assetURL];
-            [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
-        }
-        else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
-                                                                  action:@"image_untag"  // Event action (required)
-                                                                   label:nil         // Event label
-                                                                   value:nil] build]];    // Event value
-            [UIView animateWithDuration:0.1 animations:^{
-                button.alpha = 0.0;
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.9 animations:^{
-                    button.alpha = 1.0;
-                } completion:^(BOOL finished) {
-                    // Cleanup stuff.
-                }];
-            }];
-            /* Logic for removing a tag from a new image - it is necessary to update both urlToTagMap and tagCollection. */
-            [urlToTagMap removeTag:tag forAssetURL:assetURL];
-            [tagCollection removeImageURL:assetURL forTag:tag];
-        }
-//            [_collectionView reloadItemsAtIndexPaths: [[NSArray alloc] initWithObjects:path, nil]]; // DOES NOT WORK FOR FIRST TAG (APPLE BUG?).
-        [_collectionView reloadData];
+    if (point.x >= FRAME_WIDTH/2 -40 && point.x <= FRAME_WIDTH/2+40 && point.y >= FRAME_HEIGHT - 40 && point.y <= FRAME_HEIGHT && multi){
+        [self setupScrollMenuWithButtons:[self loadButtons]];
     }
-    else {
-        currentURL = assetURL;
-        switch (currentTag) {
-            case 1:
-                [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
-                break;
-            case 2:
-                [self performSegueWithIdentifier:@"topRightTagEdit" sender:self];
-                break;
-            case 3:
-                [self performSegueWithIdentifier:@"botLeftTagEdit" sender:self];
-                break;
-            case 4:
-                [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
-                break;
-            default:
-                break;
+    else{
+        if (![tag.tagName isEqualToString:@""]) {
+            if (tag && ![urlToTagMap doesURL:assetURL haveTag:tag]) {
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                      action:@"image_tag"  // Event action (required)
+                                                                       label:nil         // Event label
+                                                                       value:nil] build]];    // Event value
+                [UIView animateWithDuration:0.1 animations:^{
+                    button.alpha = 0.0;
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:0.9 animations:^{
+                        button.alpha = 1.0;
+                    } completion:^(BOOL finished) {
+                        // Cleanup stuff.
+                    }];
+                }];
+                if (multi){
+                    [urlToTagMap addTag:tag forMultipleAssets:selected];
+                    [tagCollection updateCollectionWithTag:tag forMultipleAssets:selected];
+                    multi = NO;
+                    [selected removeAllObjects];
+                    [self toggleMultiImage];
+                }
+                else {
+                /* Logic for tagging a new image - it is necessary to update both urlToTagMap and tagCollection. */
+                    [urlToTagMap addTag: tag forAssetURL:assetURL];
+                    [tagCollection updateCollectionWithTag: tag forImageURL:assetURL];
+                }
+            }
+            else if (tag && [urlToTagMap doesURL:assetURL haveTag:tag]) {
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                      action:@"image_untag"  // Event action (required)
+                                                                       label:nil         // Event label
+                                                                       value:nil] build]];    // Event value
+                [UIView animateWithDuration:0.1 animations:^{
+                    button.alpha = 0.0;
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:0.9 animations:^{
+                        button.alpha = 1.0;
+                    } completion:^(BOOL finished) {
+                        // Cleanup stuff.
+                    }];
+                }];
+                if (multi){
+                    [urlToTagMap removeTag:tag forMultipleAssets:selected];
+                    [tagCollection removeMultipleAssets:selected forTag:tag];
+                    multi = NO;
+                    [selected removeAllObjects];
+                    [self toggleMultiImage];
+                }
+                else {
+                    /* Logic for removing a tag from a new image - it is necessary to update both urlToTagMap and tagCollection. */
+                    [urlToTagMap removeTag:tag forAssetURL:assetURL];
+                    [tagCollection removeImageURL:assetURL forTag:tag];
+                }
+            }
+    //            [_collectionView reloadItemsAtIndexPaths: [[NSArray alloc] initWithObjects:path, nil]]; // DOES NOT WORK FOR FIRST TAG (APPLE BUG?).
+            [_collectionView reloadData];
+        }
+        else {
+            currentURL = assetURL;
+            switch (currentTag) {
+                case 1:
+                    [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
+                    break;
+                case 2:
+                    [self performSegueWithIdentifier:@"topRightTagEdit" sender:self];
+                    break;
+                case 3:
+                    [self performSegueWithIdentifier:@"botLeftTagEdit" sender:self];
+                    break;
+                case 4:
+                    [self performSegueWithIdentifier:@"botRightTagEdit" sender:self];
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
 
 #pragma mark Camera Methods
-/* Take photo. */
-- (IBAction)takePhotoButtonTapped:(id)sender {
-    [self performSelector:@selector(useCamera) withObject:nil afterDelay:0.3];
-}
 
 /* Setup for image picker. */
 - (void)useCamera{
@@ -602,6 +876,9 @@ finishedSavingWithError:(NSError *)error
 
 #pragma mark Segue Handling
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if ([identifier isEqualToString:@"showDetail"] && multi){
+        return NO;
+    }
     if ([_topLeftLabel.text isEqualToString:@""] && [identifier isEqualToString:@"topLeftTag"]) {
         [self performSegueWithIdentifier:@"topLeftTagEdit" sender:self];
         return NO;
@@ -634,10 +911,14 @@ finishedSavingWithError:(NSError *)error
         ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
         UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
         SKDetailViewController *detailViewController = [segue destinationViewController];
+        if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+            detailViewController.video = YES;
+        }
         detailViewController.image = image;
         detailViewController.imageURL = url;
         detailViewController.assets = _assets;
         detailViewController->imageIndex = (int) indexPath.row;
+        
     }
     
     /* Routes to tag search view. */
@@ -674,13 +955,9 @@ finishedSavingWithError:(NSError *)error
         UINavigationController *navigationController = [segue destinationViewController];
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_topLeftLabel.text isEqualToString:@""]) {
-            tagAssignViewController.createTag = YES;
-            if (currentURL) {
+                tagAssignViewController.createTag = YES;
                 tagAssignViewController.tagImageURL = currentURL;
-            }
-            else {
-                tagAssignViewController.tagImageURL = nil;
-            }
+                tagAssignViewController.assets = selected;
         }
         currentURL = nil;
         tagAssignViewController.location = SKCornerLocationTopLeft;
@@ -693,12 +970,8 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_topRightLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
-            if (currentURL) {
-                tagAssignViewController.tagImageURL = currentURL;
-            }
-            else {
-                tagAssignViewController.tagImageURL = nil;
-            }
+            tagAssignViewController.tagImageURL = currentURL;
+            tagAssignViewController.assets = selected;
         }
         currentURL = nil;
         tagAssignViewController.location = SKCornerLocationTopRight;
@@ -712,12 +985,8 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_botLeftLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
-            if (currentURL) {
-                tagAssignViewController.tagImageURL = currentURL;
-            }
-            else {
-                tagAssignViewController.tagImageURL = nil;
-            }
+            tagAssignViewController.tagImageURL = currentURL;
+            tagAssignViewController.assets = selected;
         }
         currentURL = nil;
         tagAssignViewController.location = SKCornerLocationBottomLeft;
@@ -730,12 +999,8 @@ finishedSavingWithError:(NSError *)error
         SKTagAssignViewController *tagAssignViewController = [navigationController viewControllers][0];
         if ([_botRightLabel.text isEqualToString:@""]) {
             tagAssignViewController.createTag = YES;
-            if (currentURL) {
-                tagAssignViewController.tagImageURL = currentURL;
-            }
-            else {
-                tagAssignViewController.tagImageURL = nil;
-            }
+            tagAssignViewController.tagImageURL = currentURL;
+            tagAssignViewController.assets = selected;
         }
         currentURL = nil;
         tagAssignViewController.location = SKCornerLocationBottomRight;
@@ -755,13 +1020,20 @@ finishedSavingWithError:(NSError *)error
 }
 
 #pragma mark Tag Assign Delegate Methods
+-(void)loadExtTutorial:(SKMenuViewController*)controller
+{
+    NSLog(@"tutut");
+    //    [self loadTutorial];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 - (void)tagAssignViewControllerDidCancel:(SKTagAssignViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
 /* Edit or delete tags from SKTagAssignViewController. */
-- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR forLocation:(SKCornerLocation) cornerLocation andDelete:(BOOL)delete andDidTagImageURL:(NSURL *)assetURL
+- (void)tagAssignViewController:(SKTagAssignViewController *)controller didAddTag:(NSString *)tagSTR forLocation:(SKCornerLocation) cornerLocation andDelete:(BOOL)delete andDidTagImageURL:(NSURL *)assetURL forAssets:(NSArray *)assets
 {
     SKTagCollection *tagCollection = [SKTagCollection sharedInstance];
     SKImageTag *tag = [[SKImageTag alloc] initWithName:tagSTR location:cornerLocation andColor:nil];
@@ -808,7 +1080,12 @@ finishedSavingWithError:(NSError *)error
             [tagCollection removeTag:oldTag];
             _botRightLabel.text = tagSTR;
         }
-        if (assetURL && ![tag.tagName isEqualToString:@""]) {
+        if ([assets count] > 0 && ![tag.tagName isEqualToString:@""]) {
+            [urlTagsMap addTag:tag forMultipleAssets:assets];
+            [tagCollection updateCollectionWithTag:tag forMultipleAssets:assets];
+            [_collectionView reloadData];
+        }
+        else if (assetURL && ![tag.tagName isEqualToString:@""]) {
             if (tag && ![urlTagsMap doesURL:assetURL haveTag:tag]) {
                 [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                                       action:@"image_tag"  // Event action (required)
@@ -841,6 +1118,191 @@ finishedSavingWithError:(NSError *)error
         [alert show];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark Sharing Multiple
+
+- (void)shareMultipleToFacebook:(id)sender
+{
+    if (!multi) {
+        [NSException raise:@"Multi Not Selected" format:@"Cannot share photos while not in multi-select mode."];
+    }
+    
+    SLComposeViewController *fbController=[SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+    
+    
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+    {
+        SLComposeViewControllerCompletionHandler __block completionHandler=^(SLComposeViewControllerResult result){
+            
+            [fbController dismissViewControllerAnimated:YES completion:nil];
+            
+            switch(result){
+                case SLComposeViewControllerResultCancelled:
+                default:
+                {
+                    NSLog(@"Cancelled.....");
+                    [self closeShareScrollView];
+                    
+                }
+                    break;
+                case SLComposeViewControllerResultDone:
+                {
+                    NSLog(@"Posted....");
+                    [self closeShareScrollView];
+                }
+                    break;
+        }};
+        
+        // Add selected photos to fbController.
+        for (ALAsset* asset in selected) {
+            ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+            UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+            [fbController addImage:image];
+        }
+        
+        [fbController setCompletionHandler:completionHandler];
+        [self presentViewController:fbController animated:YES completion:nil];
+        
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Facebook Not Setup"
+                              message: @"Please setup your Facebook Account in Settings to share multiple images."
+                              delegate: self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil, nil];
+        
+        [alert show];
+    }
+}
+
+- (void)shareMultipleToMail:(id)sender
+{
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                          action:@"share_mult_mail"  // Event action (required)
+                                                           label:nil         // Event label
+                                                           value:nil] build]];    // Event value
+    if ([MFMailComposeViewController canSendMail]) {
+        _indicatorThread = [[NSThread alloc]initWithTarget:self selector:@selector(showIndicator) object:nil];
+        [_indicatorThread start];
+        NSString *messageBody = @"<br><br>Sent via <a href=\"https://itunes.apple.com/gb/app/stickie/id853858851?mt=8\">Stickie</a>." ;
+        
+        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+        mc.mailComposeDelegate = self;
+        [mc setMessageBody:messageBody isHTML:YES];
+        
+        NSString* imagePath = [NSString stringWithFormat:@"%@/image.png", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+        
+        for (ALAsset *asset in selected) {
+            ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+            UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+            [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
+            
+            
+            NSData *fileData = [NSData dataWithContentsOfFile:imagePath];
+            NSString *mimeType = @"image/png";
+            
+            [mc addAttachmentData:fileData mimeType:mimeType fileName:@"image"];
+        }
+        
+        // Present mail view controller on screen
+        [self presentViewController:mc animated:YES completion:NULL];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Mail Not Setup"
+                              message: @"Set up mail on your device to continue."
+                              delegate: self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        
+        [alert show];
+    }
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    self.navigationController.view.alpha = 1;
+    [_activityView stopAnimating];
+    [_indicatorThread cancel];
+    [self closeShareScrollView];
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)shareMultipleToMessage:(id)sender
+{
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                          action:@"share_mult_message"  // Event action (required)
+                                                           label:nil         // Event label
+                                                           value:nil] build]];    // Event value
+    if ([MFMessageComposeViewController canSendText]) {
+        _indicatorThread = [[NSThread alloc]initWithTarget:self selector:@selector(showIndicator) object:nil];
+        [_indicatorThread start];
+        
+        MFMessageComposeViewController* composeVC = [[MFMessageComposeViewController alloc] init];
+        composeVC.messageComposeDelegate = self;
+        NSString *type = @"image/jpg";
+        
+        for (ALAsset* asset in selected) {
+            ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+            UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+            [composeVC addAttachmentData:UIImagePNGRepresentation(image) typeIdentifier:type filename:@"image.png"];
+        }
+        [self presentViewController:composeVC animated:YES completion:NULL];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Messaging Not Setup"
+                              message: @"Set up messaging on your device to continue."
+                              delegate: self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        
+        [alert show];
+    }
+    
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+        self.navigationController.view.alpha = 1;
+    [_activityView stopAnimating];
+    [_indicatorThread cancel];
+    [self closeShareScrollView];
+}
+
+// For showing the activity indicator.
+- (void)showIndicator
+{
+    @autoreleasepool {
+        self.navigationController.view.alpha = 0.5;
+        _activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        _activityView.center = self.view.center;
+        [_activityView startAnimating];
+        [self.view addSubview:_activityView];
+    }
 }
 
 @end

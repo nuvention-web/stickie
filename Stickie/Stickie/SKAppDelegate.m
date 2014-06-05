@@ -40,12 +40,13 @@
         [NSDictionary dictionaryWithObjectsAndKeys:
             [UIColor colorWithRed:51.0/255.0 green:153.0/255.0 blue:255.0/255.0 alpha:1.0],
             NSForegroundColorAttributeName,
-            [UIFont fontWithName:@"Arial Hebrew" size:21],
+            [UIFont fontWithName:@"Raleway-Medium" size:26.0],
             NSFontAttributeName, nil
         ]
      ];
     
-    /* For second prototype, these tags need to be added to the tag collection at startup. */
+    // Moves text slighly farther down vertically.
+    [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:3.0 forBarMetrics:UIBarMetricsDefault];
     
     NSMutableDictionary *appState = [NSKeyedUnarchiver unarchiveObjectWithFile:[self filePathForSave: @"stickie_data"]];
     SKTagCollection *tagCollection = [appState objectForKey:@"tCollect"];
@@ -62,7 +63,14 @@
     }
     
     [self checkAndHandleDeletedPhotos];
-        
+    
+    // DEFAULT SWITCH SETTINGS
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"firstSwitch"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstSwitch"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"instalikesOn"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"photostreamOn"];
+    }
+    
     return YES;
 }
 							

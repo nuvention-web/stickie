@@ -11,8 +11,9 @@
 #import "GAITrackedViewController.h"
 #import "SKLongPressButton.h"
 #import "SKTutorialViewController.h"
+#import "SKMenuViewController.h"
 
-@interface SKViewController : GAITrackedViewController <UIPageViewControllerDataSource, SKTagAssignViewControllerDelegate>
+@interface SKViewController : GAITrackedViewController <UIPageViewControllerDataSource, SKTagAssignViewControllerDelegate, SKMenuViewControllerDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (strong, nonatomic) NSArray *pageImages;
@@ -26,6 +27,9 @@
 @property (strong, nonatomic) IBOutlet SKLongPressButton *topRightCorner;
 @property (strong, nonatomic) IBOutlet SKLongPressButton *botLeftCorner;
 @property (strong, nonatomic) IBOutlet SKLongPressButton *botRightCorner;
+
+@property BOOL showTutorial;
+@property BOOL shouldReloadCollectionView;
 
 -(void)longPressCornerRecognized:(UILongPressGestureRecognizer *) gestureRecognizer;
 

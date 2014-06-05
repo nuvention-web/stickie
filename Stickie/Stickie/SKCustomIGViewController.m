@@ -45,13 +45,13 @@ typedef void (^ButtonCompletionBlock)(BOOL finished);
 //    _textView.clipsToBounds = YES;
     
     hash_count = (int)[[_textView.text componentsSeparatedByString:@"#"] count]-1;
-    _tagCountLabel.text = [NSString stringWithFormat:@"TAGS: %d of 25", hash_count];
+    _tagCountLabel.text = [NSString stringWithFormat:@"TAGS: %d of 30", hash_count];
     
     _textView.delegate = self;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if (hash_count > 24 && [text isEqualToString:@"#"]) {
+    if (hash_count > 29 && [text isEqualToString:@"#"]) {
         [self animateNoMoreHashtagsForTime:0.35 completion:^(BOOL done) {}];
         return NO;
     } else {
@@ -78,7 +78,7 @@ typedef void (^ButtonCompletionBlock)(BOOL finished);
 
 - (void)textViewDidChange:(UITextView *)textView {
     hash_count = (int)[[_textView.text componentsSeparatedByString:@"#"] count]-1;
-    _tagCountLabel.text = [NSString stringWithFormat:@"TAGS: %d of 25", hash_count];
+    _tagCountLabel.text = [NSString stringWithFormat:@"TAGS: %d of 30", hash_count];
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,15 +103,8 @@ typedef void (^ButtonCompletionBlock)(BOOL finished);
 - (void)shareToInstaWith: (NSString *)str noBS:(BOOL)noBS
 {
     //    UIImage* instaImage = [self thumbnailFromView:imageView]; //Full Image Low Resolution
-    UIImage* instaImage = _imageView.image; //Top half of image Full Resolution.
-    
-    NSString* imagePath = [NSString stringWithFormat:@"%@/image.igo", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
-    [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
-    [UIImagePNGRepresentation(instaImage) writeToFile:imagePath atomically:YES];
-    _docFile = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:imagePath]];
     _docFile.delegate=self;
     _docFile.UTI = @"com.instagram.exclusivegram";
-    
     _docFile.annotation=[NSDictionary dictionaryWithObjectsAndKeys:str,@"InstagramCaption", nil];
     [_docFile presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
 }

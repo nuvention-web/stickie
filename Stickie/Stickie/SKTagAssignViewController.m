@@ -21,14 +21,14 @@
     [super viewWillAppear:animated];
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     if (_createTag) {
-        self.navigationItem.title = @"create tag";
+        self.navigationItem.title = @"create";
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                               action:@"create_tag"  // Event action (required)
                                                                label:nil         // Event label
                                                                value:nil] build]];    // Event value
     }
     else {
-        self.navigationItem.title = @"edit tag";
+        self.navigationItem.title = @"edit";
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
                                                               action:@"edit_tag"  // Event action (required)
                                                                label:nil         // Event label
@@ -36,6 +36,10 @@
     }
     _tagTextField.text = _preLabel;
 }
+
+
+
+
 
 - (IBAction)cancel:(id)sender
 {
@@ -45,10 +49,10 @@
 - (IBAction)done:(id)sender
 {
     if ([_tagTextField.text isEqualToString:@""]) {
-        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text forLocation:_location andDelete:YES andDidTagImageURL:nil];
+        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text forLocation:_location andDelete:YES andDidTagImageURL:nil forAssets:nil];
     }
     else {
-        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text forLocation:_location andDelete:NO andDidTagImageURL:_tagImageURL];
+        [self.delegate tagAssignViewController:self didAddTag:_tagTextField.text forLocation:_location andDelete:NO andDidTagImageURL:_tagImageURL forAssets:_assets];
     }
 }
 
@@ -79,7 +83,7 @@
                                                               action:@"delete_tag"  // Event action (required)
                                                                label:nil         // Event label
                                                                value:nil] build]];    // Event value
-        [self.delegate tagAssignViewController:self didAddTag:@"" forLocation:_location andDelete:YES andDidTagImageURL:nil];
+        [self.delegate tagAssignViewController:self didAddTag:@"" forLocation:_location andDelete:YES andDidTagImageURL:nil forAssets:nil];
     }
 }
 @end

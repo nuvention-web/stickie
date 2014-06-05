@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "SKTagData.h"
 #import "SKImageTag.h"
 
@@ -30,6 +31,11 @@
  */
 - (void) updateCollectionWithTag:(SKImageTag *)tag forImageURL: (NSURL *) url;
 
+/*
+ * Updates data in collection with tag for multiple image URLs. If a tag is not in the collection,
+ * an exception is thrown.
+ */
+- (void) updateCollectionWithTag:(SKImageTag *)tag forMultipleAssets: (NSArray *) urls;
 /* Returns YES if tag is in collection; returns NO otherwise. */
 - (BOOL) isTagInCollection: (SKImageTag *) tag;
 
@@ -41,7 +47,8 @@
 
 /* Unassociates url with tag. Throws exception if url is not already associated with tag. */
 - (void) removeImageURL: (NSURL *) url forTag: (SKImageTag *) tag;
-
+/* Unassociates multiple urls with tag. No exceptions thrown. */
+- (void) removeMultipleAssets: (NSArray *) urls forTag: (SKImageTag *) tag;
 /* Deletes all mappings to url from all tags. */
 - (void) removeAllInstancesOfURL: (NSURL *) url;
 
