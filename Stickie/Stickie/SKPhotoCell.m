@@ -30,13 +30,20 @@
     NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
     
     UIImage *backgroundImage = [UIImage imageWithCGImage:[asset thumbnail]];
-    UIImage *topLeftWatermarkImage = [UIImage imageNamed:@"BlueCorner.png"];
-    UIImage *topRightWatermarkImage = [UIImage imageNamed:@"GreenCorner.png"];
-    UIImage *botLeftWatermarkImage = [UIImage imageNamed:@"RedCorner.png"];
-    UIImage *botRightWatermarkImage = [UIImage imageNamed:@"OrangeCorner.png"];
+    UIImage *topLeftWatermarkImage = [UIImage imageNamed:@"CornerBlue.png"];
+    UIImage *topRightWatermarkImage = [UIImage imageNamed:@"CornerGreen.png"];
+    UIImage *botLeftWatermarkImage = [UIImage imageNamed:@"CornerRed.png"];
+    UIImage *botRightWatermarkImage = [UIImage imageNamed:@"CornerOrange.png"];
+    UIImage *selectedWatermarkImage = [UIImage imageNamed:@"stickie.png"];
     
     UIGraphicsBeginImageContext(backgroundImage.size);
-    [backgroundImage drawInRect:CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height)];
+    if ([_selectedAsset containsObject:asset]) {
+        [selectedWatermarkImage drawInRect:CGRectMake(backgroundImage.size.width/4, backgroundImage.size.width/4, backgroundImage.size.width/2, backgroundImage.size.width/2)];
+        [backgroundImage drawInRect:CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height)blendMode:kCGBlendModeNormal alpha:0.5];
+    }
+    else {
+        [backgroundImage drawInRect:CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height)];
+    }
     if ([urlTagsMap doesURL:url haveTag:topLeftTag]) {
         [topLeftWatermarkImage drawInRect:CGRectMake(0, 0, backgroundImage.size.width/4, backgroundImage.size.width/4)];
     }
@@ -49,7 +56,11 @@
     if ([urlTagsMap doesURL:url haveTag:botRightTag]) {
         [botRightWatermarkImage drawInRect:CGRectMake(3*backgroundImage.size.width/4, 3*backgroundImage.size.width/4, backgroundImage.size.width/4, backgroundImage.size.width/4)];
     }
+    if ([_selectedAsset containsObject:asset]) {
+        [selectedWatermarkImage drawInRect:CGRectMake(backgroundImage.size.width/4, backgroundImage.size.width/4, backgroundImage.size.width/2, backgroundImage.size.width/2)];
+    }
     UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    
     UIGraphicsEndImageContext();
     
     self.photoImageView.image = result;
