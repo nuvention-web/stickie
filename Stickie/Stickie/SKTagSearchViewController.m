@@ -164,6 +164,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
     {
+        _indicatorThread = [[NSThread alloc]initWithTarget:self selector:@selector(showIndicator) object:nil];
+        [_indicatorThread start];
         SLComposeViewControllerCompletionHandler __block completionHandler=^(SLComposeViewControllerResult result){
             
             [fbController dismissViewControllerAnimated:YES completion:nil];
@@ -193,6 +195,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         }
         
         [fbController setCompletionHandler:completionHandler];
+        self.navigationController.view.alpha = 1;
+        [_activityView stopAnimating];
+        [_indicatorThread cancel];
         [self presentViewController:fbController animated:YES completion:nil];
         
     } else {
